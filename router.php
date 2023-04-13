@@ -26,7 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         case $base."masuk":
             // require_once 'view.php';
             // echo View::createView("index.html");
-            header("Location:play");
+            require_once 'Database\databaseController.php';
+            $myDB=new bufferDatabase();
+            $myDB->loginUSer($_POST['email'],$_POST['password']);
+            // header("Location:play");
             break;
         case $base."daftar":
             // require_once 'Controller/controllerLogin-signup.php';
