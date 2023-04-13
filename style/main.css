@@ -45,7 +45,8 @@ button:hover {
 
 /* Main Menu Styling */
 [data-screen="main"] {
-
+	background: url(/assets/scenes/science_lab.jpg);
+	/* background: black; */
 }
 
 /* Main Menu Buttons Styling */
