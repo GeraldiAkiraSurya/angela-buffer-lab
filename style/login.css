@@ -1,0 +1,13 @@
+#form-modal{
+    width:40vw; 
+    margin-top:10vh;
+    background-color: white;
+    padding-top: 30px;
+    border-radius: 20px;
+}
+
+
+
+input{
+    width:100vw;
+}
