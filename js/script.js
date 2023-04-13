@@ -69,7 +69,8 @@ monogatari.assets ('images', {
 
 // Define the backgrounds for each scene.
 monogatari.assets ('scenes', {
-
+'background1' : 'Background1.png',
+'background2' : 'Background2.png'
 });
 
 
@@ -77,14 +78,18 @@ monogatari.assets ('scenes', {
 monogatari.characters ({
 	'y': {
 		name: 'Yui',
-		color: '#5bcaff'
+		color: '#5bcaff',
+		sprites : {
+			normal : 'Sigma.png',
+			sad : 'SigmaSad.png',
+		}
 	}
 });
 
 monogatari.script ({
 	// The game starts here.
 	'Start': [
-		'show scene #f7f6f6 with fadeIn',
+		'show scene background1 with fadeIn',
 		'show notification Welcome',
 		{
 			'Input': {
@@ -110,6 +115,8 @@ monogatari.script ({
 				'Warning': 'You must enter a name!'
 			}
 		},
+		// 'show character y normal at center with fadeIn',
+		'show character y normal at middle with fadeIn',
 		'y Hi {{player.name}} Welcome to Monogatari!',
 		{
 			'Choice': {
@@ -121,6 +128,10 @@ monogatari.script ({
 				'No': {
 					'Text': 'No',
 					'Do': 'jump No'
+				},
+				'Test': {
+					'Text': 'Jumping Scene Test',
+					'Do': 'jump Test'
 				}
 			}
 		}
@@ -142,5 +153,31 @@ monogatari.script ({
 		'y Go ahead and create an amazing Game!',
 		'y I can’t wait to see what story you’ll tell!',
 		'end'
+	],
+
+	'Test': [
+
+		'show character y normal at center with fadeIn',
+		'show scene background2 with fadeIn',
+
+		'y This is the new scene.',
+
+		'y Go ahead and create an amazing Game!',
+		'y I can’t wait to see what story you’ll tell!',
+		
+		{
+			'Choice': {
+				'Dialog': 'y Do you want to go back to start?',
+				'Yes': {
+					'Text': 'Yes',
+					'Do': 'jump Start'
+				},
+				'No': {
+					'Text': 'No',
+					'Do': 'y Ok! Understandable.',
+					'Do' : 'jump Test'
+				},
+			}
+		}
 	]
 });
