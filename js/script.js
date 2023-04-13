@@ -10,22 +10,22 @@ monogatari.action ('message').messages ({
 			<p><a href='https://monogatari.io/demo/'>Demo</a> - A simple Demo.</p>
 		`
 	},
-	'Narration1-1-1': {
+	'Narration1-1': {
 		title: '',
 		subtitle: '',
 		body: 'Allison adalah seorang profesor yang ditugaskan di Laboratorium X untuk mencari obat dari penyakit yang tidak diketahui asal-usulnya.',
 	},
-	'Narration1-1-2': {
+	'Narration1-2': {
 		title: '',
 		subtitle: '',
 		body: 'Untuk itu Prof. Allison bekerjasama dengan ilmuan kimia (pemain) untuk melakukan penelitian untuk mengumpulkan ramuan obat yang sedang dicari.',
 	},
-	'Narration1-1-3': {
+	'Narration1-3': {
 		title: '',
 		subtitle: '',
 		body: 'Seluruh ramuan obat dapat dikumpulkan setelah ilmuan kimia menyelesaikan tantangan pada setiap misi.',
 	},
-	'NarrMiss1-1-1': {
+	'NarrMiss1-1': {
 		title: 'Misi 1',
 		subtitle: '',
 		body: `
@@ -35,7 +35,7 @@ monogatari.action ('message').messages ({
 			<p><b>JIKA GAGAL:</b> KEMBALI KE AWAL</p>
 		`,
 	},
-	'NarrMiss1-1-2': {
+	'NarrMiss1-2': {
 		title: 'Video 1',
 		subtitle: '',
 		body: `
@@ -44,7 +44,7 @@ monogatari.action ('message').messages ({
 			</iframe>
 		`
 	},
-	'NarrMiss1-1-3': {
+	'NarrMiss1-3': {
 		title: 'Video 2',
 		subtitle: '',
 		body: `
@@ -136,9 +136,9 @@ monogatari.script ({
 	// The game starts here.
 	'Start': [
 		'show scene lab1 with fadeIn',
-		'show message Narration1-1-1',
-		'show message Narration1-1-2',
-		'show message Narration1-1-3',
+		'show message Narration1-1',
+		'show message Narration1-2',
+		'show message Narration1-3',
 		'show character p normal with fadeIn',
 		'p Hai selamat datang di Buffer Laboratory!!!',
 		'show notification Welcome',
@@ -180,7 +180,7 @@ monogatari.script ({
 					'Text': 'Terima',
 					'Do': 'jump Misi1-1'
 				},
-				'Tidak': {
+				'No': {
 					'Text': 'Tidak',
 					'Do': 'jump No'
 				}
@@ -190,24 +190,38 @@ monogatari.script ({
 
 	'Misi1-1': [
 		'show scene desk with FadeIn',
-		'show message NarrMiss1-1-1',
-		'show message NarrMiss1-1-2',
-		'show message NarrMiss1-1-3',
+		'show message NarrMiss1-1',
+		'show message NarrMiss1-2',
+		'jump Misi1-1-Video2'
+	],
+
+	'Misi1-1-Video2': [
+		'show message NarrMiss1-3',
 		'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?',
 		{
 			'Choice': {
-				'No': {
+				'1': {
 					'Text': 'pH pada semua system/ campuran berubah drastis',
-					'Do': 'jump No'
+					'Do': 'jump Misi1-1-Video2'
 				},
-				'Yes': {
+				'2': {
 					'Text': 'pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan',
 					'Do': 'jump Misi1-2'
-				}
+				},
+				'3': {
+					'Text': 'pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan',
+					'Do': 'jump Misi1-1-Video2'
+				},
+				'4': {
+					'Text': 'pH pada larutan asam asetat 0,1 M berubah drastis',
+					'Do': 'jump Misi1-2'
+				},
+				'5': {
+					'Text': 'pH pada larutan natrium asetat 0,1 M berubah drastis',
+					'Do': 'jump Misi1-2'
+				},
 			}
-		},
-		
-		'end'
+		}
 	],
 
 	'No': [
