@@ -224,6 +224,58 @@ monogatari.script ({
 		}
 	],
 
+	'Misi1-2': [
+		'Nah..berdasarkan perubahan pH yang terjadi pada larutan – larutan dalam video, manakah sistem yang dapat mempertahankan pHnya setelah penambahan 5 tetes asam atau basa kuat?',
+
+	],
+
+	// Baris di bawah ini buat ditambahin ke kode ivan
+
+	'Misi1-4': [
+		'Berdasarkan perubahan pH yang terjadi pada larutan–larutan dalam video, manakah campuran yang dapat mempertahankan pHnya?',
+		{
+			'Choice': {
+				'1': {
+					'Text': 'Campuran larutan NH3 + NH4ClpH pada semua system/ campuran berubah drastis',
+					'Do': 'jump Misi1-5'
+				},
+				'2': {
+					'Text': 'Campuran larutan NaOH + NaCl',
+					'Do': 'jump Misi1-4'
+				},
+				'3': {
+					'Text': 'Larutan NH3 saja',
+					'Do': 'jump Misi1-4'
+				},
+				'4': {
+					'Text': 'Larutan NH4Cl saja',
+					'Do': 'jump Misi1-4'
+				},
+			}
+		}
+	],
+
+	'Misi1-5': [
+		'Setelah melewati permainan, mengapa larutan (CH3COOH + CH3COONa dan NH3 + NH4Cl) termasuk larutan penyangga?',
+		{
+			'Choice': {
+				'1': {
+					'Text': 'Karena ketika ditambahkan sedikit asam ataupun basa hanya terjadi sedikit perubahan pH atau bahkan tidak mengalami perubahan',
+					'Do': 'jump Game1'
+				},
+				'2': {
+					'Text': 'Karena ketika ditambahkan sedikit asam ataupun basa terjadi perubahan pH yang drastis',
+					'Do': 'jump Game1'
+				}
+			}
+		}
+	],
+
+	'Game1': [
+		'Demo telah selesai!!!',
+		'End'
+	],
+
 	'No': [
 		// 'y You can do it now.',
 		// 'show message Help',
