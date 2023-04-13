@@ -41,7 +41,7 @@
 <div class="d-flex flex-column">
   <div class="d-flex justify-content-center">
     <div class="d-flex justify-content-center align-middle text-center" id="form-modal">
-      <form action="gabung" method="post">
+      <form action="gabung" method="POST">
           <img class="mb-4" src="assets\images\logo.jpeg" alt="" width="72" height="72">
           <img class="mb-4" src="assets\images\Logo-Serviam.png" alt="" width="72" height="72">
           <h1 class="h3 mb-3 fw-normal">Please sign up</h1>

@@ -1,45 +1,43 @@
 <?php  
+require_once 'Database\mysqlDB.php';
 
-
-class database{  //disatuka karena fungsi-fungsi yang beririsan
+class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
         protected $db;
         public function __construct(){
             
-            $this->db=new MySQLDB("localhost","root","","tubes");
+            $this->db=new MySQLDB("localhost","root","","buffer-labs");
         }
 
-        public function login($username,$passwordInput){
+        public function loginUser($username,$passwordInput){
             $userInfo=$this->getAccountInfo($username);
-            if($userInfo!= "tidak terdaftar"){
-                $role=$userInfo[0]['role'];
+            if($userInfo!= -1){
                 $passwordDB=$userInfo[0]['password'];
 
                
-                $verify =Password::decode($passwordInput,$passwordDB);
-                if($verify){
-                    Session_start();
-                    $_SESSION['role']=$role;
-                    require_once 'Model/user.php';
-                    $username=$userInfo[0]['username'];
-                    if($role=="peserta"){
-                        $gambar=$userInfo[0]['gambar'];
-                        $nama=$userInfo[0]['nama_lengkap'];
-                        $gender=$userInfo[0]['gender'];
-                        $tl=$userInfo[0]['tanggal_lahir'];
-                        $_SESSION['userInfo']=new user($username,$nama,$gambar,$tl,$gender);
-                    } else{
-                        $_SESSION['userInfo']=$username;
-                    }
-                   
-                    header("location: $role");
+                // $verify =Password::decode($passwordInput,$passwordDB);
+                if($passwordDB==$passwordInput){
+                    header("location: play");
                     
                 }else { 
-                    header("location: register?wrong=1");
+                    header("location: play?wrong=1");
                 }
             }else{
-                header("location: register?wrong=2"); #kalau tidak ada
+                header("location: play?wrong=2"); #kalau tidak ada
             }
+            return null;
         }
+
+        private function getAccountInfo($username){
+            $query ="SELECT * FROM `user` where `email` = '$username'"; 
+            $res=$this->db->executeSelectQuery($query);
+
+           if($res != NULL){  
+               return $res; 
+           }else{
+               return -1;
+     
+           }
+       }
 
 
 
