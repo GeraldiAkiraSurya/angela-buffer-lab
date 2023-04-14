@@ -17,6 +17,7 @@
         }
     </style>
 
+    <link rel="icon" href="assets\images\Logo-Serviam.png">  
     <link href="style\\login.css" rel="stylesheet">
 
 <style>
@@ -41,28 +42,42 @@
 <div class="d-flex flex-column">
   <div class="d-flex justify-content-center">
     <div class="d-flex justify-content-center align-middle text-center" id="form-modal">
+
+    
       <form action="masuk" method="POST">
           <img class="mb-4" src="assets\images\logo.jpeg" alt="" width="72" height="72">
           <img class="mb-4" src="assets\images\Logo-Serviam.png" alt="" width="72" height="72">
-          <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+          <h1 class="h3 mb-3 fw-normal">Silahkan Masuk</h1>
 
           <div class="form-floating">
             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
-            <label for="floatingInput">Email address</label>
+            <label for="floatingInput">Email</label>
           </div>
           <br>
           <div class="form-floating">
             <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
             <label for="floatingPassword">Password</label>
           </div>
+
+          <div>
+            Tidak memiliki akun? <a href="register">daftar disini</a>
+          </div>
+
+          <?php
+         if (isset($_GET['wrong'])) { ?>
+   
+        <p style="color:red;" >email dan password tidak cocok</p>
+        <?php
+        } 
+        ?>
           <!-- <div class="checkbox mb-3">
             <label>
               <input type="checkbox" value="remember-me"> Remember me
             </label>
           </div> -->
-          <br> 
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-           
+          <br>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Masuk</button>
+          
           <p class="mt-5 mb-3 text-muted">&copy; <a href="https://instagram.com/geraldiakira?igshid=YmMyMTA2M2Y=">IF UNPAR</a> 2023</p>
         </form>
       </div>

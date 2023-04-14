@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     switch($url){
         case $base."login":
             require_once 'view.php'; 
-            echo View::createView("login.php");
+            echo View::createView("index.php");
             break;
             case $base."register":
                 require_once 'view.php'; 
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 break;
                 case $base."play":
                     require_once 'view.php'; 
-                    echo View::createView("game.html");
+                    echo View::createView("game.php");
                 break;
 
         default:
@@ -28,21 +28,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             // echo View::createView("index.html");
             require_once 'Database\databaseController.php';
             $myDB=new bufferDatabase();
-            $myDB->loginUSer($_POST['email'],$_POST['password']);
-            // header("Location:play");
+            $myDB->loginUSer();
             break;
         case $base."daftar":
-            // require_once 'Controller/controllerLogin-signup.php';
-            // $signup=new LoginAndSignUP();
-            // $res=$signup-> signupUser();
-            header("Location:play");
+            require_once 'Database\databaseController.php';
+            $myDB=new bufferDatabase();
+            $myDB->signupUser();
+
             break;
-        
-     
-
-
+            default:
+            header("Location:login");
+            break;
         }
 
+}else{
+    header("Location:login");
 }
 
 

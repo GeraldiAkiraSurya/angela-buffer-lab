@@ -16,7 +16,7 @@
 
         }
     </style>
-
+    <link rel="icon" href="assets\images\Logo-Serviam.png"> 
     <link href="style\\login.css" rel="stylesheet">
 
 <style>
@@ -41,53 +41,57 @@
 <div class="d-flex flex-column">
   <div class="d-flex justify-content-center">
     <div class="d-flex justify-content-center align-middle text-center" id="form-modal">
-      <form action="gabung" method="POST">
+      <form action="daftar" method="POST">
           <img class="mb-4" src="assets\images\logo.jpeg" alt="" width="72" height="72">
           <img class="mb-4" src="assets\images\Logo-Serviam.png" alt="" width="72" height="72">
-          <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
+          <h1 class="h3 mb-3 fw-normal">Daftar</h1>
 
           <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput">
+            <input type="text" class="form-control" id="floatingInput" name="nama">
             <label for="floatingInput">Nama</label>
           </div>
           <br>
           <div class="form-floating">
-            <select class="form-select" aria-label="Default select example">
-              <option value="1">SMA ST. Angela</option>
+            <select class="form-select" aria-label="Default select example" name="sekolah">
+              <option value=1>SMA ST. Angela</option>
             </select>
             <label for="floatingInput">Sekolah</label>
           </div>
           <br>
           <div class="form-floating">
-            <select class="form-select" aria-label="Default select example">
-              <option value="10">X</option>
-              <option value="11">XI</option>
-              <option value="12">XII</option>
+            <select class="form-select" aria-label="Default select example" name="tingkat">
+              <option value=10>X</option>
+              <option value=11>XI</option>
+              <option value=12>XII</option>
             </select>
             <label for="floatingInput">Tingkat</label>
           </div>
           <br>
           <div class="form-floating">
-            <input type="number" class="form-control" id="floatingInput" min="1" >
+            <input type="number" class="form-control" id="floatingInput" min="1" name="absen">
             <label for="floatingInput">No Absen</label>
           </div>
           <br>
           <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" >
             <label for="floatingInput">Email address</label>
           </div>
           <br>
           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
             <label for="floatingPassword">Password</label>
           </div>
+          <div>
+            Sudah memiliki akun? <a href="login">masuk</a>
+          </div>
+
           <!-- <div class="checkbox mb-3">
             <label>
               <input type="checkbox" value="remember-me"> Remember me
             </label>
           </div> -->
           <br> 
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign UP</button>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Daftar</button>
            
           <p class="mt-5 mb-3 text-muted">&copy; <a href="https://instagram.com/geraldiakira?igshid=YmMyMTA2M2Y=">IF UNPAR</a> 2023</p>
         </form>
