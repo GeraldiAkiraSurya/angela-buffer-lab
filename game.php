@@ -1,10 +1,24 @@
+
+<?php  
+	if (session_status() !=2) {
+		session_start();
+	}
+    if( !isset($_SESSION['email']) || !isset($_SESSION['nama']) || !isset($_SESSION['token'])   ){
+        header("Location:login");
+    }
+?>
+
+
+
 <!DOCTYPE html>
 
 <html lang="en" itemscope itemtype="http://schema.org/WebPage"> <!--Change the lang property to your web"s language-->
 
 	<head prefix="og: http://ogp.me/ns#">
 
-		<title>Monogatari Visual Novel</title> <!--Up to 60-70 Characters. Optimal Format: Primary Keyword - Secondary Keyword | Brand Name-->
+		<title>Buffer Labs Games</title> <!--Up to 60-70 Characters. Optimal Format: Primary Keyword - Secondary Keyword | Brand Name-->
+		
+
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">
@@ -38,17 +52,14 @@
 		<meta name="mobile-web-app-capable" content="yes">
 		<link rel="icon" sizes="192x192" href="assets/icons/icon_192x192.png"> <!--192 x 192 Icon-->
 		<link rel="icon" sizes="128x128" href="assets/icons/icon_128x128.png"> <!--128 x 128 Icon-->
+		<link rel="icon" href="assets\images\Logo-Serviam.png"> 
 
 		<!--Apple Meta Tags-->
 		<meta name="apple-mobile-web-app-title" content=""> <!--App Title or Name-->
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> <!--Styling for the iOS Status Bar-->
-		<link rel="apple-touch-icon" href="assets/icons/icon_60x60.png"> <!--60 x 60 Icon-->
-		<link rel="apple-touch-icon" sizes="76x76" href="assets/icons/icon_76x76.png"> <!--76 x 76 Icon-->
-		<link rel="apple-touch-icon" sizes="120x120" href="assets/icons/icon_120x120.png"> <!--120 x 120 Icon-->
-		<link rel="apple-touch-icon" sizes="152x152" href="assets/icons/icon_152x152.png"> <!--152 x 152 Icon-->
-		<link rel="apple-touch-icon" sizes="152x152" href="assets/icons/icon_167x167.png"> <!--167 x 167 Icon-->
-		<link rel="apple-touch-icon" sizes="152x152" href="assets/icons/icon_180x180.png"> <!--180 x 180 Icon-->
+		<link rel="apple-touch-icon" href="assets\images\Logo-Serviam.png"> <!--60 x 60 Icon-->
+
 
 		<!--Microsoft Tags-->
 		<meta name="msapplication-TileColor" content=""> <!--Color of the tile on Windows. In hexadecimal format-->
@@ -64,8 +75,10 @@
 
 		<meta name="theme-color" content=""><!--Theme color for browsers in hexadecimal format.-->
 
-		<link rel="shortcut icon" href="favicon.ico" /> <!--Favicon. Good tool for creating one: http://xiconeditor.com/ Create all sizes.-->
+		<link rel="shortcut icon" href="assets\images\Logo-Serviam.png" /> <!--Favicon. Good tool for creating one: http://xiconeditor.com/ Create all sizes.-->
 		<!--<link rel="canonical" href=""> Canonical URL of your webpage-->
+		<link rel="icon" href="assets\images\Logo-Serviam.png"> 
+
 
 		<link rel="manifest" href="manifest.json">
 
