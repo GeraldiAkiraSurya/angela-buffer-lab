@@ -25,7 +25,7 @@
 		<meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; script-src 'self' 'unsafe-eval'">
 		<meta name="description" content=""> <!--Page description. No longer than 155 characters.-->
 		<meta name="keywords" content="">
-		<meta name="author" content=""> <!--Name of the author.-->
+		<meta name="author" content="Lucyus, Geraldi, Dimas"> <!--Name of the author.-->
 
 		<!--Facebook Meta Tags-->
 		<meta property="og:image" content="http://" /> <!--URL of Image to show-->
@@ -97,6 +97,7 @@
 		<script src="./js/storage.js"></script>
 		<script src="./js/script.js"></script>
 		<script src="./js/main.js"></script>
+		<script src="./js/globalvar.js"></script>
 
 	</head>
 
