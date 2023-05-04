@@ -51,7 +51,10 @@ button:hover {
 
 /* Main Menu Buttons Styling */
 [data-screen="main"] button {
-
+	display: inline-block;
+	border-radius: 10px;
+	color: black;
+	background-color: #A8D08C;
 }
 
 /**
