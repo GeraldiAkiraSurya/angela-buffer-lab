@@ -24,12 +24,12 @@ var config = {
         }
     },
     canvasStyle: `display: block; width: 100%; height: 100%;`,
-    // scene: [mainMenu, gameplay]
+
     //lengkap
-    // scene: [mainMenu, findingObjects1]
+    scene: [mainMenu, findingObjects1, selectChara]
 
     //development
-    scene: [findingObjects1]
+    // scene: [mainMenu]
 };
 
 var game = new Phaser.Game(config);

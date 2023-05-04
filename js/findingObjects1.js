@@ -128,7 +128,9 @@ findingObjects1.create = function () {
         else {
             gameObject.x = gameObject.input.dragStartX;
             gameObject.y = gameObject.input.dragStartY;
-            alert("salah cuy!!!");
+            // alert("salah cuy!!!");
+            energy -= 20;
+            console.log(energy);
         } 
     });
 
@@ -143,6 +145,8 @@ findingObjects1.create = function () {
 }
 
 findingObjects1.update = function () {
-    
+    if (energy == 0) {
+        alert("energimu telah habis!");
+    }
 }
 
