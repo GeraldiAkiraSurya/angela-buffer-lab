@@ -16,14 +16,14 @@ selectChara.create = function () {
     //x 1879 y 1008
 
     //background main menu
-    this.add.image(game.canvas.width/2, game.canvas.height/2, 'menuBackground').setScale(0.65, 0.52);
+    this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
 
     //buttons
-    btnBack = this.add.image(game.canvas.width/2, game.canvas.height/2 + 300, 'backButton').setInteractive().setScale(0.5);
+    btnBack = this.add.image(canvasWidth/2, canvasHeight/2 + 300, 'backButton').setInteractive().setScale(0.5);
 
     //characters
-    male = this.add.image(game.canvas.width/2 - 200, game.canvas.height/2 - 150, 'professor').setInteractive().setScale(0.7);
-    female = this.add.image(game.canvas.width/2 + 200, game.canvas.height/2 - 150, 'professor').setInteractive().setScale(0.7).setFlipX(true);
+    male = this.add.image(canvasWidth/2 - 200, canvasHeight/2 - 150, 'professor').setInteractive().setScale(0.7);
+    female = this.add.image(canvasWidth/2 + 200, canvasHeight/2 - 150, 'professor').setInteractive().setScale(0.7).setFlipX(true);
 
     btnBack.on('pointerup', function () {
         selectChara.scene.start('MainMenu');
@@ -42,7 +42,7 @@ selectChara.create = function () {
     // this.tweens.add({
     //     targets: [btnStart],
     //     duration: 1000,
-    //     x: game.canvas.width/2,
+    //     x: canvasWidth/2,
     //     scaleX: 2,
     //     scaleY: 2,
     //     ease: 'Bounce.easeIn'
