@@ -16,6 +16,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     require_once 'view.php'; 
                     echo View::createView("game.php");
                 break;
+<<<<<<< HEAD
+=======
+                
+                case $base."find":
+                    require_once 'view.php';
+                    echo View::createView("find.php");
+                break;
+>>>>>>> b2735b9034ff5cf23269295a4493a2621b5956a3
 
         default:
         header("Location:login");
@@ -46,4 +54,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 }
 
 
+<<<<<<< HEAD
   ?>
+=======
+?> 
+>>>>>>> b2735b9034ff5cf23269295a4493a2621b5956a3

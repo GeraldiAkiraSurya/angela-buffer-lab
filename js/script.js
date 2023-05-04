@@ -86,11 +86,11 @@ monogatari.action ('message').messages ({
 
 // Define the notifications used in the game
 monogatari.action ('notification').notifications ({
-	'Welcome': {
-		title: 'Welcome',
-		body: 'This is the Monogatari VN Engine',
-		icon: ''
-	}
+	// 'Welcome': {
+	// 	title: 'Welcome',
+	// 	body: 'This is the Monogatari VN Engine',
+	// 	icon: ''
+	// }
 });
 
 // Define the Particles JS Configurations used in the game
@@ -170,7 +170,7 @@ monogatari.script ({
 		'show message Narration1-3',
 		'show character p normal with fadeIn',
 		'p Hai selamat datang di Buffer Laboratory!!!',
-		'show notification Welcome',
+		// 'show notification Welcome',
 		{
 			'Input': {
 				'Text': 'Siapa namamu?',
@@ -207,10 +207,39 @@ monogatari.script ({
 				// 'Dialog': 'Anda dapat memulai penelitian di laboratorium X',
 				'Yes': {
 					'Text': 'Terima',
-					'Do': 'jump Misi1-1'
+					'Do': 'jump Mission-Screen'
 				},
 				'No': {
 					'Text': 'Tidak',
+					'Do': 'jump Start'
+				},
+			}
+		},
+	],
+
+	//mission screen
+	'Mission-Screen': [
+		'p Test Mission Screen!',
+		{
+			'Choice': {
+				'Misi1': {
+					'Text': 'Misi 1',
+					'Do': 'jump Misi1-1'
+				},
+				'Misi2': {
+					'Text': 'Misi 2',
+					'Do': 'jump No'
+				},
+				'Misi3': {
+					'Text': 'Misi 3',
+					'Do': 'jump No'
+				},
+				'Misi4': {
+					'Text': 'Misi 4',
+					'Do': 'jump No'
+				},
+				'Misi5': {
+					'Text': 'Misi 5',
 					'Do': 'jump No'
 				},
 			}
