@@ -3,10 +3,13 @@
 	if (session_status() !=2) {
 		session_start();
 	}
-    if( !isset($_SESSION['email']) || !isset($_SESSION['nama']) || !isset($_SESSION['token'])   ){
+    if( (!isset($_SESSION['email'])) || (!isset($_SESSION['nama'])) || (!isset($_SESSION['token']))   ){
         header("Location:login");
+
     }
 ?>
+
+
 
 
 
