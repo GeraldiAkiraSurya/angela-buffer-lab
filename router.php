@@ -20,6 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 require_once 'view.php'; 
                 echo View::createView("testBackend.php");
                 break;
+                
+                case $base."find":
+                    require_once 'view.php';
+                    echo View::createView("find.php");
+                break;
 
         default:
         header("Location:login");
@@ -77,4 +82,4 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 }
 
 
-  ?>
+?> 
