@@ -17,19 +17,30 @@ var config = {
         width: window.innerWidth,
         height: window.innerHeight,
     },
+
     physics: {
         default: 'arcade',
         arcade: {
             debug: false,
         }
     },
+    
+    // plugins: {
+    //     scene: [{
+    //         key: 'rexUI',
+    //         plugin: UIPlugin,
+    //         mapping: 'rexUI'
+    //     },
+    //     ]
+    // },
+    
     canvasStyle: `display: block; width: 100%; height: 100%;`,
 
     //lengkap
-    scene: [mainMenu, findingObjects1, selectChara]
+    // scene: [mainMenu, findingObjects1, selectChara, missionOne]
 
     //development
-    // scene: [mainMenu]
+    scene: [missionOne]
 };
 
 var game = new Phaser.Game(config);
