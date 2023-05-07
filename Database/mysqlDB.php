@@ -47,6 +47,15 @@ class MySQLDB{
 	function executeNonSelectQuery($query){
 		$this->OpenConnect();
 		$resQuery=$this->connection->query($query);
+		$id= $this->connection->affected_rows;
+		$this->closeConnect();
+		return $id;
+
+	}
+
+	function executeNonSelectQueryGetId($query){
+		$this->OpenConnect();
+		$resQuery=$this->connection->query($query);
 		$id= $this->connection->insert_id;
 		$this->closeConnect();
 		return $id;

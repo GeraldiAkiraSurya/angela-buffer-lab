@@ -105,6 +105,12 @@ findingObjects1.create = function () {
     const testTubeZone = this.add.zone(600, 750, 100, 100).setRectangleDropZone(100, 100).setName('testTube');
     const testTubeRackZone = this.add.zone(750, 750, 100, 100).setRectangleDropZone(100, 100).setName('testTubeRack');
 
+    //text
+    this.add.text(265, 735, "Beaker", {font: "20px Arial", fill: "#000000"});
+    this.add.text(415, 735, "Spatula", {font: "20px Arial", fill: "#000000"});
+    this.add.text(555, 735, "Test Tube", {font: "20px Arial", fill: "#000000"});
+    this.add.text(710, 735, "Test Tube Rack", {font: "20px Arial", fill: "#000000"});
+
     //on event dragging
     this.input.on('dragstart', function (pointer, gameObject) {
         this.children.bringToTop(gameObject);
