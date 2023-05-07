@@ -3,37 +3,42 @@ $url=$_SERVER['REDIRECT_URL'];
 $base ="/angela-buffer-lab/";
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    require_once 'view.php';
     switch($url){
+        case $base:
+            echo View::createView("index.php");
+            break;
         case $base."login":
-            require_once 'view.php'; 
             echo View::createView("index.php");
             break;
         case $base."register":
-            require_once 'view.php'; 
-            echo View::createView("signUp.php");
+            echo View::createView("View/signUp.php");
             break;
         case $base."play":
-            require_once 'view.php'; 
             echo View::createView("game.php");
             break;
-            case $base."test":
-                require_once 'view.php'; 
-                echo View::createView("testBackend.php");
-                break;
-                
-                case $base."find":
-                    require_once 'view.php';
-                    echo View::createView("find.php");
-                break;
+        case $base."profile":
+            require_once 'Database/databaseController.php';
+            $myDB=new bufferDatabase();
+            $data=$myDB->viewProfile();
+            echo View::createView("View/profile.php",$data);
+            break;
 
+
+
+
+        case $base."test":
+            echo View::createView("testBackend.php");
+            break;
+        case $base."find":
+            echo View::createView("find.php");
+            break;
         default:
-        header("Location:login");
-        break;
+        header("location: login");
         }
 }else if ($_SERVER["REQUEST_METHOD"] == "POST"){
     switch($url){
         case $base."masuk":
-
             require_once 'Database/databaseController.php';
             $myDB=new bufferDatabase();
             $myDB->loginUSer();
@@ -73,12 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
             break;
             default:
-            header("Location:login");
+            header("location:View/index.php");
             break;
         }
 
 }else{
-    header("Location:login");
+    header("location:View/index.php");
 }
 
 

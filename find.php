@@ -19,6 +19,12 @@
   </head>
 
   <body>
+    
+      <?php
+      require_once 'user.php';?>
+
+
+  
     <script src="./js/globalvar.js"></script>
     <script src="./js/findingObjects1.js"></script>
     <script src="./js/missionOne.js"></script>

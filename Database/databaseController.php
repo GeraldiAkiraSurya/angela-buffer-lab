@@ -34,7 +34,6 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                 ,array(2.2,3)
                 ,array(2.2,4)
                 ,array(2.2,5)
-                ,array(2.2,5)
                 ,array(2.2,6)
                 ,array(2.2,7)
                 ,array(2.2,8)
@@ -64,7 +63,6 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                 ,array(5,3)
                 ,array(5,4)
                 ,array(5,5)
-                ,array(5,5)
                 ,array(5,6)
                 ,array(5,7)
             );
@@ -82,7 +80,7 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                 if($verify){
                     $generateToken = bin2hex(random_bytes(25));
 
-                    $query ="UPDATE `user` SET `lastLogin` = NOW(),`token`= '$generateToken' WHERE `email`= '$username'";
+                    $query ="UPDATE `user` SET `lastLogin` = NOW(),`token`= '$generateToken' ,`numLogin`=`numLogin`+1 WHERE `email`= '$username'";
                     $res=$this->db->executeNonSelectQuery($query);
 
                     Session_start();
@@ -92,7 +90,7 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                     $_SESSION['token']=$generateToken;
 
 
-                    header("location: login");
+                    header("location: play");
                     
                 }else { 
                     header("location: login?wrong=1");
@@ -142,7 +140,6 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
         $query ="INSERT INTO `user` 
         (`nama`,`sekolah`,`tingkat`,`absen`,`email`,`password`) 
         VALUES ('$nama',$sekolah,$tingkat,$absen,'$email','$passwordHash')";
-
 
 
         $id=$this->db->executeNonSelectQueryGetId($query);
@@ -295,6 +292,26 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
         }else{
             return "true";
         }
+
+    }
+
+
+    public function viewProfile(){
+
+        if(session_status()!=2){
+            session_start();
+        }
+        if(isset($_SESSION['id'])){
+        $id=$_SESSION['id'];
+        }else {
+            header("Location:login");
+        }
+
+        $query ="SELECT `nama`, `tingkat`, `absen`, `email`, `lastLogin`, `numLogin`, `misi`, max(`waktuBenar`) AS 'waktuSelesai', MIN(`waktuPertama`) AS `waktuMulai`, SUM( CASE WHEN `pengerjaan`.`waktuBenar` IS NULL THEN 0 else 1 END ) as `benar`, COUNT(`soal`) as jumlahSoal FROM user INNER JOIN pengerjaan ON `user`.`id`=`pengerjaan`.`userId` WHERE `user`.`id`=$id GROUP BY `misi`;";
+
+        $res=$this->db->executeSelectQuery($query);
+ 
+        return $res;
 
     }
 
