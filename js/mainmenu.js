@@ -29,7 +29,7 @@ mainMenu.create = function () {
 
     btnStart.on('pointerup', function () {        
         console.log(energy);
-        mainMenu.scene.start('FindingObjects1');
+        mainMenu.scene.start('MissionSelection');
     });
 
     btnOptions.on('pointerup', function () {
