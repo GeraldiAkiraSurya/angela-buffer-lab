@@ -24,6 +24,11 @@ var config = {
             debug: false,
         }
     },
+
+    //buat youtube video player??
+    dom: {
+        createContainer: true
+    },
     
     // plugins: {
     //     scene: [{
