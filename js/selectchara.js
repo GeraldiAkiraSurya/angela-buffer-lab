@@ -4,12 +4,19 @@ selectChara.preload = function () {
     this.load.path = './assets/';
     this.load.image('menuBackground', 'scenes/science_lab.jpg');
     this.load.image('backButton', 'buttons/Back Button.png');
+
     this.load.image('professor', 'characters/professor.png');
+    //female
+    this.load.image('sora', 'characters/female.png');
+    //males
+    this.load.image('shin', 'characters/male.png');
 }
 
 var btnBack;
-var male;
-var female;
+//male
+var shin;
+//female
+var sora;
 
 selectChara.create = function () {
     // console.log(game.canvas.width, game.canvas.height);
@@ -22,20 +29,20 @@ selectChara.create = function () {
     btnBack = this.add.image(canvasWidth/2, canvasHeight/2 + 300, 'backButton').setInteractive().setScale(0.5);
 
     //characters
-    male = this.add.image(canvasWidth/2 - 200, canvasHeight/2 - 150, 'professor').setInteractive().setScale(0.7);
-    female = this.add.image(canvasWidth/2 + 200, canvasHeight/2 - 150, 'professor').setInteractive().setScale(0.7).setFlipX(true);
+    shin = this.add.image(canvasWidth/2 - 200, canvasHeight/2 - 150, 'shin').setInteractive().setScale(0.56);
+    sora = this.add.image(canvasWidth/2 + 200, canvasHeight/2 - 150, 'sora').setInteractive().setScale(0.56).setFlipX(true);
 
     btnBack.on('pointerup', function () {
         selectChara.scene.start('MainMenu');
     });
 
-    male.on('pointerup', function () {
-        chara = 'male';
+    shin.on('pointerup', function () {
+        character = 'male';
         selectChara.scene.start('MainMenu');
     });
 
-    female.on('pointerup', function () {
-        chara = 'female';
+    sora.on('pointerup', function () {
+        character = 'female';
         selectChara.scene.start('MainMenu');
     });
 
