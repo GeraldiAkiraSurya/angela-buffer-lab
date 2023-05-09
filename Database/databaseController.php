@@ -4,12 +4,10 @@ require_once 'Database/controllerPassword.php';
 
 class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
         protected $db;
-        protected $damage;
         protected $soal;
         public function __construct(){
             $this->db=new MySQLDB("localhost","root","","buffer-labs");
             //CONFIG
-            $this->damage=5;
             $this->soal=array(
                 array(1,1)
                 ,array(1,2)
@@ -168,8 +166,9 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
 
         $id=$_POST['id'];
         $token=$_POST['token'];
+        $value=$_POST['value'];
 
-        $query ="UPDATE `user` SET `power`=`power`-$this->damage WHERE `id`=$id AND `token`='$token' AND `power`>0";
+        $query ="UPDATE `user` SET `power`=`power`-$value WHERE `id`=$id AND `token`='$token' AND `power`>0";
         $res=$this->db->executeNonSelectQuery($query);
  
         if($res==0){
@@ -282,8 +281,9 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
 
         $id=$_POST['id'];
         $token=$_POST['token'];
+        $value=$_POST['value'];
 
-        $query ="UPDATE `user` SET `power`=`power`+$this->damage WHERE `id`=$id AND `token`='$token' AND `power`<100";
+        $query ="UPDATE `user` SET `power`=`power`+$value WHERE `id`=$id AND `token`='$token'";
 
         $res=$this->db->executeNonSelectQuery($query);
  
@@ -312,6 +312,61 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
         $res=$this->db->executeSelectQuery($query);
  
         return $res;
+
+    }
+
+
+    public function mission(){
+
+        if(session_status()!=2){
+            session_start();
+        }
+        if(isset($_SESSION['id'])){
+        $id=$_SESSION['id'];
+        }else {
+            header("Location:login");
+        }
+
+        $query ="SELECT * FROM `pengerjaan`; ";
+
+        $res=$this->db->executeSelectQuery($query);
+
+        $arr= ["1"=>array(), "2.1"=> array(), "2.2"=> array(), "3"=> array(), "4"=>array(), "5"=>array()];
+
+        $lastSoal=TRUE; //true kalau dia not null
+
+        foreach($res as $row){
+            $misi=$row['misi'];
+            $soal=$row['soal'];
+            $mulai=$row['waktuPertama'];
+            $selesai=$row['waktuBenar'];
+
+            $selectedMisi=array();
+
+            if($mulai==NULL){
+                if($lastSoal || $selesai !=NULL  ){
+                    $selectedMisi[$soal]=TRUE; 
+                }else{
+                    $selectedMisi[$soal]=FALSE;
+                }
+
+
+            }else{
+                $selectedMisi[$soal]=TRUE; 
+            }
+
+            array_push($arr[strval($misi)],$selectedMisi);
+    
+            if($selesai==NULL){
+                $lastSoal=FALSE;
+            }else{
+                $lastSoal=TRUE;
+            }
+
+
+        }
+
+        return json_encode($arr);
 
     }
 

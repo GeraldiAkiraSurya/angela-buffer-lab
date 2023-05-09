@@ -48,6 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $myDB=new bufferDatabase();
             $myDB->signupUser();
             break;
+
+
         case $base."kenaHit":
             require_once 'Database/databaseController.php';
             $myDB=new bufferDatabase();
@@ -63,18 +65,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $myDB=new bufferDatabase();
             echo $myDB->start();
             break;
-        case $base."gagal":
-            require_once 'Database/databaseController.php';
-            $myDB=new bufferDatabase();
-            $myDB->failed();
-            break;
         case $base."berobat":
             require_once 'Database/databaseController.php';
             $myDB=new bufferDatabase();
             echo $myDB->heal();
             break;
-
-
+        case $base."permisi":
+            require_once 'Database/databaseController.php';
+            $myDB=new bufferDatabase();
+            echo $myDB->mission();
+            break;
 
             break;
             default:

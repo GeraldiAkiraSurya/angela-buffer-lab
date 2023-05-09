@@ -40,7 +40,7 @@ missionSelection.create = function() {
 }
 
 class Button {
-    constructor(x, y, label, scene, callback) {
+    constructor(x, y, label, scene, callback,active=false) {
         const button = scene.add.text(x, y, label)
             .setOrigin(1)
             .setFontSize(30)
@@ -48,9 +48,16 @@ class Button {
             .setPadding(12)
             .setStyle({ backgroundColor: '#e6e6e6', fill: '#000000' })
             .setInteractive({ useHandCursor: true })
-            .on('pointerdown', () => callback())
             .on('pointerover', () => button.setStyle({ fill: '#0000ff' }))
             .on('pointerout', () => button.setStyle({ fill: '#000000' }));
+
+            if(active){ //untuk mengecek dia udah boleh atau belum
+                button.setStyle({ backgroundColor: '#e6e6e6', fill: '#000000' })
+                button.on('pointerdown', () => callback())
+            }else {
+                button.setStyle({ backgroundColor: '#666666', fill: '#000000' })
+            }
+
 
         // console.log(button.style.stroke);
         // console.log(button.style.strokeThickness);

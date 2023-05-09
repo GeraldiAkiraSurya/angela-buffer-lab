@@ -40,7 +40,7 @@ var config = {
     // scene: [mainMenu, findingObjects1, selectChara, missionOne]
 
     //development
-    scene: [missionOne]
+    scene: [missionSelection]
 };
 
 var game = new Phaser.Game(config);
