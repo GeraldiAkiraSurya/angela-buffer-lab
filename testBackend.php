@@ -52,7 +52,7 @@ if(session_status()!=2){
 
 <br>
 
-<button onclick="done('1',2)">DONE</button>
+<button onclick="done('1',3)">DONE</button>
 
 <br>
 
