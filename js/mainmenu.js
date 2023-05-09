@@ -18,9 +18,6 @@ mainMenu.preload = function () {
 var btnStart;
 var btnOptions;
 
-var music;
-var musicConfig;
-
 var youtubePlayer;
 
 //male
@@ -33,17 +30,24 @@ mainMenu.create = function () {
     //x 1879 y 1008
 
     //BGM
-    musicConfig = {
+    const musicConf = {
         volume: 0.05,
         loop: true,
     }
 
-    music = this.sound.add('mainMenuBGM', musicConfig);
+    //added the music
+    menuMusic = this.sound.add('mainMenuBGM', musicConf);
     //biar ga ke pause kalo ganti tab
-    music.pauseOnBlur = false;
+    menuMusic.pauseOnBlur = false;
 
-    //play the music
-    music.play();
+    //prevent the music from being played twice
+    if (!isMenuMusicPlaying) {
+        //play the music
+        menuMusic.play();
+        //boolean for checking is music playing between scenes
+        //stored in global variable
+        isMenuMusicPlaying = true;
+    }
 
     canvasWidth = game.canvas.width;
     canvasHeight = game.canvas.height;
@@ -55,7 +59,7 @@ mainMenu.create = function () {
     shin = this.add.image(canvasWidth/2 - 400, canvasHeight/2 - 150, 'shin').setScale(0.56).setVisible(false);
     sora = this.add.image(canvasWidth/2 + 400, canvasHeight/2 - 150, 'sora').setScale(0.56).setFlipX(true).setVisible(false);
 
-    console.log(character);
+    // console.log(character);
 
     if (character == 'male') {
         shin.setVisible(true);
@@ -76,9 +80,7 @@ mainMenu.create = function () {
     //     videoId: 'wDOym-mXxO4'
     // }).on('ready', function () {
     //     youtubePlayer.setPosition(canvasWidth/2, canvasHeight/2);
-    // });
-
-    energy = 100;
+    // });    
 
     //buttons
     btnStart = this.add.image(canvasWidth/2, canvasHeight/2, 'startButton').setInteractive().setScale(0.5);
