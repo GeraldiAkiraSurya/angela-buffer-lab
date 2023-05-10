@@ -3,6 +3,7 @@ missionOne = new Phaser.Scene('Misi1');
 missionOne.preload = function () {
     this.load.path = './assets/';
     this.load.image('menuBackground', 'scenes/science_lab.jpg');
+    this.load.image('missionBackground', 'scenes/lab_desk.jpg')
     this.load.image('textBoxBackground', 'scenes/textbox_background.png');
 
     //pluginsnya pindahin ke game?
@@ -29,28 +30,19 @@ var content;
 
 //notes
 //speed muncul textnya belum nemu
+//udah ketemu -Geraldi
 
 //yg pertama bisa langsung enter
-var arrayOfContent = [`Hai selamat datang di Buffer Laboratory!!! 1
-Hai selamat datang di Buffer Laboratory!!! 2
-Hai selamat datang di Buffer Laboratory!!! 3
-Hai selamat datang di Buffer Laboratory!!! 4
-Hai selamat datang di Buffer Laboratory!!! 5
-Hai selamat datang di Buffer Laboratory!!! 6
-Hai selamat datang di Buffer Laboratory!!! 7
-Hai selamat datang di Buffer Laboratory!!! 8
-Hai selamat datang di Buffer Laboratory!!! 9
-Hai selamat datang di Buffer Laboratory!!! 10
-Hai selamat datang di Buffer Laboratory!!! 11
-Hai selamat datang di Buffer Laboratory!!! 12
-Hai selamat datang di Buffer Laboratory!!! 13
-Hai selamat datang di Buffer Laboratory!!! 14
-Hai selamat datang di Buffer Laboratory!!! 15
-`,
-//kalo kepanjangan, ngilang dong lmao
-'test kalimat 2 cuy panjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaang',
-'test kalimat 3 cuy panjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaang',
-'test kalimat 4 cuy panjaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaang'];
+var arrayOfContent = [
+    'Allison adalah seorang profesor yang ditugaskan di Laboratorium X untuk mencari obat dari penyakit yang tidak diketahui asal-usulnya.',
+    `Untuk itu Prof. Allison bekerjasama dengan ilmuan kimia ${playerName} untuk melakukan penelitian untuk mengumpulkan ramuan obat yang sedang dicari.`,
+    'Seluruh ramuan obat dapat dikumpulkan setelah ilmuan kimia menyelesaikan tantangan pada setiap misi.',
+    `Prof. Allison: ${playerName}, Anda harus mengambil buku ramuan obat yang tertinggal di laboratorium pusat.`,
+    `${playerName}: Siap meluncur prof...`,
+    'Prof. Allison: Sebelum berangkat Anda harus menyelesaikan tantangan di laboratorium X, tiap tantangan yang dilewati akan menambah energi Anda untuk memperoleh buku ramuan obat...',
+    `${playerName}: Penemuan ini akan menjadi gebrakan hebat di dunia penelitian...`,
+    'Prof. Allison: Semoga berhasil!!!'
+];
 var lineCounter;
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -63,8 +55,13 @@ missionOne.create = function () {
     canvasHeight = game.canvas.height;
     //git error
 
+    let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'menuBackground');
+    let scaleX = this.cameras.main.width / image.width;
+    let scaleY = this.cameras.main.height / image.height;
+    let scale = Math.max(scaleX, scaleY);
+    image.setScale(scale).setScrollFactor(0);
     //background main menu
-    this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
+    // this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
 
     //background text box
     // this.add.image(canvasWidth/2, canvasHeight/2 + 320, 'textBoxBackground').setScale(0.8, 0.6);
@@ -95,7 +92,7 @@ missionOne.create = function () {
         fixedWidth: 900,
         fixedHeight: 250,
     })
-    .start(content, 150);
+    .start(content, 50); // yang integer tuh speed muncul speednya
 
     //input
     this.input.on('pointerdown', function () {
@@ -113,7 +110,7 @@ missionOne.create = function () {
 
         }
         //kalo ga lagi typing, gas ae masbro
-        else {         
+        else {
             //ngatur panah next
             var nextIcon = textBox.getElement('action').setVisible(false);
             textBox.resetChildVisibleState(nextIcon);
@@ -131,10 +128,23 @@ missionOne.create = function () {
                     // console.log('next line: ' + content); 
                     lineCounter += 1;
         
-                    textBox.start(content);                    
+                    textBox.start(content);
                 }
     
                 // return;
+
+                // kalo udah dialog paling terakhir bakal hapus textbox nya
+                if(lineCounter >= arrayOfContent.length) {
+                    textBox.destroy();
+                    // this.add.image(canvasWidth/2, canvasHeight/2, 'missionBackground').setScale(0.65, 0.52);
+                    image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'missionBackground');
+                    scaleX = this.cameras.main.width / image.width;
+                    scaleY = this.cameras.main.height / image.height;
+                    scale = Math.max(scaleX, scaleY);
+                    image.setScale(scale).setScrollFactor(0);
+
+                    // this.add.Rectangle(100, 100, 200, 200, '#DDDDDD');
+                }
             }
             else {
                 console.log('bukan akhir page cuy');
@@ -145,6 +155,7 @@ missionOne.create = function () {
 
         // console.log('clicked!');
     }, this);
+    // this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
 }
 
 missionOne.update = function () {
@@ -216,6 +227,10 @@ function createTextBox (scene, x, y, config) {
     //})
 
     return textBox;
+}
+
+function createMissionScene(scene) {
+    
 }
 
 function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {

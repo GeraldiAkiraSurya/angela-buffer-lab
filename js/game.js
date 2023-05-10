@@ -45,11 +45,7 @@ var config = {
     scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne]
 
     //development
-<<<<<<< HEAD
-    scene: [missionSelection]
-=======
     // scene: [findingObjects1]
->>>>>>> 0738e2eb23f85d6208e2298d0306475f5f0f76a0
 };
 
 var game = new Phaser.Game(config);
