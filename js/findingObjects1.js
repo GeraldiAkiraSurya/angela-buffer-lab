@@ -67,8 +67,18 @@ var dropZoneSpatulaBG;
 var dropZoneTestTubeBG;
 var dropZoneTestTubeRackBG;
 
+//boolean: object found or not
+var beakerFound;
+var spatulaFound;
+var testTubeFound;
+var testTubeRackFound;
+
 var energyFlask;
 var energyText;
+
+var findTimer;
+var timerText;
+var correctAnswer;
 
 findingObjects1.create = function () {
 
@@ -76,7 +86,15 @@ findingObjects1.create = function () {
     //x 1879 y 1008
     //halve value: 940, 500
 
-    //objek yang akan disembunyikan
+    //energy debugger, disable pas udah siap dirangkai
+    energy = 100;
+
+    //variable initialization
+    correctAnswer = false;
+    beakerFound = false;
+    spatulaFound = false;
+    testTubeFound = false;
+    testTubeRackFound = false;
 
     //setAngle buat rotation in degree
     //setScale buat skala imagenya, belum tau hitboxnya keganti ato engga. kayanya ga keganti, atau hitboxnya lebih besar dari imagenya
@@ -84,10 +102,7 @@ findingObjects1.create = function () {
     //load image to scene
     beaker = this.add.image(940, 400, 'beaker').setInteractive().setScale(0.5);
     //biar bisa di-drag
-    this.input.setDraggable(beaker);
-
-    //energy debugger, disable pas udah siap dirangkai
-    // energy = 100;
+    this.input.setDraggable(beaker);    
 
     spatula = this.add.image(1100, 770, 'spatula').setInteractive().setScale(0.4);
     this.input.setDraggable(spatula);
@@ -125,13 +140,37 @@ findingObjects1.create = function () {
     this.add.text(265, 735, "Beaker", {font: "20px Helvetica", fill: "#000000"});
     this.add.text(415, 735, "Spatula", {font: "20px Helvetica", fill: "#000000"});
     this.add.text(555, 735, "Test Tube", {font: "20px Helvetica", fill: "#000000"});
-    this.add.text(710, 730, "Test Tube", {font: "20px Helvetica", fill: "#000000"});
-    this.add.text(730, 750, "Rack", {font: "20px Helvetica", fill: "#000000"});
+    this.add.text(710, 730, "Test Tube\n    Rack", {font: "20px Helvetica", fill: "#000000"});
+    // this.add.text(730, 750, "Rack", {font: "20px Helvetica", fill: "#000000"});
+
+    //coba-coba timer
+    timerText = this.add.text(1650, 25);
+    timerText.setStyle({
+        fontSize: '20px',
+        fontFamily: 'Helvetica',
+        color: '#000000',
+    });
+
+    //delay dalam ms, jadi 15000 berarti 15 detik = 1x repeat
+    //kalo 15 detik lewat, object ga bener, ngurangin energy 20
+    this.findTimer = new Phaser.Time.TimerEvent({ delay: 15000, callback: () => {
+        drainEnergy();
+    }, callbackScope: this, loop: true });
+
+    //start the timer
+    this.time.addEvent(this.findTimer);
+
+    this.input.on('pointerdown', () => {
+        //buat pause
+        // this.findTimer.paused = !this.findTimer.paused;
+
+        // this.time.addEvent(this.findTimer);
+    });
 
     //on event dragging
     this.input.on('dragstart', function (pointer, gameObject) {
         this.children.bringToTop(gameObject);
-        console.log(gameObject.texture.key);
+        // console.log(gameObject.texture.key);
     }, this);
 
     this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
@@ -140,19 +179,24 @@ findingObjects1.create = function () {
     });
 
     this.input.on('drop', function (pointer, gameObject, dropZone) {
-        console.log(dropZone.name);
+        // console.log(dropZone.name);
 
         //kalo bener
         if (gameObject.texture.key == dropZone.name) {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
 
-            gameObject.input.enabled = false;
+            foundObject(dropZone.name);
+
+            //biar timernya direset
+            correctAnswer = true;
+
+            gameObject.input.enabled = false;            
         }
 
         //kalo salah
         else {
-            wrongObject();
+            drainEnergy();
 
             gameObject.x = gameObject.input.dragStartX;
             gameObject.y = gameObject.input.dragStartY;
@@ -171,12 +215,45 @@ findingObjects1.create = function () {
 }
 
 findingObjects1.update = function () {
+    //u ded
     if (energy == 0) {
         console.log("energimu telah habis!");
     }
+
+    //completion
+    // if (beakerFound && spatulaFound && testTubeFound && testTubeRackFound) {
+    //     console.log('horeee beres');
+    // }
+
+    // timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nEvent.repeatCount: ${this.findTimer.repeatCount}\nPaused?: ${this.findTimer.paused}`);
+    //keperluan debugging
+    timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${this.findTimer.paused}`);
+
+    //kalo jawabannya bener, timernnya direset
+    if (correctAnswer) {
+        this.time.addEvent(this.findTimer);
+        correctAnswer = false;
+    }
 }
 
-function wrongObject () {
+function drainEnergy () {
     energy -= 20;
     energyText.setText(energy + '%');
+}
+
+function foundObject (objectName) {
+    switch (objectName) {
+        case 'beaker':
+            beakerFound = true;
+            break;
+        case 'spatula':
+            spatulaFound = true;
+            break;
+        case 'testTube':
+            testTubeFound = true;
+            break;
+        case 'testTubeRack':
+            testTubeRackFound = true;
+            break;
+    }
 }
