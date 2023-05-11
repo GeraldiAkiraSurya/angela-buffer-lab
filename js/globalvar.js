@@ -1,6 +1,8 @@
 var status; //0: dead 1: alive
 var character; //male / female
 
+var playerName = 'Geraldi'; //Variable ini diisi dengan nama pemain
+
 //energy
 var energy;
 

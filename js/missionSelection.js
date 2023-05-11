@@ -24,7 +24,7 @@ missionSelection.create = function() {
         // .setStyle(`font-size: 60; color: #000000; font-weight: bold;`)
         .setStroke('#fff', 5)
     
-    let btnMsn1 = new Button((canvasWidth/2) - (2*deltaX), baseY, 'MISI I', this, () => {this.scene.start('Misi1')});
+    let btnMsn1 = new Button((canvasWidth/2) - (2*deltaX), baseY, 'MISI I', this, () => {this.scene.start('Misi1')}, true);
     //temporary ke finding objects
     let btnMsn2 = new Button((canvasWidth/2) - (1*deltaX), baseY, 'MISI II', this, () => {
         this.scene.start('FindingObjects1');
@@ -44,7 +44,7 @@ missionSelection.create = function() {
 }
 
 class Button {
-    constructor(x, y, label, scene, callback,active=false) {
+    constructor(x, y, label, scene, callback, active=false) {
         const button = scene.add.text(x, y, label)
             .setOrigin(1)
             .setFontSize(30)
