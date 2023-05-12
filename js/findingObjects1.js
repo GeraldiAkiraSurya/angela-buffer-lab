@@ -23,8 +23,7 @@ findingObjects1.preload = function () {
 
     this.load.image('dropZoneBG', 'icons/finding_object_dropzone_background.png');
     this.load.image('energyFlask', 'icons/energy_flask.png');
-
-    // this.load.image();
+    this.load.image('magnifyingGlass', 'icons/MagnifyingGlass.png');
 }
 
 var ballPipet;
@@ -80,11 +79,15 @@ var findTimer;
 var timerText;
 var correctAnswer;
 
+var btnHint;
+
 findingObjects1.create = function () {
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
     //halve value: 940, 500
+    canvasWidth = game.canvas.width;
+    canvasHeight = game.canvas.height;
 
     //energy debugger, disable pas udah siap dirangkai
     energy = 100;
@@ -117,6 +120,30 @@ findingObjects1.create = function () {
     energyFlask = this.add.image(50, 50, 'energyFlask').setScale(0.5);
     energyText = this.add.text(energyFlask.x - 15, energyFlask.y + 5, energy + '%', {font: "700 16px Helvetica", fill: "#000000"});
 
+    //hint
+    btnHint = this.add.image(canvasWidth/2 - 800, canvasHeight/2 - 455, 'magnifyingGlass').setInteractive().setScale(0.8);
+
+    btnHint.on('pointerup', function () {
+        let objectsArray = [];
+        if (!beakerFound) {
+            objectsArray.push('beaker');
+        }
+        if (!spatulaFound) {
+            objectsArray.push('spatula');
+        }
+        if (!testTubeFound) {
+            objectsArray.push('testTube');
+        }
+        if (!testTubeRackFound) {
+            objectsArray.push('testTubeRack');
+        }
+        // console.log(objectsArray);
+        // console.log(Math.floor(Math.random() * 4));
+        hintObject(objectsArray[Math.floor(Math.random() * objectsArray.length)]);    
+        drainEnergy();   
+        btnHint.input.enabled = false;
+    });
+
     //temporary box(to be replaced with asset when we find one)
     // rectangleBeaker = this.add.rectangle(300, 750, 100, 100, 0x00f000, .5);
     // rectangleSpatula = this.add.rectangle(450, 750, 100, 100, 0x00f000, .5);
@@ -141,7 +168,6 @@ findingObjects1.create = function () {
     this.add.text(415, 735, "Spatula", {font: "20px Helvetica", fill: "#000000"});
     this.add.text(555, 735, "Test Tube", {font: "20px Helvetica", fill: "#000000"});
     this.add.text(710, 730, "Test Tube\n    Rack", {font: "20px Helvetica", fill: "#000000"});
-    // this.add.text(730, 750, "Rack", {font: "20px Helvetica", fill: "#000000"});
 
     //coba-coba timer
     timerText = this.add.text(1650, 25);
@@ -225,7 +251,6 @@ findingObjects1.update = function () {
     //     console.log('horeee beres');
     // }
 
-    // timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nEvent.repeatCount: ${this.findTimer.repeatCount}\nPaused?: ${this.findTimer.paused}`);
     //keperluan debugging
     timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${this.findTimer.paused}`);
 
@@ -254,6 +279,23 @@ function foundObject (objectName) {
             break;
         case 'testTubeRack':
             testTubeRackFound = true;
+            break;
+    }
+}
+
+function hintObject (objectName) {
+    switch (objectName) {
+        case 'beaker':
+            beaker.setTint(0x08F26E);
+            break;
+        case 'spatula':
+            spatula.setTint(0x08F26E);
+            break;
+        case 'testTube':
+            testTube.setTint(0x08F26E);
+            break;
+        case 'testTubeRack':
+            testTubeRack.setTint(0x08F26E);
             break;
     }
 }
