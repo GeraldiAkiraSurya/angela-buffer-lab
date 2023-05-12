@@ -137,13 +137,7 @@ missionOne.create = function () {
                 if(lineCounter >= arrayOfContent.length) {
                     textBox.destroy();
                     // this.add.image(canvasWidth/2, canvasHeight/2, 'missionBackground').setScale(0.65, 0.52);
-                    image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'missionBackground');
-                    scaleX = this.cameras.main.width / image.width;
-                    scaleY = this.cameras.main.height / image.height;
-                    scale = Math.max(scaleX, scaleY);
-                    image.setScale(scale).setScrollFactor(0);
-
-                    // this.add.Rectangle(100, 100, 200, 200, '#DDDDDD');
+                    startMission(this);
                 }
             }
             else {
@@ -160,6 +154,22 @@ missionOne.create = function () {
 
 missionOne.update = function () {
     
+}
+
+function startMission(scene) {
+    var middleX = scene.cameras.main.width / 2;
+    var middleY = scene.cameras.main.height / 2;
+    var image = scene.add.image(middleX, middleY, 'missionBackground');
+    var scaleX = scene.cameras.main.width / image.width;
+    var scaleY = scene.cameras.main.height / image.height;
+    var scale = Math.max(scaleX, scaleY);
+    image.setScale(scale).setScrollFactor(0);
+
+    var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
+    var descBoxTopY = middleY - (descriptionBox.height / 2);
+    var title = scene.add.text(middleX, descBoxTopY + 50, "MISI I")
+        .setOrigin(0.5)
+        .setFontSize(40);
 }
 
 function createTextBox (scene, x, y, config) {

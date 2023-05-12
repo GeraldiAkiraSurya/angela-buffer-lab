@@ -13,6 +13,8 @@ var config = {
 
     //nanti scale harus matiin
     scale: {
+        // mode: Phaser.Scale.FIT,
+        // autoCenter: Phaser.Scale.CENTER_BOTH,
         mode: Phaser.Scale.ScaleModes.NONE,
         width: window.innerWidth,
         height: window.innerHeight,
