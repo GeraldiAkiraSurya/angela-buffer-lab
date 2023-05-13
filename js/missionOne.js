@@ -13,6 +13,8 @@ missionOne.preload = function () {
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
         sceneKey: 'rexUI'
     });
+    this.load.plugin('rexyoutubeplayerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexyoutubeplayerplugin.min.js', true);
+    this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
 
     this.load.image('nextPage', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/assets/images/arrow-down-left.png');
 }
@@ -136,7 +138,6 @@ missionOne.create = function () {
                 // kalo udah dialog paling terakhir bakal hapus textbox nya
                 if(lineCounter >= arrayOfContent.length) {
                     textBox.destroy();
-                    // this.add.image(canvasWidth/2, canvasHeight/2, 'missionBackground').setScale(0.65, 0.52);
                     startMission(this);
                 }
             }
@@ -150,6 +151,17 @@ missionOne.create = function () {
         // console.log('clicked!');
     }, this);
     // this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
+
+    exitBtn = this.add.text(50, 50, 'EXIT')
+        .setOrigin(0)
+        .setFontSize(30)
+        // .setOrigin(10)
+        .setPadding(12)
+        .setStyle({ backgroundColor: '#000000', fill: '#ffffff' })
+        .setInteractive({ useHandCursor: true })
+        .on('pointerover', () => button.setStyle({ fill: '#0000ff' }))
+        .on('pointerout', () => button.setStyle({ fill: '#ffffff' }))
+        .on('pointerdown', () => this.scene.start('MainMenu'));
 }
 
 missionOne.update = function () {
@@ -165,11 +177,71 @@ function startMission(scene) {
     var scale = Math.max(scaleX, scaleY);
     image.setScale(scale).setScrollFactor(0);
 
+    scene.children.bringToTop(exitBtn);
+
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
+    var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
     var title = scene.add.text(middleX, descBoxTopY + 50, "MISI I")
         .setOrigin(0.5)
         .setFontSize(40);
+
+    var text = 
+    `[b]SYARAT PENYELESAIAN KHUSUS:[/b] AMATILAH VIDEO DENGAN SEKSAMA DAN PILIHLAH JAWABAN YANG BENAR DARI PERTANYAAN YANG DIBERIKAN
+
+[b]BATAS WAKTU:[/b] TIDAK ADA
+
+[b]HADIAH:[/b] ENERGI DAN BUKU RAMUAN OBAT
+
+[b]JIKA GAGAL:[/b] KEMBALI KE AWAL
+    `;
+
+    var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+100, text, {
+        fontSize: '30px',
+        align: 'left',
+        wrap: {
+            mode: 'word',
+            width: 700
+        },
+    });
+
+    var nextBtn = new AcceptBtn(middleX, middleY + (descriptionBox.height / 2) - 50, 'TERIMA', scene, () => {
+        missionDesc.destroy();
+        exitBtn.destroy();
+        showYoutubeVideo(scene, middleX, middleY, 'qz1XzCmdHAg');
+    });
+
+    nextBtn.setNewCallback(() => {
+        youtubePlayer.destroy();
+        showYoutubeVideo(scene, middleX, middleY, 'EJZ8B7NOy2k');
+    });
+
+    /*
+    var nextBtn = scene.add.text(middleX, middleY + (descriptionBox.height / 2) - 50, 'TERIMA')
+        .setOrigin(0.5)
+        .setFontSize(30)
+        .setPadding(12)
+        .setStyle({ backgroundColor: '#e6e6e6', fill: '#000000' })
+        .setInteractive({ useHandCursor: true })
+        .on('pointerover', () => button.setStyle({ fill: '#0000ff' }))
+        .on('pointerout', () => button.setStyle({ fill: '#000000' }))
+        .on('pointerdown', () => {
+            missionDesc.destroy();
+            exitBtn.destroy();
+            showTutorialVideo(scene, middleX, middleY);
+        });
+    */
+
+    // console.log(descriptionBox);
+    // var missionDesc = scene.add.textbox()
+    
+}
+
+function showYoutubeVideo(scene, middleX, middleY, videoId) {
+    var youtubePlayer = scene.add.rexYoutubePlayer(middleX, middleY, 600, 450, {
+        videoId: videoId,
+        autoPlay: false
+    })
 }
 
 function createTextBox (scene, x, y, config) {
@@ -268,4 +340,22 @@ function getBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
         //max line dalam sekali textbox
         maxLines: 10
     })
+}
+
+class AcceptBtn {
+    constructor(x, y, label, scene, callback) {
+        this.accBtn = scene.add.text(x, y, label)
+            .setOrigin(0.5)
+            .setFontSize('30px')
+            .setPadding(12)
+            .setStyle({ backgroundColor: '#e6e6e6', fill: '#000000' })
+            .setInteractive({ useHandCursor: true })
+            .on('pointerover', () => button.setStyle({ fill: '#0000ff' }))
+            .on('pointerout', () => button.setStyle({ fill: '#000000' }))
+            .on('pointerdown', () => callback());
+    }
+
+    setNewCallback(callback) {
+        this.accBtn.on('pointerdown', () => callback());
+    }
 }
