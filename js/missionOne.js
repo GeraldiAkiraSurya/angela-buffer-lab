@@ -207,7 +207,7 @@ function startMission(scene) {
 
     var nextBtn = new AcceptBtn(middleX, middleY + (descriptionBox.height / 2) - 50, 'TERIMA', scene, () => {
         missionDesc.destroy();
-        exitBtn.destroy();
+        // exitBtn.destroy();
         showYoutubeVideo(scene, middleX, middleY, 'qz1XzCmdHAg');
     });
 
