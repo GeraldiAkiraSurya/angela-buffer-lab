@@ -46,7 +46,7 @@ missionSelection.create = function() {
 class Button {
     constructor(x, y, label, scene, callback, active=false) {
         const button = scene.add.text(x, y, label)
-            .setOrigin(1)
+            .setOrigin(0.5, 0.5)
             .setFontSize(30)
             // .setOrigin(10)
             .setPadding(12)
