@@ -24,6 +24,8 @@ findingObjects1.preload = function () {
     this.load.image('dropZoneBG', 'icons/finding_object_dropzone_background.png');
     this.load.image('energyFlask', 'icons/energy_flask.png');
     this.load.image('magnifyingGlass', 'icons/MagnifyingGlass.png');
+
+    this.load.image('backButton', 'buttons/Back Button.png');
 }
 
 var ballPipet;
@@ -72,14 +74,20 @@ var spatulaFound;
 var testTubeFound;
 var testTubeRackFound;
 
-var energyFlask;
+var energyFlaskIcon;
 var energyText;
+
+var energyFlask1;
+var energyFlask2;
 
 var findTimer;
 var timerText;
 var correctAnswer;
 
 var btnHint;
+var btnBack;
+
+var isGameOver;
 
 findingObjects1.create = function () {
 
@@ -94,6 +102,7 @@ findingObjects1.create = function () {
 
     //variable initialization
     correctAnswer = false;
+    isGameOver = false;
     beakerFound = false;
     spatulaFound = false;
     testTubeFound = false;
@@ -116,9 +125,11 @@ findingObjects1.create = function () {
     testTubeRack = this.add.image(1500, 550, 'testTubeRack').setInteractive().setScale(0.4);
     this.input.setDraggable(testTubeRack);
 
-    // energyFlask = this.add.image(canvasWidth/2 - 500, canvasHeight/2 - 250, 'energyFlask');
-    energyFlask = this.add.image(50, 50, 'energyFlask').setScale(0.5);
-    energyText = this.add.text(energyFlask.x - 15, energyFlask.y + 5, energy + '%', {font: "700 16px Helvetica", fill: "#000000"});
+    energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
+    energyText = this.add.text(energyFlaskIcon.x - 15, energyFlaskIcon.y + 5, energy + '%', {font: "700 16px Helvetica", fill: "#000000"});
+
+    energyFlask1 = this.add.image(canvasWidth/2 + 600, canvasHeight/2 - 300, 'energyFlask').setInteractive().setScale(0.7).setName('energyFlask1').setVisible(false);
+    energyFlask2 = this.add.image(canvasWidth/2 + 700, canvasHeight/2 + 400, 'energyFlask').setInteractive().setScale(0.7).setName('energyFlask2').setVisible(false);
 
     //hint
     btnHint = this.add.image(canvasWidth/2 - 800, canvasHeight/2 - 455, 'magnifyingGlass').setInteractive().setScale(0.8);
@@ -142,6 +153,13 @@ findingObjects1.create = function () {
         hintObject(objectsArray[Math.floor(Math.random() * objectsArray.length)]);    
         drainEnergy();   
         btnHint.input.enabled = false;
+    });
+
+    //back button [temporary]
+    btnBack = this.add.image(canvasWidth/2 - 800, canvasHeight/2 + 455, 'backButton').setInteractive().setScale(0.35);
+
+    btnBack.on('pointerup', function () {
+        findingObjects1.scene.start('MissionSelection');
     });
 
     //temporary box(to be replaced with asset when we find one)
@@ -244,6 +262,7 @@ findingObjects1.update = function () {
     //u ded
     if (energy == 0) {
         console.log("energimu telah habis!");
+        // isGameOver = true;
     }
 
     //completion
@@ -259,6 +278,13 @@ findingObjects1.update = function () {
         this.time.addEvent(this.findTimer);
         correctAnswer = false;
     }
+
+    // if (isGameOver) {
+    //     this.findTimer.paused = !this.findTimer.paused;
+    //     if (confirm('energimu telah habis!!') == true) {
+
+    //     }
+    // }
 }
 
 function drainEnergy () {
