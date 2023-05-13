@@ -6,43 +6,15 @@ userData.set('email',email)
 userData.set('token', token);
 
 
+var logic=[false,false,false,false,false]
 
 
-function minHealth(){
-
-    fetch(`${window.location.origin}${baseUrl}/kenaHit`,{
-        method: "POST",
-        body: userData,
-        }).then(response => response.text()) .then(response=>{
-            if(response=="dead"){
-                alert("you are dead")
-            }else if(response=="true"){
-                console.log("you get hit")
-            }
-        }).catch((error) => {
-            console.log(error)
-        });
-    }
 
 function start(misi,soal){
     userData.set("misi",misi)
     userData.set("soal",soal)
 
     fetch(`${window.location.origin}${baseUrl}/mulai`,{
-        method: "POST",
-        redirect: "follow",
-        body: userData,
-        }).then(response => response.text()) .then(response=>{
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
-        });
-    }
-
-function nyobalLagi(misi,soal){
-    userData.set("misi",misi)
-    userData.set("soal",soal)
-    fetch(`${window.location.origin}${baseUrl}/gagal`,{
         method: "POST",
         redirect: "follow",
         body: userData,
@@ -67,19 +39,40 @@ function done(misi,soal){
             });
         }
 
-function plusHealth(){
-    fetch(`${window.location.origin}${baseUrl}/berobat`,{
+function health(heal,value){ 
+
+    userData.set("value",value)
+
+    let url;
+    if (heal){
+        url=`${window.location.origin}${baseUrl}/berobat`
+    }else{
+        url=`${window.location.origin}${baseUrl}/kenaHit`
+    }
+
+    fetch(url,{
         method: "POST",
-        redirect: "follow",
         body: userData,
-    }).then(response => response.text()) .then(response=>{
-        console.log(response)
-        if(response=="max"){
-            alert("max hp reached")
-        }else if(response=="true"){
-            console.log("you get heal")
-        }
-    }).catch((error) => {
-        console.log(error)
-    });
+        }).then(response => response.text()) .then(response=>{
+            if(response=="dead"){
+                alert("you are dead")
+            }else if(response=="max"){
+                alert("max hp")
+            }else if(response=="true"){
+                console.log("you get hit")
+            }
+        }).catch((error) => {
+            console.log(error)
+        });
+    }
+
+function missionMenu(){ 
+    fetch(`${window.location.origin}${baseUrl}/permisi`,{
+        method: "POST",
+        body: userData,
+        }).then(response => response.json()) .then(response=>{
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+        });
     }

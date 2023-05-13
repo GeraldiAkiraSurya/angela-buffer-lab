@@ -1,7 +1,7 @@
 <?php  
 class View{
 
-    public static function createView($view){
+    public static function createView($view, $data=NULL, $data2=NULL, $data3=NULL){
         /*
         karena php typeless maka arr1,arr2,arr3,arr4,dapat berupa variable lainnya 
         tidak dimaksudkan hanya  untuk array saja

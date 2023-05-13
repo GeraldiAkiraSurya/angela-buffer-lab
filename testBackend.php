@@ -48,22 +48,19 @@ if(session_status()!=2){
 
 <br>
 
-<button onclick="start('1',2)">ngerjain soal baru</button>
+<button onclick="start('1',3)">ngerjain soal baru</button>
 
 <br>
 
-<button onclick="nyobalLagi('1',2)">nyoba lagi</button>
-
-<br>
-
-<button onclick="done('1',2)">DONE</button>
+<button onclick="done('1',3)">DONE</button>
 
 <br>
 
 <button onclick="plusHealth()">NGEHEAL</button>
 
+<br>
 
-
+<button onclick="missionMenu()">ngambilMisi</button>
 
 </body>
 </html>
