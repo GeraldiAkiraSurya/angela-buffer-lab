@@ -8,6 +8,7 @@ findingObjects1.preload = function () {
     this.load.image('testTube', 'lab_eq/TestTube.png');
     this.load.image('testTubeRack', 'lab_eq/TestTubeRack.png');
 
+    this.load.image('background', 'scenes/finding_objects1.png');
 
     this.load.image('dropZoneBG', 'icons/finding_object_dropzone_background.png');
     this.load.image('energyFlask', 'icons/energy_flask.png');
@@ -65,9 +66,12 @@ findingObjects1.create = function () {
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
-    //halve value: 940, 500
+    //halve value: 940, 504
     canvasWidth = game.canvas.width;
     canvasHeight = game.canvas.height;
+
+    //background
+    this.add.image(canvasWidth/2, canvasHeight/2, 'background').setScale(0.98, 0.95);
 
     //energy debugger, disable pas udah siap dirangkai
     energy = 100;
@@ -128,37 +132,41 @@ findingObjects1.create = function () {
         btnHint.input.enabled = false;
     });
 
-    //back button [temporary]
-    btnBack = this.add.image(canvasWidth/2 - 800, canvasHeight/2 + 455, 'backButton').setInteractive().setScale(0.35);
+    //back button [temporary, kalo completion udah jadi hapus aja]
+    // btnBack = this.add.image(canvasWidth/2 - 800, canvasHeight/2 + 455, 'backButton').setInteractive().setScale(0.35);
 
-    btnBack.on('pointerup', function () {
-        findingObjects1.scene.start('MissionSelection');
-    });
+    // btnBack.on('pointerup', function () {
+    //     findingObjects1.scene.start('MissionSelection');
+    // });
+
+    //halve value
+    //940 504
 
     //temporary box(to be replaced with asset when we find one)
     //size default 128x128
-    dropZoneBeakerBG = this.add.image(300, 750, 'dropZoneBG');
-    dropZoneSpatulaBG = this.add.image(450, 750, 'dropZoneBG');
-    dropZoneTestTubeBG = this.add.image(600, 750, 'dropZoneBG');
-    dropZoneTestTubeRackBG = this.add.image(750, 750, 'dropZoneBG');
+    dropZoneBeakerBG = this.add.image(canvasWidth/2 - 640, canvasHeight/2 - 439, 'dropZoneBG');
+    dropZoneTestTubeBG = this.add.image(canvasWidth/2 - 490, canvasHeight/2 - 439, 'dropZoneBG');
+    dropZoneSpatulaBG = this.add.image(canvasWidth/2 - 340, canvasHeight/2 - 439, 'dropZoneBG');
+    dropZoneTestTubeRackBG = this.add.image(canvasWidth/2 - 190, canvasHeight/2 - 439, 'dropZoneBG');
 
     //drop zone. set name buat id. samain kaya nama texturenya
     //kenapa di set 128? biar sama dengan asset
-    const beakerZone = this.add.zone(300, 750, 100, 100).setRectangleDropZone(128, 128).setName('beaker');
-    const spatulaZone = this.add.zone(450, 750, 100, 100).setRectangleDropZone(128, 128).setName('spatula');
-    const testTubeZone = this.add.zone(600, 750, 100, 100).setRectangleDropZone(128, 128).setName('testTube');
-    const testTubeRackZone = this.add.zone(750, 750, 100, 100).setRectangleDropZone(128, 128).setName('testTubeRack');
+    const beakerZone = this.add.zone(canvasWidth/2 - 640, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('beaker');
+    const testTubeZone = this.add.zone(canvasWidth/2 - 490, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('testTube');
+    const spatulaZone = this.add.zone(canvasWidth/2 - 340, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('spatula');
+    const testTubeRackZone = this.add.zone(canvasWidth/2 - 190, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('testTubeRack');
 
-    //text
-    this.add.text(265, 735, "Beaker", {font: "20px Helvetica", fill: "#000000"});
-    this.add.text(415, 735, "Spatula", {font: "20px Helvetica", fill: "#000000"});
-    this.add.text(555, 735, "Test Tube", {font: "20px Helvetica", fill: "#000000"});
-    this.add.text(710, 730, "Test Tube\n    Rack", {font: "20px Helvetica", fill: "#000000"});
+    //text dalam dropZone
+    this.add.text(canvasWidth/2 - 670, canvasHeight/2 - 464, "Gelas\nKimia", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(canvasWidth/2 - 530, canvasHeight/2 - 464, "Tabung\nReaksi", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(canvasWidth/2 - 380, canvasHeight/2 - 454, "Spatula", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(canvasWidth/2 - 230, canvasHeight/2 - 464, "   Rak\nTabung", {font: "900 20px Helvetica", fill: "#000000"});
 
-    //coba-coba timer
-    timerText = this.add.text(1650, 25);
+    //timer 15 detik per objek
+    //keperluan debugging
+    timerText = this.add.text(1640, 25);
     timerText.setStyle({
-        fontSize: '20px',
+        fontSize: '900 20px',
         fontFamily: 'Helvetica',
         color: '#000000',
     });
@@ -269,7 +277,7 @@ findingObjects1.create = function () {
         // console.log('outOfEnergy: ' + outOfEnergy);
         // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
         // console.log('energyFlask2Found: ' + energyFlask2Found);
-        
+
         energyFlask2.setVisible(false);
         energyText.setText(energy + '%');
         findingObjects1.findTimer.paused = !findingObjects1.findTimer.paused;
