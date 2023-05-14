@@ -13,6 +13,8 @@ findingObjects1.preload = function () {
     this.load.image('dropZoneBG', 'icons/finding_object_dropzone_background.png');
     this.load.image('energyFlask', 'icons/energy_flask.png');
     this.load.image('magnifyingGlass', 'icons/MagnifyingGlass.png');
+    this.load.image('giftBox', 'icons/gift_box.png');
+    this.load.image('book', 'icons/book.png');
 
     this.load.image('backButton', 'buttons/Back Button.png');
 }
@@ -51,6 +53,10 @@ var lookingForEnergyFlask;
 
 var energyFlaskIcon;
 var energyText;
+
+//reward when complete
+var giftBox;
+var book;
 
 var energyFlask1;
 var energyFlask2;
@@ -109,6 +115,15 @@ findingObjects1.create = function () {
     // testTubeRack = this.add.image(1110, 100, 'testTubeRack').setInteractive().setScale(0.2).setAngle(7);
     testTubeRack = this.add.image(canvasWidth/2 + 170, canvasHeight/2 - 404, 'testTubeRack').setInteractive().setScale(0.2).setAngle(7);
     this.input.setDraggable(testTubeRack);
+
+    //gift box & book
+    giftBox = this.add.image(canvasWidth/2, canvasHeight/2 + 50, 'giftBox').setVisible(false);
+    book = this.add.image(canvasWidth/2, canvasHeight/2 - 100, 'book').setInteractive().setScale(0.7).setVisible(false);
+
+    book.on('pointerup', function () {
+        // console.log('clicked book!');
+        findingObjects1.scene.start('MissionSelection');
+    });
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
     energyText = this.add.text(energyFlaskIcon.x - 15, energyFlaskIcon.y + 5, energy + '%', {font: "700 16px Helvetica", fill: "#000000"});
@@ -310,8 +325,10 @@ findingObjects1.update = function () {
 
     //completion
     if (beakerFound && spatulaFound && testTubeFound && testTubeRackFound) {
-        console.log('horeee beres');
-        this.findTimer.paused = true;
+        // console.log('horeee beres');
+        // this.findTimer.paused = true;
+        giftBox.setVisible(true);
+        book.setVisible(true);
     }
 
     //keperluan debugging
