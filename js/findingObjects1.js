@@ -3,64 +3,31 @@ findingObjects1 = new Phaser.Scene('FindingObjects1');
 
 findingObjects1.preload = function () {
     this.load.path = './assets/';
-    this.load.image('ballPipet', 'lab_eq/BallPipet.png');
     this.load.image('beaker', 'lab_eq/Beaker.png');
-    this.load.image('burner', 'lab_eq/Burner.png');
-    this.load.image('dripBoard', 'lab_eq/DripBoard.png');
-    this.load.image('dropper', 'lab_eq/Dropper.png');
-    this.load.image('funnel', 'lab_eq/Funnel.png');
-    this.load.image('measuringCylinder', 'lab_eq/MeasuringCylinder.png');
-    this.load.image('phMeter', 'lab_eq/pHMeter.png');
     this.load.image('spatula', 'lab_eq/Spatula.png');
-    this.load.image('sprayBottle', 'lab_eq/SprayBottle.png');
-    this.load.image('stirringRod', 'lab_eq/StirringRod.png');
     this.load.image('testTube', 'lab_eq/TestTube.png');
     this.load.image('testTubeRack', 'lab_eq/TestTubeRack.png');
-    this.load.image('thermometer', 'lab_eq/Thermometer.png');
-    this.load.image('volumetricFlask', 'lab_eq/VolumetricFlask.png');
-    this.load.image('watchGlass', 'lab_eq/WatchGlass.png');
 
+    this.load.image('background', 'scenes/finding_objects1.png');
 
     this.load.image('dropZoneBG', 'icons/finding_object_dropzone_background.png');
     this.load.image('energyFlask', 'icons/energy_flask.png');
     this.load.image('magnifyingGlass', 'icons/MagnifyingGlass.png');
+    this.load.image('giftBox', 'icons/gift_box.png');
+    this.load.image('book', 'icons/book.png');
 
     this.load.image('backButton', 'buttons/Back Button.png');
 }
 
-var ballPipet;
 var beaker;
-var burner;
-var dripBoard;
-var dropper;
-var funnel;
-var measuringCylinder;
-var phMeter;
 var spatula;
-var sprayBottle;
-var stirringRod;
 var testTube;
 var testTubeRack;
-var thermometer;
-var volumetricFlask;
-var watchGlass;
 
-var ballPipetIndicator;
 var beakerIndicator;
-var burnerIndicator;
-var dripBoardIndicator;
-var dropperIndicator;
-var funnelIndicator;
-var measuringCylinderIndicator;
-var phMeterIndicator;
 var spatulaIndicator;
-var sprayBottleIndicator;
-var stirringRodIndicator;
 var testTubeIndicator;
 var testTubeRackIndicator;
-var thermometerIndicator;
-var volumetricFlaskIndicator;
-var watchGlassIndicator;
 
 //drop zone destinasi
 var dropZoneBeakerBG;
@@ -73,63 +40,93 @@ var beakerFound;
 var spatulaFound;
 var testTubeFound;
 var testTubeRackFound;
+var energyFlask1Found;
+var energyFlask2Found;
+
+//buat ngecek objek" di disable ato engga
+//kalo true: energi abis, ga bisa drag objek
+var isGamePaused;
+//abis energy
+var outOfEnergy;
+//lagi mencari energy
+var lookingForEnergyFlask;
 
 var energyFlaskIcon;
 var energyText;
+
+//reward when complete
+var giftBox;
+var book;
 
 var energyFlask1;
 var energyFlask2;
 
 var findTimer;
-var timerText;
+//keperluan debugging
+// var timerText;
 var correctAnswer;
 
 var btnHint;
 var btnBack;
 
-var isGameOver;
-
 findingObjects1.create = function () {
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
-    //halve value: 940, 500
+    //halve value: 940, 504
     canvasWidth = game.canvas.width;
     canvasHeight = game.canvas.height;
+
+    //background
+    this.add.image(canvasWidth/2, canvasHeight/2, 'background').setScale(0.98, 0.95);
 
     //energy debugger, disable pas udah siap dirangkai
     energy = 100;
 
     //variable initialization
     correctAnswer = false;
-    isGameOver = false;
+    // isGamePaused = false;
+    outOfEnergy = false;
+    lookingForEnergyFlask = false;
     beakerFound = false;
     spatulaFound = false;
     testTubeFound = false;
     testTubeRackFound = false;
+    energyFlask1Found = false;
+    energyFlask2Found = false;
 
     //setAngle buat rotation in degree
     //setScale buat skala imagenya, belum tau hitboxnya keganti ato engga. kayanya ga keganti, atau hitboxnya lebih besar dari imagenya
     //setInteractive buat bisa interactable
     //load image to scene
-    beaker = this.add.image(940, 400, 'beaker').setInteractive().setScale(0.5);
+    // beaker = this.add.image(650, 840, 'beaker').setInteractive().setScale(0.5);
+    beaker = this.add.image(canvasWidth/2 - 290, canvasHeight/2 + 336, 'beaker').setInteractive().setScale(0.5);
     //biar bisa di-drag
     this.input.setDraggable(beaker);    
 
-    spatula = this.add.image(1100, 770, 'spatula').setInteractive().setScale(0.4);
+    // spatula = this.add.image(1655, 165, 'spatula').setInteractive().setScale(0.2).setAngle(17);
+    spatula = this.add.image(canvasWidth/2 + 725, canvasHeight/2 - 339, 'spatula').setInteractive().setScale(0.2).setAngle(17);
     this.input.setDraggable(spatula);
 
-    testTube = this.add.image(440, 320, 'testTube').setInteractive().setScale(0.25).setAngle(-90);
+    // testTube = this.add.image(500, 565, 'testTube').setInteractive().setScale(0.12).setAngle(-7);
+    testTube = this.add.image(canvasWidth/2 - 440, canvasHeight/2 + 61, 'testTube').setInteractive().setScale(0.12).setAngle(-7);
     this.input.setDraggable(testTube);
 
-    testTubeRack = this.add.image(1500, 550, 'testTubeRack').setInteractive().setScale(0.4);
+    // testTubeRack = this.add.image(1110, 100, 'testTubeRack').setInteractive().setScale(0.2).setAngle(7);
+    testTubeRack = this.add.image(canvasWidth/2 + 170, canvasHeight/2 - 404, 'testTubeRack').setInteractive().setScale(0.2).setAngle(7);
     this.input.setDraggable(testTubeRack);
+
+    //gift box & book
+    giftBox = this.add.image(canvasWidth/2, canvasHeight/2 + 50, 'giftBox').setVisible(false);
+    book = this.add.image(canvasWidth/2, canvasHeight/2 - 100, 'book').setInteractive().setScale(0.7).setVisible(false);
+
+    book.on('pointerup', function () {
+        // console.log('clicked book!');
+        findingObjects1.scene.start('MissionSelection');
+    });
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
     energyText = this.add.text(energyFlaskIcon.x - 15, energyFlaskIcon.y + 5, energy + '%', {font: "700 16px Helvetica", fill: "#000000"});
-
-    energyFlask1 = this.add.image(canvasWidth/2 + 600, canvasHeight/2 - 300, 'energyFlask').setInteractive().setScale(0.7).setName('energyFlask1').setVisible(false);
-    energyFlask2 = this.add.image(canvasWidth/2 + 700, canvasHeight/2 + 400, 'energyFlask').setInteractive().setScale(0.7).setName('energyFlask2').setVisible(false);
 
     //hint
     btnHint = this.add.image(canvasWidth/2 - 800, canvasHeight/2 - 455, 'magnifyingGlass').setInteractive().setScale(0.8);
@@ -155,45 +152,44 @@ findingObjects1.create = function () {
         btnHint.input.enabled = false;
     });
 
-    //back button [temporary]
-    btnBack = this.add.image(canvasWidth/2 - 800, canvasHeight/2 + 455, 'backButton').setInteractive().setScale(0.35);
+    //back button [temporary, kalo completion udah jadi hapus aja]
+    // btnBack = this.add.image(canvasWidth/2 - 800, canvasHeight/2 + 455, 'backButton').setInteractive().setScale(0.35);
 
-    btnBack.on('pointerup', function () {
-        findingObjects1.scene.start('MissionSelection');
-    });
+    // btnBack.on('pointerup', function () {
+    //     findingObjects1.scene.start('MissionSelection');
+    // });
+
+    //halve value
+    //940 504
 
     //temporary box(to be replaced with asset when we find one)
-    // rectangleBeaker = this.add.rectangle(300, 750, 100, 100, 0x00f000, .5);
-    // rectangleSpatula = this.add.rectangle(450, 750, 100, 100, 0x00f000, .5);
-    // rectangleTestTube = this.add.rectangle(600, 750, 100, 100, 0x00f000, .5);
-    // rectangleTestTubeRack = this.add.rectangle(750, 750, 100, 100, 0x00f000, .5);
-
     //size default 128x128
-    dropZoneBeakerBG = this.add.image(300, 750, 'dropZoneBG');
-    dropZoneSpatulaBG = this.add.image(450, 750, 'dropZoneBG');
-    dropZoneTestTubeBG = this.add.image(600, 750, 'dropZoneBG');
-    dropZoneTestTubeRackBG = this.add.image(750, 750, 'dropZoneBG');
+    dropZoneBeakerBG = this.add.image(canvasWidth/2 - 640, canvasHeight/2 - 439, 'dropZoneBG');
+    dropZoneTestTubeBG = this.add.image(canvasWidth/2 - 490, canvasHeight/2 - 439, 'dropZoneBG');
+    dropZoneSpatulaBG = this.add.image(canvasWidth/2 - 340, canvasHeight/2 - 439, 'dropZoneBG');
+    dropZoneTestTubeRackBG = this.add.image(canvasWidth/2 - 190, canvasHeight/2 - 439, 'dropZoneBG');
 
     //drop zone. set name buat id. samain kaya nama texturenya
     //kenapa di set 128? biar sama dengan asset
-    const beakerZone = this.add.zone(300, 750, 100, 100).setRectangleDropZone(128, 128).setName('beaker');
-    const spatulaZone = this.add.zone(450, 750, 100, 100).setRectangleDropZone(128, 128).setName('spatula');
-    const testTubeZone = this.add.zone(600, 750, 100, 100).setRectangleDropZone(128, 128).setName('testTube');
-    const testTubeRackZone = this.add.zone(750, 750, 100, 100).setRectangleDropZone(128, 128).setName('testTubeRack');
+    const beakerZone = this.add.zone(canvasWidth/2 - 640, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('beaker');
+    const testTubeZone = this.add.zone(canvasWidth/2 - 490, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('testTube');
+    const spatulaZone = this.add.zone(canvasWidth/2 - 340, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('spatula');
+    const testTubeRackZone = this.add.zone(canvasWidth/2 - 190, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('testTubeRack');
 
-    //text
-    this.add.text(265, 735, "Beaker", {font: "20px Helvetica", fill: "#000000"});
-    this.add.text(415, 735, "Spatula", {font: "20px Helvetica", fill: "#000000"});
-    this.add.text(555, 735, "Test Tube", {font: "20px Helvetica", fill: "#000000"});
-    this.add.text(710, 730, "Test Tube\n    Rack", {font: "20px Helvetica", fill: "#000000"});
+    //text dalam dropZone
+    this.add.text(canvasWidth/2 - 670, canvasHeight/2 - 464, "Gelas\nKimia", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(canvasWidth/2 - 530, canvasHeight/2 - 464, "Tabung\nReaksi", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(canvasWidth/2 - 380, canvasHeight/2 - 454, "Spatula", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(canvasWidth/2 - 230, canvasHeight/2 - 464, "   Rak\nTabung", {font: "900 20px Helvetica", fill: "#000000"});
 
-    //coba-coba timer
-    timerText = this.add.text(1650, 25);
-    timerText.setStyle({
-        fontSize: '20px',
-        fontFamily: 'Helvetica',
-        color: '#000000',
-    });
+    //timer 15 detik per objek
+    //keperluan debugging
+    // timerText = this.add.text(1640, 25);
+    // timerText.setStyle({
+    //     fontSize: '900 20px',
+    //     fontFamily: 'Helvetica',
+    //     color: '#000000',
+    // });
 
     //delay dalam ms, jadi 15000 berarti 15 detik = 1x repeat
     //kalo 15 detik lewat, object ga bener, ngurangin energy 20
@@ -225,6 +221,11 @@ findingObjects1.create = function () {
     this.input.on('drop', function (pointer, gameObject, dropZone) {
         // console.log(dropZone.name);
 
+        //selama gamenya ga kepause
+        // if (!isGamePaused) {
+            
+        // }
+
         //kalo bener
         if (gameObject.texture.key == dropZone.name) {
             gameObject.x = dropZone.x;
@@ -235,7 +236,7 @@ findingObjects1.create = function () {
             //biar timernya direset
             correctAnswer = true;
 
-            gameObject.input.enabled = false;            
+            gameObject.input.enabled = false;
         }
 
         //kalo salah
@@ -245,7 +246,7 @@ findingObjects1.create = function () {
             gameObject.x = gameObject.input.dragStartX;
             gameObject.y = gameObject.input.dragStartY;
             // alert("salah cuy!!!");            
-        } 
+        }
     });
 
     this.input.on('dragend', function (pointer, gameObject, dropped) {
@@ -256,22 +257,82 @@ findingObjects1.create = function () {
     });
     //beres event dragging
 
+    //cari energy flask kalo abis energy
+    energyFlask1 = this.add.image(canvasWidth/2 + 685, canvasHeight/2 - 5, 'energyFlask').setInteractive().setScale(0.3).setName('energyFlask1').setVisible(false);
+    energyFlask2 = this.add.image(canvasWidth/2 - 700, canvasHeight/2 - 229, 'energyFlask').setInteractive().setScale(0.4).setName('energyFlask2').setVisible(false);
+
+    energyFlask1.on('pointerup', function () {
+        energy = 100;
+        energyFlask1Found = true;
+        outOfEnergy = false;
+        lookingForEnergyFlask = false;
+        // isGamePaused = false;
+
+        beaker.input.enabled = true;
+        spatula.input.enabled = true;
+        testTube.input.enabled = true;
+        testTubeRack.input.enabled = true;
+
+        // console.log('outOfEnergy: ' + outOfEnergy);
+        // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
+        // console.log('energyFlask1Found: ' + energyFlask1Found);
+
+        energyFlask1.setVisible(false);
+        energyText.setText(energy + '%');
+        findingObjects1.findTimer.paused = !findingObjects1.findTimer.paused;
+    });
+
+    energyFlask2.on('pointerup', function () {
+        energy = 100;
+        energyFlask2Found = true;
+        outOfEnergy = false;
+        lookingForEnergyFlask = false;
+        // isGamePaused = false;
+
+        beaker.input.enabled = true;
+        spatula.input.enabled = true;
+        testTube.input.enabled = true;
+        testTubeRack.input.enabled = true;
+
+        // console.log('outOfEnergy: ' + outOfEnergy);
+        // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
+        // console.log('energyFlask2Found: ' + energyFlask2Found);
+
+        energyFlask2.setVisible(false);
+        energyText.setText(energy + '%');
+        findingObjects1.findTimer.paused = !findingObjects1.findTimer.paused;
+    });
+
 }
 
 findingObjects1.update = function () {
-    //u ded
+    //out of energy
+    //kalo energi abis, disable smua objek interactivenya, dropZone nya
+    //yg enabled cmn energyFlask
     if (energy == 0) {
-        console.log("energimu telah habis!");
-        // isGameOver = true;
+        // console.log("energimu telah habis!");
+        // isGamePaused = true;
+
+        beaker.input.enabled = false;
+        spatula.input.enabled = false;
+        testTube.input.enabled = false;
+        testTubeRack.input.enabled = false;
+
+        if (!lookingForEnergyFlask) {
+            outOfEnergy = true;
+        }
     }
 
     //completion
-    // if (beakerFound && spatulaFound && testTubeFound && testTubeRackFound) {
-    //     console.log('horeee beres');
-    // }
+    if (beakerFound && spatulaFound && testTubeFound && testTubeRackFound) {
+        // console.log('horeee beres');
+        // this.findTimer.paused = true;
+        giftBox.setVisible(true);
+        book.setVisible(true);
+    }
 
     //keperluan debugging
-    timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${this.findTimer.paused}`);
+    // timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${this.findTimer.paused}`);
 
     //kalo jawabannya bener, timernnya direset
     if (correctAnswer) {
@@ -279,12 +340,35 @@ findingObjects1.update = function () {
         correctAnswer = false;
     }
 
-    // if (isGameOver) {
-    //     this.findTimer.paused = !this.findTimer.paused;
-    //     if (confirm('energimu telah habis!!') == true) {
+    //hides all flask yg blm ketemu setelah salah satu ketemu
+    if (!lookingForEnergyFlask && !outOfEnergy) {
+        if (!energyFlask1Found) {
+            energyFlask1.setVisible(false);
+        }
+        if (!energyFlask2Found) {
+            energyFlask2.setVisible(false);
+        }
+    }
 
-    //     }
-    // }
+    //energy abis dan mau nyari flask
+    if (outOfEnergy && !lookingForEnergyFlask) {
+        // console.log('triggered nyari energy flask');
+        lookingForEnergyFlask = true;
+        //reset timer by adding new timer
+        this.time.addEvent(this.findTimer);
+        this.findTimer.paused = !this.findTimer.paused;
+        //then pause the goddamn timer
+        
+        //butuh confirmation buat nyari energy flask
+        if (!energyFlask1Found) {
+            energyFlask1.setVisible(true);
+        }
+        if (!energyFlask2Found) {
+            energyFlask2.setVisible(true);
+        }
+    }
+
+
 }
 
 function drainEnergy () {
