@@ -40,7 +40,9 @@ var testTubeRackFound;
 var energyFlask1Found;
 var energyFlask2Found;
 
-var isGameOver;
+//buat ngecek objek" di disable ato engga
+//kalo true: energi abis, ga bisa drag objek
+var isGamePaused;
 //abis energy
 var outOfEnergy;
 //lagi mencari energy
@@ -72,7 +74,7 @@ findingObjects1.create = function () {
 
     //variable initialization
     correctAnswer = false;
-    // isGameOver = false;
+    // isGamePaused = false;
     outOfEnergy = false;
     lookingForEnergyFlask = false;
     beakerFound = false;
@@ -191,6 +193,11 @@ findingObjects1.create = function () {
     this.input.on('drop', function (pointer, gameObject, dropZone) {
         // console.log(dropZone.name);
 
+        //selama gamenya ga kepause
+        // if (!isGamePaused) {
+            
+        // }
+
         //kalo bener
         if (gameObject.texture.key == dropZone.name) {
             gameObject.x = dropZone.x;
@@ -201,7 +208,7 @@ findingObjects1.create = function () {
             //biar timernya direset
             correctAnswer = true;
 
-            gameObject.input.enabled = false;  
+            gameObject.input.enabled = false;
         }
 
         //kalo salah
@@ -211,7 +218,7 @@ findingObjects1.create = function () {
             gameObject.x = gameObject.input.dragStartX;
             gameObject.y = gameObject.input.dragStartY;
             // alert("salah cuy!!!");            
-        } 
+        }
     });
 
     this.input.on('dragend', function (pointer, gameObject, dropped) {
@@ -231,13 +238,20 @@ findingObjects1.create = function () {
         energyFlask1Found = true;
         outOfEnergy = false;
         lookingForEnergyFlask = false;
+        // isGamePaused = false;
+
+        beaker.input.enabled = true;
+        spatula.input.enabled = true;
+        testTube.input.enabled = true;
+        testTubeRack.input.enabled = true;
+
         // console.log('outOfEnergy: ' + outOfEnergy);
         // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
         // console.log('energyFlask1Found: ' + energyFlask1Found);
+
         energyFlask1.setVisible(false);
         energyText.setText(energy + '%');
         findingObjects1.findTimer.paused = !findingObjects1.findTimer.paused;
-        
     });
 
     energyFlask2.on('pointerup', function () {
@@ -245,22 +259,37 @@ findingObjects1.create = function () {
         energyFlask2Found = true;
         outOfEnergy = false;
         lookingForEnergyFlask = false;
+        // isGamePaused = false;
+
+        beaker.input.enabled = true;
+        spatula.input.enabled = true;
+        testTube.input.enabled = true;
+        testTubeRack.input.enabled = true;
+
         // console.log('outOfEnergy: ' + outOfEnergy);
         // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
         // console.log('energyFlask2Found: ' + energyFlask2Found);
+        
         energyFlask2.setVisible(false);
         energyText.setText(energy + '%');
         findingObjects1.findTimer.paused = !findingObjects1.findTimer.paused;
-        
     });
 
 }
 
 findingObjects1.update = function () {
     //out of energy
+    //kalo energi abis, disable smua objek interactivenya, dropZone nya
+    //yg enabled cmn energyFlask
     if (energy == 0) {
         // console.log("energimu telah habis!");
-        // isGameOver = true;
+        // isGamePaused = true;
+
+        beaker.input.enabled = false;
+        spatula.input.enabled = false;
+        testTube.input.enabled = false;
+        testTubeRack.input.enabled = false;
+
         if (!lookingForEnergyFlask) {
             outOfEnergy = true;
         }
@@ -269,6 +298,7 @@ findingObjects1.update = function () {
     //completion
     if (beakerFound && spatulaFound && testTubeFound && testTubeRackFound) {
         console.log('horeee beres');
+        this.findTimer.paused = true;
     }
 
     //keperluan debugging
