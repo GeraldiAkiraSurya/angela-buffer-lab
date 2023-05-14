@@ -92,17 +92,21 @@ findingObjects1.create = function () {
     //setScale buat skala imagenya, belum tau hitboxnya keganti ato engga. kayanya ga keganti, atau hitboxnya lebih besar dari imagenya
     //setInteractive buat bisa interactable
     //load image to scene
-    beaker = this.add.image(940, 400, 'beaker').setInteractive().setScale(0.5);
+    // beaker = this.add.image(650, 840, 'beaker').setInteractive().setScale(0.5);
+    beaker = this.add.image(canvasWidth/2 - 290, canvasHeight/2 + 336, 'beaker').setInteractive().setScale(0.5);
     //biar bisa di-drag
     this.input.setDraggable(beaker);    
 
-    spatula = this.add.image(1100, 770, 'spatula').setInteractive().setScale(0.4);
+    // spatula = this.add.image(1655, 165, 'spatula').setInteractive().setScale(0.2).setAngle(17);
+    spatula = this.add.image(canvasWidth/2 + 725, canvasHeight/2 - 339, 'spatula').setInteractive().setScale(0.2).setAngle(17);
     this.input.setDraggable(spatula);
 
-    testTube = this.add.image(440, 320, 'testTube').setInteractive().setScale(0.25).setAngle(-90);
+    // testTube = this.add.image(500, 565, 'testTube').setInteractive().setScale(0.12).setAngle(-7);
+    testTube = this.add.image(canvasWidth/2 - 440, canvasHeight/2 + 61, 'testTube').setInteractive().setScale(0.12).setAngle(-7);
     this.input.setDraggable(testTube);
 
-    testTubeRack = this.add.image(1500, 550, 'testTubeRack').setInteractive().setScale(0.4);
+    // testTubeRack = this.add.image(1110, 100, 'testTubeRack').setInteractive().setScale(0.2).setAngle(7);
+    testTubeRack = this.add.image(canvasWidth/2 + 170, canvasHeight/2 - 404, 'testTubeRack').setInteractive().setScale(0.2).setAngle(7);
     this.input.setDraggable(testTubeRack);
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
@@ -238,8 +242,8 @@ findingObjects1.create = function () {
     //beres event dragging
 
     //cari energy flask kalo abis energy
-    energyFlask1 = this.add.image(canvasWidth/2 + 600, canvasHeight/2 - 300, 'energyFlask').setInteractive().setScale(0.7).setName('energyFlask1').setVisible(false);
-    energyFlask2 = this.add.image(canvasWidth/2 + 700, canvasHeight/2 + 400, 'energyFlask').setInteractive().setScale(0.7).setName('energyFlask2').setVisible(false);
+    energyFlask1 = this.add.image(canvasWidth/2 + 685, canvasHeight/2 - 5, 'energyFlask').setInteractive().setScale(0.3).setName('energyFlask1').setVisible(false);
+    energyFlask2 = this.add.image(canvasWidth/2 - 700, canvasHeight/2 - 229, 'energyFlask').setInteractive().setScale(0.4).setName('energyFlask2').setVisible(false);
 
     energyFlask1.on('pointerup', function () {
         energy = 100;
