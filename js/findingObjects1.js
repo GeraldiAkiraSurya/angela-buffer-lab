@@ -56,7 +56,8 @@ var energyFlask1;
 var energyFlask2;
 
 var findTimer;
-var timerText;
+//keperluan debugging
+// var timerText;
 var correctAnswer;
 
 var btnHint;
@@ -168,12 +169,12 @@ findingObjects1.create = function () {
 
     //timer 15 detik per objek
     //keperluan debugging
-    timerText = this.add.text(1640, 25);
-    timerText.setStyle({
-        fontSize: '900 20px',
-        fontFamily: 'Helvetica',
-        color: '#000000',
-    });
+    // timerText = this.add.text(1640, 25);
+    // timerText.setStyle({
+    //     fontSize: '900 20px',
+    //     fontFamily: 'Helvetica',
+    //     color: '#000000',
+    // });
 
     //delay dalam ms, jadi 15000 berarti 15 detik = 1x repeat
     //kalo 15 detik lewat, object ga bener, ngurangin energy 20
@@ -314,7 +315,7 @@ findingObjects1.update = function () {
     }
 
     //keperluan debugging
-    timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${this.findTimer.paused}`);
+    // timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${this.findTimer.paused}`);
 
     //kalo jawabannya bener, timernnya direset
     if (correctAnswer) {
@@ -334,7 +335,7 @@ findingObjects1.update = function () {
 
     //energy abis dan mau nyari flask
     if (outOfEnergy && !lookingForEnergyFlask) {
-        console.log('triggered nyari energy flask');
+        // console.log('triggered nyari energy flask');
         lookingForEnergyFlask = true;
         //reset timer by adding new timer
         this.time.addEvent(this.findTimer);
