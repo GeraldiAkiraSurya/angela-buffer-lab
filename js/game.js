@@ -13,6 +13,8 @@ var config = {
 
     //nanti scale harus matiin
     scale: {
+        // mode: Phaser.Scale.FIT,
+        // autoCenter: Phaser.Scale.CENTER_BOTH,
         mode: Phaser.Scale.ScaleModes.NONE,
         width: window.innerWidth,
         height: window.innerHeight,
@@ -25,7 +27,8 @@ var config = {
         }
     },
 
-    //buat youtube video player??
+    //buat youtube video player
+    parent: 'angela-buffer-lab',
     dom: {
         createContainer: true
     },
@@ -49,3 +52,12 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
+
+/* LINK VIDEO
+alat dan bahan misi 1 : https://youtu.be/qz1XzCmdHAg
+misi 1 : https://youtu.be/EJZ8B7NOy2k
+misi 2 : https://youtu.be/TdDKvshp6ks
+misi 3 : https://youtu.be/vTP3BGnawU4
+misi 4 : https://youtu.be/QpCJO6pe5RI
+misi 5 : https://youtu.be/pRIrCBToivc 
+*/

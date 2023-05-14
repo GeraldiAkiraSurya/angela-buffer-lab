@@ -19,6 +19,10 @@
 
 	<head prefix="og: http://ogp.me/ns#">
 
+
+	<?php
+      require_once 'user.php';?>
+
 		<title>Buffer Labs Games</title> <!--Up to 60-70 Characters. Optimal Format: Primary Keyword - Secondary Keyword | Brand Name-->
 		
 
@@ -105,6 +109,7 @@
 	</head>
 
 	<body>
+	
 
 		<!-- Fallback when JavaScript is not available -->
 		<noscript>
