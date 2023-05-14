@@ -29,7 +29,7 @@ missionSelection.create = function() {
     let btnMsn2 = new Button((canvasWidth/2) - (1*deltaX), baseY, 'MISI II', this, () => {
         this.scene.start('FindingObjects1');
         energy = 100;
-    });
+    },true);
     let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('mission1')});
     let btnMsn2sub2 = new Button((canvasWidth/2) - (1*deltaX), baseY+200, 'SUB-MISI II.2', this, () => {this.scene.start('mission1')});
     let btnMsn3 = new Button(canvasWidth/2, baseY, 'MISI 3', this, () => {this.scene.start('mission3')});

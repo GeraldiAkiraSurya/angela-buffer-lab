@@ -10,12 +10,15 @@ if(session_status()!=2){
     echo "
         <script>
         const userid={$_SESSION['id']}
-        const nama='{$_SESSION['nama']}'
+        const playerName='{$_SESSION['nama']}'
         const token='{$_SESSION['token']}'
         const email='{$_SESSION['email']}'
+
+
         </script>
         ";
         
+
 
 
   }

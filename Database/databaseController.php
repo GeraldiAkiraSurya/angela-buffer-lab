@@ -206,14 +206,17 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                 exit();
             }
     
-            $query ="UPDATE `pengerjaan` SET `waktuPertama`=NOW(),`tries`=1 WHERE `userId`=$id AND `misi`='$misi' AND `soal`= $soal";
+            $query ="UPDATE `pengerjaan` SET`tries`=`tries`+1 WHERE `userId`=$id AND `misi`='$misi' AND `soal`= $soal";
             $res=$this->db->executeNonSelectQuery($query);
      
             if($res==0){
-                echo "dead";
+                echo "fail";
             }else{
                 echo "true";
             }
+
+            $query ="UPDATE `pengerjaan` SET `waktuPertama`=NOW() WHERE `userId`=$id AND `misi`='$misi' AND `soal`= $soal AND `waktuPertama` is NULL";
+            $res=$this->db->executeNonSelectQuery($query);
 
         }else{
             header("location: login");

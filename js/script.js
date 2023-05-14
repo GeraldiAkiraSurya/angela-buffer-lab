@@ -41,9 +41,7 @@ monogatari.action ('message').messages ({
 		title: 'Pertanyaan 1 Video 1',
 		subtitle: '',
 		body: `
-			<iframe width="420" height="315"
-				src="https://www.youtube.com/embed/tgbNymZ7vqY" allowFullScreen="true">
-			</iframe>
+		<iframe width="420" height="315" src="https://www.youtube.com/embed/qz1XzCmdHAg?autoplay=1"  allow="autoplay"></iframe>
 		`
 	},
 	'Video1-1-2': {
@@ -69,7 +67,7 @@ monogatari.action ('message').messages ({
 		subtitle: '',
 		body: `
 			<iframe width="420" height="315"
-				src="https://www.youtube.com/embed/tgbNymZ7vqY" allowFullScreen="true">
+				src="<iframe width="1903" height="760" src="https://www.youtube.com/embed/qz1XzCmdHAg" title="Alat dan Bahan MISI 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>" allowFullScreen="true" allow='autoplay'>
 			</iframe>
 		`
 	},
@@ -156,7 +154,7 @@ monogatari.characters ({
 		}
 	},
 	'u': {
-		name: '{{player.name}}',
+		name: playerName,
 		color: '#FFFFFF'
 	}
 });
@@ -171,32 +169,34 @@ monogatari.script ({
 		'show character p normal with fadeIn',
 		'p Hai selamat datang di Buffer Laboratory!!!',
 		// 'show notification Welcome',
-		{
-			'Input': {
-				'Text': 'Siapa namamu?',
-				'Validation': function (input) {
-					return input.trim ().length > 0;
-				},
-				'Save': function (input) {
-					this.storage ({
-						player: {
-							name: input
-						}
-					});
-					return true;
-				},
-				'Revert': function () {
-					this.storage ({
-						player: {
-							name: ''
-						}
-					});
-				},
-				'Peringatan': 'Kamu harus menuliskan namamu!'
-			}
-		},
-		'p Hi {{player.name}} perkenalkan aku adalah professor Allison!',
-		'p {{player.name}}… Anda harus mengambil buku ramuan obat yang tertinggal di laboratorium pusat!',
+		// {
+		// 	'Input': {
+		// 		'Text': 'Siapa namamu?',
+		// 		'Validation': function (input) {
+		// 			return input.trim ().length > 0;
+		// 		},
+		// 		'Save': function (input) {
+		// 			this.storage ({
+		// 				player: {
+		// 					name: input
+		// 				}
+		// 			});
+		// 			return true;
+		// 		},
+		// 		'Revert': function () {
+		// 			this.storage ({
+		// 				player: {
+		// 					name: ''
+		// 				}
+		// 			});
+		// 		},
+		// 		'Peringatan': 'Kamu harus menuliskan namamu!'
+		// 	}
+		// },
+
+
+		`p Hi ${playerName} perkenalkan aku adalah professor Allison!`,
+		`p ${playerName}… Anda harus mengambil buku ramuan obat yang tertinggal di laboratorium pusat!`,
 		'u Siap meluncur prof...',
 		'p Sebelum berangkat Anda harus menyelesaikan tantangan di laboratorium X, tiap tantangan yang dilewati akan menambah energi Anda untuk memperoleh buku ramuan obat..',
 		'u Penemuan ini akan menjadi gebrakan hebat di dunia penelitian…',
@@ -261,7 +261,11 @@ monogatari.script ({
 				},
 				'2': {
 					'Text': 'pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan',
-					'Do': 'jump Misi1-2'
+					'Do': 'jump Misi1-2',
+					'Condition':function () {
+						done('1',1)
+						start('1',2)
+					}
 				},
 				'3': {
 					'Text': 'pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan',
@@ -362,6 +366,7 @@ monogatari.script ({
 
 	//misi 1 pertanyaan 2
 	'Misi1-2': [
+		
 		'Nah..berdasarkan perubahan pH yang terjadi pada larutan – larutan dalam video, manakah campuran yang dapat mempertahankan pHnya?',
 		{
 			'Choice': {
