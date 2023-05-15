@@ -19,8 +19,8 @@ missionOne.preload = function () {
     this.load.image('nextPage', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/assets/images/arrow-down-left.png');
 }
 
-var btnStart;
-var btnOptions;
+// var btnStart;
+// var btnOptions;
 
 var textBox;
 
@@ -29,10 +29,6 @@ const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
 var content;
-
-//notes
-//speed muncul textnya belum nemu
-//udah ketemu -Geraldi
 
 //yg pertama bisa langsung enter
 var arrayOfContent = [
@@ -50,6 +46,7 @@ var lineCounter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 missionOne.create = function () {
+    var mode = 'normal';
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
 
@@ -96,79 +93,94 @@ missionOne.create = function () {
     })
     .start(content, 50); // yang integer tuh speed muncul speednya
 
+    // var exitBtn = this.add.text(50, 50, 'EXIT')
+    //     .setOrigin(0)
+    //     .setFontSize(30)
+    //     // .setOrigin(10)
+    //     .setPadding(12)
+    //     .setStyle({ backgroundColor: '#000000', fill: '#ffffff' })
+    //     .setInteractive({ useHandCursor: true })
+    //     .on('pointerover', () => exitBtn.setStyle({ fill: '#0000ff' }))
+    //     .on('pointerout', () => exitBtn.setStyle({ fill: '#ffffff' }))
+    //     .on('pointerdown', () => this.scene.start('MainMenu'));
+
+    var exitBtn = createExitBtn(this, 50, 50);
+
+    var isDialogScene = true;
     //input
-    this.input.on('pointerdown', function () {
-        //kalo lg typing, beresin dlu (munculin smua)
-        console.log(Phaser.GameObjects.TextStyle);
-        console.log(textBox.isTyping);
+    
+    this.input.on('pointerdown', () => {
 
-        if (textBox.isTyping) {
-            textBox.stop(true);
-            console.log('lagi ngetik: ' + textBox.isTyping);
-
-            //ngatur panah next
-            var nextIcon = textBox.getElement('action').setVisible(true);
-            textBox.resetChildVisibleState(nextIcon);
-
+        if (mode == 'misi') {
+            textBox.destroy();
+            image.destroy();
+            startMission(this, exitBtn);
         }
-        //kalo ga lagi typing, gas ae masbro
-        else {
-            //ngatur panah next
-            var nextIcon = textBox.getElement('action').setVisible(false);
-            textBox.resetChildVisibleState(nextIcon);
 
-            //cek page terakhir
-            //kalo udah halaman terakhir dari current line, bakal next line
-            //soalnya kalo panjang, bakal displit per berapa halaman tergantung maxLine
-            if (textBox.isLastPage) {
-                console.log('akhir page');
-                console.log(lineCounter);
-    
-                //pergantian line
-                if (lineCounter < arrayOfContent.length) {
-                    content = arrayOfContent[lineCounter];
-                    // console.log('next line: ' + content); 
-                    lineCounter += 1;
-        
-                    textBox.start(content);
-                }
-    
-                // return;
+        if (isDialogScene) {
+            //kalo lg typing, beresin dlu (munculin smua)
+            // console.log(Phaser.GameObjects.TextStyle);
+            // console.log(textBox.isTyping);
 
-                // kalo udah dialog paling terakhir bakal hapus textbox nya
-                if(lineCounter >= arrayOfContent.length) {
-                    textBox.destroy();
-                    startMission(this);
-                }
+            if (textBox.isTyping) {
+                textBox.stop(true);
+                console.log('lagi ngetik: ' + textBox.isTyping);
+
+                //ngatur panah next
+                var nextIcon = textBox.getElement('action').setVisible(true);
+                textBox.resetChildVisibleState(nextIcon);
+
             }
+            //kalo ga lagi typing, gas ae masbro
             else {
-                console.log('bukan akhir page cuy');
-                textBox.typeNextPage();
+                //ngatur panah next
+                var nextIcon = textBox.getElement('action').setVisible(false);
+                textBox.resetChildVisibleState(nextIcon);
+
+                //cek page terakhir
+                //kalo udah halaman terakhir dari current line, bakal next line
+                //soalnya kalo panjang, bakal displit per berapa halaman tergantung maxLine
+                if (textBox.isLastPage) {
+                    console.log('akhir page');
+                    console.log(lineCounter);
+        
+                    //pergantian line
+                    if (lineCounter < arrayOfContent.length) {
+                        content = arrayOfContent[lineCounter];
+                        // console.log('next line: ' + content); 
+                        lineCounter += 1;
+            
+                        textBox.start(content);
+                    }
+        
+                    // return;
+
+                    // kalo udah dialog paling terakhir bakal hapus textbox nya
+                    if(lineCounter >= arrayOfContent.length) {
+                        isDialogScene = false;
+                        textBox.destroy();
+                        image.destroy();
+                        // askStartMission(this);
+                        startMission(this, exitBtn);
+                    }
+                }
+                else {
+                    console.log('bukan akhir page cuy');
+                    textBox.typeNextPage();
+                }
             }
         }
-        
-
         // console.log('clicked!');
     }, this);
     // this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
 
-    exitBtn = this.add.text(50, 50, 'EXIT')
-        .setOrigin(0)
-        .setFontSize(30)
-        // .setOrigin(10)
-        .setPadding(12)
-        .setStyle({ backgroundColor: '#000000', fill: '#ffffff' })
-        .setInteractive({ useHandCursor: true })
-        .on('pointerover', () => button.setStyle({ fill: '#0000ff' }))
-        .on('pointerout', () => button.setStyle({ fill: '#ffffff' }))
-        .on('pointerdown', () => this.scene.start('MainMenu'));
 }
 
 missionOne.update = function () {
     
 }
 
-function startMission(scene) {
+function startMission(scene, exitBtn) {
     var middleX = scene.cameras.main.width / 2;
     var middleY = scene.cameras.main.height / 2;
     var image = scene.add.image(middleX, middleY, 'missionBackground');
@@ -187,34 +199,78 @@ function startMission(scene) {
         .setFontSize(40);
 
     var text = 
-    `[b]SYARAT PENYELESAIAN KHUSUS:[/b] AMATILAH VIDEO DENGAN SEKSAMA DAN PILIHLAH JAWABAN YANG BENAR DARI PERTANYAAN YANG DIBERIKAN
+`[b]SYARAT PENYELESAIAN KHUSUS:[/b] AMATILAH VIDEO DENGAN SEKSAMA DAN PILIHLAH JAWABAN YANG BENAR DARI PERTANYAAN YANG DIBERIKAN
 
 [b]BATAS WAKTU:[/b] TIDAK ADA
 
 [b]HADIAH:[/b] ENERGI DAN BUKU RAMUAN OBAT
 
-[b]JIKA GAGAL:[/b] KEMBALI KE AWAL
-    `;
+[b]JIKA GAGAL:[/b] KEMBALI KE AWAL`;
+
+    // var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+100, text, {
+    //     fontSize: '30px',
+    //     align: 'left',
+    //     wrap: {
+    //         mode: 'word',
+    //         width: 700
+    //     },
+    // });
 
     var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+100, text, {
         fontSize: '30px',
         align: 'left',
         wrap: {
             mode: 'word',
-            width: 700
+            width: descriptionBox.width-100
         },
     });
 
-    var nextBtn = new AcceptBtn(middleX, middleY + (descriptionBox.height / 2) - 50, 'TERIMA', scene, () => {
-        missionDesc.destroy();
-        // exitBtn.destroy();
-        showYoutubeVideo(scene, middleX, middleY, 'qz1XzCmdHAg');
+    var youtubeId = {
+        intro: 'qz1XzCmdHAg',
+        problem: 'EJZ8B7NOy2k'
+    }
+
+    var youtubePlayer;
+    var sequence = 0;
+
+    var nextBtn = createNextBtn(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'TERIMA', () => {
+        // ini hal-hal yang dilakuin pas si button 'terima' diklik
+
+        console.log("Sequence:" + sequence);
+        switch (sequence) {
+            case 0:
+                missionDesc.setVisible(false);
+                youtubePlayer = showYoutubeVideo(scene, middleX, middleY, youtubeId['intro']); //munculin video alat dan bahan
+                nextBtn.setText('LANJUT');
+                break;
+            case 1:
+                // youtubePlayer.load(youtubeId['problem'], false);
+                youtubePlayer.destroy();
+                youtubePlayer = showYoutubeVideo(scene, middleX, middleY, youtubeId['problem']);
+                break;
+            case 2:
+                youtubePlayer.destroy();
+                //text = getProblemText(0);
+                text = 'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?';
+                missionDesc.setText(text);
+                missionDesc.setVisible(true);
+                break;
+            case 3:
+                missionDesc.setVisible(false);
+                showQuestion(scene, 0);
+                break;
+        }
+
+        sequence++;
     });
 
-    nextBtn.setNewCallback(() => {
-        youtubePlayer.destroy();
-        showYoutubeVideo(scene, middleX, middleY, 'EJZ8B7NOy2k');
-    });
+    
+    // accBtn.button.destroy();
+
+    // nextBtn.setNewCallback(() => {
+    //     youtubePlayer.destroy();
+    //     showYoutubeVideo(scene, middleX, middleY, 'EJZ8B7NOy2k');
+    // });
 
     /*
     var nextBtn = scene.add.text(middleX, middleY + (descriptionBox.height / 2) - 50, 'TERIMA')
@@ -238,10 +294,24 @@ function startMission(scene) {
 }
 
 function showYoutubeVideo(scene, middleX, middleY, videoId) {
-    var youtubePlayer = scene.add.rexYoutubePlayer(middleX, middleY, 600, 450, {
+    return scene.add.rexYoutubePlayer(middleX, middleY, 600, 450, {
         videoId: videoId,
         autoPlay: false
-    })
+    });
+}
+
+function showQuestion(scene, index) {
+    var middleX = scene.cameras.main.width / 2;
+    var middleY = scene.cameras.main.height / 2;
+
+    if (index == 0) {
+        var deltaY = 75;
+        var choice1 = createChoiceBtn(scene, middleX, middleY-(deltaY*2), 'pH pada semua system/ campuran berubah drastis', 0);
+        var choice2 = createChoiceBtn(scene, middleX, middleY-(deltaY*1), 'pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan', 0);
+        var choice1 = createChoiceBtn(scene, middleX, middleY, 'pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan', 0);
+        var choice1 = createChoiceBtn(scene, middleX, middleY+(deltaY*1), 'pH pada larutan asam asetat 0,1 M berubah drastis', 0);
+        var choice1 = createChoiceBtn(scene, middleX, middleY+(deltaY*2), 'pH pada larutan natrium asetat 0,1 M berubah drastis', 0);
+    }
 }
 
 function createTextBox (scene, x, y, config) {
@@ -342,20 +412,74 @@ function getBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
     })
 }
 
-class AcceptBtn {
+/*
+class NextButton {
     constructor(x, y, label, scene, callback) {
-        this.accBtn = scene.add.text(x, y, label)
+        this.buttonObject = scene.add.text(x, y, label)
             .setOrigin(0.5)
             .setFontSize('30px')
             .setPadding(12)
             .setStyle({ backgroundColor: '#e6e6e6', fill: '#000000' })
             .setInteractive({ useHandCursor: true })
-            .on('pointerover', () => button.setStyle({ fill: '#0000ff' }))
-            .on('pointerout', () => button.setStyle({ fill: '#000000' }))
+            .on('pointerover', () => this.buttonObject.setStyle({ fill: '#0000ff' }))
+            .on('pointerout', () => this.buttonObject.setStyle({ fill: '#000000' }))
             .on('pointerdown', () => callback());
     }
+}
+*/
 
-    setNewCallback(callback) {
-        this.accBtn.on('pointerdown', () => callback());
+function createExitBtn(scene, x, y) {
+    var button = scene.add.text(x, y, 'EXIT')
+        .setOrigin(0)
+        .setFontSize(30)
+        // .setOrigin(10)
+        .setPadding(12)
+        .setStyle({ backgroundColor: '#000000', color: '#ffffff' })
+        .setInteractive({ useHandCursor: true })
+        .on('pointerover', () => button.setStyle({ color: '#0000ff' }))
+        .on('pointerout', () => button.setStyle({ color: '#ffffff' }))
+        .on('pointerdown', () => scene.scene.start('MainMenu'));
+
+    return button;
+}
+
+function createNextBtn(scene, x, y, label, callback) {
+    var button = scene.add.text(x, y, label)
+        .setOrigin(0.5)
+        .setFontSize('30px')
+        .setPadding(12)
+        .setStyle({ backgroundColor: '#e6e6e6', color: '#000000' })
+        .setInteractive({ useHandCursor: true })
+        .on('pointerover', () => button.setStyle({ color: '#0000ff' }))
+        .on('pointerout', () => button.setStyle({ color: '#000000' }))
+        .on('pointerdown', () => callback());
+
+    return button
+}
+
+function createChoiceBtn(scene, x, y, label) {
+    var button = scene.add.text(x, y, label)
+        .setOrigin(0.5)
+        .setFontSize('30px')
+        .setPadding(12)
+        .setStyle({
+            backgroundColor: '#e6e6e6', 
+            color: '#000000'
+            // backgroundStrokeColor: 'black', 
+            // backgroundStrokeLineWidth: 2 
+        })
+        .setInteractive({ useHandCursor: true })
+        .on('pointerover', () => button.setStyle({ color: '#0000ff' }))
+        .on('pointerout', () => button.setStyle({ color: '#000000' }));
+
+    return button;
+}
+
+
+/*
+function getProblemText(index) {
+    if (index == 0) {
+        return 'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?';
     }
 }
+*/
