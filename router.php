@@ -17,6 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         case $base."play":
             echo View::createView("game.php");
             break;
+        case $base."find":
+            echo View::createView("find.php");
+            break;
         case $base."profile":
             require_once 'Database/databaseController.php';
             $myDB=new bufferDatabase();
@@ -24,14 +27,35 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             echo View::createView("View/profile.php",$data);
             break;
 
+        case $base."loginadmin":
+            require_once 'Database/databaseController.php';
+                $myDB=new bufferDatabase();
+                $data=$myDB->adminViewClass();
+                echo View::createView("View/loginAdmin.php",$data);
+                break;
+        case $base."dashboardAdmin":
+            require_once 'Database/databaseController.php';
+            $myDB=new bufferDatabase();
+            $data=$myDB->adminViewClass();
+            echo View::createView("View/dashboardAdmin.php",$data);
+            break;
+        case $base."detailUser":
+            require_once 'Database/databaseController.php';
+                $myDB=new bufferDatabase();
+                $data=$myDB->adminViewUser();
+                echo View::createView("View/detailUserAdmin.php",$data);
+                break;
+        case $base."logout": 
+            require_once 'Database/controllerlogout.php';
+            header("location:login");
+            break;
+        
+
 
 
 
         case $base."test":
             echo View::createView("testBackend.php");
-            break;
-        case $base."find":
-            echo View::createView("find.php");
             break;
         default:
         header("location: login");
@@ -76,7 +100,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             echo $myDB->mission();
             break;
 
+
+        case $base."masukAdmin":
+            require_once 'Database/databaseController.php';
+            $myDB=new bufferDatabase();
+            $myDB->adminLogin();
             break;
+
+
+            
             default:
             header("location:View/index.php");
             break;

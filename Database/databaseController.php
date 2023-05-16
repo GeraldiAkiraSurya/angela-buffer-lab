@@ -81,14 +81,14 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                     $query ="UPDATE `user` SET `lastLogin` = NOW(),`token`= '$generateToken' ,`numLogin`=`numLogin`+1 WHERE `email`= '$username'";
                     $res=$this->db->executeNonSelectQuery($query);
 
-                    Session_start();
+                    session_start();
                     $_SESSION['id']=$userInfo[0]['id'];
                     $_SESSION['email']=$username;
                     $_SESSION['nama']=$userInfo[0]['nama'];
                     $_SESSION['token']=$generateToken;
 
 
-                    header("location: play");
+                    header("location: find");
                     
                 }else { 
                     header("location: login?wrong=1");
@@ -374,24 +374,54 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
     }
 
 
+    public function adminViewClass(){
+        $tingkat=10;//default 10
+        if(isset($_GET['tingkat'])){
+            $tingkat=$_GET['tingkat'];
+        }
+
+        $query ="SELECT `id`,`nama`,`absen`,`email`,`lastLogin`,`numLogin` FROM `user` where `tingkat`=$tingkat ORDER BY `absen` ASC";
+
+        $res=$this->db->executeSelectQuery($query);
+ 
+      return $res;
+
+    }
+
+    public function adminViewUser(){
+        $id=$_GET['urut'];
+
+        $query ="SELECT * FROM `pengerjaan` WHERE `userId`=$id ORDER BY `misi`, `soal`  ASC";
+
+        $res=$this->db->executeSelectQuery($query);
+ 
+      return $res;
+
+    }
+
+    public function adminLogin(){
+        $username=$_POST['email'];
+        $passwordInput=$_POST['password'];
+
+        if($username=="admin1" && $passwordInput=="gelaskimia"){
+            $this->giveLogin();
+        }else if($username=="admin2" && $passwordInput=="bakerglass"){
+            $this->giveLogin();
+        }else{
+            header("location: loginadmin?wrong=1");
+        }
+
+        
+    }
+
+    private function giveLogin(){
+        $generateToken = bin2hex(random_bytes(25));
+        session_start();
+        $_SESSION['token']=$generateToken;
+        header("location: dashboardAdmin");
+    }
+
+
 
 }
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

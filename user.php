@@ -1,9 +1,7 @@
-<?php
-
-
-if(session_status()!=2){
-    session_start();
-  }
+<?php 
+  if(session_status()!=2){
+  session_start();
+}
 
   if (isset($_SESSION['id'])) {
     
@@ -18,9 +16,8 @@ if(session_status()!=2){
         </script>
         ";
         
-
-
-
+  }else{
+    header("Location:login");
   }
 
   echo '<script src="logic.js" defer></script>' 

@@ -2,57 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<?php require_once 'user.php';?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/console-ban@5.0.0/dist/console-ban.min.js"></script>
+
 </head>
 <body>
-    
-<?php
-
-
-
-if(session_status()!=2){
-    session_start();
-  }
-
-  if (isset($_SESSION['id'])) {
-    
-    echo "
-        <script>
-        const userid={$_SESSION['id']}
-        const nama='{$_SESSION['nama']}'
-        const token='{$_SESSION['token']}'
-        const email='{$_SESSION['email']}'
-        </script>
-        ";
-        
-
-
-  }
-
-  echo '<script src="logic.js" defer></script>'
 
 
   
-  
-// const nama={$_SESSION['nama']}
-//         const token={$_SESSION['token']}
-//         const email={$_SESSION['email']}
-
-?>
 
 <button onclick="minHealth()">kena hit</button>
 
 <br>
 
-<button onclick="start('1',3)">ngerjain soal baru</button>
-
+<button onclick="startTest()">ngerjain soal baru</button>
+misi
+<input type="text" placeholder="misi" id="a">
+soal
+<input type="number" placeholder="soal" id="b">
 <br>
 
-<button onclick="done('1',3)">DONE</button>
+<button onclick="doneTest()">DONE</button>
+misi
+<input type="text" placeholder="misi" id="c">
+soal
+<input type="number" placeholder="soal"id="d">
 
 <br>
 
@@ -61,6 +39,27 @@ if(session_status()!=2){
 <br>
 
 <button onclick="missionMenu()">ngambilMisi</button>
+
+
+
+<script>
+let a=document.getElementById("a")
+let b=document.getElementById("b")
+let c=document.getElementById("c")
+let d=document.getElementById("d")
+
+
+
+function startTest(){
+    start(a.value,b.value)
+}
+
+function doneTest(){
+    done(c.value,d.value)
+}
+
+</script>
+
 
 </body>
 </html>
