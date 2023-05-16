@@ -49,15 +49,15 @@ mainMenu.create = function () {
         isMenuMusicPlaying = true;
     }
 
-    canvasWidth = game.canvas.width;
-    canvasHeight = game.canvas.height;
+    middleX = this.cameras.main.width / 2;
+    middleY = this.cameras.main.height / 2;
 
     //background main menu
-    this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
+    this.add.image(middleX, middleY, 'menuBackground').setScale(0.65, 0.52);
 
     //add characters
-    shin = this.add.image(canvasWidth/2 - 400, canvasHeight/2 - 150, 'shin').setScale(0.56).setVisible(false);
-    sora = this.add.image(canvasWidth/2 + 400, canvasHeight/2 - 150, 'sora').setScale(0.56).setFlipX(true).setVisible(false);
+    shin = this.add.image(middleX - 400, middleY - 150, 'shin').setScale(0.56).setVisible(false);
+    sora = this.add.image(middleX + 400, middleY - 150, 'sora').setScale(0.56).setFlipX(true).setVisible(false);
 
     // console.log(character);
 
@@ -69,7 +69,7 @@ mainMenu.create = function () {
     }
 
     //video player
-    // video = this.add.video(canvasWidth/2, canvasHeight/2);
+    // video = this.add.video(middleX, middleY);
     // let url = 'https://www.youtube.com/embed/tgbNymZ7vqY';
     // video.loadURL('https://www.youtube.com/embed/tgbNymZ7vqY');
 
@@ -79,12 +79,12 @@ mainMenu.create = function () {
     // youtubePlayer = this.add.rexYoutubePlayer(0, 0, 600, 450, {
     //     videoId: 'wDOym-mXxO4'
     // }).on('ready', function () {
-    //     youtubePlayer.setPosition(canvasWidth/2, canvasHeight/2);
+    //     youtubePlayer.setPosition(middleX, middleY);
     // });    
 
     //buttons
-    btnStart = this.add.image(canvasWidth/2, canvasHeight/2, 'startButton').setInteractive().setScale(0.5);
-    btnOptions = this.add.image(canvasWidth/2, canvasHeight/2 + 125, 'optionsButton').setInteractive().setScale(0.5);
+    btnStart = this.add.image(middleX, middleY, 'startButton').setInteractive().setScale(0.5);
+    btnOptions = this.add.image(middleX, middleY + 125, 'optionsButton').setInteractive().setScale(0.5);
 
     btnStart.on('pointerup', function () {        
         console.log(energy);
@@ -98,7 +98,7 @@ mainMenu.create = function () {
     // this.tweens.add({
     //     targets: [btnStart],
     //     duration: 1000,
-    //     x: canvasWidth/2,
+    //     x: middleX,
     //     scaleX: 2,
     //     scaleY: 2,
     //     ease: 'Bounce.easeIn'

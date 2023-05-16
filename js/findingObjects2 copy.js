@@ -218,7 +218,20 @@ findingObjects2.create = function () {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
 
-            foundObject(dropZone.name);
+            switch (dropZone.name) {
+                case 'sprayBottle':
+                    sprayBottleFound = foundObject(dropZone.name);
+                    break;
+                case 'dropper':
+                    dropperFound = foundObject(dropZone.name);
+                    break;
+                case 'measuringCylinder':
+                    measuringCylinderFound = foundObject(dropZone.name);
+                    break;
+                case 'stirringRod':
+                    stirringRodFound = foundObject(dropZone.name);
+                    break;
+            }
 
             //biar timernya direset
             correctAnswer = true;
@@ -361,23 +374,6 @@ findingObjects2.update = function () {
 function drainEnergy () {
     energy -= 20;
     energyText.setText(energy + '%');
-}
-
-function foundObject (objectName) {
-    switch (objectName) {
-        case 'sprayBottle':
-            sprayBottleFound = true;
-            break;
-        case 'dropper':
-            dropperFound = true;
-            break;
-        case 'measuringCylinder':
-            measuringCylinderFound = true;
-            break;
-        case 'stirringRod':
-            stirringRodFound = true;
-            break;
-    }
 }
 
 function hintObject (objectName) {
