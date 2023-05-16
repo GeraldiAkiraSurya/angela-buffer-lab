@@ -5,6 +5,7 @@ findingObjects2.preload = function () {
     this.load.path = './assets/';
     this.load.image('sprayBottle', 'lab_eq/SprayBottle.png');
     this.load.image('dropper', 'lab_eq/Dropper.png');
+    //perlu ganti dgn yg transparant
     this.load.image('measuringCylinder', 'lab_eq/MeasuringCylinder.png');
     this.load.image('stirringRod', 'lab_eq/StirringRod.png');
 
