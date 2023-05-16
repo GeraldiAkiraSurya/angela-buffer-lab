@@ -17,12 +17,20 @@ findingObjects2.preload = function () {
     this.load.image('book', 'icons/book.png');
 
     this.load.image('backButton', 'buttons/Back Button.png');
+
+    this.load.plugin('rexyoutubeplayerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexyoutubeplayerplugin.min.js', true);
+    this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
 }
 
 var sprayBottle;
 var dropper;
 var measuringCylinder;
 var stirringRod;
+
+var sprayBottleIndicator;
+var dropperIndicator;
+var measuringCylinderIndicator;
+var stirringRodIndicator;
 
 //drop zone destinasi
 var dropZoneSprayBottleBG;
@@ -40,7 +48,7 @@ var energyFlask2Found;
 
 //buat ngecek objek" di disable ato engga
 //kalo true: energi abis, ga bisa drag objek
-var isGamePaused;
+var isGameOverRendered;
 //abis energy
 var outOfEnergy;
 //lagi mencari energy
@@ -64,22 +72,21 @@ var correctAnswer;
 var btnHint;
 
 findingObjects2.create = function () {
-
-    // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
     //halve value: 940, 504
-    canvasWidth = game.canvas.width;
-    canvasHeight = game.canvas.height;
+    //comment nanti, keperluan debugging doang. harusnya di initiate dari main menu.
+    middleX = this.cameras.main.width / 2;
+    middleY = this.cameras.main.height / 2;
 
     //background
-    this.add.image(canvasWidth/2, canvasHeight/2, 'background').setScale(0.98, 0.95);
+    this.add.image(middleX, middleY, 'background').setScale(0.98, 0.95);
 
     //energy debugger, disable pas udah siap dirangkai
     energy = 100;
 
     //variable initialization
     correctAnswer = false;
-    // isGamePaused = false;
+    isGameOverRendered = false;
     outOfEnergy = false;
     lookingForEnergyFlask = false;
     sprayBottleFound = false;
@@ -94,28 +101,31 @@ findingObjects2.create = function () {
     //setInteractive buat bisa interactable
     //load image to scene
     // sprayBottle = this.add.image(650, 840, 'sprayBottle').setInteractive().setScale(0.5);
-    sprayBottle = this.add.image(canvasWidth/2 - 290, canvasHeight/2 + 336, 'sprayBottle').setInteractive().setScale(0.5);
+    sprayBottle = this.add.image(middleX - 290, middleY + 256, 'sprayBottle').setInteractive().setScale(0.5).setVisible(false);
     //biar bisa di-drag
     this.input.setDraggable(sprayBottle);    
 
     // dropper = this.add.image(1655, 165, 'dropper').setInteractive().setScale(0.2).setAngle(17);
-    dropper = this.add.image(canvasWidth/2 + 725, canvasHeight/2 - 339, 'dropper').setInteractive().setScale(0.2).setAngle(17);
+    dropper = this.add.image(middleX + 725, middleY - 339, 'dropper').setInteractive().setScale(0.2).setAngle(17).setVisible(false);
     this.input.setDraggable(dropper);
 
     // measuringCylinder = this.add.image(500, 565, 'measuringCylinder').setInteractive().setScale(0.12).setAngle(-7);
-    measuringCylinder = this.add.image(canvasWidth/2 - 440, canvasHeight/2 + 61, 'measuringCylinder').setInteractive().setScale(0.12).setAngle(-7);
+    measuringCylinder = this.add.image(middleX - 440, middleY + 61, 'measuringCylinder').setInteractive().setScale(0.12).setAngle(-7).setVisible(false);
     this.input.setDraggable(measuringCylinder);
 
     // stirringRod = this.add.image(1110, 100, 'stirringRod').setInteractive().setScale(0.2).setAngle(7);
-    stirringRod = this.add.image(canvasWidth/2 + 170, canvasHeight/2 - 404, 'stirringRod').setInteractive().setScale(0.2).setAngle(7);
+    stirringRod = this.add.image(middleX + 170, middleY - 416, 'stirringRod').setInteractive().setScale(0.2).setVisible(false);
     this.input.setDraggable(stirringRod);
 
     //gift box & book
-    giftBox = this.add.image(canvasWidth/2, canvasHeight/2 + 50, 'giftBox').setVisible(false);
-    book = this.add.image(canvasWidth/2, canvasHeight/2 - 100, 'book').setInteractive().setScale(0.7).setVisible(false);
+    giftBox = this.add.image(middleX, middleY + 50, 'giftBox').setVisible(false);
+    book = this.add.image(middleX, middleY - 100, 'book').setInteractive().setScale(0.7).setVisible(false);
 
+    //ketrigger kalo udah beres
     book.on('pointerup', function () {
         // console.log('clicked book!');
+        //manggil methodnya disini dim
+
         findingObjects2.scene.start('MissionSelection');
     });
 
@@ -123,51 +133,52 @@ findingObjects2.create = function () {
     energyText = this.add.text(energyFlaskIcon.x - 15, energyFlaskIcon.y + 5, energy + '%', {font: "700 16px Helvetica", fill: "#000000"});
 
     //hint
-    btnHint = this.add.image(canvasWidth/2 - 800, canvasHeight/2 - 455, 'magnifyingGlass').setInteractive().setScale(0.8);
+    btnHint = this.add.image(middleX - 800, middleY - 455, 'magnifyingGlass').setInteractive().setScale(0.8);
+    //disabled pas showObjective on, re-enabled by startFindingObject
+    btnHint.input.enabled = false;
 
     btnHint.on('pointerup', function () {
         let objectsArray = [];
         if (!sprayBottleFound) {
-            objectsArray.push('sprayBottle');
+            objectsArray.push(sprayBottle);
         }
         if (!dropperFound) {
-            objectsArray.push('dropper');
+            objectsArray.push(dropper);
         }
         if (!measuringCylinderFound) {
-            objectsArray.push('measuringCylinder');
+            objectsArray.push(measuringCylinder);
         }
         if (!stirringRodFound) {
-            objectsArray.push('stirringRod');
+            objectsArray.push(stirringRod);
         }
         // console.log(objectsArray);
         // console.log(Math.floor(Math.random() * 4));
         hintObject(objectsArray[Math.floor(Math.random() * objectsArray.length)]);    
-        drainEnergy();
+        drainEnergy(20, energyText);
         btnHint.input.enabled = false;
     });
 
     //halve value
     //940 504
 
-    //temporary box(to be replaced with asset when we find one)
-    //size default 128x128
-    dropZoneSprayBottleBG = this.add.image(canvasWidth/2 - 640, canvasHeight/2 - 439, 'dropZoneBG');
-    dropZoneDropperBG = this.add.image(canvasWidth/2 - 490, canvasHeight/2 - 439, 'dropZoneBG');
-    dropZoneMeasuringCylinderBG = this.add.image(canvasWidth/2 - 340, canvasHeight/2 - 439, 'dropZoneBG');
-    dropZoneStirringRodBG = this.add.image(canvasWidth/2 - 190, canvasHeight/2 - 439, 'dropZoneBG');
+    //drop zone background size default 128x128
+    dropZoneSprayBottleBG = this.add.image(middleX - 640, middleY - 439, 'dropZoneBG');
+    dropZoneDropperBG = this.add.image(middleX - 490, middleY - 439, 'dropZoneBG');
+    dropZoneMeasuringCylinderBG = this.add.image(middleX - 340, middleY - 439, 'dropZoneBG');
+    dropZoneStirringRodBG = this.add.image(middleX - 190, middleY - 439, 'dropZoneBG');
 
     //drop zone. set name buat id. samain kaya nama texturenya
     //kenapa di set 128? biar sama dengan asset
-    const sprayBottleZone = this.add.zone(canvasWidth/2 - 640, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('sprayBottle');
-    const dropperZone = this.add.zone(canvasWidth/2 - 490, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('dropper');
-    const measuringCylinderZone = this.add.zone(canvasWidth/2 - 340, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('measuringCylinder');
-    const stirringRodZone = this.add.zone(canvasWidth/2 - 190, canvasHeight/2 - 439, 128, 128).setRectangleDropZone(128, 128).setName('stirringRod');
+    const sprayBottleZone = this.add.zone(middleX - 640, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('sprayBottle');
+    const dropperZone = this.add.zone(middleX - 490, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('dropper');
+    const measuringCylinderZone = this.add.zone(middleX - 340, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('measuringCylinder');
+    const stirringRodZone = this.add.zone(middleX - 190, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('stirringRod');
 
     //text dalam dropZone
-    this.add.text(canvasWidth/2 - 686, canvasHeight/2 - 464, "   Botol\nSemprot", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(canvasWidth/2 - 520, canvasHeight/2 - 464, "Pipet\nTetes", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(canvasWidth/2 - 370, canvasHeight/2 - 464, "Gelas\n Ukur", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(canvasWidth/2 - 243, canvasHeight/2 - 464, "  Batang\nPengaduk", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 686, middleY - 464, "   Botol\nSemprot", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 520, middleY - 464, "Pipet\nTetes", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 370, middleY - 464, "Gelas\n Ukur", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 243, middleY - 464, "  Batang\nPengaduk", {font: "900 20px Helvetica", fill: "#000000"});
 
     //timer 15 detik per objek
     //keperluan debugging
@@ -180,18 +191,18 @@ findingObjects2.create = function () {
 
     //delay dalam ms, jadi 15000 berarti 15 detik = 1x repeat
     //kalo 15 detik lewat, object ga bener, ngurangin energy 20
-    this.findTimer = new Phaser.Time.TimerEvent({ delay: 15000, callback: () => {
-        drainEnergy();
+    findTimer = new Phaser.Time.TimerEvent({ delay: 15000, callback: () => {
+        drainEnergy(20, energyText);
     }, callbackScope: this, loop: true });
 
     //start the timer
-    this.time.addEvent(this.findTimer);
+    // this.time.addEvent(findTimer);
 
     this.input.on('pointerdown', () => {
         //buat pause
-        // this.findTimer.paused = !this.findTimer.paused;
+        // findTimer.paused = !findTimer.paused;
 
-        // this.time.addEvent(this.findTimer);
+        // this.time.addEvent(findTimer);
     });
 
     //on event dragging
@@ -208,28 +219,47 @@ findingObjects2.create = function () {
     this.input.on('drop', function (pointer, gameObject, dropZone) {
         // console.log(dropZone.name);
 
-        //selama gamenya ga kepause
-        // if (!isGamePaused) {
-            
-        // }
-
         //kalo bener
         if (gameObject.texture.key == dropZone.name) {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
 
+            //troublenya multiple file jadi ngaco
+            //findingObject2.js bermasalah
+            //foundObjectnya ngaco
             switch (dropZone.name) {
                 case 'sprayBottle':
+                    //tandain objeknya ketemu
                     sprayBottleFound = foundObject(dropZone.name);
+                    sprayBottle.setVisible(false);
+                    dropZoneSprayBottleBG.setTint(0x08F26E);
+                    //destroy the zone biar yg lain ga dicoba di drag lagi kesini
+                    sprayBottleZone.destroy();
+                    // console.log(sprayBottleFound);
                     break;
                 case 'dropper':
                     dropperFound = foundObject(dropZone.name);
+                    dropper.setVisible(false);
+                    dropZoneDropperBG.setTint(0x08F26E);
+
+                    dropperZone.destroy();
+                    // console.log(dropperFound);
                     break;
                 case 'measuringCylinder':
                     measuringCylinderFound = foundObject(dropZone.name);
+                    measuringCylinder.setVisible(false);
+                    dropZoneMeasuringCylinderBG.setTint(0x08F26E);
+
+                    measuringCylinderZone.destroy();
+                    // console.log(measuringCylinderFound);
                     break;
                 case 'stirringRod':
                     stirringRodFound = foundObject(dropZone.name);
+                    stirringRod.setVisible(false);
+                    dropZoneStirringRodBG.setTint(0x08F26E);
+
+                    stirringRodZone.destroy();
+                    // console.log(stirringRodFound);
                     break;
             }
 
@@ -241,7 +271,7 @@ findingObjects2.create = function () {
 
         //kalo salah
         else {
-            drainEnergy();
+            drainEnergy(20, energyText);
 
             gameObject.x = gameObject.input.dragStartX;
             gameObject.y = gameObject.input.dragStartY;
@@ -258,15 +288,15 @@ findingObjects2.create = function () {
     //beres event dragging
 
     //cari energy flask kalo abis energy
-    energyFlask1 = this.add.image(canvasWidth/2 + 685, canvasHeight/2 - 5, 'energyFlask').setInteractive().setScale(0.3).setName('energyFlask1').setVisible(false);
-    energyFlask2 = this.add.image(canvasWidth/2 - 700, canvasHeight/2 - 229, 'energyFlask').setInteractive().setScale(0.4).setName('energyFlask2').setVisible(false);
+    energyFlask1 = this.add.image(middleX + 685, middleY - 5, 'energyFlask').setInteractive().setScale(0.3).setName('energyFlask1').setVisible(false);
+    energyFlask2 = this.add.image(middleX - 700, middleY - 229, 'energyFlask').setInteractive().setScale(0.4).setName('energyFlask2').setVisible(false);
 
     energyFlask1.on('pointerup', function () {
         energy = 20;
         energyFlask1Found = true;
         outOfEnergy = false;
         lookingForEnergyFlask = false;
-        // isGamePaused = false;
+        // isGameOverRendered = false;
 
         sprayBottle.input.enabled = true;
         dropper.input.enabled = true;
@@ -279,7 +309,7 @@ findingObjects2.create = function () {
 
         energyFlask1.setVisible(false);
         energyText.setText(energy + '%');
-        findingObjects2.findTimer.paused = !findingObjects2.findTimer.paused;
+        findTimer.paused = !findTimer.paused;
     });
 
     energyFlask2.on('pointerup', function () {
@@ -287,7 +317,7 @@ findingObjects2.create = function () {
         energyFlask2Found = true;
         outOfEnergy = false;
         lookingForEnergyFlask = false;
-        // isGamePaused = false;
+        // isGameOverRendered = false;
 
         sprayBottle.input.enabled = true;
         dropper.input.enabled = true;
@@ -300,9 +330,11 @@ findingObjects2.create = function () {
 
         energyFlask2.setVisible(false);
         energyText.setText(energy + '%');
-        findingObjects2.findTimer.paused = !findingObjects2.findTimer.paused;
+        findTimer.paused = !findTimer.paused;
     });
 
+    //alur game
+    showObjective(this, sprayBottle, dropper, measuringCylinder, stirringRod, btnHint);
 }
 
 findingObjects2.update = function () {
@@ -311,7 +343,6 @@ findingObjects2.update = function () {
     //yg enabled cmn energyFlask
     if (energy == 0) {
         // console.log("energimu telah habis!");
-        // isGamePaused = true;
 
         sprayBottle.input.enabled = false;
         dropper.input.enabled = false;
@@ -321,22 +352,26 @@ findingObjects2.update = function () {
         if (!lookingForEnergyFlask) {
             outOfEnergy = true;
         }
+
+        if (energyFlask1Found && energyFlask2Found && !isGameOverRendered) {
+            showGameOver(this);
+        }
     }
 
     //completion
     if (sprayBottleFound && dropperFound && measuringCylinderFound && stirringRodFound) {
         // console.log('horeee beres');
-        // this.findTimer.paused = true;
+        findTimer.paused = true;
         giftBox.setVisible(true);
         book.setVisible(true);
     }
 
     //keperluan debugging
-    timerText.setText(`Event.progress: ${this.findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${this.findTimer.paused}`);
+    timerText.setText(`Event.progress: ${findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${findTimer.paused}`);
 
     //kalo jawabannya bener, timernnya direset
     if (correctAnswer) {
-        this.time.addEvent(this.findTimer);
+        this.time.addEvent(findTimer);
         correctAnswer = false;
     }
 
@@ -355,40 +390,13 @@ findingObjects2.update = function () {
         // console.log('triggered nyari energy flask');
         lookingForEnergyFlask = true;
         //reset timer by adding new timer
-        this.time.addEvent(this.findTimer);
-        this.findTimer.paused = !this.findTimer.paused;
+        this.time.addEvent(findTimer);
+        findTimer.paused = !findTimer.paused;
         //then pause the goddamn timer
         
-        //butuh confirmation buat nyari energy flask
-        if (!energyFlask1Found) {
-            energyFlask1.setVisible(true);
+        //butuh confirmation buat nyari energy flask kalau masih ada energy flask yang belum ditemukan
+        if (!energyFlask1Found || !energyFlask2Found) {
+            showObjectiveOutOfEnergy(this);
         }
-        if (!energyFlask2Found) {
-            energyFlask2.setVisible(true);
-        }
-    }
-
-
-}
-
-function drainEnergy () {
-    energy -= 20;
-    energyText.setText(energy + '%');
-}
-
-function hintObject (objectName) {
-    switch (objectName) {
-        case 'sprayBottle':
-            sprayBottle.setTint(0x08F26E);
-            break;
-        case 'dropper':
-            dropper.setTint(0x08F26E);
-            break;
-        case 'measuringCylinder':
-            measuringCylinder.setTint(0x08F26E);
-            break;
-        case 'stirringRod':
-            stirringRod.setTint(0x08F26E);
-            break;
     }
 }

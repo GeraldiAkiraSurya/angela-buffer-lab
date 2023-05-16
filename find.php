@@ -28,7 +28,7 @@
     <script src="./js/globalvar.js"></script>
     <script src="./js/globalfunction.js"></script>
     <script src="./js/findingObjects1.js"></script>
-    <!-- <script src="./js/findingObjects2.js"></script> -->
+    <script src="./js/findingObjects2.js"></script>
     <script src="./js/missionOne.js"></script>
     
     <script src="./js/selectchara.js"></script>

@@ -29,7 +29,7 @@ function drainEnergy (amount, energyText) {
 }
 
 //pertama kali show objective
-function showObjective(scene, beaker, spatula, testTube, testTubeRack, btnHint) {
+function showObjective(scene, object1, object2, object3, object4, btnHint) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
     var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
@@ -61,7 +61,7 @@ function showObjective(scene, beaker, spatula, testTube, testTubeRack, btnHint) 
         nextBtn.destroy();
         descriptionBox.destroy();
 
-        startFindingObject(scene, this.beaker, this.spatula, this.testTube, this.testTubeRack, this.btnHint);
+        startFindingObject(scene, object1, object2, object3, object4, btnHint);
     });    
 }
 

@@ -161,8 +161,7 @@ findingObjects1.create = function () {
     //halve value
     //940 504
 
-    //temporary box(to be replaced with asset when we find one)
-    //size default 128x128
+    //drop zone background size default 128x128
     dropZoneBeakerBG = this.add.image(middleX - 640, middleY - 439, 'dropZoneBG');
     dropZoneTestTubeBG = this.add.image(middleX - 490, middleY - 439, 'dropZoneBG');
     dropZoneSpatulaBG = this.add.image(middleX - 340, middleY - 439, 'dropZoneBG');
@@ -335,7 +334,7 @@ findingObjects1.create = function () {
     });
 
     //alur game
-    showObjective(this);
+    showObjective(this, beaker, spatula, testTube, testTubeRack, btnHint);
 }
 
 findingObjects1.update = function () {

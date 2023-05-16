@@ -45,11 +45,11 @@ var config = {
     canvasStyle: `display: block; width: 100%; height: 100%;`,
 
     //lengkap
-    scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne]
+    // scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne]
     // scene: [mainMenu, findingObjects1, findingObjects2, selectChara, missionSelection, missionOne]
 
     //development
-    // scene: [findingObjects1]
+    scene: [findingObjects2]
     // scene: [missionOne]
 };
 
