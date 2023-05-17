@@ -1,11 +1,25 @@
+
+
 missionSelection = new Phaser.Scene('MissionSelection');
+
 
 missionSelection.preload = function () {
     this.load.path = './assets/';
     this.load.image('menuBackground', 'scenes/science_lab.jpg');
 }
 
+
 missionSelection.create = function() {
+
+    //--------------------------------------------------------------------------------
+    let jsonMissionProses = missionMenu()
+    //--------------------------------------------------------------------------------
+
+
+
+
+
+
     canvasWidth = game.canvas.width;
     canvasHeight = game.canvas.height;
 
@@ -24,17 +38,17 @@ missionSelection.create = function() {
         // .setStyle(`font-size: 60; color: #000000; font-weight: bold;`)
         .setStroke('#fff', 5)
     
-    let btnMsn1 = new Button((canvasWidth/2) - (2*deltaX), baseY, 'MISI I', this, () => {this.scene.start('Misi1')}, true);
+    let btnMsn1 = new Button((canvasWidth/2) - (2*deltaX), baseY, 'MISI I', this, () => {this.scene.start('Misi1')}, jsonMissionProses["1"]);
     //temporary ke finding objects
     let btnMsn2 = new Button((canvasWidth/2) - (1*deltaX), baseY, 'MISI II', this, () => {
         this.scene.start('FindingObjects1');
         energy = 100;
-    },true);
-    let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('mission1')});
-    let btnMsn2sub2 = new Button((canvasWidth/2) - (1*deltaX), baseY+200, 'SUB-MISI II.2', this, () => {this.scene.start('mission1')});
-    let btnMsn3 = new Button(canvasWidth/2, baseY, 'MISI 3', this, () => {this.scene.start('mission3')});
-    let btnMsn4 = new Button((canvasWidth/2) + (1*deltaX), baseY, 'MISI 4', this, () => {this.scene.start('mission4')});
-    let btnMsn5 = new Button((canvasWidth/2) + (2*deltaX), baseY, 'MISI 5', this, () => {this.scene.start('mission5')});
+    });
+    let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('mission1')},jsonMissionProses["2.1"]);
+    let btnMsn2sub2 = new Button((canvasWidth/2) - (1*deltaX), baseY+200, 'SUB-MISI II.2', this, () => {this.scene.start('mission1')},jsonMissionProses["2.2"]);
+    let btnMsn3 = new Button(canvasWidth/2, baseY, 'MISI 3', this, () => {this.scene.start('mission3')},jsonMissionProses["3"]);
+    let btnMsn4 = new Button((canvasWidth/2) + (1*deltaX), baseY, 'MISI 4', this, () => {this.scene.start('mission4')},jsonMissionProses["4"]);
+    let btnMsn5 = new Button((canvasWidth/2) + (2*deltaX), baseY, 'MISI 5', this, () => {this.scene.start('mission5')},jsonMissionProses["5"]);
 
     console.log(title.style.stroke);
     // console.log(Phaser.GameObjects.Text)
@@ -43,6 +57,11 @@ missionSelection.create = function() {
     // console.log(btnMsn1.strokeThickness);
 }
 
+
+
+
+
+
 class Button {
     constructor(x, y, label, scene, callback, active=false) {
         const button = scene.add.text(x, y, label)
@@ -50,14 +69,15 @@ class Button {
             .setFontSize(30)
             // .setOrigin(10)
             .setPadding(12)
-            .setStyle({ backgroundColor: '#e6e6e6', fill: '#000000' })
-            .setInteractive({ useHandCursor: true })
-            .on('pointerover', () => button.setStyle({ fill: '#0000ff' }))
-            .on('pointerout', () => button.setStyle({ fill: '#000000' }));
+            
+            
 
             if(active){ //untuk mengecek dia udah boleh atau belum
                 button.setStyle({ backgroundColor: '#e6e6e6', fill: '#000000' })
                 button.on('pointerdown', () => callback())
+                button.on('pointerover', () => button.setStyle({ fill: '#0000ff' }))
+                button.on('pointerout', () => button.setStyle({ fill: '#000000' }));
+                button.setInteractive({ useHandCursor: true })
             }else {
                 button.setStyle({ backgroundColor: '#666666', fill: '#000000' })
             }

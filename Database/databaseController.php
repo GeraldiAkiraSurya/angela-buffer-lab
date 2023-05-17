@@ -348,14 +348,15 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
 
             if($mulai==NULL){
                 if($lastSoal || $selesai !=NULL  ){
-                    $selectedMisi[$soal]=TRUE; 
+                    array_push($selectedMisi,TRUE);
                 }else{
-                    $selectedMisi[$soal]=FALSE;
+                    array_push($selectedMisi,FALSE);
+    
                 }
 
 
             }else{
-                $selectedMisi[$soal]=TRUE; 
+                array_push($selectedMisi,TRUE);
             }
 
             array_push($arr[strval($misi)],$selectedMisi);
@@ -369,7 +370,29 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
 
         }
 
-        return json_encode($arr);
+        $arrRes= [];
+
+        foreach($arr as $misi=>$misiSoal){
+            $ok=TRUE;
+
+            foreach($misiSoal as $soal=>$status){
+                if($status[0]){
+                    $arrRes[strval($misi)]=TRUE ;
+                    $ok=FALSE;
+                    break;
+                }
+            }
+
+            if($ok){
+                $arrRes[strval($misi)]=FALSE;
+            }
+
+        }
+
+
+
+
+        return json_encode($arrRes);
 
     }
 

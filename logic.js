@@ -67,12 +67,10 @@ function health(heal,value){
     }
 
 function missionMenu(){ 
-    fetch(`${window.location.origin}${baseUrl}/permisi`,{
-        method: "POST",
-        body: userData,
-        }).then(response => response.json()) .then(response=>{
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
-        });
+    let request = new XMLHttpRequest();
+    var url = `${window.location.origin}${baseUrl}/permisi`;
+    request.open('POST', url, false);
+
+    request.send(userData);
+    return JSON.parse(request.responseText);
     }
