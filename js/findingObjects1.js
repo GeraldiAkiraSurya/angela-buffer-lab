@@ -205,7 +205,7 @@ findingObjects1.create = function () {
         // this.time.addEvent(findTimer);
     });
 
-    //on event dragging
+    //mulai event dragging
     this.input.on('dragstart', function (pointer, gameObject) {
         this.children.bringToTop(gameObject);
         // console.log(gameObject.texture.key);

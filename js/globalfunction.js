@@ -134,6 +134,43 @@ function showGameOver(scene) {
     });    
 }
 
+//buat pop up
+// function showPopUp(scene, object1, object2, object3, object4, btnHint) {
+//     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
+//     var descBoxTopX = middleX - (descriptionBox.width / 2);
+//     var descBoxTopY = middleY - (descriptionBox.height / 2);
+//     var title = scene.add.text(middleX, descBoxTopY + 100, "FINDING OBJECTS MINIGAME")
+//         .setOrigin(0.5)
+//         .setFontSize(40);
+
+//     var text = 
+// `[b]OBJECTIVE:[/b] TEMUKAN OBJEK DAN PINDAHKAN KE BOX YANG SESUAI
+
+// [b]BATAS WAKTU:[/b] 15 DETIK PER OBJEK
+
+// [b]HADIAH:[/b] BUKU RAMUAN OBAT
+
+// [b]JIKA GAGAL:[/b] MINIGAME DIULANG DARI AWAL`;
+
+//     var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+250, text, {
+//         fontSize: '30px',
+//         align: 'left',
+//         wrap: {
+//             mode: 'word',
+//             width: descriptionBox.width-100
+//         },
+//     });
+
+//     var nextBtn = createNextBtn(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'LANJUT', () => {
+//         title.destroy();
+//         missionDesc.destroy();
+//         nextBtn.destroy();
+//         descriptionBox.destroy();
+
+//         startFindingObject(scene, object1, object2, object3, object4, btnHint);
+//     });    
+// }
+
 function startFindingObject(scene, object1, object2, object3, object4, btnHint) {
     scene.time.addEvent(findTimer);
     object1.setVisible(true);
