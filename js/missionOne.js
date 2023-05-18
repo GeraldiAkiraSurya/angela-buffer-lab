@@ -19,330 +19,304 @@ missionOne.preload = function () {
     this.load.image('nextPage', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/assets/images/arrow-down-left.png');
 }
 
-// var btnStart;
-// var btnOptions;
+// GLOBAL VARIABLE pada file ini
 
-var textBox;
-
+let middleX;
+let middleY;
 const COLOR_PRIMARY = 0x2E4E34; //2E4E34  //0x4e342e
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
-var content;
+let gameObjects = {};
+let missionBoxProps = {};
+let choices = [];
+let selections = [];
+let sequence = 0;
 
-//yg pertama bisa langsung enter
-var arrayOfContent = [
-    'Allison adalah seorang profesor yang ditugaskan di Laboratorium X untuk mencari obat dari penyakit yang tidak diketahui asal-usulnya.',
-    `Untuk itu Prof. Allison bekerjasama dengan ilmuan kimia ${playerName} untuk melakukan penelitian untuk mengumpulkan ramuan obat yang sedang dicari.`,
-    'Seluruh ramuan obat dapat dikumpulkan setelah ilmuan kimia menyelesaikan tantangan pada setiap misi.',
-    `Prof. Allison: ${playerName}, Anda harus mengambil buku ramuan obat yang tertinggal di laboratorium pusat.`,
-    `${playerName}: Siap meluncur prof...`,
-    'Prof. Allison: Sebelum berangkat Anda harus menyelesaikan tantangan di laboratorium X, tiap tantangan yang dilewati akan menambah energi Anda untuk memperoleh buku ramuan obat...',
-    `${playerName}: Penemuan ini akan menjadi gebrakan hebat di dunia penelitian...`,
-    'Prof. Allison: Semoga berhasil!!!'
-];
-var lineCounter;
+/**
+ * Isi variable choicesText dengan pilihan-pilihan jawaban untuk suatu soal.
+ * Key pada choicesText adalah nomor pertanyaan, dan value nya merupakan array yang berisi text-text pilihan jawaban.
+ */
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+let youtubeId = {
+    intro: 'qz1XzCmdHAg',
+    problem: 'EJZ8B7NOy2k',
+};
 
-var middleX;
-var middleY;
+let choicesText = {
+    1: [
+        "pH pada semua system/ campuran berubah drastis",
+        "pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan",
+        "pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan",
+        "pH pada larutan asam asetat 0,1 M berubah drastis",
+        "pH pada larutan natrium asetat 0,1 M berubah drastis"
+    ],
+    2: [
+        "15 mL CH3COOH 0,1 M + 15 mL CH3COONa 0,1 M",
+        "15 mL HCl 0,1 M + 15 mL NaCl 0,1 M",
+        "30 mL CH3COOH 0,1 M ",
+        "30 mL CH3COONa 0,1 M"
+    ],
+};
 
-missionOne.create = function () {
-    var mode = 'misi'; // kalo diisi 'misi' bakal skip dialog
-    // console.log(game.canvas.width, game.canvas.height);
-    //x 1879 y 1008
+let correctAnswers = {
+    1: [0,1,0,1,1],
+    2: [1,0,0,0]
+};
+
+let mode = 'normal'; // kalo diisi 'misi' bakal skip dialog
+
+missionOne.create = function() {
+    // scene = this;
 
     canvasWidth = game.canvas.width;
     canvasHeight = game.canvas.height;
     middleX = this.cameras.main.width / 2;
     middleY = this.cameras.main.height / 2;
 
-    let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'menuBackground');
-    let scaleX = this.cameras.main.width / image.width;
-    let scaleY = this.cameras.main.height / image.height;
-    let scale = Math.max(scaleX, scaleY);
-    image.setScale(scale).setScrollFactor(0);
-    //background main menu
-    // this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
+    gameObjects.backgroundImage = createBackgroundImage(this, 'menuBackground');
 
-    //background text box
-    // this.add.image(canvasWidth/2, canvasHeight/2 + 320, 'textBoxBackground').setScale(0.8, 0.6);
+    let dialogs = [
+        "Allison adalah seorang profesor yang ditugaskan di Laboratorium X untuk mencari obat dari penyakit yang tidak diketahui asal-usulnya.",
+        `Untuk itu Prof. Allison bekerjasama dengan ilmuan kimia ${playerName} untuk melakukan penelitian untuk mengumpulkan ramuan obat yang sedang dicari.`,
+        "Seluruh ramuan obat dapat dikumpulkan setelah ilmuan kimia menyelesaikan tantangan pada setiap misi.",
+        `Prof. Allison: ${playerName}, Anda harus mengambil buku ramuan obat yang tertinggal di laboratorium pusat.`,
+        `${playerName}: Siap meluncur prof...`,
+        "Prof. Allison: Sebelum berangkat Anda harus menyelesaikan tantangan di laboratorium X, tiap tantangan yang dilewati akan menambah energi Anda untuk memperoleh buku ramuan obat...",
+        `${playerName}: Penemuan ini akan menjadi gebrakan hebat di dunia penelitian...`,
+        "Prof. Allison: Semoga berhasil!!!"
+    ];
 
-    //buttons
-
-    // this.tweens.add({
-    //     targets: [btnStart],
-    //     duration: 1000,
-    //     x: canvasWidth/2,
-    //     scaleX: 2,
-    //     scaleY: 2,
-    //     ease: 'Bounce.easeIn'
-    // });
-
-    // createTextBox(this, canvasWidth/2, canvasHeight/2 + 320, {
-    //     wrapWidth: 500,
-    // })
-    // .start(content, 50);
-
-    //awal mula text
-    content = arrayOfContent[0];
-    //penghitung baris keberapa
-    lineCounter = 1;
-    // console.log(content);
-    textBox = createTextBox(this, canvasWidth/2 - 600, canvasHeight/2 + 50, {
-        wrapWidth: 900,
-        fixedWidth: 900,
-        fixedHeight: 250,
-    })
-    .start(content, 50); // yang integer tuh speed muncul speednya
-
-    // var exitBtn = this.add.text(50, 50, 'EXIT')
-    //     .setOrigin(0)
-    //     .setFontSize(30)
-    //     // .setOrigin(10)
-    //     .setPadding(12)
-    //     .setStyle({ backgroundColor: '#000000', fill: '#ffffff' })
-    //     .setInteractive({ useHandCursor: true })
-    //     .on('pointerover', () => exitBtn.setStyle({ fill: '#0000ff' }))
-    //     .on('pointerout', () => exitBtn.setStyle({ fill: '#ffffff' }))
-    //     .on('pointerdown', () => this.scene.start('MainMenu'));
-
-    var exitBtn = createExitBtn(this, 50, 50);
-
-    var isDialogScene = true;
-    //input
-    
-    this.input.on('pointerdown', () => {
-
-        
-
-        if (isDialogScene) {
-            //kalo lg typing, beresin dlu (munculin smua)
-            // console.log(Phaser.GameObjects.TextStyle);
-            // console.log(textBox.isTyping);
-
-            if (textBox.isTyping) {
-                textBox.stop(true);
-                console.log('lagi ngetik: ' + textBox.isTyping);
-
-                //ngatur panah next
-                var nextIcon = textBox.getElement('action').setVisible(true);
-                textBox.resetChildVisibleState(nextIcon);
-
-            }
-            //kalo ga lagi typing, gas ae masbro
-            else {
-                if (mode == 'misi') {
-                    isDialogScene = false;
-                    textBox.destroy();
-                    image.destroy();
-                    startMission(this, exitBtn);
-                }
-
-                //ngatur panah next
-                var nextIcon = textBox.getElement('action').setVisible(false);
-                textBox.resetChildVisibleState(nextIcon);
-
-                //cek page terakhir
-                //kalo udah halaman terakhir dari current line, bakal next line
-                //soalnya kalo panjang, bakal displit per berapa halaman tergantung maxLine
-                if (textBox.isLastPage) {
-                    console.log('akhir page');
-                    console.log(lineCounter);
-        
-                    //pergantian line
-                    if (lineCounter < arrayOfContent.length) {
-                        content = arrayOfContent[lineCounter];
-                        // console.log('next line: ' + content); 
-                        lineCounter += 1;
-            
-                        textBox.start(content);
-                    }
-        
-                    // return;
-
-                    // kalo udah dialog paling terakhir bakal hapus textbox nya
-                    if(lineCounter >= arrayOfContent.length) {
-                        isDialogScene = false;
-                        textBox.destroy();
-                        image.destroy();
-                        // askStartMission(this);
-                        startMission(this, exitBtn);
-                    }
-                }
-                else {
-                    console.log('bukan akhir page cuy');
-                    textBox.typeNextPage();
-                }
-            }
-        }
-        // console.log('clicked!');
-    }, this);
-    // this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
-
+    // gameObjects.textBox = createDialog(dialogs);
+    loadSequence(this, 0);
 }
 
-missionOne.update = function () {
+missionOne.update = function() {
     
 }
 
-function startMission(scene, exitBtn) {
-    // var middleX = scene.cameras.main.width / 2;
-    // var middleY = scene.cameras.main.height / 2;
-    var image = scene.add.image(middleX, middleY, 'missionBackground');
-    var scaleX = scene.cameras.main.width / image.width;
-    var scaleY = scene.cameras.main.height / image.height;
-    var scale = Math.max(scaleX, scaleY);
-    image.setScale(scale).setScrollFactor(0);
+function loadSequence(scene, sequence) {
+    console.log("Start sequence " + sequence);
 
-    scene.children.bringToTop(exitBtn);
+    console.log(gameObjects);
+    destroyAllGameObjects();
+    createMissionBackgroundObjects(scene, 'missionBackground');
 
-    var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
-    var descBoxTopX = middleX - (descriptionBox.width / 2);
-    var descBoxTopY = middleY - (descriptionBox.height / 2);
-    var title = scene.add.text(middleX, descBoxTopY + 50, "MISI I")
-        .setOrigin(0.5)
-        .setFontSize(40);
+    if (sequence == 0) { // Sequence dialog
+        destroyAllGameObjects();
+        gameObjects.backgroundImage = createBackgroundImage(scene, 'menuBackground');
+        let dialogs = [
+            "Allison adalah seorang profesor yang ditugaskan di Laboratorium X untuk mencari obat dari penyakit yang tidak diketahui asal-usulnya.",
+            `Untuk itu Prof. Allison bekerjasama dengan ilmuan kimia ${playerName} untuk melakukan penelitian untuk mengumpulkan ramuan obat yang sedang dicari.`,
+            "Seluruh ramuan obat dapat dikumpulkan setelah ilmuan kimia menyelesaikan tantangan pada setiap misi.",
+            `Prof. Allison: ${playerName}, Anda harus mengambil buku ramuan obat yang tertinggal di laboratorium pusat.`,
+            `${playerName}: Siap meluncur prof...`,
+            "Prof. Allison: Sebelum berangkat Anda harus menyelesaikan tantangan di laboratorium X, tiap tantangan yang dilewati akan menambah energi Anda untuk memperoleh buku ramuan obat...",
+            `${playerName}: Penemuan ini akan menjadi gebrakan hebat di dunia penelitian...`,
+            "Prof. Allison: Semoga berhasil!!!"
+        ];
+        createDialog(scene, dialogs, () => {loadSequence(scene, 1)});
+    } else if (sequence == 1) { // Sequence yang muncul prompt mau lanjut atau tidak
+        // destroyAllGameObjects();
+        createMissionBackgroundObjects(scene, 'menuBackground');
+        gameObjects.missionBox.setSize(scene.cameras.main.width * 3 / 4, scene.cameras.main.height * 3 / 4);
+        let text = "Anda dapat memulai penelitian di laboratorium X!";
+        gameObjects.announcement = createAnnouncementText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence+1);
+        }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
+        gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
-    var text = 
-`[b]SYARAT PENYELESAIAN KHUSUS:[/b] AMATILAH VIDEO DENGAN SEKSAMA DAN PILIHLAH JAWABAN YANG BENAR DARI PERTANYAAN YANG DIBERIKAN
+    } else if (sequence == 2) { // Sequence deskripsi misi
 
-[b]BATAS WAKTU:[/b] TIDAK ADA
+        gameObjects.title = scene.add.text(middleX, missionBoxProps.lowestY + 50, "MISI I")
+            .setOrigin(0.5)
+            .setFontSize(40);
+        let text = "[b]SYARAT PENYELESAIAN KHUSUS:[/b] AMATILAH VIDEO DENGAN SEKSAMA DAN PILIHLAH JAWABAN YANG BENAR DARI PERTANYAAN YANG DIBERIKAN\n\n\
+[b]BATAS WAKTU:[/b] TIDAK ADA\n\n\
+[b]HADIAH:[/b] ENERGI DAN BUKU RAMUAN OBAT\n\n\
+[b]JIKA GAGAL:[/b] KEMBALI KE AWAL\n";
+        gameObjects.missionDesc = createDescText(scene, text);
 
-[b]HADIAH:[/b] ENERGI DAN BUKU RAMUAN OBAT
+        // Button untuk load sequence selanjutnya
+        gameObjects.nextBtn = createNextButton(scene, 'TERIMA', () => {
+            loadSequence(scene, sequence+1);
+        });
 
-[b]JIKA GAGAL:[/b] KEMBALI KE AWAL`;
+    } else if (sequence == 3) { // Sequence youtube vid
 
-    // var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+100, text, {
-    //     fontSize: '30px',
-    //     align: 'left',
-    //     wrap: {
-    //         mode: 'word',
-    //         width: 700
-    //     },
-    // });
+        gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['intro']);
+        // Button untuk load sequence selanjutnya
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence+1);
+        });
 
-    var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+100, text, {
-        fontSize: '30px',
-        align: 'left',
-        wrap: {
-            mode: 'word',
-            width: descriptionBox.width-100
-        },
-    });
+    } else if (sequence == 4) { // Sequence youtube vid
 
-    var youtubeId = {
-        intro: 'qz1XzCmdHAg',
-        problem: 'EJZ8B7NOy2k'
+        gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+        // Button untuk load sequence selanjutnya
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence+1);
+        });
+
+    } else if (sequence == 5) { // Sequence soal pertanyaan
+
+        let text = 'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?';
+        gameObjects.question = createDescText(scene, text);
+        // Button untuk load sequence selanjutnya
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence+1);
+        });
+
+    } else if (sequence == 6) { // Sequence milih jawaban
+
+        let questionNumber = 1; // ISI DENGAN NOMOR PERTANYAAN!
+        createChoices(scene, questionNumber);
+        gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
+            console.log("Final answer: \n" + selections);
+            if (checkAnswer(questionNumber) == true) {
+                // Kalo jawaban bener, langsung load sequence selanjutnya
+                loadSequence(scene, sequence+1);
+            } else {
+                // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence(scene, sequence-1);
+                });
+            }
+        });
+        
+    } else if (sequence == 7) { // Sequence jawaban bener
+
+        let text = "Bagus sekali, pilihan Anda benar.";
+        gameObjects.announcement = createAnnouncementText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence+1);
+        }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
+        gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
+
+    } else if (sequence == 8) { // Sequence pertanyaan
+        
+        let text = 'Nah..berdasarkan perubahan pH yang terjadi pada larutan – larutan dalam video, manakah sistem yang dapat mempertahankan pHnya setelah penambahan 5 tetes asam atau basa kuat?';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence+1);
+        });
+
+    } else if (sequence == 9) { // Sequence milih jawaban
+
+        let questionNumber = 2; // ISI DENGAN NOMOR PERTANYAAN!
+        createChoices(scene, questionNumber);
+        gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
+            console.log("Final answer: \n" + selections);
+            if (checkAnswer(questionNumber) == true) {
+                // Kalo jawaban bener, langsung load sequence selanjutnya
+                loadSequence(scene, sequence+1);
+            } else {
+                // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence(sequence-1);
+                });
+            }
+        });
+
+    } else if (sequence == 10) { // Sequence jawaban bener
+
+        let text = "Bagus sekali, pilihan Anda benar."
+        gameObjects.announcement = createAnnouncementText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence+1);
+        }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
+        gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
+
+    } else if (sequence == 11) {
+
+        
+
     }
-
-    var youtubePlayer;
-    // var sequence = 0;
-    var state = {sequence: 0, questionNumber: 1, choices: [], selections: []};
-    // var {choices, selections} = createChoices(scene, questionNumber, descriptionBox);
-    // var state = createChoices(scene, questionNumber, descriptionBox);
-    // var state = createChoices(scene, state, descriptionBox);
-
-    var nextBtn = createNextBtn(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'TERIMA', () => {
-
-        console.log("Sequence:" + state.sequence);
-        console.log(state.questionNumber);
-        console.log(state.choices);
-        console.log(state.selections);
-
-        switch (state.sequence) {
-            case 0:
-                missionDesc.setVisible(false);
-                youtubePlayer = showYoutubeVideo(scene, middleX, middleY, youtubeId['intro']); //munculin video alat dan bahan
-                nextBtn.setText('LANJUT');
-                break;
-            case 1:
-                // youtubePlayer.load(youtubeId['problem'], false);
-                youtubePlayer.destroy();
-                youtubePlayer = showYoutubeVideo(scene, middleX, middleY, youtubeId['problem']);
-                break;
-            case 2:
-                youtubePlayer.destroy();
-                //text = getProblemText(0);
-                text = 'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?';
-                missionDesc.setText(text);
-                missionDesc.setVisible(true);
-                break;
-            case 3:
-                missionDesc.setVisible(false);
-                nextBtn.setText('KONFIRMASI');
-                // console.log(state.selections);
-                // selections = showChoices(choices);
-                createChoices(scene, state, descriptionBox);
-                // showChoices(state.choices);
-                // console.log(selections);
-                break;
-            case 4:
-                var isAnswer = checkAnswer(state);
-                if (isAnswer == true) {
-                    showRightScreen(scene, state, nextBtn);
-                }
-                break;
-        }
-
-        if (state.sequence != 4) {
-            state.sequence += 1;
-        }
-    });
-    
 }
 
-function showYoutubeVideo(scene, middleX, middleY, videoId) {
+function createMissionBackgroundObjects(scene, imageName) {
+    // bikin background image
+    gameObjects.backgroundImage = createBackgroundImage(scene, imageName);
+
+    // bikin exit button
+    gameObjects.exitBtn = createExitButton(scene, 100, 50);
+
+    // bikin kotak abu transparan
+    gameObjects.missionBox = createMissionBox(scene);
+    missionBoxProps = {
+        width: gameObjects.missionBox.width, 
+        height: gameObjects.missionBox.height, 
+        lowestX: middleX - (gameObjects.missionBox.width / 2), 
+        lowestY: middleY - (gameObjects.missionBox.height / 2)
+    };
+
+    // console.log(missionBoxProps);
+}
+
+function destroyAllGameObjects() {
+    let keys = Object.keys(gameObjects);
+    // console.log("List of keys:");
+    // console.log(keys);
+    keys.forEach((key, index) => {
+        // console.log("Destroying " + key);
+        gameObjects[key].destroy();
+        // delete gameObjects[key];
+    });
+}
+
+function createYoutubeVideo(scene, videoId) {
     return scene.add.rexYoutubePlayer(middleX, middleY, 600, 450, {
         videoId: videoId,
         autoPlay: false
     });
 }
 
-function createChoices(scene, state, descriptionBox) {
-    // var middleX = scene.cameras.main.width / 2;
-    // var middleY = scene.cameras.main.height / 2;
-    var descBoxTopX = middleX - (descriptionBox.width / 2);
-    var descBoxTopY = middleY - (descriptionBox.height / 2);
+function createChoices(scene, questionNumber) {
+    // buat nyimpen si tombol pilihan jawaban
+    choices = [];
+    console.log("Choices Resetted!");
+    // buat nyimpen tombol jawaban mana aja yg dipilih, contoh isinya nanti kayak [1,1,0,0,0]
+    selections = new Array(choicesText[questionNumber].length).fill(0); 
+    console.log("choicesText[questionNumber].length: " + choicesText[questionNumber].length);
+    console.log("Selections resetted!");
+    console.log("Current selections:\n" + selections);
 
-    if (state.questionNumber == 1) {
-        var choicesText = [
-            "pH pada semua system/ campuran berubah drastis",
-            "pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan",
-            "pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan",
-            "pH pada larutan asam asetat 0,1 M berubah drastis",
-            "pH pada larutan natrium asetat 0,1 M berubah drastis"
-        ];
-        // buat nyimpen si tombol pilihan jawaban
-        state.choices = [];
-        // buat nyimpen tombol jawaban mana aja yg dipilih, contoh isinya nanti kayak [1,1,0,0,0]
-        state.selections = new Array(choicesText.length).fill(0); 
-
-        var deltaY = 80; // jarak antar masing-masing tombol jawaban
-        
-        for (let i = 0; i < choicesText.length; i++) {
-            // var choice = createChoiceBtn(scene, middleX, descBoxTopY+150+(deltaY*i), choicesText[i]);
-            var choice = createChoiceBtn(scene, middleX, descBoxTopY+150+(deltaY*i), choicesText[i], descriptionBox);
-            state.choices.push(choice);
-            // choice.setVisible(false);
-            state.choices[i].on('pointerdown', () => {
-                if (state.selections[i] == 0) {
-                    state.choices[i].setStyle({ backgroundColor: "#FFBF00" });
-                    state.selections[i] = 1;
-                } else if (state.selections[i] == 1) {
-                    state.choices[i].setStyle({ backgroundColor: "#e6e6e6" });
-                    state.selections[i] = 0;
-                }
-                console.log("You clicked choice " + i);
-                // console.log(selections);
-            });
-            // var selections.append(0);
-        }
-
-        // Object.assign(state, {choices: choices, selections: selections});
-        return state;
+    let deltaY = 80; // jarak antar masing-masing tombol jawaban
+    
+    for (let i = 0; i < choicesText[questionNumber].length; i++) {
+        // var choice = createChoiceButton(scene, middleX, descBoxTopY+150+(deltaY*i), choicesText[i]);
+        let choice = createChoiceButton(scene, middleX, missionBoxProps.lowestY+150+(deltaY*i), choicesText[questionNumber][i], missionBoxProps);
+        // console.log(choice);
+        choices.push(choice);
+        // choice.setVisible(false);
+        choices[i].on('pointerdown', () => {
+            if (selections[i] == 0) {
+                choices[i].setStyle({ backgroundColor: "#FFBF00" });
+                selections[i] = 1;
+            } else if (selections[i] == 1) {
+                choices[i].setStyle({ backgroundColor: "#e6e6e6" });
+                selections[i] = 0;
+            }
+            console.log("You clicked choice " + i);
+            console.log("Selections Updated!");
+            console.log("Current selections:\n" + selections);
+            // console.log(selections);
+        });
+        // var selections.append(0);
     }
+
+    // Object.assign(state, {choices: choices, selections: selections});
+}
+
+function checkAnswer(questionNumber) {
+    return arraysEqual(selections, correctAnswers[questionNumber]);
 }
 
 function showChoices(choices) {
@@ -351,90 +325,93 @@ function showChoices(choices) {
     }
 }
 
-/*
-function showQuestion(scene, questionNumber, descriptionBox) {
-    var middleX = scene.cameras.main.width / 2;
-    var middleY = scene.cameras.main.height / 2;
-    var descBoxTopX = middleX - (descriptionBox.width / 2);
-    var descBoxTopY = middleY - (descriptionBox.height / 2);
+function createDialog(scene, dialogs, callback) {
+    //awal mula text
+    let content = dialogs[0];
+    //penghitung baris keberapa
+    let lineCounter = 1;
+    // console.log(content);
+    gameObjects.textBox = createTextBox(scene, middleX, middleY + 200, {
+        wrapWidth: 900,
+        fixedWidth: 900,
+        fixedHeight: 250,
+    })
+    .start(content, 50); // yang integer tuh speed muncul speednya
 
-    if (questionNumber == 0) {
-        var choicesText = [
-            "pH pada semua system/ campuran berubah drastis",
-            "pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan",
-            "pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan",
-            "pH pada larutan asam asetat 0,1 M berubah drastis",
-            "pH pada larutan natrium asetat 0,1 M berubah drastis"
-        ];
-        var choices = [];
-        var selections = new Array(choicesText.length).fill(0); // pilihan jawaban yang dipilih misal [0,1,1,0,1]
+    // console.log(gameObjects.textBox);
 
-        console.log(selections);
+    // gameObjects.exitBtn  = createExitButton(scene, 50, 50);
 
-        var deltaY = 80;
-        // var choice1 = createChoiceBtn(scene, middleX, middleY-(deltaY*2), 'pH pada semua system/ campuran berubah drastis');
-        // var choice2 = createChoiceBtn(scene, middleX, middleY-(deltaY*1), 'pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan');
-        // var choice3 = createChoiceBtn(scene, middleX, middleY, 'pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan');
-        // var choice4 = createChoiceBtn(scene, middleX, middleY+(deltaY*1), 'pH pada larutan asam asetat 0,1 M berubah drastis');
-        // var choice5 = createChoiceBtn(scene, middleX, middleY+(deltaY*2), 'pH pada larutan natrium asetat 0,1 M berubah drastis');
-        
-        for (let i = 0; i < choicesText.length; i++) {
-            // var choice = createChoiceBtn(scene, middleX, descBoxTopY+150+(deltaY*i), choicesText[i]);
-            var choice = createChoiceBtn(scene, middleX, descBoxTopY+150+(deltaY*i), choicesText[i], descriptionBox);
-            choices.push(choice);
-            choices[i].on('pointerdown', () => {
-                if (selections[i] == 0) {
-                    choices[i].setStyle({ backgroundColor: "#FFBF00" });
-                    selections[i] = 1;
-                } else if (selections[i] == 1) {
-                    choices[i].setStyle({ backgroundColor: "#e6e6e6" });
-                    selections[i] = 0;
+    let isDialogScene = true;
+    
+    scene.input.on('pointerdown', () => {
+
+        if (isDialogScene) {
+
+            //kalo lg typing, beresin dlu (munculin smua)
+
+            if (gameObjects.textBox.isTyping) {
+                gameObjects.textBox.stop(true);
+                console.log('lagi ngetik: ' + gameObjects.textBox.isTyping);
+
+                //ngatur panah next
+                let nextIcon = gameObjects.textBox.getElement('action').setVisible(true);
+                gameObjects.textBox.resetChildVisibleState(nextIcon);
+
+            }
+            //kalo ga lagi typing, gas ae masbro
+            else {
+                // KALO PENGEN SKIP DIALOG, Isi global variable mode dengan 'misi'
+                // Nanti program bakal munculin dialog pertama doang terus jalanin callback
+                if (mode == 'misi') {
+                    callback();
+                    isDialogScene = false;
                 }
-                console.log("You clicked choice " + i);
-                console.log(selections);
-            });
-            // var selections.append(0);
+
+                //ngatur panah next
+                let nextIcon = gameObjects.textBox.getElement('action').setVisible(false);
+                gameObjects.textBox.resetChildVisibleState(nextIcon);
+
+                //cek page terakhir
+                //kalo udah halaman terakhir dari current line, bakal next line
+                //soalnya kalo panjang, bakal displit per berapa halaman tergantung maxLine
+                if (gameObjects.textBox.isLastPage) {
+                    console.log('akhir page');
+                    console.log(lineCounter);
+        
+                    //pergantian line
+                    if (lineCounter < dialogs.length) {
+                        content = dialogs[lineCounter];
+                        // console.log('next line: ' + content); 
+                        lineCounter += 1;
+            
+                        gameObjects.textBox.start(content);
+                    }
+
+                    // kalo udah dialog paling terakhir bakal ngejalanin perintah callback
+                    if(lineCounter >= dialogs.length) {
+                        callback();
+                        isDialogScene = false;
+                    }
+                }
+                else {
+                    console.log('bukan akhir page cuy');
+                    gameObjects.textBox.typeNextPage();
+                }
+            }
         }
-
-        return selections;
-    }
-}
-*/
-
-function checkAnswer(state) {
-    console.log("Final Answer: ");
-    console.log(state.selections);
-
-    var correctAnswer = [];
-    if (state.questionNumber == 1) {
-        correctAnswer = [0,1,0,1,1];
-        return arraysEqual(state.selections, correctAnswer);
-        // console.log(arraysEqual(state.selections,correctAnswer));
-        // if (arraysEqual(state.selections, correctAnswer)) {
-
-        // }
-    }
+        // console.log('clicked!');
+    }, scene);
 }
 
-function showRightScreen(scene, state, nextBtn) {
-    for (let i = 0; i < state.choices.length; i++) {
-        state.choices[i].setVisible(false);
-    }
+function createTextBox(scene, x, y, config) {
+    // var wrapWidth = GetValue(config, 'wrapWidth', 0);
+    // var fixedWidth = GetValue(config, 'fixedWidth', 0);
+    // var fixedHeight = GetValue(config, 'fixedHeight', 0);
 
-    nextBtn.x = middleX - 150;
-    nextBtn.y = middleY + 100;
-    nextBtn.setText('LANJUT');
-
-    var exitBtn = createNextBtn(scene, middleX+150, middleY+100, 'TIDAK', () => {scene.scene.start('MissionSelection')});
-    var text = scene.add.text(middleX, middleY - 100, 'Bagus sekali, pilihan Anda benar.')
-        .setOrigin(0.5)
-        .setFontSize('30px');
-}
-
-function createTextBox (scene, x, y, config) {
-    var wrapWidth = GetValue(config, 'wrapWidth', 0);
-    var fixedWidth = GetValue(config, 'fixedWidth', 0);
-    var fixedHeight = GetValue(config, 'fixedHeight', 0);
+    var wrapWidth = config.wrapWidth;
+    var fixedWidth = config.fixedWidth;
+    var fixedHeight = config.fixedHeight;
     var textBox = scene.rexUI.add.textBox({
             x: x,
             y: y,
@@ -458,7 +435,7 @@ function createTextBox (scene, x, y, config) {
                 text: 10,
             }
         })
-        .setOrigin(0)
+        .setOrigin(0.5)
         .layout();
 
     //kayanya gaperlu dicek dari funct  ion textboxtnya doang.
@@ -498,11 +475,7 @@ function createTextBox (scene, x, y, config) {
     return textBox;
 }
 
-function createMissionScene(scene) {
-    
-}
-
-function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {
+function getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight) {
     return scene.add.text(0, 0, '', {
             fontSize: '20px',
             wordWrap: {
@@ -514,7 +487,7 @@ function getBuiltInText (scene, wrapWidth, fixedWidth, fixedHeight) {
         .setFixedSize(fixedWidth, fixedHeight);
 }
 
-function getBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
+function getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight) {
     return scene.rexUI.add.BBCodeText(0, 0, '', {
         fixedWidth: fixedWidth,
         fixedHeight: fixedHeight,
@@ -529,9 +502,69 @@ function getBBcodeText (scene, wrapWidth, fixedWidth, fixedHeight) {
     })
 }
 
-function createExitBtn(scene, x, y) {
-    var button = scene.add.text(x, y, 'EXIT')
-        .setOrigin(0)
+function createBackgroundImage(scene, imageName) {
+    console.log(middleX);
+    console.log(middleY);
+    console.log(imageName);
+
+    let backgroundImage = scene.add.image(middleX, middleY, imageName);
+    let scaleX = scene.cameras.main.width / backgroundImage.width;
+    let scaleY = scene.cameras.main.height / backgroundImage.height;
+    let scale = Math.max(scaleX, scaleY);
+    backgroundImage.setScale(scale).setScrollFactor(0);
+
+    return backgroundImage;
+}
+
+function createMissionBox(scene) {
+    let grayRectangle = scene.add.rectangle(
+        scene.cameras.main.width / 2, 
+        scene.cameras.main.height / 2, 
+        scene.cameras.main.width / 2, 
+        scene.cameras.main.height * 3 / 4, 
+        0x000000, 
+        0.7
+    );
+
+    return grayRectangle;
+}
+
+function createDescText(scene, text, x = middleX-missionBoxProps.lowestX+50, y = missionBoxProps.lowestY+100) {
+    let t = scene.add.rexBBCodeText(x, y, text, {
+        fontSize: '30px',
+        align: 'left',
+        wrap: {
+            mode: 'word',
+            width: gameObjects.missionBox.width-100
+        },
+    });
+
+    return t;
+}
+
+function createNextButton(
+        scene, 
+        label, 
+        callback, 
+        x = middleX, 
+        y = middleY+(missionBoxProps.height/2)-50
+    ) {
+    let button = scene.add.text(x, y, label)
+        .setOrigin(0.5)
+        .setFontSize('30px')
+        .setPadding(12)
+        .setStyle({ backgroundColor: '#e6e6e6', color: '#000000' })
+        .setInteractive({ useHandCursor: true })
+        .on('pointerover', () => button.setStyle({ color: '#0000ff' }))
+        .on('pointerout', () => button.setStyle({ color: '#000000' }))
+        .on('pointerdown', () => callback());
+
+    return button;
+}
+
+function createExitButton(scene, x, y) {
+    let button = scene.add.text(x, y, 'KELUAR')
+        .setOrigin(0.5)
         .setFontSize(30)
         // .setOrigin(10)
         .setPadding(12)
@@ -544,21 +577,7 @@ function createExitBtn(scene, x, y) {
     return button;
 }
 
-function createNextBtn(scene, x, y, label, callback) {
-    var button = scene.add.text(x, y, label)
-        .setOrigin(0.5)
-        .setFontSize('30px')
-        .setPadding(12)
-        .setStyle({ backgroundColor: '#e6e6e6', color: '#000000' })
-        .setInteractive({ useHandCursor: true })
-        .on('pointerover', () => button.setStyle({ color: '#0000ff' }))
-        .on('pointerout', () => button.setStyle({ color: '#000000' }))
-        .on('pointerdown', () => callback());
-
-    return button
-}
-
-function createChoiceBtn(scene, x, y, label, container) {
+function createChoiceButton(scene, x, y, label, container) {
     var button = scene.add.rexBBCodeText({
         x: x,
         y: y,
@@ -588,6 +607,17 @@ function createChoiceBtn(scene, x, y, label, container) {
     .on('pointerout', () => button.setStyle({ color: '#000000' }));
 
     return button;
+}
+
+function createAnnouncementText(scene, text) {
+    let t = scene.add.text(middleX, middleY, text)
+        .setOrigin(0.5)
+        .setFontSize('30px');
+
+    console.log("Ini t: ");
+    console.log(t);
+
+    return t;
 }
 
 function arraysEqual(a, b) {
