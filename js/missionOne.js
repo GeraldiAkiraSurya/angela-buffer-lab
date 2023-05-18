@@ -33,15 +33,17 @@ let choices = [];
 let selections = [];
 let sequence = 0;
 
-/**
- * Isi variable choicesText dengan pilihan-pilihan jawaban untuk suatu soal.
- * Key pada choicesText adalah nomor pertanyaan, dan value nya merupakan array yang berisi text-text pilihan jawaban.
- */
-
 let youtubeId = {
     intro: 'qz1XzCmdHAg',
     problem: 'EJZ8B7NOy2k',
 };
+
+/**
+ * Isi variable choicesText dengan pilihan-pilihan jawaban untuk suatu soal.
+ * Key pada choicesText adalah nomor pertanyaan, dan value nya merupakan array yang berisi text-text pilihan jawaban.
+ * 
+ * Isi variable correctAnswer dengan jawaban yang benar untuk pertanyaan pada nomor sekian.
+ */
 
 let choicesText = {
     1: [
@@ -67,27 +69,12 @@ let correctAnswers = {
 let mode = 'normal'; // kalo diisi 'misi' bakal skip dialog
 
 missionOne.create = function() {
-    // scene = this;
 
     canvasWidth = game.canvas.width;
     canvasHeight = game.canvas.height;
     middleX = this.cameras.main.width / 2;
     middleY = this.cameras.main.height / 2;
 
-    gameObjects.backgroundImage = createBackgroundImage(this, 'menuBackground');
-
-    let dialogs = [
-        "Allison adalah seorang profesor yang ditugaskan di Laboratorium X untuk mencari obat dari penyakit yang tidak diketahui asal-usulnya.",
-        `Untuk itu Prof. Allison bekerjasama dengan ilmuan kimia ${playerName} untuk melakukan penelitian untuk mengumpulkan ramuan obat yang sedang dicari.`,
-        "Seluruh ramuan obat dapat dikumpulkan setelah ilmuan kimia menyelesaikan tantangan pada setiap misi.",
-        `Prof. Allison: ${playerName}, Anda harus mengambil buku ramuan obat yang tertinggal di laboratorium pusat.`,
-        `${playerName}: Siap meluncur prof...`,
-        "Prof. Allison: Sebelum berangkat Anda harus menyelesaikan tantangan di laboratorium X, tiap tantangan yang dilewati akan menambah energi Anda untuk memperoleh buku ramuan obat...",
-        `${playerName}: Penemuan ini akan menjadi gebrakan hebat di dunia penelitian...`,
-        "Prof. Allison: Semoga berhasil!!!"
-    ];
-
-    // gameObjects.textBox = createDialog(dialogs);
     loadSequence(this, 0);
 }
 
@@ -236,7 +223,7 @@ function loadSequence(scene, sequence) {
 
     } else if (sequence == 11) {
 
-        
+
 
     }
 }
