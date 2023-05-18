@@ -1,0 +1,40 @@
+.container{
+    background-color: white;
+    border-radius: 20px;
+    padding:5vh 5vw;
+}
+
+#boxMain{
+ height: 70vh;
+}
+
+#judul{
+    position: fixed;
+    top: 120px;
+}
+
+.status{
+    position: fixed;
+    left: 550px;
+    font-size: 16pt;
+}
+
+.misi{
+    position: fixed;
+    left: 575px;
+    font-size: 14pt;
+}
+
+.progBar{
+    position: fixed;
+    left: 675px;
+    font-size: 14pt;
+}
+
+
+.navButton{
+    position: fixed;
+    top:600px;
+    color: black;
+    font-size: 14pt;
+}

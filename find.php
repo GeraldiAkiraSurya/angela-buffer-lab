@@ -1,12 +1,7 @@
-
 <!DOCTYPE html>
-
-
-
 <html lang="en">
-
   <head>
-
+  <?php require_once 'user.php';?>
     <script src="./js/phaser.min.js"></script>
     <style>
       html,
@@ -20,11 +15,6 @@
 
   <body>
     
-      <?php
-      require_once 'user.php';?>
-
-
-  
     <script src="./js/globalvar.js"></script>
     <script src="./js/globalfunction.js"></script>
     <script src="./js/findingObjects1.js"></script>
