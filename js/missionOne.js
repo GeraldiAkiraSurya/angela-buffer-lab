@@ -21,8 +21,6 @@ missionOne.preload = function () {
 
 // GLOBAL VARIABLE pada file ini
 
-let middleX;
-let middleY;
 const COLOR_PRIMARY = 0x2E4E34; //2E4E34  //0x4e342e
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;

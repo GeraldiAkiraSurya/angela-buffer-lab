@@ -10,15 +10,10 @@ mainMenu.preload = function () {
 
     this.load.image('sora', 'characters/female.png');
     this.load.image('shin', 'characters/male.png');
-
-    //video player plugin
-    this.load.plugin('rexyoutubeplayerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexyoutubeplayerplugin.min.js', true);
 }
 
 var btnStart;
 var btnOptions;
-
-var youtubePlayer;
 
 //male
 var shin;
@@ -67,20 +62,6 @@ mainMenu.create = function () {
     else if (character == 'female') {
         sora.setVisible(true);
     }
-
-    //video player
-    // video = this.add.video(middleX, middleY);
-    // let url = 'https://www.youtube.com/embed/tgbNymZ7vqY';
-    // video.loadURL('https://www.youtube.com/embed/tgbNymZ7vqY');
-
-    // video.play();
-
-    //pake plugins tapi blm berhasil
-    // youtubePlayer = this.add.rexYoutubePlayer(0, 0, 600, 450, {
-    //     videoId: 'wDOym-mXxO4'
-    // }).on('ready', function () {
-    //     youtubePlayer.setPosition(middleX, middleY);
-    // });    
 
     //buttons
     btnStart = this.add.image(middleX, middleY, 'startButton').setInteractive().setScale(0.5);

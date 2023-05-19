@@ -4,6 +4,8 @@ var character; //male / female
 // var playerName = 'playerName';
 //energy
 var energy;
+var energyFlaskIcon;
+var energyText;
 
 //main menu music
 var menuMusic = false;

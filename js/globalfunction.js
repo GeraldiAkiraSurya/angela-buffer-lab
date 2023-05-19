@@ -55,14 +55,14 @@ function showObjective(scene, object1, object2, object3, object4, btnHint) {
         },
     });
 
-    var nextBtn = createNextBtn(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'LANJUT', () => {
+    var nextBtn = createNextButton(scene, 'LANJUT', () => {
         title.destroy();
         missionDesc.destroy();
         nextBtn.destroy();
         descriptionBox.destroy();
 
         startFindingObject(scene, object1, object2, object3, object4, btnHint);
-    });    
+    }, middleX, middleY + (descriptionBox.height / 2) - 50);    
 }
 
 //pop-up kalau energi abis
@@ -86,7 +86,7 @@ function showObjectiveOutOfEnergy(scene) {
         },
     });
 
-    var nextBtn = createNextBtn(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'LANJUT', () => {
+    var nextBtn = createNextButton(scene,'LANJUT', () => {
         title.destroy();
         missionDesc.destroy();
         nextBtn.destroy();
@@ -99,7 +99,7 @@ function showObjectiveOutOfEnergy(scene) {
         if (!energyFlask2Found) {
             energyFlask2.setVisible(true);
         }
-    });
+    },  middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
 //pop-up kalau game over
@@ -124,15 +124,37 @@ function showGameOver(scene) {
         },
     });
 
-    var nextBtn = createNextBtn(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'LANJUT', () => {
+    var nextBtn = createNextButton(scene, 'LANJUT', () => {
         title.destroy();
         missionDesc.destroy();
         nextBtn.destroy();
         descriptionBox.destroy();
 
         scene.scene.start()
-    });    
+    }, middleX, middleY + (descriptionBox.height / 2) - 50);    
 }
+
+//dari missionOne
+function createNextButton(
+        scene, 
+        label, 
+        callback, 
+        x = middleX, 
+        y = middleY+(missionBoxProps.height/2)-50
+    ) {
+    let button = scene.add.text(x, y, label)
+        .setOrigin(0.5)
+        .setFontSize('30px')
+        .setPadding(12)
+        .setStyle({ backgroundColor: '#e6e6e6', color: '#000000' })
+        .setInteractive({ useHandCursor: true })
+        .on('pointerover', () => button.setStyle({ color: '#0000ff' }))
+        .on('pointerout', () => button.setStyle({ color: '#000000' }))
+        .on('pointerdown', () => callback());
+
+    return button;
+}
+
 
 //buat pop up
 // function showPopUp(scene, object1, object2, object3, object4, btnHint) {
@@ -161,7 +183,7 @@ function showGameOver(scene) {
 //         },
 //     });
 
-//     var nextBtn = createNextBtn(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'LANJUT', () => {
+//     var nextBtn = createNextButton(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'LANJUT', () => {
 //         title.destroy();
 //         missionDesc.destroy();
 //         nextBtn.destroy();
