@@ -81,7 +81,9 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                     $query ="UPDATE `user` SET `lastLogin` = NOW(),`token`= '$generateToken' ,`numLogin`=`numLogin`+1 WHERE `email`= '$username'";
                     $res=$this->db->executeNonSelectQuery($query);
 
+                    session_set_cookie_params(0);
                     session_start();
+                    
                     $_SESSION['id']=$userInfo[0]['id'];
                     $_SESSION['email']=$username;
                     $_SESSION['nama']=$userInfo[0]['nama'];
@@ -439,6 +441,7 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
 
     private function giveLogin(){
         $generateToken = bin2hex(random_bytes(25));
+        session_set_cookie_params(0);
         session_start();
         $_SESSION['token']=$generateToken;
         header("location: dashboardAdmin");

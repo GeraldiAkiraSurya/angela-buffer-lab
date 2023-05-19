@@ -45,7 +45,7 @@ var config = {
     canvasStyle: `display: block; width: 100%; height: 100%;`,
 
     //lengkap
-    scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne]
+    scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne, missionThree]
 
     //development
     // scene: [findingObjects1]

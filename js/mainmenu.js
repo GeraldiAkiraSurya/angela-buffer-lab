@@ -17,6 +17,7 @@ mainMenu.preload = function () {
 
 var btnStart;
 var btnOptions;
+var btnProfile
 
 var youtubePlayer;
 
@@ -85,6 +86,7 @@ mainMenu.create = function () {
     //buttons
     btnStart = this.add.image(canvasWidth/2, canvasHeight/2, 'startButton').setInteractive().setScale(0.5);
     btnOptions = this.add.image(canvasWidth/2, canvasHeight/2 + 125, 'optionsButton').setInteractive().setScale(0.5);
+    btnProfile = this.add.image(canvasWidth/2, canvasHeight/2 + 250, 'optionsButton').setInteractive().setScale(0.5);
 
     btnStart.on('pointerup', function () {        
         console.log(energy);
@@ -93,6 +95,10 @@ mainMenu.create = function () {
 
     btnOptions.on('pointerup', function () {
         mainMenu.scene.start('SelectChara');
+    });
+
+    btnProfile.on('pointerup', function () {
+        window.location.href = 'profile';
     });
 
     // this.tweens.add({

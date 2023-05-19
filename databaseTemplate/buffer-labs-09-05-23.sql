@@ -55,6 +55,10 @@ CREATE TABLE IF NOT EXISTS `sekolah` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `sekolah` (`id`, `sekolah`) VALUES
+(1, 'SMA ST. Angela');
+
+
 -- --------------------------------------------------------
 
 --
