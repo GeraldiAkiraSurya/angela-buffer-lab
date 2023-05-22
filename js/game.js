@@ -49,6 +49,7 @@ var config = {
 
     //development
     scene: [question214]
+    // scene: [question212, question214]
     // scene: [missionOne]
     // scene: [findingObjects1]
 };

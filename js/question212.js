@@ -188,7 +188,7 @@ Ayo kumpulkan!`;
             destroyObject(objectsArray);
 
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncementCorrectAnswer212(this, text)
+            showAnnouncementCorrectAnswer212(this, text);
         }
         else {
             //destory all objects
@@ -268,10 +268,13 @@ function showAnnouncementCorrectAnswer212(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
+        //to question 3
+        scene.scene.start('Question214');
+
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu')
+        scene.scene.start('MainMenu');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
@@ -359,14 +362,14 @@ function startOver212(scene) {
         
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
-            destroyObject(objectsArray)
+            destroyObject(objectsArray);
 
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncementCorrectAnswer212(scene, text)
+            showAnnouncementCorrectAnswer212(scene, text);
         }
         else {
             //salah kedua kali? langsung tendang ke main menu
-            scene.scene.start('MainMenu')
+            scene.scene.start('MainMenu');
         }  
 
     }, middleX, middleY + 350);
