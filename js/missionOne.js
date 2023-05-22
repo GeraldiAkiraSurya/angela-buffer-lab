@@ -25,50 +25,49 @@ const COLOR_PRIMARY = 0x2E4E34; //2E4E34  //0x4e342e
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
-let gameObjects = {};
-let missionBoxProps = {};
-let choices = [];
-let selections = [];
-let sequence = 0;
-
-let youtubeId = {
-    intro: 'qz1XzCmdHAg',
-    problem: 'EJZ8B7NOy2k',
-};
-
-/**
- * Isi variable choicesText dengan pilihan-pilihan jawaban untuk suatu soal.
- * Key pada choicesText adalah nomor pertanyaan, dan value nya merupakan array yang berisi text-text pilihan jawaban.
- * 
- * Isi variable correctAnswer dengan jawaban yang benar untuk pertanyaan pada nomor sekian.
- */
-
-let choicesText = {
-    1: [
-        "pH pada semua system/ campuran berubah drastis",
-        "pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan",
-        "pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan",
-        "pH pada larutan asam asetat 0,1 M berubah drastis",
-        "pH pada larutan natrium asetat 0,1 M berubah drastis"
-    ],
-    2: [
-        "15 mL CH3COOH 0,1 M + 15 mL CH3COONa 0,1 M",
-        "15 mL HCl 0,1 M + 15 mL NaCl 0,1 M",
-        "30 mL CH3COOH 0,1 M ",
-        "30 mL CH3COONa 0,1 M"
-    ],
-};
-
-let correctAnswers = {
-    1: [0,1,0,1,1],
-    2: [1,0,0,0]
-};
-
-let mode = 'normal'; // kalo diisi 'misi' bakal skip dialog
-
 missionOne.create = function() {
     middleX = this.cameras.main.width / 2;
     middleY = this.cameras.main.height / 2;
+
+    
+    gameObjects = {};
+    missionBoxProps = {};
+    choices = [];
+    selections = [];
+    sequence = 0;
+
+    youtubeId = {
+        intro: 'qz1XzCmdHAg',
+        problem: 'EJZ8B7NOy2k',
+    };
+
+    /**
+     * Isi variable choicesText dengan pilihan-pilihan jawaban untuk suatu soal.
+     * Key pada choicesText adalah nomor pertanyaan, dan value nya merupakan array yang berisi text-text pilihan jawaban.
+     * 
+     * Isi variable correctAnswer dengan jawaban yang benar untuk pertanyaan pada nomor sekian.
+     */
+
+    choicesText = {
+        1: [
+            "pH pada semua system/ campuran berubah drastis",
+            "pH pada Campuran 15 mL CH3COOH 0,1 M + 15 mL CH3COONa 15 M tidak berubah secara signifikan",
+            "pH pada campuran 15 mL HCl 0,1 M + 15 mL NaCl 0,1 M tidak berubah secara signifikan",
+            "pH pada larutan asam asetat 0,1 M berubah drastis",
+            "pH pada larutan natrium asetat 0,1 M berubah drastis"
+        ],
+        2: [
+            "15 mL CH3COOH 0,1 M + 15 mL CH3COONa 0,1 M",
+            "15 mL HCl 0,1 M + 15 mL NaCl 0,1 M",
+            "30 mL CH3COOH 0,1 M ",
+            "30 mL CH3COONa 0,1 M"
+        ],
+    };
+
+    correctAnswers = {
+        1: [0,1,0,1,1],
+        2: [1,0,0,0]
+    };
 
     loadSequence(this, 0);
 }

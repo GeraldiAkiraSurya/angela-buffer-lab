@@ -65,9 +65,9 @@ mainMenu.create = function () {
     }
 
     //buttons
-    btnStart = this.add.image(canvasWidth/2, canvasHeight/2, 'startButton').setInteractive().setScale(0.5);
-    btnOptions = this.add.image(canvasWidth/2, canvasHeight/2 + 125, 'optionsButton').setInteractive().setScale(0.5);
-    btnProfile = this.add.image(canvasWidth/2, canvasHeight/2 + 250, 'optionsButton').setInteractive().setScale(0.5);
+    btnStart = this.add.image(middleX, middleY, 'startButton').setInteractive().setScale(0.5);
+    btnOptions = this.add.image(middleX, middleY + 125, 'optionsButton').setInteractive().setScale(0.5);
+    btnProfile = this.add.image(middleX, middleY + 250, 'optionsButton').setInteractive().setScale(0.5);
 
     btnStart.on('pointerup', function () {        
         console.log(energy);
