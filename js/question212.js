@@ -319,24 +319,6 @@ function showAnnouncementWrongAnswer(scene, text) {
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);
 }
 
-function hideObject(objectsArrayToHide) {
-    for (let i = 0; i < objectsArrayToHide.length; i++) {
-        objectsArrayToHide[i].setVisible(false);
-    }    
-}
-
-function showObject(objectsArrayToShow) {
-    for (let i = 0; i < objectsArrayToShow.length; i++) {
-        objectsArrayToShow[i].setVisible(true);
-    }    
-}
-
-function destroyObject(objectsArrayToDestroy) {
-    for (let i = 0; i < objectsArrayToDestroy.length; i++) {
-        objectsArrayToDestroy[i].destroy();
-    }    
-}
-
 //buat ngereset game object ke posisi semula
 //perlu di push lagi ke array ga ya?
 //kayanya ga usah
