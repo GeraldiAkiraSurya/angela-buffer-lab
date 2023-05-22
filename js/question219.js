@@ -3,13 +3,12 @@ question219 = new Phaser.Scene('Question219');
 question219.preload = function () {
     this.load.path = './assets/';
     this.load.image('beaker', 'question/beaker.gif');
-    this.load.image('purpleBeaker', 'question/bottle.png');
+    this.load.image('bottle', 'question/bottle.png');
 
-    this.load.image('219A', 'question/2.1.1A.png');
-    this.load.image('219B', 'question/2.1.1B.png');
-    this.load.image('219C', 'question/2.1.1C.png');
-    this.load.image('219D', 'question/2.1.1D.png');
-    this.load.image('219E', 'question/2.1.1E.png');
+    this.load.image('219A', 'question/2.1.9A.png');
+    this.load.image('219B', 'question/2.1.9B.png');
+    this.load.image('219C', 'question/2.1.9C.png');
+    this.load.image('219D', 'question/2.1.9D.png');
 
     this.load.image('background', 'scenes/bg_question.png');
 
@@ -50,25 +49,25 @@ question219.create = function () {
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
     //variable initialization
-    //yg bener itu pilihan E
-    answerArray = ['E'];
+    //yg bener itu pilihan A
+    answerArray = ['A'];
     playerAnswerArray = [];
     objectsArray = [];
 
     //beaker jawaban
-    botolJawaban1 = this.add.image(middleX - 30, middleY - 20, 'purpleBeaker').setInteractive().setScale(0.25).setName('A');
+    botolJawaban1 = this.add.image(middleX - 30, middleY - 20, 'bottle').setInteractive().setScale(0.25).setName('A');
     this.input.setDraggable(botolJawaban1);
     objectsArray.push(botolJawaban1);
 
-    botolJawaban2 = this.add.image(middleX + 240, middleY - 160, 'purpleBeaker').setInteractive().setScale(0.25).setName('B');
+    botolJawaban2 = this.add.image(middleX + 240, middleY - 160, 'bottle').setInteractive().setScale(0.25).setName('B');
     this.input.setDraggable(botolJawaban2);
     objectsArray.push(botolJawaban2);
 
-    botolJawaban3 = this.add.image(middleX + 540, middleY - 20, 'purpleBeaker').setInteractive().setScale(0.25).setName('C');
+    botolJawaban3 = this.add.image(middleX + 540, middleY - 20, 'bottle').setInteractive().setScale(0.25).setName('C');
     this.input.setDraggable(botolJawaban3);
     objectsArray.push(botolJawaban3);
 
-    botolJawaban4 = this.add.image(middleX + 810, middleY - 160, 'purpleBeaker').setInteractive().setScale(0.25).setName('D');
+    botolJawaban4 = this.add.image(middleX + 810, middleY - 160, 'bottle').setInteractive().setScale(0.25).setName('D');
     this.input.setDraggable(botolJawaban4);
     objectsArray.push(botolJawaban4);
 
@@ -91,19 +90,19 @@ Nah..berdasarkan perubahan pH pada campuran / sistem dalam tabel, manakah yang t
 `;
 
     //beaker-text
-    A = this.add.image(middleX + 30, middleY - 300, '219A').setScale(1.2);
+    A = this.add.image(middleX - 30, middleY + 170, '219A').setScale(1.2);
     // this.input.setDraggable(A);
     objectsArray.push(A);
 
-    B = this.add.image(middleX + 630, middleY - 300, '219B').setScale(1.2);
+    B = this.add.image(middleX + 250, middleY + 30, '219B').setScale(1.2);
     // this.input.setDraggable(B);
     objectsArray.push(B);
 
-    C = this.add.image(middleX + 330, middleY - 60, '219C').setScale(1.2);
+    C = this.add.image(middleX + 540, middleY + 170, '219C').setScale(1.2);
     // this.input.setDraggable(C);
     objectsArray.push(C);
 
-    D = this.add.image(middleX + 30, middleY + 180, '219D').setScale(1.2);
+    D = this.add.image(middleX + 820, middleY + 30, '219D').setScale(1.2);
     // this.input.setDraggable(D);
     objectsArray.push(D);
 
@@ -166,10 +165,10 @@ Nah..berdasarkan perubahan pH pada campuran / sistem dalam tabel, manakah yang t
 
     //alur game
     //hide all object
-    // hideObject(objectsArray);
+    hideObject(objectsArray);
 
     //show pertanyaan
-    // showPertanyaan219(this, text);
+    showPertanyaan219(this, text);
 }
 
 question219.update = function () {
@@ -293,25 +292,25 @@ function startOver219(scene) {
     //kosongin jawaban buat startover
     playerAnswerArray = [];
 
-    botolJawaban1 = scene.add.image(middleX + 230, middleY - 370, 'purpleBeaker').setInteractive().setScale(0.19).setName('A');
+    botolJawaban1 = scene.add.image(middleX - 30, middleY - 20, 'bottle').setInteractive().setScale(0.19).setName('A');
     scene.input.setDraggable(botolJawaban1);
 
-    botolJawaban2 = scene.add.image(middleX + 830, middleY - 370, 'purpleBeaker').setInteractive().setScale(0.19).setName('B');
+    botolJawaban2 = scene.add.image(middleX + 240, middleY - 160, 'bottle').setInteractive().setScale(0.19).setName('B');
     scene.input.setDraggable(botolJawaban2);
 
-    botolJawaban3 = scene.add.image(middleX + 530, middleY - 130, 'purpleBeaker').setInteractive().setScale(0.19).setName('C');
+    botolJawaban3 = scene.add.image(middleX + 540, middleY - 20, 'bottle').setInteractive().setScale(0.19).setName('C');
     scene.input.setDraggable(botolJawaban3);
 
-    botolJawaban4 = scene.add.image(middleX + 230, middleY + 110, 'purpleBeaker').setInteractive().setScale(0.19).setName('D');
+    botolJawaban4 = scene.add.image(middleX + 810, middleY - 160, 'bottle').setInteractive().setScale(0.19).setName('D');
     scene.input.setDraggable(botolJawaban4);
 
-    A = scene.add.image(middleX + 30, middleY - 300, '219A').setScale(1.2);
+    A = scene.add.image(middleX - 30, middleY + 170, '219A').setScale(1.2);
 
-    B = scene.add.image(middleX + 630, middleY - 300, '219B').setScale(1.2);
+    B = scene.add.image(middleX + 250, middleY + 30, '219B').setScale(1.2);
 
-    C = scene.add.image(middleX + 330, middleY - 60, '219C').setScale(1.2);
+    C = scene.add.image(middleX + 540, middleY + 170, '219C').setScale(1.2);
 
-    D = scene.add.image(middleX + 30, middleY + 180, '219D').setScale(1.2);
+    D = scene.add.image(middleX + 820, middleY + 30, '219D').setScale(1.2);
 
     //btn buat check jawaban kedua kali
     cekJawabanBtn = createNextButton(scene, 'CEK JAWABAN', () => {
