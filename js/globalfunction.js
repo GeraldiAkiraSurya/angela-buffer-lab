@@ -201,6 +201,24 @@ function startFindingObject(scene, object1, object2, object3, object4, btnHint) 
     btnHint.input.enabled = true;
 }
 
+
+//function buat misi 2.1 & 2.2 pertanyaan 1-8 start
+//check answer
+function checkAnswerDraggable(answerArray, playerAnswerArray) {
+    if (playerAnswerArray.length == answerArray.length) {
+        return playerAnswerArray.every(element => {
+          if (answerArray.includes(element)) {
+            return true;
+          }
+    
+          return false;
+        });
+    }
+    
+    return false;
+}
+//function buat misi 2.1 & 2.2 pertanyaan 1-8 finished
+
 function hideObject(objectsArrayToHide) {
     for (let i = 0; i < objectsArrayToHide.length; i++) {
         objectsArrayToHide[i].setVisible(false);

@@ -214,7 +214,6 @@ question212.update = function () {
     
 }
 
-//otw pindahin ke global
 function showPertanyaan(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
@@ -371,18 +370,4 @@ function startOver212(scene) {
         }  
 
     }, middleX, middleY + 350);
-}
-
-function checkAnswerDraggable(answerArray, playerAnswerArray) {
-    if (playerAnswerArray.length == answerArray.length) {
-        return playerAnswerArray.every(element => {
-          if (answerArray.includes(element)) {
-            return true;
-          }
-    
-          return false;
-        });
-    }
-    
-    return false;
 }
