@@ -39,9 +39,9 @@ missionSelection.create = function() {
         .setStroke('#fff', 5)
     
     let btnMsn1 = new Button((canvasWidth/2) - (2*deltaX), baseY, 'MISI I', this, () => {this.scene.start('Misi1')}, jsonMissionProses["1"]);
-    //temporary ke finding objects
+    //temporary ke Question211
     let btnMsn2 = new Button((canvasWidth/2) - (1*deltaX), baseY, 'MISI II', this, () => {
-        this.scene.start('FindingObjects1');
+        this.scene.start('Question211');
         energy = 100;
     }, true);
     let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('mission1')},jsonMissionProses["2.1"]);
