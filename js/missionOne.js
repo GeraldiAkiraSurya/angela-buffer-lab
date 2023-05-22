@@ -67,9 +67,6 @@ let correctAnswers = {
 let mode = 'normal'; // kalo diisi 'misi' bakal skip dialog
 
 missionOne.create = function() {
-
-    canvasWidth = game.canvas.width;
-    canvasHeight = game.canvas.height;
     middleX = this.cameras.main.width / 2;
     middleY = this.cameras.main.height / 2;
 
