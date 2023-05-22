@@ -1,6 +1,6 @@
-question212 = new Phaser.Scene('Question212');
+question214 = new Phaser.Scene('Question214');
 
-question212.preload = function () {
+question214.preload = function () {
     this.load.path = './assets/';
     this.load.image('greenBeaker', 'question/greenBeaker.png');
     this.load.image('CH3COONeg', 'question/CH3COONeg.png');
@@ -42,7 +42,7 @@ var playerAnswerArray;
 
 var cekJawabanBtn;
 
-question212.create = function () {
+question214.create = function () {
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
@@ -210,7 +210,7 @@ Ayo kumpulkan!`;
     showPertanyaan212(this, text);
 }
 
-question212.update = function () {
+question214.update = function () {
     
 }
 
