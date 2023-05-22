@@ -17,115 +17,95 @@ missionThree.preload = function () {
     this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
 
     this.load.image('nextPage', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/assets/images/arrow-down-left.png');
-
-
+    
 }
 
-// GLOBAL VARIABLE pada file ini
-
-const youtubeId3 = {
-    intro: 'qz1XzCmdHAg',
-    problem: 'vTP3BGnawU4',
-};
-
-
-
-let gameObjects3 = {};
-let missionBoxProps3 = {};
-let choices3 = [];
-let selections3 = [];
-
-
-let choices3Text3;
-let correctAnswers3;
-
-
 missionThree.create = function() {
-
-    canvasWidth = game.canvas.width;
-    canvasHeight = game.canvas.height;
     middleX = this.cameras.main.width / 2;
     middleY = this.cameras.main.height / 2;
 
+    youtubeId = {
+        intro: 'qz1XzCmdHAg',
+        problem: 'vTP3BGnawU4',
+    };
 
-/**
- * Isi variable choices3Text3 dengan pilihan-pilihan jawaban untuk suatu soal.
- * Key pada choices3Text3 adalah nomor pertanyaan, dan value nya merupakan array yang berisi text-text pilihan jawaban.
- * 
- * Isi variable correctAnswer dengan jawaban yang benar untuk pertanyaan pada nomor sekian.
- */
+    /**
+     * Isi variable choicesText dengan pilihan-pilihan jawaban untuk suatu soal.
+     * Key pada choicesText adalah nomor pertanyaan, dan value nya merupakan array yang berisi text-text pilihan jawaban.
+     * 
+     * Isi variable correctAnswer dengan jawaban yang benar untuk pertanyaan pada nomor sekian.
+     */
 
-choices3Text3 = {
-    1: [
-        "pH pada semua system/ campuran berubah drastis",
-        "campuran 20 mL CH3COOH 0,1 M + 10 mL NaOH 0,1 M tidak mengalami perubahan pH",
-        "campuran 15 mL CH3COOH 0,1 + 15 mL NaOH 0,1 M tidak mengalami perubahan pH",
-        "campuran 10 mL CH3COOH 0,1 M + 20 mL NaOH 0,1 M mengalami perubahan pH yang drastis",
-        "campuran 15 mL HCl 0,1 M + 15 mL NaOH 0,1 M tidak mengalami perubahan pH"
-    ],
-    2: [
-        "20 mL CH3COOH 0,1 M + 10 mL NaOH 0,1 M ",
-        "15 mL HCl 0,1 M + 15 mL NaCl 0,1 M",
-        "10 mL CH3COOH 0,1 M + 20 mL NaOH 0,1 M ",
-        "15 mL HCl 0,1 M + 15 mL NaOH 0,1 M "
-    ],
-    3: [
-        "CH3COOH(aq) + NaOH(aq) → CH3COONa(aq) + H2O(l) ",
-        "CH3COO-(aq) + Na+(aq) → CH3COONa(aq)",
-        "H+(aq) + OH-(aq) →  H2O(l)"
-    ],
-    4: [
-        "CH3COOH",
-        "NaOH"
-    ],
-    5: [
-        "CH3COOH",
-        "H2O",
-        "CH3COO-",
-        "H+",
-        "OH-",
-        "Na+",
-        "NaOH",
-        "CH3COONa",
-        "H2",
-        "O2 "
-    ],
-    6: [
-        "CH3COOH dengan CH3COO-",
-        "CH3COOH saja",
-        "CH3COONa saja",
-        "CH3COO- dengan H+",
-        "CH3COONa dengan Na+"
-    ],
-    7: [
-        "karena setelah bereaksi terdapat sisa asam lemah dengan produk basa konjugasinya",
-        "karena setelah bereaksi terdapat sisa basa lemah dengan produk asam konjugasinya",
-        "karena setelah bereaksi terdapat sisa basa kuat dengan produk garam dan air",
-        "karena setelah bereaksi terdapat sisa basa kuat dengan produk asam konjugasinya",
-        "karena setelah bereaksi terdapat sisa asam kuat dengan produk basa konjugasinya"
-    ],
-};
+    choicesText = {
+        1: [
+            "pH pada semua system/ campuran berubah drastis",
+            "campuran 20 mL CH3COOH 0,1 M + 10 mL NaOH 0,1 M tidak mengalami perubahan pH",
+            "campuran 15 mL CH3COOH 0,1 + 15 mL NaOH 0,1 M tidak mengalami perubahan pH",
+            "campuran 10 mL CH3COOH 0,1 M + 20 mL NaOH 0,1 M mengalami perubahan pH yang drastis",
+            "campuran 15 mL HCl 0,1 M + 15 mL NaOH 0,1 M tidak mengalami perubahan pH"
+        ],
+        2: [
+            "20 mL CH3COOH 0,1 M + 10 mL NaOH 0,1 M ",
+            "15 mL HCl 0,1 M + 15 mL NaCl 0,1 M",
+            "10 mL CH3COOH 0,1 M + 20 mL NaOH 0,1 M ",
+            "15 mL HCl 0,1 M + 15 mL NaOH 0,1 M "
+        ],
+        3: [
+            "CH3COOH(aq) + NaOH(aq) → CH3COONa(aq) + H2O(l) ",
+            "CH3COO-(aq) + Na+(aq) → CH3COONa(aq)",
+            "H+(aq) + OH-(aq) →  H2O(l)"
+        ],
+        4: [
+            "CH3COOH",
+            "NaOH"
+        ],
+        5: [
+            "CH3COOH",
+            "H2O",
+            "CH3COO-",
+            "H+",
+            "OH-",
+            "Na+",
+            "NaOH",
+            "CH3COONa",
+            "H2",
+            "O2 "
+        ],
+        6: [
+            "CH3COOH dengan CH3COO-",
+            "CH3COOH saja",
+            "CH3COONa saja",
+            "CH3COO- dengan H+",
+            "CH3COONa dengan Na+"
+        ],
+        7: [
+            "karena setelah bereaksi terdapat sisa asam lemah dengan produk basa konjugasinya",
+            "karena setelah bereaksi terdapat sisa basa lemah dengan produk asam konjugasinya",
+            "karena setelah bereaksi terdapat sisa basa kuat dengan produk garam dan air",
+            "karena setelah bereaksi terdapat sisa basa kuat dengan produk asam konjugasinya",
+            "karena setelah bereaksi terdapat sisa asam kuat dengan produk basa konjugasinya"
+        ],
+    };
 
-correctAnswers3 = {
-    1: [0,1,0,1,0],
-    2: [1,0,0,0],
-    3: [1,0,0],
-    4: [1,0],
-    5: [1,1,1,1,1,1,0,0,0,0],
-    6: [1,0,0,0,0],
-    7: [1,0,0,0,0]
+    correctAnswers = {
+        1: [0,1,0,1,0],
+        2: [1,0,0,0],
+        3: [1,0,0],
+        4: [1,0,0],
+        5: [1,1,1,1,1,1,0,0,0,0],
+        6: [1,0,0,0,0],
+        7: [1,0,0,0,0]
 
-};
+    };
 
-
-    loadSequence3(this,  2);
+    loadSequence3(this,  0);
 }
 
 missionThree.update = function() {
     
 }
 
-function loadSequence3(scene3, sequence) {
+function loadSequence3(scene, sequence) {
     console.log("Start sequence " + sequence);
 
     console.log(gameObjects3);
@@ -133,21 +113,33 @@ function loadSequence3(scene3, sequence) {
     createMissionBackgroundObjects3 (scene3, 'missionBackground');
 
     if (sequence == 0) { // Sequence dialog
-        destroyAllGameObjects3();
+        destroyAllGameObjects();
+        gameObjects.backgroundImage = createBackgroundImage(scene, 'menuBackground');
+        let dialogs = [
+            "Allison adalah seorang profesor yang ditugaskan di Laboratorium X untuk mencari obat dari penyakit yang tidak diketahui asal-usulnya.",
+            `Untuk itu Prof. Allison bekerjasama dengan ilmuan kimia ${playerName} untuk melakukan penelitian untuk mengumpulkan ramuan obat yang sedang dicari.`,
+            "Seluruh ramuan obat dapat dikumpulkan setelah ilmuan kimia menyelesaikan tantangan pada setiap misi.",
+            `Prof. Allison: ${playerName}, Anda harus mengambil buku ramuan obat yang tertinggal di laboratorium pusat.`,
+            `${playerName}: Siap meluncur prof...`,
+            "Prof. Allison: Sebelum berangkat Anda harus menyelesaikan tantangan di laboratorium X, tiap tantangan yang dilewati akan menambah energi Anda untuk memperoleh buku ramuan obat...",
+            `${playerName}: Penemuan ini akan menjadi gebrakan hebat di dunia penelitian...`,
+            "Prof. Allison: Semoga berhasil!!!"
+        ];
+        createDialog(scene, dialogs, () => {loadSequence3(scene, 1)});
     } else if (sequence == 1) { // Sequence yang muncul prompt mau lanjut atau tidak
         // destroyAllGameObjects3();
         createMissionBackgroundObjects3 (scene3, 'menuBackground');
         gameObjects3.missionBox.setSize(scene3.cameras.main.width * 3 / 4, scene3.cameras.main.height * 3 / 4);
         let text = "Anda dapat memulai penelitian di laboratorium X!";
-        gameObjects3.announcement = createAnnouncementText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
-        }, middleX - 150, middleY + (missionBoxProps3.height/2) - 100);
-        gameObjects3.exitBtn = createExitButton3(scene3, middleX+150, middleY + (missionBoxProps3.height/2) - 100);
+        gameObjects.announcement = createAnnouncementText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
+        }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
+        gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
     } else if (sequence == 2) { // Sequence deskripsi misi
 
-        gameObjects3.title = scene3.add.text(middleX, missionBoxProps3.lowestY + 50, "MISI III")
+        gameObjects.title = scene.add.text(middleX, missionBoxProps.lowestY + 50, "MISI III")
             .setOrigin(0.5)
             .setFontSize(40);
         let text = "[b]SYARAT PENYELESAIAN KHUSUS:[/b] AMATILAH VIDEO DENGAN SEKSAMA DAN PILIHLAH JAWABAN YANG BENAR DARI PERTANYAAN YANG DIBERIKAN\n\n\
@@ -157,24 +149,24 @@ function loadSequence3(scene3, sequence) {
         gameObjects3.missionDesc = createDescText3(scene3, text);
 
         // Button untuk load sequence selanjutnya
-        gameObjects3.nextBtn = createNextButton3(scene3, 'TERIMA', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.nextBtn = createNextButton(scene, 'TERIMA', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     } else if (sequence == 3) { // Sequence youtube vid
 
-        gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['intro']);
+        gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['intro']);
         // Button untuk load sequence selanjutnya
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     } else if (sequence == 4) { // Sequence youtube vid
 
-        gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
+        gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
         // Button untuk load sequence selanjutnya
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     } else if (sequence == 5) { // Sequence soal pertanyaan SOAL 1
@@ -182,8 +174,8 @@ function loadSequence3(scene3, sequence) {
         let text = 'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?';
         gameObjects3.question = createDescText3(scene3, text);
         // Button untuk load sequence selanjutnya
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     } else if (sequence == 6) { // Sequence milih jawaban
@@ -195,14 +187,14 @@ function loadSequence3(scene3, sequence) {
             if (checkAnswer3(questionNumber) == true) {
                 done("3",1)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene3, sequence+1);
+                loadSequence3(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
-                destroyAllGameObjects3();
-                createMissionBackgroundObjects3 (scene3, 'missionBackground');
-                gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
-                gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-                    loadSequence3(scene3, sequence-1);
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence3(scene, sequence-1);
                 });
             }
         });
@@ -210,18 +202,18 @@ function loadSequence3(scene3, sequence) {
     } else if (sequence == 7) { // Sequence jawaban bener
 
         let text = "Bagus sekali, pilihan Anda benar.";
-        gameObjects3.announcement = createAnnouncementText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
-        }, middleX - 150, middleY + (missionBoxProps3.height/2) - 100);
-        gameObjects3.exitBtn = createExitButton3(scene3, middleX+150, middleY + (missionBoxProps3.height/2) - 100);
+        gameObjects.announcement = createAnnouncementText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
+        }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
+        gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
     } else if (sequence == 8) { // Sequence pertanyaan
         start("3",2)
         let text = 'Dari pengukuran pH pada video, maka yang merupakan larutan penyangga adalah';
-        gameObjects3.question = createDescText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     } else if (sequence == 9) { // Sequence milih jawaban
@@ -232,13 +224,13 @@ function loadSequence3(scene3, sequence) {
             console.log("Final answer: \n" + selections3);
             if (checkAnswer3(questionNumber) == true) {
                 done("3",2)
-                loadSequence3(scene3, sequence+1);
+                loadSequence3(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
-                destroyAllGameObjects3();
-                createMissionBackgroundObjects3 (scene3, 'missionBackground');
-                gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
-                gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
                     loadSequence3(sequence-1);
                 });
             }
@@ -247,18 +239,18 @@ function loadSequence3(scene3, sequence) {
     } else if (sequence == 10) { // Sequence jawaban bener
 
         let text = "Bagus sekali, pilihan Anda benar."
-        gameObjects3.announcement = createAnnouncementText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
-        }, middleX - 150, middleY + (missionBoxProps3.height/2) - 100);
-        gameObjects3.exitBtn = createExitButton3(scene3, middleX+150, middleY + (missionBoxProps3.height/2) - 100);
+        gameObjects.announcement = createAnnouncementText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
+        }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
+        gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
     } else if (sequence == 11) {
         start("3",3)
         let text = 'Nah... coba tentukan reaksi yang terjadi dalam larutan penyangga tesebut, yaitu: 20 mL asam asetat 0,1 M dengan 10 mL natrium hidroksida 0,1 M ';
-        gameObjects3.question = createDescText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     }
@@ -271,14 +263,14 @@ function loadSequence3(scene3, sequence) {
             if (checkAnswer3(questionNumber) == true) {
                 done("3",questionNumber)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene3, sequence+1);
+                loadSequence3(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
-                destroyAllGameObjects3();
-                createMissionBackgroundObjects3 (scene3, 'missionBackground');
-                gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
-                gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-                    loadSequence3(scene3, sequence-1);
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence3(scene, sequence-1);
                 });
             }
         });
@@ -288,9 +280,9 @@ function loadSequence3(scene3, sequence) {
     else if (sequence == 13) {
         start("3",4)
         let text = 'Dari reaksi asam basa yang terjadi, tentukan reaktan yang habis bereaksi';
-        gameObjects3.question = createDescText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     }
@@ -303,14 +295,14 @@ function loadSequence3(scene3, sequence) {
             if (checkAnswer3(questionNumber) == true) {
                 done("3",questionNumber)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene3, sequence+1);
+                loadSequence3(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
-                destroyAllGameObjects3();
-                createMissionBackgroundObjects3 (scene3, 'missionBackground');
-                gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
-                gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-                    loadSequence3(scene3, sequence-1);
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence3(scene, sequence-1);
                 });
             }
         });
@@ -321,9 +313,9 @@ function loadSequence3(scene3, sequence) {
     else if (sequence == 15) {
         start("3",5)
         let text = 'Nah…sekarang pilih spesi yang terdapat dalam larutan setelah terjadi reaksi';
-        gameObjects3.question = createDescText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     }
@@ -336,14 +328,14 @@ function loadSequence3(scene3, sequence) {
             if (checkAnswer3(questionNumber) == true) {
                 done("3",questionNumber)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene3, sequence+1);
+                loadSequence3(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
-                destroyAllGameObjects3();
-                createMissionBackgroundObjects3 (scene3, 'missionBackground');
-                gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
-                gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-                    loadSequence3(scene3, sequence-1);
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence3(scene, sequence-1);
                 });
             }
         });
@@ -353,9 +345,9 @@ function loadSequence3(scene3, sequence) {
     else if (sequence == 17) {
         start("3",5)
         let text = 'spesi yang terdapat dalam larutan setelah terjadi reaksi ke dalam gelas kimia kosong';
-        gameObjects3.question = createDescText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     }
@@ -368,14 +360,14 @@ function loadSequence3(scene3, sequence) {
             if (checkAnswer3(questionNumber) == true) {
                 done("3",questionNumber)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene3, sequence+1);
+                loadSequence3(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
-                destroyAllGameObjects3();
-                createMissionBackgroundObjects3 (scene3, 'missionBackground');
-                gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
-                gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-                    loadSequence3(scene3, sequence-1);
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence3(scene, sequence-1);
                 });
             }
         });
@@ -385,9 +377,9 @@ function loadSequence3(scene3, sequence) {
     else if (sequence == 19) {
         start("3",6)
         let text = 'Pilih komponen penyangga yang terdapat dalam campuran';
-        gameObjects3.question = createDescText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     }
@@ -400,14 +392,14 @@ function loadSequence3(scene3, sequence) {
             if (checkAnswer3(questionNumber) == true) {
                 done("3",questionNumber)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene3, sequence+1);
+                loadSequence3(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
-                destroyAllGameObjects3();
-                createMissionBackgroundObjects3 (scene3, 'missionBackground');
-                gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
-                gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-                    loadSequence3(scene3, sequence-1);
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence3(scene, sequence-1);
                 });
             }
         });
@@ -417,9 +409,9 @@ function loadSequence3(scene3, sequence) {
     else if (sequence == 21) {
         start("3",7)
         let text = 'Setelah melewati permainan, tentukan alasan mengapa campuran 20 mL CH3COOH 0,1 M + 10 mL NaOH 0,1 M dapat menyangga pH setelah penambahan sedikit asam/ basa, sedangkan campuran yang lainnya tidak… ';
-        gameObjects3.question = createDescText3(scene3, text);
-        gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-            loadSequence3(scene3, sequence+1);
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence3(scene, sequence+1);
         });
 
     }
@@ -432,22 +424,23 @@ function loadSequence3(scene3, sequence) {
             if (checkAnswer3(questionNumber) == true) {
                 done("3",questionNumber)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene3, sequence+1);
+                loadSequence3(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
-                destroyAllGameObjects3();
-                createMissionBackgroundObjects3 (scene3, 'missionBackground');
-                gameObjects3.youtubePlayer = createYoutubeVideo3(scene3, youtubeId3['problem']);
-                gameObjects3.nextBtn = createNextButton3(scene3, 'LANJUT', () => {
-                    loadSequence3(scene3, sequence-1);
+                destroyAllGameObjects();
+                createMissionBackgroundObjects(scene, 'missionBackground');
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+                    loadSequence3(scene, sequence-1);
                 });
             }
         });
         
     }
 
-
 }
+
+/*
 
 function createExitButton3(scene3, x, y) {
     let button = scene3.add.text(x, y, 'KELUAR')
@@ -460,21 +453,6 @@ function createExitButton3(scene3, x, y) {
         .on('pointerover', () => button.setStyle({ color: '#0000ff' }))
         .on('pointerout', () => button.setStyle({ color: '#ffffff' }))
         .on('pointerdown', () => scene3.scene3.start('MainMenu'));
-
-    return button;
-}
-
-function createYoutubeVideo3(scene3vid, videoId) {
-    return scene3vid.add.rexYoutubePlayer(middleX, middleY, 600, 450, {
-        videoId: videoId,
-        autoPlay: false
-    });
-}
-
-
-
-function checkAnswer3(questionNumber) {
-    return arraysEqual3(selections3, correctAnswers3[questionNumber]);
 }
 
 
@@ -515,38 +493,45 @@ function createChoices3(scene3, questionNumber) {
     choices3 = [];
     console.log("Choices Resetted!");
     // buat nyimpen tombol jawaban mana aja yg dipilih, contoh isinya nanti kayak [1,1,0,0,0]
-    selections3 = new Array(choices3Text3[questionNumber].length).fill(0); 
-    console.log("choices3Text[questionNumber].length: " + choices3Text3[questionNumber].length);
+    selections = new Array(choicesText[questionNumber].length).fill(0); 
+    console.log("choicesText[questionNumber].length: " + choicesText[questionNumber].length);
     console.log("Selections resetted!");
     console.log("Current selections3:\n" + selections3);
 
     let deltaY = 80; // jarak antar masing-masing tombol jawaban
     
-    for (let i = 0; i < choices3Text3[questionNumber].length; i++) {
-        // var choice = createChoiceButton3(scene3, middleX, descBoxTopY+150+(deltaY*i), choices3Text[i]);
-        let choice = createChoiceButton3(scene3, middleX, missionBoxProps3.lowestY+150+(deltaY*i), choices3Text3[questionNumber][i], missionBoxProps3);
-        // console.log(choice);
-        choices3.push(choice);
-        // choice.setVisible(false);
-        choices3[i].on('pointerdown', () => {
-            if (selections3[i] == 0) {
-                choices3[i].setStyle({ backgroundColor: "#FFBF00" });
-                selections3[i] = 1;
-            } else if (selections3[i] == 1) {
-                choices3[i].setStyle({ backgroundColor: "#e6e6e6" });
-                selections3[i] = 0;
-            }
-            console.log("You clicked choice " + i);
-            console.log("Selections Updated!");
-            console.log("Current selections3:\n" + selections3);
-            // console.log(selections3);
-        });
-        // var selections3.append(0);
+    for (let i = 0; i < choicesText[questionNumber].length; i++) {
+        if( typeof choicesText[questionNumber][i] !== 'object'){
+        // var choice = createChoiceButton(scene, middleX, descBoxTopY+150+(deltaY*i), choicesText[i]);
+            let choice = createChoiceButton(scene, middleX, missionBoxProps.lowestY+150+(deltaY*i), choicesText[questionNumber][i], missionBoxProps);
+            // console.log(choice);
+            choices.push(choice);
+            // choice.setVisible(false);
+            choices[i].on('pointerdown', () => {
+                if (selections[i] == 0) {
+                    choices[i].setStyle({ backgroundColor: "#FFBF00" });
+                    selections[i] = 1;
+                } else if (selections[i] == 1) {
+                    choices[i].setStyle({ backgroundColor: "#e6e6e6" });
+                    selections[i] = 0;
+                }
+                console.log("You clicked choice " + i);
+                console.log("Selections Updated!");
+                console.log("Current selections:\n" + selections);
+                // console.log(selections);
+            });
+            // var selections.append(0);
+        }else{
+            console.log(typeof choicesText[questionNumber][i])
+        }
     }
 
     // Object.assign(state, {choices3: choices3, selections3: selections3});
 }
 
+function checkAnswer(questionNumber) {
+    return arraysEqual(selections, correctAnswers[questionNumber]);
+}
 
 function showChoices3(choices3) {
     for (let i = 0; i < choices3.length; i++) {
@@ -865,7 +850,4 @@ function arraysEqual3(a, b) {
     return true;
 }
 
-
-
-
-
+*/

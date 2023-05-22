@@ -45,10 +45,14 @@ var config = {
     canvasStyle: `display: block; width: 100%; height: 100%;`,
 
     //lengkap
-    scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne, missionThree]
+    // scene: [mainMenu, findingObjects1, findingObjects2, question212, selectChara, missionSelection, missionOne, missionThree]
 
     //development
+    // scene: [question214]
+    // scene: [question212, question214]
+    // scene: [missionOne]
     // scene: [findingObjects1]
+    scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne, missionThree]
 };
 
 var game = new Phaser.Game(config);
