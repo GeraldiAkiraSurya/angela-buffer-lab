@@ -155,7 +155,6 @@ function createNextButton(
     return button;
 }
 
-
 //buat pop up
 // function showPopUp(scene, object1, object2, object3, object4, btnHint) {
 //     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);

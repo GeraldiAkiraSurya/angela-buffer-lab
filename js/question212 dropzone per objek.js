@@ -40,9 +40,6 @@ var OHNeg;
 
 var correctAnswer;
 var answerArray;
-var playerAnswerArray;
-
-var cekJawabanBtn;
 
 question212.create = function () {
 
@@ -58,9 +55,7 @@ question212.create = function () {
 
     //variable initialization
     correctAnswer = false;
-    //yg bener itu H+, OH-, CH3COOH, CH3COO-, Na+, H2O
-    answerArray = ['CH3COONeg', 'CH3COOH', 'HPos', 'H2O', 'NaPos', 'OHNeg'];
-    playerAnswerArray = [];
+    answerArray = [];
 
     //nanti jawaban ect diset false
     //beaker jawaban
@@ -88,12 +83,14 @@ Ayo kumpulkan!`;
     //pertama show pop up dulu
     // showPopUp(this, text, title)
 
-    //spesi-spesi
-    CH3COONeg = this.add.image(middleX + 550, middleY + 25, 'CH3COONeg').setInteractive().setScale(0.7);
+    //percobaan button buat jawaban
+    //yg bener itu H+, OH-, CH3COOH, CH3COO-, Na+, H2O
+    //di setName answer karena jawaban bener
+    CH3COONeg = this.add.image(middleX + 550, middleY + 25, 'CH3COONeg').setInteractive().setScale(0.7).setName('answer');
     this.input.setDraggable(CH3COONeg);
 
     //di setName answer karena jawaban bener
-    CH3COOH = this.add.image(middleX + 470, middleY + 100, 'CH3COOH').setInteractive().setScale(0.7);
+    CH3COOH = this.add.image(middleX + 470, middleY + 100, 'CH3COOH').setInteractive().setScale(0.7).setName('answer');
     this.input.setDraggable(CH3COOH);
 
     CH3COONa = this.add.image(middleX + 550, middleY - 100, 'CH3COONa').setInteractive().setScale(0.7);
@@ -107,21 +104,21 @@ Ayo kumpulkan!`;
     this.input.setDraggable(H2);
 
     //di setName answer karena jawaban bener
-    H2O = this.add.image(middleX + 590, middleY + 85, 'H2O').setInteractive().setScale(0.7);
+    H2O = this.add.image(middleX + 590, middleY + 85, 'H2O').setInteractive().setScale(0.7).setName('answer');
     this.input.setDraggable(H2O);
 
     Na = this.add.image(middleX + 430, middleY -70, 'Na').setInteractive().setScale(0.7);
     this.input.setDraggable(Na);
 
     //di setName answer karena jawaban bener
-    NaPos = this.add.image(middleX + 430, middleY - 0, 'NaPos').setInteractive().setScale(0.7);
+    NaPos = this.add.image(middleX + 430, middleY - 0, 'NaPos').setInteractive().setScale(0.7).setName('answer');
     this.input.setDraggable(NaPos);
 
     O2 = this.add.image(middleX + 670, middleY + 85, 'O2').setInteractive().setScale(0.7);
     this.input.setDraggable(O2);
 
     //di setName answer karena jawaban bener
-    OHNeg = this.add.image(middleX + 670, middleY + 20, 'OHNeg').setInteractive().setScale(0.7);
+    OHNeg = this.add.image(middleX + 670, middleY + 20, 'OHNeg').setInteractive().setScale(0.7).setName('answer');
     this.input.setDraggable(OHNeg);
 
     //energy module start
@@ -129,7 +126,7 @@ Ayo kumpulkan!`;
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
     energyText = this.add.text(energyFlaskIcon.x - 15, energyFlaskIcon.y + 5, energy + '%', {font: "700 16px Helvetica", fill: "#000000"});
-    //energy module finished
+    //enerngy module finished
 
     this.input.on('pointerdown', () => {
         //kalau udah ketemu smua ceknya pake inputnya false smua
@@ -161,7 +158,24 @@ Ayo kumpulkan!`;
         gameObject.y = gameObject.y;
         gameObject.input.enabled = false;
 
-        playerAnswerArray.push(gameObject.texture.key);
+        answerArray.push(gameObject.texture.key);
+
+        //kalo bener
+        // if (gameObject.name == dropZone.name) {
+        //     gameObject.x = gameObject.x;
+        //     gameObject.y = gameObject.y;
+
+        //     gameObject.input.enabled = false;
+        // }
+
+        // //kalo salah
+        // else {
+        //     drainEnergy(20, energyText);
+
+        //     gameObject.x = gameObject.input.dragStartX;
+        //     gameObject.y = gameObject.input.dragStartY;
+        //     // alert("salah cuy!!!");
+        // }
     });
 
     this.input.on('dragend', function (pointer, gameObject, dropped) {
@@ -173,19 +187,10 @@ Ayo kumpulkan!`;
     //beres event dragging
 
 
-    cekJawabanBtn = createNextButton(this, 'CEK JAWABAN', () => {
-        // console.log(playerAnswerArray);
-        console.log(checkAnswerDraggable(answerArray, playerAnswerArray));
+    createNextButton(this, 'KONFIRMASI', () => {
+        console.log(answerArray);
 
         //manggil method nunjukkin beaker and ect
-        
-        if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
-            let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncement(this, text)
-        }
-
-        
-
     }, middleX, middleY + 350);
 
 
@@ -196,14 +201,14 @@ question212.update = function () {
     //     alert("You picked the correct combination!");
     // }
 
-    // if (playerAnswerArray.length == 3) {
-    //     if (playerAnswerArray[0] == "phMeter" && playerAnswerArray[1] == "ballPipet" && playerAnswerArray[2] == "beaker") {
+    // if (answerArray.length == 3) {
+    //     if (answerArray[0] == "phMeter" && answerArray[1] == "ballPipet" && answerArray[2] == "beaker") {
     //         correctAnswer = true;
     //     }
     //     else {
     //         alert("You picked the wrong combination!");
-    //         playerAnswerArray = [];
-    //         console.log(playerAnswerArray);
+    //         answerArray = [];
+    //         console.log(answerArray);
     //     }
     // }
 }
@@ -236,47 +241,10 @@ function showPopUp(scene, text, title) {
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
-function showAnnouncement(scene, text) {
-    var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
-
-    let announcement = scene.add.text(middleX, middleY, text)
-        .setOrigin(0.5)
-        .setFontSize('30px');
-
-    var nextBtn = createNextButton(scene, 'LANJUT', () => {
-        nextBtn.destroy();
-        exitBtn.destroy();
-        descriptionBox.destroy();
-        announcement.destroy();
-
-        //manggil method nunjukkin beaker and ect
-    }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
-
-    var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu')
-
-        //manggil method nunjukkin beaker and ect
-    }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
-}
-
 function startMiniGame(scene, object1, object2, object3, object4, btnHint) {
     object1.setVisible(true);
     object2.setVisible(true);
     object3.setVisible(true);
     object4.setVisible(true);
     btnHint.input.enabled = true;
-}
-
-function checkAnswerDraggable (answerArray, playerAnswerArray) {
-    if (playerAnswerArray.length == answerArray.length) {
-        return playerAnswerArray.every(element => {
-          if (answerArray.includes(element)) {
-            return true;
-          }
-    
-          return false;
-        });
-    }
-    
-    return false;
 }
