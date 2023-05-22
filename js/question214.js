@@ -194,10 +194,10 @@ Ayo kumpulkan!`;
 
     //alur game
     //hide all object
-    // hideObject(objectsArray);
+    hideObject(objectsArray);
 
     //show pertanyaan
-    // showPertanyaan214(this, text);
+    showPertanyaan214(this, text);
 }
 
 question214.update = function () {
@@ -258,7 +258,7 @@ function showAnnouncementCorrectAnswer214(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to question 5
+        //to tabulasi screen
         scene.scene.start('Question215');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
