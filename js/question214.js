@@ -48,7 +48,7 @@ question214.create = function () {
     middleY = this.cameras.main.height / 2;
 
     //background
-    this.add.image(middleX, middleY, 'background').setScale(1.17, 0.95);
+    this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
     //variable initialization
     //yg bener itu H+, OH-, Cl-, Na+, H2O
