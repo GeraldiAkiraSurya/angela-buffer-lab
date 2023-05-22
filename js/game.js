@@ -48,8 +48,8 @@ var config = {
     // scene: [mainMenu, findingObjects1, findingObjects2, question212, selectChara, missionSelection, missionOne, missionThree]
 
     //development
-    scene: [question213, question214]
-    // scene: [question213]
+    // scene: [question213, question214]
+    scene: [question214]
     // scene: [missionOne]
     // scene: [findingObjects1]
     // scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne, missionThree]

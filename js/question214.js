@@ -3,12 +3,17 @@ question214 = new Phaser.Scene('Question214');
 question214.preload = function () {
     this.load.path = './assets/';
     this.load.image('greenBeaker', 'question/greenBeaker.png');
+
     this.load.image('HPos', 'question/HPos.png');
     this.load.image('H2', 'question/H2.png');
     this.load.image('H2O', 'question/H2O.png');
     this.load.image('Na', 'question/Na.png');
     this.load.image('NaPos', 'question/NaPos.png');
     this.load.image('OHNeg', 'question/OHNeg.png');
+    this.load.image('ClNeg', 'question/ClNeg.png');
+    this.load.image('HCl', 'question/HCl.png');
+    this.load.image('NaCl', 'question/NaCl.png');
+    this.load.image('Cl2', 'question/Cl2.png');
 
     this.load.image('background', 'scenes/bg_question.png');
 
@@ -91,7 +96,7 @@ Ayo kumpulkan!`;
 
 
     //jawaban bener
-    H2O = this.add.image(middleX + 590, middleY + 85, 'H2O').setInteractive().setScale(0.7);
+    H2O = this.add.image(middleX + 570, middleY + 85, 'H2O').setInteractive().setScale(0.7);
     this.input.setDraggable(H2O);
     objectsArray.push(H2O);
 
@@ -111,6 +116,23 @@ Ayo kumpulkan!`;
     OHNeg = this.add.image(middleX + 670, middleY + 20, 'OHNeg').setInteractive().setScale(0.7);
     this.input.setDraggable(OHNeg);
     objectsArray.push(OHNeg);
+
+    //jawaban benar
+    ClNeg = this.add.image(middleX + 550, middleY + 20, 'ClNeg').setInteractive().setScale(0.7);
+    this.input.setDraggable(ClNeg);
+    objectsArray.push(ClNeg);
+
+    HCl = this.add.image(middleX + 430, middleY + 50, 'HCl').setInteractive().setScale(0.7);
+    this.input.setDraggable(HCl);
+    objectsArray.push(HCl);
+
+    NaCl = this.add.image(middleX + 470, middleY + 100, 'NaCl').setInteractive().setScale(0.7);
+    this.input.setDraggable(NaCl);
+    objectsArray.push(NaCl);
+
+    Cl2 = this.add.image(middleX + 670, middleY + 100, 'Cl2').setInteractive().setScale(0.7);
+    this.input.setDraggable(Cl2);
+    objectsArray.push(Cl2);
 
     this.input.on('pointerdown', () => {
         //kalau udah ketemu smua ceknya pake inputnya false smua
@@ -172,10 +194,10 @@ Ayo kumpulkan!`;
 
     //alur game
     //hide all object
-    hideObject(objectsArray);
+    // hideObject(objectsArray);
 
     //show pertanyaan
-    showPertanyaan214(this, text);
+    // showPertanyaan214(this, text);
 }
 
 question214.update = function () {
@@ -237,7 +259,7 @@ function showAnnouncementCorrectAnswer214(scene, text) {
         announcement.destroy();
 
         //to question 5
-        scene.scene.start('Question214');
+        scene.scene.start('Question215');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
@@ -293,23 +315,40 @@ function startOver214(scene) {
     //kosongin jawaban buat startover
     playerAnswerArray = [];
 
+    //jawaban bener
     HPos = scene.add.image(middleX + 550, middleY - 35, 'HPos').setInteractive().setScale(0.7);
     scene.input.setDraggable(HPos);
 
     H2 = scene.add.image(middleX + 650, middleY - 50, 'H2').setInteractive().setScale(0.7);
     scene.input.setDraggable(H2);
 
-    H2O = scene.add.image(middleX + 590, middleY + 85, 'H2O').setInteractive().setScale(0.7);
+    //jawaban bener
+    H2O = scene.add.image(middleX + 570, middleY + 85, 'H2O').setInteractive().setScale(0.7);
     scene.input.setDraggable(H2O);
 
     Na = scene.add.image(middleX + 430, middleY -70, 'Na').setInteractive().setScale(0.7);
     scene.input.setDraggable(Na);
 
+    //jawaban bener
     NaPos = scene.add.image(middleX + 430, middleY - 0, 'NaPos').setInteractive().setScale(0.7);
     scene.input.setDraggable(NaPos);
 
+    //jawaban bener
     OHNeg = scene.add.image(middleX + 670, middleY + 20, 'OHNeg').setInteractive().setScale(0.7);
     scene.input.setDraggable(OHNeg);
+
+    //jawaban benar
+    ClNeg = scene.add.image(middleX + 550, middleY + 20, 'ClNeg').setInteractive().setScale(0.7);
+    scene.input.setDraggable(ClNeg);
+
+    HCl = scene.add.image(middleX + 430, middleY + 50, 'HCl').setInteractive().setScale(0.7);
+    scene.input.setDraggable(HCl);
+
+    NaCl = scene.add.image(middleX + 470, middleY + 100, 'NaCl').setInteractive().setScale(0.7);
+    scene.input.setDraggable(NaCl);
+
+    Cl2 = scene.add.image(middleX + 670, middleY + 100, 'Cl2').setInteractive().setScale(0.7);
+    scene.input.setDraggable(Cl2);
 
     //btn buat check jawaban kedua kali
     cekJawabanBtn = createNextButton(scene, 'CEK JAWABAN', () => {
