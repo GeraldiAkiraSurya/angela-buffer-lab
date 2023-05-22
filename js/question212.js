@@ -14,9 +14,6 @@ question212.preload = function () {
     this.load.image('O2', 'question/O2.png');
     this.load.image('OHNeg', 'question/OHNeg.png');
 
-    //energy module
-    this.load.image('energyFlask', 'icons/energy_flask.png');
-
     this.load.image('background', 'scenes/question212BG.png');
 
     this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
@@ -143,14 +140,6 @@ Ayo kumpulkan!`;
     this.input.setDraggable(OHNeg);
     objectsArray.push(OHNeg);
 
-
-    //energy module start
-    energy = 100;
-
-    energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
-    energyText = this.add.text(energyFlaskIcon.x - 15, energyFlaskIcon.y + 5, energy + '%', {font: "700 16px Helvetica", fill: "#000000"});
-    //energy module finished
-
     this.input.on('pointerdown', () => {
         //kalau udah ketemu smua ceknya pake inputnya false smua
 
@@ -233,7 +222,7 @@ function showPertanyaan(scene, text, objectsArrayToHide) {
         missionDesc.destroy();
         nextBtn.destroy();
         descriptionBox.destroy();
-        
+
         //munculin semua game object
         showAllObject(objectsArrayToHide);
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
