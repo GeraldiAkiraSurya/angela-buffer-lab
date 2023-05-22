@@ -21,8 +21,6 @@ missionOne.preload = function () {
 
 // GLOBAL VARIABLE pada file ini
 
-let middleX;
-let middleY;
 const COLOR_PRIMARY = 0x2E4E34; //2E4E34  //0x4e342e
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
@@ -69,9 +67,6 @@ let correctAnswers = {
 let mode = 'normal'; // kalo diisi 'misi' bakal skip dialog
 
 missionOne.create = function() {
-
-    canvasWidth = game.canvas.width;
-    canvasHeight = game.canvas.height;
     middleX = this.cameras.main.width / 2;
     middleY = this.cameras.main.height / 2;
 

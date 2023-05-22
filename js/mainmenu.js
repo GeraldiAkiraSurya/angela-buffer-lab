@@ -10,16 +10,11 @@ mainMenu.preload = function () {
 
     this.load.image('sora', 'characters/female.png');
     this.load.image('shin', 'characters/male.png');
-
-    //video player plugin
-    this.load.plugin('rexyoutubeplayerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexyoutubeplayerplugin.min.js', true);
 }
 
 var btnStart;
 var btnOptions;
 var btnProfile
-
-var youtubePlayer;
 
 //male
 var shin;
@@ -50,15 +45,15 @@ mainMenu.create = function () {
         isMenuMusicPlaying = true;
     }
 
-    canvasWidth = game.canvas.width;
-    canvasHeight = game.canvas.height;
+    middleX = this.cameras.main.width / 2;
+    middleY = this.cameras.main.height / 2;
 
     //background main menu
-    this.add.image(canvasWidth/2, canvasHeight/2, 'menuBackground').setScale(0.65, 0.52);
+    this.add.image(middleX, middleY, 'menuBackground').setScale(0.65, 0.52);
 
     //add characters
-    shin = this.add.image(canvasWidth/2 - 400, canvasHeight/2 - 150, 'shin').setScale(0.56).setVisible(false);
-    sora = this.add.image(canvasWidth/2 + 400, canvasHeight/2 - 150, 'sora').setScale(0.56).setFlipX(true).setVisible(false);
+    shin = this.add.image(middleX - 400, middleY - 150, 'shin').setScale(0.56).setVisible(false);
+    sora = this.add.image(middleX + 400, middleY - 150, 'sora').setScale(0.56).setFlipX(true).setVisible(false);
 
     // console.log(character);
 
@@ -68,20 +63,6 @@ mainMenu.create = function () {
     else if (character == 'female') {
         sora.setVisible(true);
     }
-
-    //video player
-    // video = this.add.video(canvasWidth/2, canvasHeight/2);
-    // let url = 'https://www.youtube.com/embed/tgbNymZ7vqY';
-    // video.loadURL('https://www.youtube.com/embed/tgbNymZ7vqY');
-
-    // video.play();
-
-    //pake plugins tapi blm berhasil
-    // youtubePlayer = this.add.rexYoutubePlayer(0, 0, 600, 450, {
-    //     videoId: 'wDOym-mXxO4'
-    // }).on('ready', function () {
-    //     youtubePlayer.setPosition(canvasWidth/2, canvasHeight/2);
-    // });    
 
     //buttons
     btnStart = this.add.image(canvasWidth/2, canvasHeight/2, 'startButton').setInteractive().setScale(0.5);
@@ -104,7 +85,7 @@ mainMenu.create = function () {
     // this.tweens.add({
     //     targets: [btnStart],
     //     duration: 1000,
-    //     x: canvasWidth/2,
+    //     x: middleX,
     //     scaleX: 2,
     //     scaleY: 2,
     //     ease: 'Bounce.easeIn'

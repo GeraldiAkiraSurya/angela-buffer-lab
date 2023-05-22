@@ -1,12 +1,13 @@
-//Finding Objects 1
-findingObjects1 = new Phaser.Scene('FindingObjects1');
+//Finding Objects 2
+findingObjects2 = new Phaser.Scene('FindingObjects2');
 
-findingObjects1.preload = function () {
+findingObjects2.preload = function () {
     this.load.path = './assets/';
-    this.load.image('beaker', 'lab_eq/Beaker.png');
-    this.load.image('spatula', 'lab_eq/Spatula.png');
-    this.load.image('testTube', 'lab_eq/TestTube.png');
-    this.load.image('testTubeRack', 'lab_eq/TestTubeRack.png');
+    this.load.image('sprayBottle', 'lab_eq/SprayBottle.png');
+    this.load.image('dropper', 'lab_eq/Dropper.png');
+    //perlu ganti dgn yg transparant
+    this.load.image('measuringCylinder', 'lab_eq/MeasuringCylinder.png');
+    this.load.image('stirringRod', 'lab_eq/StirringRod.png');
 
     this.load.image('background', 'scenes/finding_objects1.png');
 
@@ -22,27 +23,27 @@ findingObjects1.preload = function () {
     this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
 }
 
-var beaker;
-var spatula;
-var testTube;
-var testTubeRack;
+var sprayBottle;
+var dropper;
+var measuringCylinder;
+var stirringRod;
 
-var beakerIndicator;
-var spatulaIndicator;
-var testTubeIndicator;
-var testTubeRackIndicator;
+var sprayBottleIndicator;
+var dropperIndicator;
+var measuringCylinderIndicator;
+var stirringRodIndicator;
 
 //drop zone destinasi
-var dropZoneBeakerBG;
-var dropZoneSpatulaBG;
-var dropZoneTestTubeBG;
-var dropZoneTestTubeRackBG;
+var dropZoneSprayBottleBG;
+var dropZoneDropperBG;
+var dropZoneMeasuringCylinderBG;
+var dropZoneStirringRodBG;
 
 //boolean: object found or not
-var beakerFound;
-var spatulaFound;
-var testTubeFound;
-var testTubeRackFound;
+var sprayBottleFound;
+var dropperFound;
+var measuringCylinderFound;
+var stirringRodFound;
 var energyFlask1Found;
 var energyFlask2Found;
 
@@ -71,7 +72,7 @@ var correctAnswer;
 
 var btnHint;
 
-findingObjects1.create = function () {
+findingObjects2.create = function () {
     //x 1879 y 1008
     //halve value: 940, 504
     //comment nanti, keperluan debugging doang. harusnya di initiate dari main menu.
@@ -89,10 +90,10 @@ findingObjects1.create = function () {
     isGameOverRendered = false;
     outOfEnergy = false;
     lookingForEnergyFlask = false;
-    beakerFound = false;
-    spatulaFound = false;
-    testTubeFound = false;
-    testTubeRackFound = false;
+    sprayBottleFound = false;
+    dropperFound = false;
+    measuringCylinderFound = false;
+    stirringRodFound = false;
     energyFlask1Found = false;
     energyFlask2Found = false;
 
@@ -100,22 +101,22 @@ findingObjects1.create = function () {
     //setScale buat skala imagenya, belum tau hitboxnya keganti ato engga. kayanya ga keganti, atau hitboxnya lebih besar dari imagenya
     //setInteractive buat bisa interactable
     //load image to scene
-    // beaker = this.add.image(650, 840, 'beaker').setInteractive().setScale(0.5);
-    beaker = this.add.image(middleX - 290, middleY + 256, 'beaker').setInteractive().setScale(0.5).setVisible(false);
+    // sprayBottle = this.add.image(650, 840, 'sprayBottle').setInteractive().setScale(0.5);
+    sprayBottle = this.add.image(middleX - 290, middleY + 256, 'sprayBottle').setInteractive().setScale(0.5).setVisible(false);
     //biar bisa di-drag
-    this.input.setDraggable(beaker);    
+    this.input.setDraggable(sprayBottle);    
 
-    // spatula = this.add.image(1655, 165, 'spatula').setInteractive().setScale(0.2).setAngle(17);
-    spatula = this.add.image(middleX + 725, middleY - 339, 'spatula').setInteractive().setScale(0.2).setAngle(17).setVisible(false);
-    this.input.setDraggable(spatula);
+    // dropper = this.add.image(1655, 165, 'dropper').setInteractive().setScale(0.2).setAngle(17);
+    dropper = this.add.image(middleX + 725, middleY - 339, 'dropper').setInteractive().setScale(0.2).setAngle(17).setVisible(false);
+    this.input.setDraggable(dropper);
 
-    // testTube = this.add.image(500, 565, 'testTube').setInteractive().setScale(0.12).setAngle(-7);
-    testTube = this.add.image(middleX - 440, middleY + 61, 'testTube').setInteractive().setScale(0.12).setAngle(-7).setVisible(false);
-    this.input.setDraggable(testTube);
+    // measuringCylinder = this.add.image(500, 565, 'measuringCylinder').setInteractive().setScale(0.12).setAngle(-7);
+    measuringCylinder = this.add.image(middleX - 440, middleY + 61, 'measuringCylinder').setInteractive().setScale(0.12).setAngle(-7).setVisible(false);
+    this.input.setDraggable(measuringCylinder);
 
-    // testTubeRack = this.add.image(1110, 100, 'testTubeRack').setInteractive().setScale(0.2).setAngle(7);
-    testTubeRack = this.add.image(middleX + 170, middleY - 416, 'testTubeRack').setInteractive().setScale(0.2).setVisible(false);
-    this.input.setDraggable(testTubeRack);
+    // stirringRod = this.add.image(1110, 100, 'stirringRod').setInteractive().setScale(0.2).setAngle(7);
+    stirringRod = this.add.image(middleX + 170, middleY - 416, 'stirringRod').setInteractive().setScale(0.2).setVisible(false);
+    this.input.setDraggable(stirringRod);
 
     //gift box & book
     giftBox = this.add.image(middleX, middleY + 50, 'giftBox').setVisible(false);
@@ -126,7 +127,7 @@ findingObjects1.create = function () {
         // console.log('clicked book!');
         //manggil methodnya disini dim
 
-        findingObjects1.scene.start('MissionSelection');
+        findingObjects2.scene.start('MissionSelection');
     });
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
@@ -139,17 +140,17 @@ findingObjects1.create = function () {
 
     btnHint.on('pointerup', function () {
         let objectsArray = [];
-        if (!beakerFound) {
-            objectsArray.push(beaker);
+        if (!sprayBottleFound) {
+            objectsArray.push(sprayBottle);
         }
-        if (!spatulaFound) {
-            objectsArray.push(spatula);
+        if (!dropperFound) {
+            objectsArray.push(dropper);
         }
-        if (!testTubeFound) {
-            objectsArray.push(testTube);
+        if (!measuringCylinderFound) {
+            objectsArray.push(measuringCylinder);
         }
-        if (!testTubeRackFound) {
-            objectsArray.push(testTubeRack);
+        if (!stirringRodFound) {
+            objectsArray.push(stirringRod);
         }
         // console.log(objectsArray);
         // console.log(Math.floor(Math.random() * 4));
@@ -162,23 +163,23 @@ findingObjects1.create = function () {
     //940 504
 
     //drop zone background size default 128x128
-    dropZoneBeakerBG = this.add.image(middleX - 640, middleY - 439, 'dropZoneBG');
-    dropZoneTestTubeBG = this.add.image(middleX - 490, middleY - 439, 'dropZoneBG');
-    dropZoneSpatulaBG = this.add.image(middleX - 340, middleY - 439, 'dropZoneBG');
-    dropZoneTestTubeRackBG = this.add.image(middleX - 190, middleY - 439, 'dropZoneBG');
+    dropZoneSprayBottleBG = this.add.image(middleX - 640, middleY - 439, 'dropZoneBG');
+    dropZoneDropperBG = this.add.image(middleX - 490, middleY - 439, 'dropZoneBG');
+    dropZoneMeasuringCylinderBG = this.add.image(middleX - 340, middleY - 439, 'dropZoneBG');
+    dropZoneStirringRodBG = this.add.image(middleX - 190, middleY - 439, 'dropZoneBG');
 
     //drop zone. set name buat id. samain kaya nama texturenya
     //kenapa di set 128? biar sama dengan asset
-    const beakerZone = this.add.zone(middleX - 640, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('beaker');
-    const testTubeZone = this.add.zone(middleX - 490, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('testTube');
-    const spatulaZone = this.add.zone(middleX - 340, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('spatula');
-    const testTubeRackZone = this.add.zone(middleX - 190, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('testTubeRack');
+    const sprayBottleZone = this.add.zone(middleX - 640, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('sprayBottle');
+    const dropperZone = this.add.zone(middleX - 490, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('dropper');
+    const measuringCylinderZone = this.add.zone(middleX - 340, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('measuringCylinder');
+    const stirringRodZone = this.add.zone(middleX - 190, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('stirringRod');
 
     //text dalam dropZone
-    this.add.text(middleX - 670, middleY - 464, "Gelas\nKimia", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(middleX - 530, middleY - 464, "Tabung\nReaksi", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(middleX - 380, middleY - 454, "Spatula", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(middleX - 230, middleY - 464, "   Rak\nTabung", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 686, middleY - 464, "   Botol\nSemprot", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 520, middleY - 464, "Pipet\nTetes", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 370, middleY - 464, "Gelas\n Ukur", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 243, middleY - 464, "  Batang\nPengaduk", {font: "900 20px Helvetica", fill: "#000000"});
 
     //timer 15 detik per objek
     //keperluan debugging
@@ -228,38 +229,38 @@ findingObjects1.create = function () {
             //findingObject2.js bermasalah
             //foundObjectnya ngaco
             switch (dropZone.name) {
-                case 'beaker':
+                case 'sprayBottle':
                     //tandain objeknya ketemu
-                    beakerFound = foundObject(dropZone.name);
-                    beaker.setVisible(false);
-                    dropZoneBeakerBG.setTint(0x08F26E);
+                    sprayBottleFound = foundObject(dropZone.name);
+                    sprayBottle.setVisible(false);
+                    dropZoneSprayBottleBG.setTint(0x08F26E);
                     //destroy the zone biar yg lain ga dicoba di drag lagi kesini
-                    beakerZone.destroy();
-                    // console.log(beakerFound);
+                    sprayBottleZone.destroy();
+                    // console.log(sprayBottleFound);
                     break;
-                case 'spatula':
-                    spatulaFound = foundObject(dropZone.name);
-                    spatula.setVisible(false);
-                    dropZoneSpatulaBG.setTint(0x08F26E);
+                case 'dropper':
+                    dropperFound = foundObject(dropZone.name);
+                    dropper.setVisible(false);
+                    dropZoneDropperBG.setTint(0x08F26E);
 
-                    spatulaZone.destroy();
-                    // console.log(spatulaFound);
+                    dropperZone.destroy();
+                    // console.log(dropperFound);
                     break;
-                case 'testTube':
-                    testTubeFound = foundObject(dropZone.name);
-                    testTube.setVisible(false);
-                    dropZoneTestTubeBG.setTint(0x08F26E);
+                case 'measuringCylinder':
+                    measuringCylinderFound = foundObject(dropZone.name);
+                    measuringCylinder.setVisible(false);
+                    dropZoneMeasuringCylinderBG.setTint(0x08F26E);
 
-                    testTubeZone.destroy();
-                    // console.log(testTubeFound);
+                    measuringCylinderZone.destroy();
+                    // console.log(measuringCylinderFound);
                     break;
-                case 'testTubeRack':
-                    testTubeRackFound = foundObject(dropZone.name);
-                    testTubeRack.setVisible(false);
-                    dropZoneTestTubeRackBG.setTint(0x08F26E);
+                case 'stirringRod':
+                    stirringRodFound = foundObject(dropZone.name);
+                    stirringRod.setVisible(false);
+                    dropZoneStirringRodBG.setTint(0x08F26E);
 
-                    testTubeRackZone.destroy();
-                    // console.log(testTubeRackFound);
+                    stirringRodZone.destroy();
+                    // console.log(stirringRodFound);
                     break;
             }
 
@@ -298,10 +299,10 @@ findingObjects1.create = function () {
         lookingForEnergyFlask = false;
         // isGameOverRendered = false;
 
-        beaker.input.enabled = true;
-        spatula.input.enabled = true;
-        testTube.input.enabled = true;
-        testTubeRack.input.enabled = true;
+        sprayBottle.input.enabled = true;
+        dropper.input.enabled = true;
+        measuringCylinder.input.enabled = true;
+        stirringRod.input.enabled = true;
 
         // console.log('outOfEnergy: ' + outOfEnergy);
         // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
@@ -319,10 +320,10 @@ findingObjects1.create = function () {
         lookingForEnergyFlask = false;
         // isGameOverRendered = false;
 
-        beaker.input.enabled = true;
-        spatula.input.enabled = true;
-        testTube.input.enabled = true;
-        testTubeRack.input.enabled = true;
+        sprayBottle.input.enabled = true;
+        dropper.input.enabled = true;
+        measuringCylinder.input.enabled = true;
+        stirringRod.input.enabled = true;
 
         // console.log('outOfEnergy: ' + outOfEnergy);
         // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
@@ -334,20 +335,20 @@ findingObjects1.create = function () {
     });
 
     //alur game
-    showObjective(this, beaker, spatula, testTube, testTubeRack, btnHint);
+    showObjective(this, sprayBottle, dropper, measuringCylinder, stirringRod, btnHint);
 }
 
-findingObjects1.update = function () {
+findingObjects2.update = function () {
     //out of energy
     //kalo energi abis, disable smua objek interactivenya, dropZone nya
     //yg enabled cmn energyFlask
     if (energy == 0) {
         // console.log("energimu telah habis!");
 
-        beaker.input.enabled = false;
-        spatula.input.enabled = false;
-        testTube.input.enabled = false;
-        testTubeRack.input.enabled = false;
+        sprayBottle.input.enabled = false;
+        dropper.input.enabled = false;
+        measuringCylinder.input.enabled = false;
+        stirringRod.input.enabled = false;
 
         if (!lookingForEnergyFlask) {
             outOfEnergy = true;
@@ -359,7 +360,7 @@ findingObjects1.update = function () {
     }
 
     //completion
-    if (beakerFound && spatulaFound && testTubeFound && testTubeRackFound) {
+    if (sprayBottleFound && dropperFound && measuringCylinderFound && stirringRodFound) {
         // console.log('horeee beres');
         findTimer.paused = true;
         giftBox.setVisible(true);
