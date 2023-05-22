@@ -3,8 +3,8 @@ missionOne = new Phaser.Scene('Misi1');
 missionOne.preload = function () {
     this.load.path = './assets/';
     this.load.image('menuBackground', 'scenes/science_lab.jpg');
-    this.load.image('missionBackground', 'scenes/lab_desk.jpg')
-    this.load.image('textBoxBackground', 'scenes/textbox_background.png');
+    this.load.image('missionBackground', 'scenes/lab_desk.jpg');
+    // this.load.image('textBoxBackground', 'scenes/textbox_background.png');
 
     //pluginsnya pindahin ke game?
 
@@ -430,8 +430,8 @@ function destroyAllGameObjects() {
     });
 }
 
-function createYoutubeVideo(scene, videoId) {
-    return scene.add.rexYoutubePlayer(middleX, middleY, 600, 450, {
+function createYoutubeVideo(scenevid, videoId) {
+    return scenevid.add.rexYoutubePlayer(middleX, middleY, 600, 450, {
         videoId: videoId,
         autoPlay: false
     });

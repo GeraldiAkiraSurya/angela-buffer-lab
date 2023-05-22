@@ -50,7 +50,6 @@ missionSelection.create = function() {
     let btnMsn4 = new Button((canvasWidth/2) + (1*deltaX), baseY, 'MISI IV', this, () => {this.scene.start('mission4')},jsonMissionProses["4"]);
     let btnMsn5 = new Button((canvasWidth/2) + (2*deltaX), baseY, 'MISI V', this, () => {this.scene.start('mission5')},jsonMissionProses["5"]);
 
-    console.log(title.style.stroke);
     // console.log(Phaser.GameObjects.Text)
     // btnMsn1.setStroke('#000000', 100);
     // console.log(btnMsn1.stroke);
