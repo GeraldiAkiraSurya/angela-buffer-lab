@@ -188,7 +188,7 @@ Ayo kumpulkan!`;
             destroyObject(objectsArray);
 
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncementCorrectAnswer(this, text)
+            showAnnouncementCorrectAnswer212(this, text)
         }
         else {
             //destory all objects
@@ -196,7 +196,7 @@ Ayo kumpulkan!`;
 
             let text = "Jawaban Anda salah, Anda punya 1x kesempatan untuk mencoba menjawab kembali.";
             let clueText = "Spesi sesuai dengan reaksi disosiasi yang terjadi, dan pertimbangkan juga bahwa dalam larutan terdapat air";
-            showAnnouncementWrongAnswer(this, text, clueText);
+            showAnnouncementWrongAnswer212(this, text, clueText);
         }  
 
     }, middleX, middleY + 350);
@@ -207,14 +207,14 @@ Ayo kumpulkan!`;
     hideObject(objectsArray);
 
     //show pertanyaan
-    showPertanyaan(this, text);
+    showPertanyaan212(this, text);
 }
 
 question212.update = function () {
     
 }
 
-function showPertanyaan(scene, text) {
+function showPertanyaan212(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let missionDesc = scene.add.text(middleX, middleY, text)
@@ -231,7 +231,7 @@ function showPertanyaan(scene, text) {
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
-function showClue(scene, text) {
+function showClue212(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
     var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
@@ -255,7 +255,7 @@ function showClue(scene, text) {
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
-function showAnnouncementCorrectAnswer(scene, text) {
+function showAnnouncementCorrectAnswer212(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let announcement = scene.add.text(middleX, middleY, text)
@@ -276,7 +276,7 @@ function showAnnouncementCorrectAnswer(scene, text) {
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
 
-function showAnnouncementWrongAnswer(scene, text, clueText) {
+function showAnnouncementWrongAnswer212(scene, text, clueText) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
     var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
@@ -310,7 +310,7 @@ function showAnnouncementWrongAnswer(scene, text, clueText) {
         descriptionBox.destroy();
         missionDesc.destroy();
 
-        showClue(scene, clueText);
+        showClue212(scene, clueText);
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);
 }
@@ -362,7 +362,7 @@ function startOver212(scene) {
             destroyObject(objectsArray)
 
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncementCorrectAnswer(scene, text)
+            showAnnouncementCorrectAnswer212(scene, text)
         }
         else {
             //salah kedua kali? langsung tendang ke main menu
