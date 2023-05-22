@@ -37,7 +37,6 @@ var OHNeg;
 
 var objectsArray;
 
-var correctAnswer;
 var answerArray;
 var playerAnswerArray;
 
@@ -56,7 +55,6 @@ question212.create = function () {
     this.add.image(middleX, middleY, 'background').setScale(1.17, 0.95);
 
     //variable initialization
-    correctAnswer = false;
     //yg bener itu H+, OH-, CH3COOH, CH3COO-, Na+, H2O
     answerArray = ['CH3COONeg', 'CH3COOH', 'HPos', 'H2O', 'NaPos', 'OHNeg'];
     playerAnswerArray = [];
@@ -79,7 +77,6 @@ question212.create = function () {
     //text pertanyaan
     textPertanyaan = this.add.text(middleX - 870, middleY - 304, "Pindahkan spesi\nyang ada dalam sistem\nke dalam gelas\nkimia kosong", {font: "900 50px Helvetica", fill: "#ffffff"});
 
-    var title = '';
     var text = `
 Spesi apa saja yang ada dalam larutan?
 
@@ -184,21 +181,22 @@ Ayo kumpulkan!`;
     //btn buat check jawaban
     cekJawabanBtn = createNextButton(this, 'CEK JAWABAN', () => {
         // console.log(playerAnswerArray);
-        // console.log(checkAnswerDraggable(answerArray, playerAnswerArray));       
+        // console.log(checkAnswerDraggable(answerArray, playerAnswerArray));
         
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
-            destroyObject(objectsArray)
+            destroyObject(objectsArray);
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer(this, text)
         }
         else {
             //destory all objects
-            destroyObject(objectsArray)
+            destroyObject(objectsArray);
 
             let text = "Jawaban Anda salah, Anda punya 1x kesempatan untuk mencoba menjawab kembali.";
-            showAnnouncementWrongAnswer(this, text, objectsArray);
+            let clueText = "Spesi sesuai dengan reaksi disosiasi yang terjadi, dan pertimbangkan juga bahwa dalam larutan terdapat air";
+            showAnnouncementWrongAnswer(this, text, clueText);
         }  
 
     }, middleX, middleY + 350);
@@ -209,7 +207,7 @@ Ayo kumpulkan!`;
     hideObject(objectsArray);
 
     //show pertanyaan
-    showPertanyaan(this, text, objectsArray);
+    showPertanyaan(this, text);
 }
 
 question212.update = function () {
@@ -217,7 +215,7 @@ question212.update = function () {
 }
 
 //otw pindahin ke global
-function showPertanyaan(scene, text, objectsArray) {
+function showPertanyaan(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let missionDesc = scene.add.text(middleX, middleY, text)
@@ -254,7 +252,7 @@ function showClue(scene, text) {
         descriptionBox.destroy();
 
         //reset game objects location
-        startMission(scene, objectsArray);
+        startOver212(scene);
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
@@ -279,7 +277,7 @@ function showAnnouncementCorrectAnswer(scene, text) {
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
 
-function showAnnouncementWrongAnswer(scene, text) {
+function showAnnouncementWrongAnswer(scene, text, clueText) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
     var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
@@ -293,8 +291,8 @@ function showAnnouncementWrongAnswer(scene, text) {
         },
     });
 
-    //maybe harus ngosongin array pas game over.
-    //update kayanya ga usah
+    //maybe harus ngosongin array objectsArray di question212 pas game over.
+    //ga perlu
     // console.log(objectsArray);
 
     var nextBtn = createNextButton(scene, 'COBA LAGI', () => {
@@ -303,7 +301,7 @@ function showAnnouncementWrongAnswer(scene, text) {
         descriptionBox.destroy();
         missionDesc.destroy();
 
-        startMission(scene);
+        startOver212(scene);
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
@@ -313,60 +311,49 @@ function showAnnouncementWrongAnswer(scene, text) {
         descriptionBox.destroy();
         missionDesc.destroy();
 
-        let text = "Spesi sesuai dengan reaksi disosiasi yang terjadi, dan pertimbangkan juga bahwa dalam larutan terdapat air";
-        showClue(scene, text);
+        showClue(scene, clueText);
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);
 }
 
 //buat ngereset game object ke posisi semula
 //perlu di push lagi ke array ga ya?
-//kayanya ga usah
-function startMission(scene) {
+//ga usah
+function startOver212(scene) {
+    //kosongin jawaban buat startover
+    playerAnswerArray = [];
+
     CH3COONeg = scene.add.image(middleX + 550, middleY + 25, 'CH3COONeg').setInteractive().setScale(0.7);
     scene.input.setDraggable(CH3COONeg);
 
-    //jawaban bener
     CH3COOH = scene.add.image(middleX + 470, middleY + 100, 'CH3COOH').setInteractive().setScale(0.7);
     scene.input.setDraggable(CH3COOH);
-
 
     CH3COONa = scene.add.image(middleX + 550, middleY - 100, 'CH3COONa').setInteractive().setScale(0.7);
     scene.input.setDraggable(CH3COONa);
 
-
-    //jawaban bener
     HPos = scene.add.image(middleX + 550, middleY - 35, 'HPos').setInteractive().setScale(0.7);
     scene.input.setDraggable(HPos);
-
 
     H2 = scene.add.image(middleX + 650, middleY - 50, 'H2').setInteractive().setScale(0.7);
     scene.input.setDraggable(H2);
 
-
-    //jawaban bener
     H2O = scene.add.image(middleX + 590, middleY + 85, 'H2O').setInteractive().setScale(0.7);
     scene.input.setDraggable(H2O);
-
 
     Na = scene.add.image(middleX + 430, middleY -70, 'Na').setInteractive().setScale(0.7);
     scene.input.setDraggable(Na);
 
-
-    //jawaban bener
     NaPos = scene.add.image(middleX + 430, middleY - 0, 'NaPos').setInteractive().setScale(0.7);
     scene.input.setDraggable(NaPos);
-
 
     O2 = scene.add.image(middleX + 670, middleY + 85, 'O2').setInteractive().setScale(0.7);
     scene.input.setDraggable(O2);
 
-
-    //jawaban bener
     OHNeg = scene.add.image(middleX + 670, middleY + 20, 'OHNeg').setInteractive().setScale(0.7);
     scene.input.setDraggable(OHNeg);
 
-    //btn buat check jawaban
+    //btn buat check jawaban kedua kali
     cekJawabanBtn = createNextButton(scene, 'CEK JAWABAN', () => {
         // console.log(playerAnswerArray);
         // console.log(checkAnswerDraggable(answerArray, playerAnswerArray));       
@@ -379,11 +366,8 @@ function startMission(scene) {
             showAnnouncementCorrectAnswer(scene, text)
         }
         else {
-            //destory all objects
-            destroyObject(objectsArray)
-
-            let text = "Jawaban Anda salah, Anda punya 1x kesempatan untuk mencoba menjawab kembali.";
-            showAnnouncementWrongAnswer(scene, text, objectsArray);
+            //salah kedua kali? langsung tendang ke main menu
+            scene.scene.start('MainMenu')
         }  
 
     }, middleX, middleY + 350);
