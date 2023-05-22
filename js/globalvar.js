@@ -17,3 +17,14 @@ var canvasHeight;
 
 var middleX;
 var middleY;
+
+let gameObjects = {};
+let missionBoxProps = {};
+let choices = [];
+let selections = [];
+let sequence = 0;
+
+let youtubeId = {};
+let choicesText = {};
+let correctAnswers = {}
+let mode = "normal";
