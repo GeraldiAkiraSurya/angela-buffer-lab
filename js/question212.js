@@ -38,6 +38,8 @@ var NaPos;
 var O2;
 var OHNeg;
 
+var objectsArray;
+
 var correctAnswer;
 var answerArray;
 var playerAnswerArray;
@@ -61,6 +63,7 @@ question212.create = function () {
     //yg bener itu H+, OH-, CH3COOH, CH3COO-, Na+, H2O
     answerArray = ['CH3COONeg', 'CH3COOH', 'HPos', 'H2O', 'NaPos', 'OHNeg'];
     playerAnswerArray = [];
+    objectsArray = [];
 
     //nanti jawaban ect diset false
     //beaker jawaban
@@ -85,44 +88,61 @@ Spesi apa saja yang ada dalam larutan?
 
 Ayo kumpulkan!`;
 
-    //pertama show pop up dulu
-    // showPopUp(this, text, title)
-
     //spesi-spesi
+    //jawaban bener
     CH3COONeg = this.add.image(middleX + 550, middleY + 25, 'CH3COONeg').setInteractive().setScale(0.7);
     this.input.setDraggable(CH3COONeg);
+    objectsArray.push(CH3COONeg);
 
-    //di setName answer karena jawaban bener
+    //jawaban bener
     CH3COOH = this.add.image(middleX + 470, middleY + 100, 'CH3COOH').setInteractive().setScale(0.7);
     this.input.setDraggable(CH3COOH);
+    objectsArray.push(CH3COOH);
+
 
     CH3COONa = this.add.image(middleX + 550, middleY - 100, 'CH3COONa').setInteractive().setScale(0.7);
     this.input.setDraggable(CH3COONa);
+    objectsArray.push(CH3COONa);
 
-    //di setName answer karena jawaban bener
-    HPos = this.add.image(middleX + 550, middleY - 35, 'HPos').setInteractive().setScale(0.7).setName('answer');
+
+    //jawaban bener
+    HPos = this.add.image(middleX + 550, middleY - 35, 'HPos').setInteractive().setScale(0.7);
     this.input.setDraggable(HPos);
+    objectsArray.push(HPos);
+
 
     H2 = this.add.image(middleX + 650, middleY - 50, 'H2').setInteractive().setScale(0.7);
     this.input.setDraggable(H2);
+    objectsArray.push(H2);
 
-    //di setName answer karena jawaban bener
+
+    //jawaban bener
     H2O = this.add.image(middleX + 590, middleY + 85, 'H2O').setInteractive().setScale(0.7);
     this.input.setDraggable(H2O);
+    objectsArray.push(H2O);
+
 
     Na = this.add.image(middleX + 430, middleY -70, 'Na').setInteractive().setScale(0.7);
     this.input.setDraggable(Na);
+    objectsArray.push(Na);
 
-    //di setName answer karena jawaban bener
+
+    //jawaban bener
     NaPos = this.add.image(middleX + 430, middleY - 0, 'NaPos').setInteractive().setScale(0.7);
     this.input.setDraggable(NaPos);
+    objectsArray.push(NaPos);
+
 
     O2 = this.add.image(middleX + 670, middleY + 85, 'O2').setInteractive().setScale(0.7);
     this.input.setDraggable(O2);
+    objectsArray.push(O2);
 
-    //di setName answer karena jawaban bener
+
+    //jawaban bener
     OHNeg = this.add.image(middleX + 670, middleY + 20, 'OHNeg').setInteractive().setScale(0.7);
     this.input.setDraggable(OHNeg);
+    objectsArray.push(OHNeg);
+
 
     //energy module start
     energy = 100;
@@ -181,62 +201,45 @@ Ayo kumpulkan!`;
         
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncement(this, text)
-        }
-
-        
+            showAnnouncementCorrectAnswer(this, text)
+        }        
 
     }, middleX, middleY + 350);
+    objectsArray.push(cekJawabanBtn);
 
+    //alur game
+    //hide all object
+    for (let i = 0; i < objectsArray.length; i++) {
+        objectsArray[i].setVisible(false);        
+    }
 
+    //show pertanyaan
+    showPertanyaan(this, text, objectsArray);
 }
 
 question212.update = function () {
-    // if (correctAnswer==true) {
-    //     alert("You picked the correct combination!");
-    // }
-
-    // if (playerAnswerArray.length == 3) {
-    //     if (playerAnswerArray[0] == "phMeter" && playerAnswerArray[1] == "ballPipet" && playerAnswerArray[2] == "beaker") {
-    //         correctAnswer = true;
-    //     }
-    //     else {
-    //         alert("You picked the wrong combination!");
-    //         playerAnswerArray = [];
-    //         console.log(playerAnswerArray);
-    //     }
-    // }
+    
 }
 
 //otw pindahin ke global
-function showPopUp(scene, text, title) {
+function showPertanyaan(scene, text, objectsArrayToHide) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
-    var descBoxTopX = middleX - (descriptionBox.width / 2);
-    var descBoxTopY = middleY - (descriptionBox.height / 2);
-    var titleCard = scene.add.text(middleX, descBoxTopY + 100, title)
-        .setOrigin(0.5)
-        .setFontSize(40);    
 
-    var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+250, text, {
-        fontSize: '30px',
-        align: 'left',
-        wrap: {
-            mode: 'word',
-            width: descriptionBox.width-100
-        },
-    });
+    let missionDesc = scene.add.text(middleX, middleY, text)
+        .setOrigin(0.5)
+        .setFontSize('30px');
 
     var nextBtn = createNextButton(scene, 'LANJUT', () => {
-        titleCard.destroy();
         missionDesc.destroy();
         nextBtn.destroy();
         descriptionBox.destroy();
-
-        //manggil method nunjukkin beaker and ect
+        
+        //munculin semua game object
+        showAllObject(objectsArrayToHide);
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
-function showAnnouncement(scene, text) {
+function showAnnouncementCorrectAnswer(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let announcement = scene.add.text(middleX, middleY, text)
@@ -249,22 +252,44 @@ function showAnnouncement(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //manggil method nunjukkin beaker and ect
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
         scene.scene.start('MainMenu')
 
-        //manggil method nunjukkin beaker and ect
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
 
-function startMiniGame(scene, object1, object2, object3, object4, btnHint) {
-    object1.setVisible(true);
-    object2.setVisible(true);
-    object3.setVisible(true);
-    object4.setVisible(true);
-    btnHint.input.enabled = true;
+function showAnnouncementWrongAnswer(scene, text) {
+    var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
+
+    let announcement = scene.add.text(middleX, middleY, text)
+        .setOrigin(0.5)
+        .setFontSize('30px');
+
+    var nextBtn = createNextButton(scene, 'COBA LAGI', () => {
+        nextBtn.destroy();
+        exitBtn.destroy();
+        descriptionBox.destroy();
+        announcement.destroy();
+
+    }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
+
+    var exitBtn = createNextButton(scene, 'CLUE', () => {     
+        //clue pake showPopUp
+    }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
+}
+
+function hideAllObject(objectsArrayToHide) {
+    for (let i = 0; i < objectsArrayToHide.length; i++) {
+        objectsArrayToHide[i].setVisible(false);
+    }    
+}
+
+function showAllObject(objectsArrayToShow) {
+    for (let i = 0; i < objectsArrayToShow.length; i++) {
+        objectsArrayToShow[i].setVisible(true);
+    }    
 }
 
 function checkAnswerDraggable (answerArray, playerAnswerArray) {
