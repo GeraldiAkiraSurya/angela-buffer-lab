@@ -181,26 +181,32 @@ Ayo kumpulkan!`;
     });
     //beres event dragging
 
-
+    //btn buat check jawaban
     cekJawabanBtn = createNextButton(this, 'CEK JAWABAN', () => {
         // console.log(playerAnswerArray);
-        console.log(checkAnswerDraggable(answerArray, playerAnswerArray));
-
-        //manggil method nunjukkin beaker and ect
+        // console.log(checkAnswerDraggable(answerArray, playerAnswerArray));       
         
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
+            //destory all objects
+            destroyObject(objectsArray)
+
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer(this, text)
-        }        
+        }
+        else {
+            //destory all objects
+            destroyObject(objectsArray)
+
+            let text = "Jawaban Anda salah, Anda punya 1x kesempatan untuk mencoba menjawab kembali.";
+            showAnnouncementWrongAnswer(this, text, objectsArray);
+        }  
 
     }, middleX, middleY + 350);
     objectsArray.push(cekJawabanBtn);
 
     //alur game
     //hide all object
-    for (let i = 0; i < objectsArray.length; i++) {
-        objectsArray[i].setVisible(false);        
-    }
+    hideObject(objectsArray);
 
     //show pertanyaan
     showPertanyaan(this, text, objectsArray);
@@ -211,7 +217,7 @@ question212.update = function () {
 }
 
 //otw pindahin ke global
-function showPertanyaan(scene, text, objectsArrayToHide) {
+function showPertanyaan(scene, text, objectsArray) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let missionDesc = scene.add.text(middleX, middleY, text)
@@ -224,7 +230,31 @@ function showPertanyaan(scene, text, objectsArrayToHide) {
         descriptionBox.destroy();
 
         //munculin semua game object
-        showAllObject(objectsArrayToHide);
+        showObject(objectsArray);
+    }, middleX, middleY + (descriptionBox.height / 2) - 50);
+}
+
+function showClue(scene, text) {
+    var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
+    var descBoxTopX = middleX - (descriptionBox.width / 2);
+    var descBoxTopY = middleY - (descriptionBox.height / 2);
+
+    var clue = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+250, text, {
+        fontSize: '30px',
+        align: 'left',
+        wrap: {
+            mode: 'word',
+            width: descriptionBox.width-100
+        },
+    });
+
+    var nextBtn = createNextButton(scene, 'LANJUT', () => {
+        clue.destroy();
+        nextBtn.destroy();
+        descriptionBox.destroy();
+
+        //reset game objects location
+        startMission(scene, objectsArray);
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
@@ -251,37 +281,133 @@ function showAnnouncementCorrectAnswer(scene, text) {
 
 function showAnnouncementWrongAnswer(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
+    var descBoxTopX = middleX - (descriptionBox.width / 2);
+    var descBoxTopY = middleY - (descriptionBox.height / 2);
 
-    let announcement = scene.add.text(middleX, middleY, text)
-        .setOrigin(0.5)
-        .setFontSize('30px');
+    var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+250, text, {
+        fontSize: '30px',
+        align: 'left',
+        wrap: {
+            mode: 'word',
+            width: descriptionBox.width-100
+        },
+    });
+
+    //maybe harus ngosongin array pas game over.
+    //update kayanya ga usah
+    // console.log(objectsArray);
 
     var nextBtn = createNextButton(scene, 'COBA LAGI', () => {
         nextBtn.destroy();
-        exitBtn.destroy();
+        clueBtn.destroy();
         descriptionBox.destroy();
-        announcement.destroy();
+        missionDesc.destroy();
+
+        startMission(scene);
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
-    var exitBtn = createNextButton(scene, 'CLUE', () => {     
-        //clue pake showPopUp
-    }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
+    var clueBtn = createNextButton(scene, 'CLUE', () => {
+        nextBtn.destroy();
+        clueBtn.destroy();
+        descriptionBox.destroy();
+        missionDesc.destroy();
+
+        let text = "Spesi sesuai dengan reaksi disosiasi yang terjadi, dan pertimbangkan juga bahwa dalam larutan terdapat air";
+        showClue(scene, text);
+
+    }, middleX + 150, middleY + (descriptionBox.height/2) - 100);
 }
 
-function hideAllObject(objectsArrayToHide) {
+function hideObject(objectsArrayToHide) {
     for (let i = 0; i < objectsArrayToHide.length; i++) {
         objectsArrayToHide[i].setVisible(false);
     }    
 }
 
-function showAllObject(objectsArrayToShow) {
+function showObject(objectsArrayToShow) {
     for (let i = 0; i < objectsArrayToShow.length; i++) {
         objectsArrayToShow[i].setVisible(true);
     }    
 }
 
-function checkAnswerDraggable (answerArray, playerAnswerArray) {
+function destroyObject(objectsArrayToDestroy) {
+    for (let i = 0; i < objectsArrayToDestroy.length; i++) {
+        objectsArrayToDestroy[i].destroy();
+    }    
+}
+
+//buat ngereset game object ke posisi semula
+//perlu di push lagi ke array ga ya?
+//kayanya ga usah
+function startMission(scene) {
+    CH3COONeg = scene.add.image(middleX + 550, middleY + 25, 'CH3COONeg').setInteractive().setScale(0.7);
+    scene.input.setDraggable(CH3COONeg);
+
+    //jawaban bener
+    CH3COOH = scene.add.image(middleX + 470, middleY + 100, 'CH3COOH').setInteractive().setScale(0.7);
+    scene.input.setDraggable(CH3COOH);
+
+
+    CH3COONa = scene.add.image(middleX + 550, middleY - 100, 'CH3COONa').setInteractive().setScale(0.7);
+    scene.input.setDraggable(CH3COONa);
+
+
+    //jawaban bener
+    HPos = scene.add.image(middleX + 550, middleY - 35, 'HPos').setInteractive().setScale(0.7);
+    scene.input.setDraggable(HPos);
+
+
+    H2 = scene.add.image(middleX + 650, middleY - 50, 'H2').setInteractive().setScale(0.7);
+    scene.input.setDraggable(H2);
+
+
+    //jawaban bener
+    H2O = scene.add.image(middleX + 590, middleY + 85, 'H2O').setInteractive().setScale(0.7);
+    scene.input.setDraggable(H2O);
+
+
+    Na = scene.add.image(middleX + 430, middleY -70, 'Na').setInteractive().setScale(0.7);
+    scene.input.setDraggable(Na);
+
+
+    //jawaban bener
+    NaPos = scene.add.image(middleX + 430, middleY - 0, 'NaPos').setInteractive().setScale(0.7);
+    scene.input.setDraggable(NaPos);
+
+
+    O2 = scene.add.image(middleX + 670, middleY + 85, 'O2').setInteractive().setScale(0.7);
+    scene.input.setDraggable(O2);
+
+
+    //jawaban bener
+    OHNeg = scene.add.image(middleX + 670, middleY + 20, 'OHNeg').setInteractive().setScale(0.7);
+    scene.input.setDraggable(OHNeg);
+
+    //btn buat check jawaban
+    cekJawabanBtn = createNextButton(scene, 'CEK JAWABAN', () => {
+        // console.log(playerAnswerArray);
+        // console.log(checkAnswerDraggable(answerArray, playerAnswerArray));       
+        
+        if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
+            //destory all objects
+            destroyObject(objectsArray)
+
+            let text = "Bagus sekali, pilihan Anda benar.";
+            showAnnouncementCorrectAnswer(scene, text)
+        }
+        else {
+            //destory all objects
+            destroyObject(objectsArray)
+
+            let text = "Jawaban Anda salah, Anda punya 1x kesempatan untuk mencoba menjawab kembali.";
+            showAnnouncementWrongAnswer(scene, text, objectsArray);
+        }  
+
+    }, middleX, middleY + 350);
+}
+
+function checkAnswerDraggable(answerArray, playerAnswerArray) {
     if (playerAnswerArray.length == answerArray.length) {
         return playerAnswerArray.every(element => {
           if (answerArray.includes(element)) {
