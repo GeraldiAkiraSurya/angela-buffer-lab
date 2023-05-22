@@ -268,8 +268,8 @@ function showAnnouncementCorrectAnswer212(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to question 3
-        scene.scene.start('Question214');
+        //to tabulasi screen
+        scene.scene.start('Question213');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
