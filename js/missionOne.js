@@ -160,8 +160,9 @@ function loadSequence(scene, sequence) {
             loadSequence(scene, sequence+1);
         });
 
-    } else if (sequence == 5) { // Sequence soal pertanyaan
+    } else if (sequence == 5) { // Sequence soal pertanyaan SOAL1
 
+        start("1",1);
         let text = 'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?';
         gameObjects.question = createDescText(scene, text);
         // Button untuk load sequence selanjutnya
@@ -176,6 +177,7 @@ function loadSequence(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
+                done("1",1);
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence(scene, sequence+1);
             } else {
@@ -198,8 +200,9 @@ function loadSequence(scene, sequence) {
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
-    } else if (sequence == 8) { // Sequence pertanyaan
+    } else if (sequence == 8) { // Sequence pertanyaan SOAL2
         
+        start("1",2);
         let text = 'Nah..berdasarkan perubahan pH yang terjadi pada larutan – larutan dalam video, manakah sistem yang dapat mempertahankan pHnya setelah penambahan 5 tetes asam atau basa kuat?';
         gameObjects.question = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
@@ -213,6 +216,7 @@ function loadSequence(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
+                done("1",2);
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence(scene, sequence+1);
             } else {
@@ -251,8 +255,9 @@ function loadSequence(scene, sequence) {
             loadSequence(scene, sequence+1);
         });
 
-    } else if (sequence == 13) { // Sequence soal pertanyaan
+    } else if (sequence == 13) { // Sequence soal pertanyaan SOAL3
 
+        start("1",3);
         let text = 'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?';
         gameObjects.question = createDescText(scene, text);
         // Button untuk load sequence selanjutnya
@@ -267,6 +272,7 @@ function loadSequence(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
+                done("1",3);
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence(scene, sequence+1);
             } else {
@@ -289,8 +295,9 @@ function loadSequence(scene, sequence) {
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
-    } else if (sequence == 16) { // Sequence soal pertanyaan
+    } else if (sequence == 16) { // Sequence soal pertanyaan SOAL4
 
+        start("1",4);
         let text = 'Nah..berdasarkan perubahan pH yang terjadi pada larutan – larutan dalam video, manakah sistem yang dapat mempertahankan pHnya setelah penambahan 5 tetes asam atau basa kuat?';
         gameObjects.question = createDescText(scene, text);
         // Button untuk load sequence selanjutnya
@@ -305,6 +312,7 @@ function loadSequence(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
+                done("1",4);
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence(scene, sequence+1);
             } else {
@@ -327,8 +335,9 @@ function loadSequence(scene, sequence) {
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
-    } else if (sequence == 19) { // Sequence soal pertanyaan
+    } else if (sequence == 19) { // Sequence soal pertanyaan SOAL5
 
+        start("1",5);
         let text = 'Mengapa campuran CH3COOH + CH3COONa dan NH3 + NH4Cl dapat disebut larutan penyangga?';
         gameObjects.question = createDescText(scene, text);
         // Button untuk load sequence selanjutnya
@@ -343,6 +352,7 @@ function loadSequence(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
+                done("1",5);
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence(scene, sequence+1);
             } else {
