@@ -36,6 +36,7 @@
 
     <!-- sub-misi 2.2 -->
     <script src="./js/question221.js"></script>
+    <script src="./js/question223.js"></script>
     
     <script src="./js/missionOne.js"></script>
     <script src="./js/missionThree.js"></script>
