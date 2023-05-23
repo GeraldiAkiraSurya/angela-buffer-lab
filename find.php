@@ -36,6 +36,7 @@
 
     <!-- sub-misi 2.2 -->
     <script src="./js/question221.js"></script>
+    <script src="./js/question222.js"></script>
     <script src="./js/question223.js"></script>
     <script src="./js/question225.js"></script>
     <script src="./js/question227.js"></script>
