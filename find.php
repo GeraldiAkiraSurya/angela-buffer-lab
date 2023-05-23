@@ -43,6 +43,7 @@
     <script src="./js/question229.js"></script>
     <script src="./js/question2210.js"></script>
     <script src="./js/question2211.js"></script>
+    <script src="./js/question2212.js"></script>
     
     <script src="./js/missionOne.js"></script>
     <script src="./js/missionThree.js"></script>
