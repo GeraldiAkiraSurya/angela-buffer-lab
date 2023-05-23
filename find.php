@@ -27,7 +27,7 @@
     
     <script src="./js/missionOne.js"></script>
     <script src="./js/missionThree.js"></script>
-
+    <script src="./js/missionFive.js"></script>
 
     <script src="./js/selectchara.js"></script>
     <script src="./js/missionSelection.js"></script>
