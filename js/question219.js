@@ -27,7 +27,6 @@ var A;
 var B;
 var C;
 var D;
-var E;
 
 var objectsArray;
 
@@ -236,8 +235,8 @@ function showAnnouncementCorrectAnswer219(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to question 2
-        scene.scene.start('Question212');
+        //to question 10
+        scene.scene.start('Question2110');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 

@@ -1,15 +1,15 @@
-question213 = new Phaser.Scene('Question213');
+question2112 = new Phaser.Scene('Question2112');
 
-question213.preload = function () {
+question2112.preload = function () {
     this.load.path = './assets/';
     this.load.image('emptyBeaker', 'question/emptyBeaker.png');
     this.load.image('purpleBeaker', 'question/purpleBeaker.png');
 
-    this.load.image('213A', 'question/2.1.3A.png');
-    this.load.image('213B', 'question/2.1.3B.png');
-    this.load.image('213C', 'question/2.1.3C.png');
-    this.load.image('213D', 'question/2.1.3D.png');
-    this.load.image('213E', 'question/2.1.3E.png');
+    this.load.image('2112A', 'question/2.1.12A.png');
+    this.load.image('2112B', 'question/2.1.12B.png');
+    this.load.image('2112C', 'question/2.1.12C.png');
+    this.load.image('2112D', 'question/2.1.12D.png');
+    this.load.image('2112E', 'question/2.1.12E.png');
 
     this.load.image('background', 'scenes/bg_question.png');
 
@@ -38,7 +38,7 @@ var playerAnswerArray;
 
 var cekJawabanBtn;
 
-question213.create = function () {
+question2112.create = function () {
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
@@ -51,8 +51,8 @@ question213.create = function () {
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
     //variable initialization
-    //yg bener itu pilihan A
-    answerArray = ['A'];
+    //yg bener itu pilihan B
+    answerArray = ['B'];
     playerAnswerArray = [];
     objectsArray = [];
 
@@ -92,28 +92,29 @@ question213.create = function () {
     textPertanyaan = this.add.text(middleX - 870, middleY - 454, "Tuangkan isi\ngelas yang benar\nke gelas kosong", {font: "900 50px Helvetica", fill: "#ffffff"});
 
     var text = `
-Pilihlah reaksi disosiasi yang terjadi
+Ayo pilih reaksi yang terjadi jika
 
-pada masing - masing larutan?`;
+larutan penyangga ditambah sedikit basa!
+`;
 
     //beaker-text
-    A = this.add.image(middleX + 30, middleY - 300, '213A').setScale(1.2);
+    A = this.add.image(middleX + 30, middleY - 300, '2112A').setScale(1.2);
     // this.input.setDraggable(A);
     objectsArray.push(A);
 
-    B = this.add.image(middleX + 630, middleY - 300, '213B').setScale(1.2);
+    B = this.add.image(middleX + 630, middleY - 300, '2112B').setScale(1.2);
     // this.input.setDraggable(B);
     objectsArray.push(B);
 
-    C = this.add.image(middleX + 330, middleY - 60, '213C').setScale(1.2);
+    C = this.add.image(middleX + 330, middleY - 60, '2112C').setScale(1.2);
     // this.input.setDraggable(C);
     objectsArray.push(C);
 
-    D = this.add.image(middleX + 30, middleY + 180, '213D').setScale(1.2);
+    D = this.add.image(middleX + 30, middleY + 180, '2112D').setScale(1.2);
     // this.input.setDraggable(D);
     objectsArray.push(D);
 
-    E = this.add.image(middleX + 630, middleY + 180, '213E').setScale(1.2);
+    E = this.add.image(middleX + 630, middleY + 180, '2112E').setScale(1.2);
     // this.input.setDraggable(E);
     objectsArray.push(E);
 
@@ -160,15 +161,15 @@ pada masing - masing larutan?`;
             destroyObject(objectsArray);
 
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncementCorrectAnswer213(this, text);
+            showAnnouncementCorrectAnswer2112(this, text);
         }
         else {
             //destory all objects
             destroyObject(objectsArray);
 
             let text = "Jawaban Anda salah, Anda punya 1x kesempatan untuk mencoba menjawab kembali";
-            let clueText = "Larutan asam klorida dan natrium klorida adalah elektrolit kuat";
-            showAnnouncementWrongAnswer213(this, text, clueText);
+            let clueText = "Komponen asam dari penyangga akan bereaksi dengan spesi basa yang ditambahkan";
+            showAnnouncementWrongAnswer2112(this, text, clueText);
         }  
 
     }, middleX, middleY + 350);
@@ -179,14 +180,14 @@ pada masing - masing larutan?`;
     hideObject(objectsArray);
 
     //show pertanyaan
-    showPertanyaan213(this, text);
+    showPertanyaan2112(this, text);
 }
 
-question213.update = function () {
+question2112.update = function () {
     
 }
 
-function showPertanyaan213(scene, text) {
+function showPertanyaan2112(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let missionDesc = scene.add.text(middleX, middleY, text)
@@ -203,7 +204,7 @@ function showPertanyaan213(scene, text) {
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
-function showClue213(scene, text) {
+function showClue2112(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
     var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
@@ -223,11 +224,11 @@ function showClue213(scene, text) {
         descriptionBox.destroy();
 
         //reset game objects location
-        startOver213(scene);
+        startOver2112(scene);
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
-function showAnnouncementCorrectAnswer213(scene, text) {
+function showAnnouncementCorrectAnswer2112(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let announcement = scene.add.text(middleX, middleY, text)
@@ -240,18 +241,22 @@ function showAnnouncementCorrectAnswer213(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to question 4
-        scene.scene.start('Question214');
+        //to missionSelection
+        scene.scene.start('MissionSelection');
+
+        //2.1 FINISHED
+        //Panggil Method Time Finish di sini Dim
+        
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu');
+        scene.scene.start('Question2110');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
 
-function showAnnouncementWrongAnswer213(scene, text, clueText) {
+function showAnnouncementWrongAnswer2112(scene, text, clueText) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
     var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
@@ -275,7 +280,7 @@ function showAnnouncementWrongAnswer213(scene, text, clueText) {
         descriptionBox.destroy();
         missionDesc.destroy();
 
-        startOver213(scene);
+        startOver2112(scene);
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
@@ -285,14 +290,14 @@ function showAnnouncementWrongAnswer213(scene, text, clueText) {
         descriptionBox.destroy();
         missionDesc.destroy();
 
-        showClue213(scene, clueText);
+        showClue2112(scene, clueText);
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);
 }
 
 //buat ngereset game object ke posisi semula
 //yang di hide masukin semua kesini
-function startOver213(scene) {
+function startOver2112(scene) {
     //kosongin jawaban buat startover
     playerAnswerArray = [];
 
@@ -311,15 +316,15 @@ function startOver213(scene) {
     beakerJawaban5 = scene.add.image(middleX + 830, middleY + 110, 'purpleBeaker').setInteractive().setScale(0.19).setName('E');
     scene.input.setDraggable(beakerJawaban5);
 
-    A = scene.add.image(middleX + 30, middleY - 300, '213A').setScale(1.2);
+    A = scene.add.image(middleX + 30, middleY - 300, '2112A').setScale(1.2);
 
-    B = scene.add.image(middleX + 630, middleY - 300, '213B').setScale(1.2);
+    B = scene.add.image(middleX + 630, middleY - 300, '2112B').setScale(1.2);
 
-    C = scene.add.image(middleX + 330, middleY - 60, '213C').setScale(1.2);
+    C = scene.add.image(middleX + 330, middleY - 60, '2112C').setScale(1.2);
 
-    D = scene.add.image(middleX + 30, middleY + 180, '213D').setScale(1.2);
+    D = scene.add.image(middleX + 30, middleY + 180, '2112D').setScale(1.2);
 
-    E = scene.add.image(middleX + 630, middleY + 180, '213E').setScale(1.2);
+    E = scene.add.image(middleX + 630, middleY + 180, '2112E').setScale(1.2);
 
     //btn buat check jawaban kedua kali
     cekJawabanBtn = createNextButton(scene, 'CEK JAWABAN', () => {
@@ -331,11 +336,11 @@ function startOver213(scene) {
             destroyObject(objectsArray);
 
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncementCorrectAnswer213(scene, text);
+            showAnnouncementCorrectAnswer2112(scene, text);
         }
         else {
-            //salah kedua kali? langsung tendang ke main menu
-            scene.scene.start('MainMenu');
+            //salah kedua kali? langsung tendang ke question2110
+            scene.scene.start('Question2110');
         }  
 
     }, middleX, middleY + 350);
