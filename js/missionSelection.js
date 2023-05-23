@@ -42,7 +42,7 @@ missionSelection.create = function() {
     //temporary ke Question211
     //harusnya ke Objective Misi 2
     let btnMsn2 = new Button((canvasWidth/2) - (1*deltaX), baseY, 'MISI II', this, () => {
-        this.scene.start('Question211');
+        this.scene.start('menumisi2.1');
         energy = 100;
     }, true);
     //temporary langsung ke pertanyaannya

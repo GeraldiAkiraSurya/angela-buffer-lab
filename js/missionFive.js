@@ -130,7 +130,7 @@ function loadSequence5(scene, sequence) {
         let text = "[b]SYARAT PENYELESAIAN KHUSUS:[/b] PERHATIKAN VIDEO DENGAN SEKSAMA DAN PILIHLAH JAWABAN YANG BENAR DARI PERTANYAAN YANG DIBERIKAN\n\n\
 [b]BATAS WAKTU:[/b] TIDAK ADA\n\n\
 [b]HADIAH:[/b] ENERGI DAN BUAH AJAIB\n\n\
-[b]JIKA GAGAL:[/b] KEMBALI KE AWAL MISI III\n";
+[b]JIKA GAGAL:[/b] KEMBALI KE AWAL MISI V\n";
         gameObjects.missionDesc = createDescText(scene, text);
 
         // Button untuk load sequence selanjutnya
@@ -247,7 +247,7 @@ function loadSequence5(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("5",questionNumber)
+                done("5",3)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence5(scene, sequence+1);
             } else {
@@ -268,7 +268,7 @@ function loadSequence5(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
@@ -289,7 +289,7 @@ function loadSequence5(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("5",questionNumber)
+                done("5",4)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence5(scene, sequence+1);
             } else {
@@ -310,7 +310,7 @@ function loadSequence5(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
@@ -334,7 +334,7 @@ function loadSequence5(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("5",questionNumber)
+                done("5",5)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence5(scene, sequence+1);
             } else {
@@ -356,7 +356,7 @@ function loadSequence5(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
@@ -377,7 +377,7 @@ function loadSequence5(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("5",questionNumber)
+                done("5",6)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence5(scene, sequence+1);
             } else {
@@ -398,7 +398,7 @@ function loadSequence5(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
@@ -419,7 +419,7 @@ function loadSequence5(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("5",questionNumber)
+                done("5",7)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence5(scene, sequence+1);
             } else {
@@ -440,15 +440,15 @@ function loadSequence5(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
 
     else if (sequence == 26) { // Sequence MISI SELESAI
 
-        let text = "Selamat... Anda berhasil menyelesaikan misi III!!\n\n\
-Energi Anda dapat digunakan untuk membantu Prof Allison untuk mendapatkan buah ajaib di hutan";
+        let text = "Selamat... Anda berhasil menyelesaikan misi V!!\n\n\
+        Energi Anda dapat ditukarkan dengan pembakar yang dibutuhkan prof. Allison";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
             scene.scene.start('MainMenu');
