@@ -38,6 +38,7 @@
     <script src="./js/question221.js"></script>
     <script src="./js/question222.js"></script>
     <script src="./js/question223.js"></script>
+    <script src="./js/question224.js"></script>
     <script src="./js/question225.js"></script>
     <script src="./js/question227.js"></script>
     <script src="./js/question229.js"></script>
