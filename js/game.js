@@ -52,7 +52,7 @@ var config = {
 
     //development
     // scene: [question211, question212, question213, question214, question215, question216, question217, question218, question219, question2110, question2111, question2112]
-    scene: [question229]
+    scene: [question2210]
     // scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne, missionThree]
 };
 
