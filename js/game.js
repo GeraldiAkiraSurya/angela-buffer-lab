@@ -45,12 +45,14 @@ var config = {
     canvasStyle: `display: block; width: 100%; height: 100%;`,
 
     //lengkap
-    // scene: [mainMenu, findingObjects1, findingObjects2, question211, question212, question213, question214, selectChara, missionSelection, missionOne, missionThree]
+    scene: [mainMenu, findingObjects1, findingObjects2, 
+        question211, question212, question213, question214, question215, question216, question217, question218, question219, question2110, question2111, question2112, 
+        selectChara, missionSelection, missionOne, missionThree
+    ]
 
     //development
-    // scene: [question213, question214]
-    // scene: [question211, question212, question213, question214]
-    scene: [question2111]
+    // scene: [question211, question212, question213, question214, question215, question216, question217, question218, question219, question2110, question2111, question2112]
+    // scene: [question216]
     // scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne, missionThree]
 };
 
