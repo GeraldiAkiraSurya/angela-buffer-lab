@@ -5,7 +5,7 @@ question2210.preload = function () {
     this.load.image('blueBeaker', 'question/blueBeaker.png');
 
     //jawaban bener dari sblmnya jadi soal
-    this.load.image('219A', 'question/2.1.9A.png');
+    this.load.image('229A', 'question/2.2.9A.png');
 
     this.load.image('2210A', 'question/2.2.10A.png');
     this.load.image('2210B', 'question/2.2.10B.png');
@@ -78,7 +78,7 @@ question2210.create = function () {
 
     //blueBeaker
     blueBeaker = this.add.image(middleX + 240, middleY - 20, 'blueBeaker').setScale(0.4);
-    labelPertanyaan = this.add.image(middleX + 240, middleY + 230, '219A').setScale(1.2);
+    labelPertanyaan = this.add.image(middleX + 240, middleY + 230, '229A').setScale(1.2);
     objectsArray.push(labelPertanyaan);
 
     //text pertanyaan

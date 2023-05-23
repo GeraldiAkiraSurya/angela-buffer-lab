@@ -255,7 +255,7 @@ function showAnnouncementCorrectAnswer226(scene, text) {
         announcement.destroy();
 
         //to tabulasi screen
-        scene.scene.start('Question225');
+        scene.scene.start('Question227');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 

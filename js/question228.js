@@ -180,7 +180,7 @@ Ayo kumpulkan!`;
             //destory all objects
             destroyObject(objectsArray);
 
-            let text = "Bagus sekali, pilihan Anda benar.";
+            let text = "Kamu keren... Semangat terus!!!\nLanjutkan!!";
             showAnnouncementCorrectAnswer228(this, text);
         }
         else {
@@ -354,7 +354,7 @@ function startOver228(scene) {
             //destory all objects
             destroyObject(objectsArray);
 
-            let text = "Bagus sekali, pilihan Anda benar.";
+            let text = "Kamu keren... Semangat terus!!!\nLanjutkan!!";
             showAnnouncementCorrectAnswer228(scene, text);
         }
         else {
