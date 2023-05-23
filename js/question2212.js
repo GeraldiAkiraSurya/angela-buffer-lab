@@ -241,7 +241,7 @@ function showAnnouncementCorrectAnswer2212(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to missionSelection
+        //to question 13
         scene.scene.start('Question2213');
         
 
