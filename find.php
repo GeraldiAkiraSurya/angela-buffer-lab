@@ -42,6 +42,7 @@
     <script src="./js/question225.js"></script>
     <script src="./js/question226.js"></script>
     <script src="./js/question227.js"></script>
+    <script src="./js/question228.js"></script>
     <script src="./js/question229.js"></script>
     <script src="./js/question2210.js"></script>
     <script src="./js/question2211.js"></script>
