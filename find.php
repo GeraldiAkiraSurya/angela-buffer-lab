@@ -49,13 +49,21 @@
     <script src="./js/question2212.js"></script>
     <script src="./js/question2213.js"></script>
     <script src="./js/question2214.js"></script>
+
+  
     
     <script src="./js/missionOne.js"></script>
     <script src="./js/missionThree.js"></script>
+    <script src="./js/missionFive.js"></script>
 
+    
 
     <script src="./js/selectchara.js"></script>
     <script src="./js/missionSelection.js"></script>
+    <script src="./js/missionTwodotOne.js"></script>
+
+
+
     <script src="./js/mainmenu.js"></script>
     <script src="./js/game.js" defer></script>
   </body>

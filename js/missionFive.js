@@ -1,9 +1,9 @@
-missionThree = new Phaser.Scene('Misi3');
+missionFive = new Phaser.Scene('mission5');
 
-missionThree.preload = function () {
+missionFive.preload = function () {
     this.load.path = './assets/';
     this.load.image('menuBackground', 'scenes/science_lab.jpg');
-    this.load.image('missionBackground', 'scenes/lab_desk.jpg')
+    this.load.image('missionBackground', 'scenes/bg_kayu.png')
 
 
     //pluginsnya pindahin ke game?
@@ -20,7 +20,7 @@ missionThree.preload = function () {
     
 }
 
-missionThree.create = function() {
+missionFive.create = function() {
     middleX = this.cameras.main.width / 2;
     middleY = this.cameras.main.height / 2;
 
@@ -32,7 +32,7 @@ missionThree.create = function() {
 
     youtubeId = {
         intro: 'qz1XzCmdHAg',
-        problem: 'vTP3BGnawU4',
+        problem: 'pRIrCBToivc',
     };
 
     /**
@@ -44,74 +44,65 @@ missionThree.create = function() {
 
     choicesText = {
         1: [
-            "pH pada semua system/ campuran berubah drastis",
-            "campuran 20 mL CH3COOH 0,1 M + 10 mL NaOH 0,1 M tidak mengalami perubahan pH",
-            "campuran 15 mL CH3COOH 0,1 + 15 mL NaOH 0,1 M tidak mengalami perubahan pH",
-            "campuran 10 mL CH3COOH 0,1 M + 20 mL NaOH 0,1 M mengalami perubahan pH yang drastis",
-            "campuran 15 mL HCl 0,1 M + 15 mL NaOH 0,1 M tidak mengalami perubahan pH"
+            "4,97",
+            "4",
+            "6"
         ],
         2: [
-            "20 mL CH3COOH 0,1 M + 10 mL NaOH 0,1 M ",
-            "15 mL HCl 0,1 M + 15 mL NaCl 0,1 M",
-            "10 mL CH3COOH 0,1 M + 20 mL NaOH 0,1 M ",
+            "[CH3COOH] = 0,05 M \n [CH3COO-] = 0,05 M",
+            "[CH3COOH] = 0,5 M \n [CH3COO-] = 0,5 M",
+            "[CH3COOH] = 0,1 M \n [CH3COO-] = 0,1 M",
             "15 mL HCl 0,1 M + 15 mL NaOH 0,1 M "
         ],
         3: [
-            "CH3COOH(aq) + NaOH(aq) → CH3COONa(aq) + H2O(l) ",
-            "CH3COO-(aq) + Na+(aq) → CH3COONa(aq)",
-            "H+(aq) + OH-(aq) →  H2O(l)"
+            "Kc =[H+][CH3COO-] / [CH3COOH] ",
+            "Kc =[CH3COOH] / [H+][CH3COO-]",
+            "Kc =[H+][CH3COOH] / [CH3COO-]",
+            "Kc =[CH3COOH][CH3COO-] / [h+]"
         ],
         4: [
-            "CH3COOH",
-            "NaOH"
+            "[H+] = Ka ( [CH3COOH]/ [CH3COO-])",
+            "[H+] = Ka ( [CH3COO-]/ [CH3COOH])",
+            "[H+] = ( [CH3COO-]/  Ka[CH3COOH])",
         ],
         5: [
-            "CH3COOH",
-            "H2O",
-            "CH3COO-",
-            "H+",
-            "OH-",
-            "Na+",
-            "NaOH",
-            "CH3COONa",
-            "H2",
-            "O2 "
+            "[H+] = 1 x 10-5 M",
+            "[H+] = 1,07 x 10-5 M",
+            "[H+] = 5 x 10-5 M"
         ],
         6: [
-            "CH3COOH dengan CH3COO-",
-            "CH3COOH saja",
-            "CH3COONa saja",
-            "CH3COO- dengan H+",
-            "CH3COONa dengan Na+"
+            "pH=5",
+            "pH=4,97",
+            "pH=4,3"
         ],
         7: [
-            "karena setelah bereaksi terdapat sisa asam lemah dengan produk basa konjugasinya",
-            "karena setelah bereaksi terdapat sisa basa lemah dengan produk asam konjugasinya",
-            "karena setelah bereaksi terdapat sisa basa kuat dengan produk garam dan air",
-            "karena setelah bereaksi terdapat sisa basa kuat dengan produk asam konjugasinya",
-            "karena setelah bereaksi terdapat sisa asam kuat dengan produk basa konjugasinya"
+            "konsentrasi asam lemah setelah pencampuran",
+            "konsentrasi basa konjugasi setelah pencampuran",
+            "nilai Ka",
+            "jenis alat yang digunakan dalam percobaan",
+            "nilai Kb"
         ],
     };
 
     correctAnswers = {
-        1: [0,1,0,1,0],
+        1: [1,0,0],
         2: [1,0,0,0],
-        3: [1,0,0],
-        4: [1,0],
-        5: [1,1,1,1,1,1,0,0,0,0],
-        6: [1,0,0,0,0],
-        7: [1,0,0,0,0]
+        3: [1,0,0,0],
+        4: [1,0,0],
+        5: [0,1,0],
+        6: [0,1,0],
+        7: [1,1,1,0,0]
 
     };
 
-    loadSequence3(this, 1);
+    loadSequence5(this, 1);
 }
 
-missionThree.update = function() {
+missionFive.update = function() {
     
 }
 
-function loadSequence3(scene, sequence) {
+function loadSequence5(scene, sequence) {
     console.log("Start sequence " + sequence);
 
     console.log(gameObjects);
@@ -127,24 +118,24 @@ function loadSequence3(scene, sequence) {
         let text = "Selamat datang di laboratorium Z!";
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
     } else if (sequence == 2) { // Sequence deskripsi misi
 
-        gameObjects.title = scene.add.text(middleX, missionBoxProps.lowestY + 50, "MISI III")
+        gameObjects.title = scene.add.text(middleX, missionBoxProps.lowestY + 50, "MISI V")
             .setOrigin(0.5)
             .setFontSize(40);
         let text = "[b]SYARAT PENYELESAIAN KHUSUS:[/b] PERHATIKAN VIDEO DENGAN SEKSAMA DAN PILIHLAH JAWABAN YANG BENAR DARI PERTANYAAN YANG DIBERIKAN\n\n\
 [b]BATAS WAKTU:[/b] TIDAK ADA\n\n\
 [b]HADIAH:[/b] ENERGI DAN BUAH AJAIB\n\n\
-[b]JIKA GAGAL:[/b] KEMBALI KE AWAL MISI III\n";
+[b]JIKA GAGAL:[/b] KEMBALI KE AWAL MISI V\n";
         gameObjects.missionDesc = createDescText(scene, text);
 
         // Button untuk load sequence selanjutnya
         gameObjects.nextBtn = createNextButton(scene, 'TERIMA', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     } else if (sequence == 3) { // Sequence youtube vid
@@ -152,7 +143,7 @@ function loadSequence3(scene, sequence) {
         gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['intro']);
         // Button untuk load sequence selanjutnya
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     } else if (sequence == 4) { // Sequence youtube vid
@@ -160,16 +151,16 @@ function loadSequence3(scene, sequence) {
         gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
         // Button untuk load sequence selanjutnya
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     } else if (sequence == 5) { // Sequence soal pertanyaan SOAL 1
-        start("3",1)
-        let text = 'Berdasarkan tayangan video tersebut, coba bandingkan perubahan pH pada sistem 1 sampai 4 sebelum dan sesudah ditambah sedikit asam maupun basa. Manakah pernyataan yang benar?';
+        start("5",1)
+        let text = 'Berdasarkan tayangan video tersebut, berapakah pH larutan yang dibuat?';
         gameObjects.question = createDescText(scene, text);
         // Button untuk load sequence selanjutnya
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     } else if (sequence == 6) { // Sequence milih jawaban
@@ -179,35 +170,36 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("3",1)
+                done("5",1)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene, sequence+1);
+                loadSequence5(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
                 gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-                    loadSequence3(scene, sequence-1);
+                    loadSequence5(scene, sequence-1);
                 });
             }
         });
+        
         
     } else if (sequence == 7) { // Sequence jawaban bener
 
         let text = "Bagus sekali, pilihan Anda benar.";
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
     } else if (sequence == 8) { // Sequence pertanyaan
-        start("3",2)
-        let text = 'Dari pengukuran pH pada video, maka yang merupakan larutan penyangga adalah';
+        start("5",2)
+        let text = 'Setelah pencampuran, coba hitung konsentrasi asam asetat dan ion asetat (yang berasal dari garam). Pilih jawaban yang benar!';
         gameObjects.question = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     } else if (sequence == 9) { // Sequence milih jawaban
@@ -217,15 +209,15 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("3",2)
-                loadSequence3(scene, sequence+1);
+                done("5",2)
+                loadSequence5(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
                 gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-                    loadSequence3(sequence-1);
+                    loadSequence5(sequence-1);
                 });
             }
         });
@@ -235,16 +227,16 @@ function loadSequence3(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
     } else if (sequence == 11) {
-        start("3",3)
-        let text = 'Nah... coba tentukan reaksi yang terjadi dalam larutan penyangga tesebut, yaitu: 20 mL asam asetat 0,1 M dengan 10 mL natrium hidroksida 0,1 M ';
+        start("5",3)
+        let text = 'Sekarang pilih tetapan kesetimbangan yang benar untuk reaksi disosiasi asam asetat ';
         gameObjects.question = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     }
@@ -255,16 +247,16 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("3",questionNumber)
+                done("5",3)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene, sequence+1);
+                loadSequence5(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
                 gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-                    loadSequence3(scene, sequence-1);
+                    loadSequence5(scene, sequence-1);
                 });
             }
         });
@@ -276,21 +268,17 @@ function loadSequence3(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
-
     }
 
-
-
-
     else if (sequence == 14) {
-        start("3",4)
-        let text = 'Dari reaksi asam basa yang terjadi, tentukan reaktan yang habis bereaksi';
+        start("5",4)
+        let text = 'Dari persamaan kesetimbangan tersebut, dengan Ka = Kc, pilih persamaan yang tepat untuk [H+]';
         gameObjects.question = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     }
@@ -301,16 +289,16 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("3",questionNumber)
+                done("5",4)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene, sequence+1);
+                loadSequence5(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
                 gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-                    loadSequence3(scene, sequence-1);
+                    loadSequence5(scene, sequence-1);
                 });
             }
         });
@@ -322,19 +310,20 @@ function loadSequence3(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
-
     }
 
 
+
+
     else if (sequence == 17) {
-        start("3",5)
-        let text = 'Nah...sekarang pilih spesi yang terdapat dalam larutan setelah terjadi reaksi';
+        start("5",5)
+        let text = 'Dengan Ka = 1,07 x 10^-5 Hitunglah [H+] yang tepat sesuai persamaan sebelumnya';
         gameObjects.question = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     }
@@ -345,39 +334,39 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("3",questionNumber)
+                done("5",5)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene, sequence+1);
+                loadSequence5(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
                 gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-                    loadSequence3(scene, sequence-1);
+                    loadSequence5(scene, sequence-1);
                 });
             }
         });
         
     }
 
+
     else if (sequence == 19) { // Sequence jawaban bener
 
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
 
-
     else if (sequence == 20) {
-        start("3",6)
-        let text = 'Nah... sekarang cari komponen penyangga yang terdapat dalam campuran!';
+        start("5",6)
+        let text = 'Nah… dari konsentrasi H+ yang sudah dihitung, pilih pH larutan yang tepat…';
         gameObjects.question = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     }
@@ -388,16 +377,16 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("3",questionNumber)
+                done("5",6)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene, sequence+1);
+                loadSequence5(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
                 gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-                    loadSequence3(scene, sequence-1);
+                    loadSequence5(scene, sequence-1);
                 });
             }
         });
@@ -409,23 +398,17 @@ function loadSequence3(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
 
-
-
-
-
-
-
     else if (sequence == 23) {
-        start("3",7)
-        let text = 'Setelah melewati permainan, tentukan alasan mengapa campuran 20 mL CH3COOH 0,1 M + 10 mL NaOH 0,1 M dapat menyangga pH setelah penambahan sedikit asam/ basa, sedangkan campuran yang lainnya tidak...';
+        start("5",7)
+        let text = 'Setelah melewati permainan, dapat disimpulkan bahwa pH larutan penyangga tersebut dipengaruhi oleh';
         gameObjects.question = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         });
 
     }
@@ -436,16 +419,16 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("3",questionNumber)
+                done("5",7)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
-                loadSequence3(scene, sequence+1);
+                loadSequence5(scene, sequence+1);
             } else {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
                 gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-                    loadSequence3(scene, sequence-1);
+                    loadSequence5(scene, sequence-1);
                 });
             }
         });
@@ -457,16 +440,15 @@ function loadSequence3(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
 
-
     else if (sequence == 26) { // Sequence MISI SELESAI
 
-        let text = "Selamat... Anda berhasil menyelesaikan misi III!!\n\n\
-Energi Anda dapat digunakan untuk membantu Prof Allison untuk mendapatkan buah ajaib di hutan";
+        let text = "Selamat... Anda berhasil menyelesaikan misi V!!\n\n\
+        Energi Anda dapat ditukarkan dengan pembakar yang dibutuhkan prof. Allison";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
             scene.scene.start('MainMenu');
