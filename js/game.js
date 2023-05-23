@@ -48,7 +48,7 @@ var config = {
 
     scene: [mainMenu, findingObjects1, findingObjects2, 
         question211, question212, question213, question214, question215, question216, question217, question218, question219, question2110, question2111, question2112, 
-        selectChara, missionSelection, missionOne, missionThree, missionFive
+        selectChara, missionSelection, missionOne, missionThree, missionFour, missionFive
     ]
 
 
