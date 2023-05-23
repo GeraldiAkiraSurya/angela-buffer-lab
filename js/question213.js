@@ -240,7 +240,7 @@ function showAnnouncementCorrectAnswer213(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to question 2
+        //to question 4
         scene.scene.start('Question214');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
