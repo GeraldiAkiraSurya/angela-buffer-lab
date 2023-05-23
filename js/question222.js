@@ -3,15 +3,15 @@ question222 = new Phaser.Scene('Question222');
 question222.preload = function () {
     this.load.path = './assets/';
     this.load.image('greenBeaker', 'question/greenBeaker.png');
-    this.load.image('CH3COONeg', 'question/CH3COONeg.png');
-    this.load.image('CH3COOH', 'question/CH3COOH.png');
-    this.load.image('CH3COONa', 'question/CH3COONa.png');
+    this.load.image('NH4Pos', 'question/NH4Pos.png');
+    this.load.image('ClNeg', 'question/ClNeg.png');
+    this.load.image('N2', 'question/N2.png');
     this.load.image('HPos', 'question/HPos.png');
     this.load.image('H2', 'question/H2.png');
     this.load.image('H2O', 'question/H2O.png');
-    this.load.image('Na', 'question/Na.png');
-    this.load.image('NaPos', 'question/NaPos.png');
-    this.load.image('O2', 'question/O2.png');
+    this.load.image('H2', 'question/H2.png');
+    this.load.image('NH3', 'question/NH3.png');
+    this.load.image('NH4Cl', 'question/NH4Cl.png');
     this.load.image('OHNeg', 'question/OHNeg.png');
 
     this.load.image('background', 'scenes/bg_question.png');
@@ -24,15 +24,15 @@ var dropZoneGreenBeakerBG;
 
 var textPertanyaan;
 
-var CH3COONeg;
-var CH3COOH;
-var CH3COONa;
+var NH4Pos;
+var ClNeg;
+var N2;
 var HPos;
 var H2;
 var H2O;
-var Na;
-var NaPos;
-var O2;
+var H2;
+var NH3;
+var NH4Cl;
 var OHNeg;
 
 var objectsArray;
@@ -55,8 +55,8 @@ question222.create = function () {
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
     //variable initialization
-    //yg bener itu H+, OH-, CH3COOH, CH3COO-, Na+, H2O
-    answerArray = ['CH3COONeg', 'CH3COOH', 'HPos', 'H2O', 'NaPos', 'OHNeg'];
+    //yg bener itu H+, OH-, Cl-, NH4+, NH3, H2O
+    answerArray = ['NH4Pos', 'ClNeg', 'HPos', 'H2O', 'NH3', 'OHNeg'];
     playerAnswerArray = [];
     objectsArray = [];
 
@@ -84,19 +84,19 @@ Ayo kumpulkan!`;
 
     //spesi-spesi
     //jawaban bener
-    CH3COONeg = this.add.image(middleX + 550, middleY + 25, 'CH3COONeg').setInteractive().setScale(0.7);
-    this.input.setDraggable(CH3COONeg);
-    objectsArray.push(CH3COONeg);
+    NH4Pos = this.add.image(middleX + 550, middleY + 25, 'NH4Pos').setInteractive().setScale(0.7);
+    this.input.setDraggable(NH4Pos);
+    objectsArray.push(NH4Pos);
 
     //jawaban bener
-    CH3COOH = this.add.image(middleX + 470, middleY + 100, 'CH3COOH').setInteractive().setScale(0.7);
-    this.input.setDraggable(CH3COOH);
-    objectsArray.push(CH3COOH);
+    ClNeg = this.add.image(middleX + 470, middleY + 100, 'ClNeg').setInteractive().setScale(0.7);
+    this.input.setDraggable(ClNeg);
+    objectsArray.push(ClNeg);
 
 
-    CH3COONa = this.add.image(middleX + 550, middleY - 100, 'CH3COONa').setInteractive().setScale(0.7);
-    this.input.setDraggable(CH3COONa);
-    objectsArray.push(CH3COONa);
+    N2 = this.add.image(middleX + 550, middleY - 100, 'N2').setInteractive().setScale(0.7);
+    this.input.setDraggable(N2);
+    objectsArray.push(N2);
 
 
     //jawaban bener
@@ -116,20 +116,15 @@ Ayo kumpulkan!`;
     objectsArray.push(H2O);
 
 
-    Na = this.add.image(middleX + 430, middleY -70, 'Na').setInteractive().setScale(0.7);
-    this.input.setDraggable(Na);
-    objectsArray.push(Na);
-
-
     //jawaban bener
-    NaPos = this.add.image(middleX + 430, middleY - 0, 'NaPos').setInteractive().setScale(0.7);
-    this.input.setDraggable(NaPos);
-    objectsArray.push(NaPos);
+    NH3 = this.add.image(middleX + 430, middleY - 0, 'NH3').setInteractive().setScale(0.7);
+    this.input.setDraggable(NH3);
+    objectsArray.push(NH3);
 
 
-    O2 = this.add.image(middleX + 670, middleY + 85, 'O2').setInteractive().setScale(0.7);
-    this.input.setDraggable(O2);
-    objectsArray.push(O2);
+    NH4Cl = this.add.image(middleX + 670, middleY + 85, 'NH4Cl').setInteractive().setScale(0.7);
+    this.input.setDraggable(NH4Cl);
+    objectsArray.push(NH4Cl);
 
 
     //jawaban bener
@@ -140,11 +135,11 @@ Ayo kumpulkan!`;
     this.input.on('pointerdown', () => {
         //kalau udah ketemu smua ceknya pake inputnya false smua
 
-        // console.log(CH3COONeg.texture.key + ' input enabled? ' + CH3COONeg.input.enabled);
-        // console.log(CH3COOH.texture.key + ' input enabled? ' + CH3COOH.input.enabled);
+        // console.log(NH4Pos.texture.key + ' input enabled? ' + NH4Pos.input.enabled);
+        // console.log(ClNeg.texture.key + ' input enabled? ' + ClNeg.input.enabled);
         // console.log(HPos.texture.key + ' input enabled? ' + HPos.input.enabled);
         // console.log(H2O.texture.key + ' input enabled? ' + H2O.input.enabled);
-        // console.log(NaPos.texture.key + ' input enabled? ' + NaPos.input.enabled);
+        // console.log(NH3.texture.key + ' input enabled? ' + NH3.input.enabled);
         // console.log(OHNeg.texture.key + ' input enabled? ' + OHNeg.input.enabled);
     });
 
@@ -269,7 +264,7 @@ function showAnnouncementCorrectAnswer222(scene, text) {
         announcement.destroy();
 
         //to tabulasi screen
-        scene.scene.start('Question213');
+        scene.scene.start('Question223');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
@@ -325,14 +320,14 @@ function startOver222(scene) {
     //kosongin jawaban buat startover
     playerAnswerArray = [];
 
-    CH3COONeg = scene.add.image(middleX + 550, middleY + 25, 'CH3COONeg').setInteractive().setScale(0.7);
-    scene.input.setDraggable(CH3COONeg);
+    NH4Pos = scene.add.image(middleX + 550, middleY + 25, 'NH4Pos').setInteractive().setScale(0.7);
+    scene.input.setDraggable(NH4Pos);
 
-    CH3COOH = scene.add.image(middleX + 470, middleY + 100, 'CH3COOH').setInteractive().setScale(0.7);
-    scene.input.setDraggable(CH3COOH);
+    ClNeg = scene.add.image(middleX + 470, middleY + 100, 'ClNeg').setInteractive().setScale(0.7);
+    scene.input.setDraggable(ClNeg);
 
-    CH3COONa = scene.add.image(middleX + 550, middleY - 100, 'CH3COONa').setInteractive().setScale(0.7);
-    scene.input.setDraggable(CH3COONa);
+    N2 = scene.add.image(middleX + 550, middleY - 100, 'N2').setInteractive().setScale(0.7);
+    scene.input.setDraggable(N2);
 
     HPos = scene.add.image(middleX + 550, middleY - 35, 'HPos').setInteractive().setScale(0.7);
     scene.input.setDraggable(HPos);
@@ -343,14 +338,11 @@ function startOver222(scene) {
     H2O = scene.add.image(middleX + 590, middleY + 85, 'H2O').setInteractive().setScale(0.7);
     scene.input.setDraggable(H2O);
 
-    Na = scene.add.image(middleX + 430, middleY -70, 'Na').setInteractive().setScale(0.7);
-    scene.input.setDraggable(Na);
+    NH3 = scene.add.image(middleX + 430, middleY - 0, 'NH3').setInteractive().setScale(0.7);
+    scene.input.setDraggable(NH3);
 
-    NaPos = scene.add.image(middleX + 430, middleY - 0, 'NaPos').setInteractive().setScale(0.7);
-    scene.input.setDraggable(NaPos);
-
-    O2 = scene.add.image(middleX + 670, middleY + 85, 'O2').setInteractive().setScale(0.7);
-    scene.input.setDraggable(O2);
+    NH4Cl = scene.add.image(middleX + 670, middleY + 85, 'NH4Cl').setInteractive().setScale(0.7);
+    scene.input.setDraggable(NH4Cl);
 
     OHNeg = scene.add.image(middleX + 670, middleY + 20, 'OHNeg').setInteractive().setScale(0.7);
     scene.input.setDraggable(OHNeg);
