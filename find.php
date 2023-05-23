@@ -33,6 +33,9 @@
     <script src="./js/question2110.js"></script>
     <script src="./js/question2111.js"></script>
     <script src="./js/question2112.js"></script>
+
+    <!-- sub-misi 2.2 -->
+    <script src="./js/question221.js"></script>
     
     <script src="./js/missionOne.js"></script>
     <script src="./js/missionThree.js"></script>
