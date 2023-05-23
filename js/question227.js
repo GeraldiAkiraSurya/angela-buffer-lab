@@ -1,15 +1,15 @@
-question225 = new Phaser.Scene('Question225');
+question227 = new Phaser.Scene('Question227');
 
-question225.preload = function () {
+question227.preload = function () {
     this.load.path = './assets/';
     this.load.image('emptyBeaker', 'question/emptyBeaker.png');
     this.load.image('purpleBeaker', 'question/purpleBeaker.png');
 
-    this.load.image('225A', 'question/2.2.5A.png');
-    this.load.image('225B', 'question/2.2.5B.png');
-    this.load.image('225C', 'question/2.2.5C.png');
-    this.load.image('225D', 'question/2.2.5D.png');
-    this.load.image('225E', 'question/2.2.5E.png');
+    this.load.image('227A', 'question/2.2.7A.png');
+    this.load.image('227B', 'question/2.2.7B.png');
+    this.load.image('227C', 'question/2.2.7C.png');
+    this.load.image('227D', 'question/2.2.7D.png');
+    this.load.image('227E', 'question/2.2.7E.png');
 
     this.load.image('background', 'scenes/bg_question.png');
 
@@ -38,7 +38,7 @@ var playerAnswerArray;
 
 var cekJawabanBtn;
 
-question225.create = function () {
+question227.create = function () {
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
@@ -97,23 +97,23 @@ Pilihlah reaksi disosiasi yang terjadi
 pada masing - masing larutan?`;
 
     //beaker-text
-    A = this.add.image(middleX + 30, middleY - 300, '225A').setScale(1.2);
+    A = this.add.image(middleX + 30, middleY - 300, '227A').setScale(1.2);
     // this.input.setDraggable(A);
     objectsArray.push(A);
 
-    B = this.add.image(middleX + 630, middleY - 300, '225B').setScale(1.2);
+    B = this.add.image(middleX + 630, middleY - 300, '227B').setScale(1.2);
     // this.input.setDraggable(B);
     objectsArray.push(B);
 
-    C = this.add.image(middleX + 330, middleY - 60, '225C').setScale(1.2);
+    C = this.add.image(middleX + 330, middleY - 60, '227C').setScale(1.2);
     // this.input.setDraggable(C);
     objectsArray.push(C);
 
-    D = this.add.image(middleX + 30, middleY + 180, '225D').setScale(1.2);
+    D = this.add.image(middleX + 30, middleY + 180, '227D').setScale(1.2);
     // this.input.setDraggable(D);
     objectsArray.push(D);
 
-    E = this.add.image(middleX + 630, middleY + 180, '225E').setScale(1.2);
+    E = this.add.image(middleX + 630, middleY + 180, '227E').setScale(1.2);
     // this.input.setDraggable(E);
     objectsArray.push(E);
 
@@ -160,15 +160,15 @@ pada masing - masing larutan?`;
             destroyObject(objectsArray);
 
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncementCorrectAnswer225(this, text);
+            showAnnouncementCorrectAnswer227(this, text);
         }
         else {
             //destory all objects
             destroyObject(objectsArray);
 
             let text = "Jawaban Anda salah, Anda punya 1x kesempatan untuk mencoba menjawab kembali";
-            let clueText = "Larutan amonia adalah elektrolit lemah";
-            showAnnouncementWrongAnswer225(this, text, clueText);
+            let clueText = "Larutan ammonium klorida adalah elektrolit kuat";
+            showAnnouncementWrongAnswer227(this, text, clueText);
         }  
 
     }, middleX, middleY + 350);
@@ -179,14 +179,14 @@ pada masing - masing larutan?`;
     hideObject(objectsArray);
 
     //show pertanyaan
-    showPertanyaan225(this, text);
+    showPertanyaan227(this, text);
 }
 
-question225.update = function () {
+question227.update = function () {
     
 }
 
-function showPertanyaan225(scene, text) {
+function showPertanyaan227(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let missionDesc = scene.add.text(middleX, middleY, text)
@@ -203,7 +203,7 @@ function showPertanyaan225(scene, text) {
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
-function showClue225(scene, text) {
+function showClue227(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
     var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
@@ -223,11 +223,11 @@ function showClue225(scene, text) {
         descriptionBox.destroy();
 
         //reset game objects location
-        startOver225(scene);
+        startOver227(scene);
     }, middleX, middleY + (descriptionBox.height / 2) - 50);
 }
 
-function showAnnouncementCorrectAnswer225(scene, text) {
+function showAnnouncementCorrectAnswer227(scene, text) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
 
     let announcement = scene.add.text(middleX, middleY, text)
@@ -240,8 +240,8 @@ function showAnnouncementCorrectAnswer225(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to question 6
-        scene.scene.start('Question226');
+        //to question 8
+        scene.scene.start('Question228');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
@@ -251,7 +251,7 @@ function showAnnouncementCorrectAnswer225(scene, text) {
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
 
-function showAnnouncementWrongAnswer225(scene, text, clueText) {
+function showAnnouncementWrongAnswer227(scene, text, clueText) {
     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
     var descBoxTopX = middleX - (descriptionBox.width / 2);
     var descBoxTopY = middleY - (descriptionBox.height / 2);
@@ -275,7 +275,7 @@ function showAnnouncementWrongAnswer225(scene, text, clueText) {
         descriptionBox.destroy();
         missionDesc.destroy();
 
-        startOver225(scene);
+        startOver227(scene);
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
@@ -285,14 +285,14 @@ function showAnnouncementWrongAnswer225(scene, text, clueText) {
         descriptionBox.destroy();
         missionDesc.destroy();
 
-        showClue225(scene, clueText);
+        showClue227(scene, clueText);
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);
 }
 
 //buat ngereset game object ke posisi semula
 //yang di hide masukin semua kesini
-function startOver225(scene) {
+function startOver227(scene) {
     //kosongin jawaban buat startover
     playerAnswerArray = [];
 
@@ -311,15 +311,15 @@ function startOver225(scene) {
     beakerJawaban5 = scene.add.image(middleX + 830, middleY + 110, 'purpleBeaker').setInteractive().setScale(0.19).setName('E');
     scene.input.setDraggable(beakerJawaban5);
 
-    A = scene.add.image(middleX + 30, middleY - 300, '225A').setScale(1.2);
+    A = scene.add.image(middleX + 30, middleY - 300, '227A').setScale(1.2);
 
-    B = scene.add.image(middleX + 630, middleY - 300, '225B').setScale(1.2);
+    B = scene.add.image(middleX + 630, middleY - 300, '227B').setScale(1.2);
 
-    C = scene.add.image(middleX + 330, middleY - 60, '225C').setScale(1.2);
+    C = scene.add.image(middleX + 330, middleY - 60, '227C').setScale(1.2);
 
-    D = scene.add.image(middleX + 30, middleY + 180, '225D').setScale(1.2);
+    D = scene.add.image(middleX + 30, middleY + 180, '227D').setScale(1.2);
 
-    E = scene.add.image(middleX + 630, middleY + 180, '225E').setScale(1.2);
+    E = scene.add.image(middleX + 630, middleY + 180, '227E').setScale(1.2);
 
     //btn buat check jawaban kedua kali
     cekJawabanBtn = createNextButton(scene, 'CEK JAWABAN', () => {
@@ -331,7 +331,7 @@ function startOver225(scene) {
             destroyObject(objectsArray);
 
             let text = "Bagus sekali, pilihan Anda benar.";
-            showAnnouncementCorrectAnswer225(scene, text);
+            showAnnouncementCorrectAnswer227(scene, text);
         }
         else {
             //salah kedua kali? langsung tendang ke main menu
