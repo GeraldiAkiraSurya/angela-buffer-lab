@@ -18,6 +18,12 @@ var canvasHeight;
 var middleX;
 var middleY;
 
+//finding objects done, buat 
+var findingObjects1Done = false;
+var findingObjects2Done = false;
+var findingObjects3Done = false;
+var findingObjects4Done = false;
+
 let gameObjects = {};
 let missionBoxProps = {};
 let choices = [];
