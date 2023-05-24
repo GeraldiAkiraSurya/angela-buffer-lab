@@ -79,10 +79,13 @@ findingObjects1.create = function () {
     middleY = this.cameras.main.height / 2;
 
     //background
-    this.add.image(middleX, middleY, 'background').setScale(0.98, 0.95);
+    this.add.image(middleX, middleY, 'background').setScale(1, 0.94);
 
     //energy debugger, disable pas udah siap dirangkai
     energy = 100;
+
+    //start timer ke DB
+    start("1", 6);
 
     //variable initialization
     correctAnswer = false;
@@ -124,7 +127,8 @@ findingObjects1.create = function () {
     //ketrigger kalo udah beres
     book.on('pointerup', function () {
         // console.log('clicked book!');
-        //manggil methodnya disini dim
+        
+        findingObjects1Done = true;
 
         findingObjects1.scene.start('MissionSelection');
     });
@@ -184,9 +188,9 @@ findingObjects1.create = function () {
     //keperluan debugging
     timerText = this.add.text(1640, 25);
     timerText.setStyle({
-        fontSize: '900 20px',
+        fontSize: '900 40px',
         fontFamily: 'Helvetica',
-        color: '#000000',
+        color: '#ffffff',
     });
 
     //delay dalam ms, jadi 15000 berarti 15 detik = 1x repeat
@@ -362,12 +366,19 @@ findingObjects1.update = function () {
     if (beakerFound && spatulaFound && testTubeFound && testTubeRackFound) {
         // console.log('horeee beres');
         findTimer.paused = true;
+
+        //manggil method done buat record time di DB
+        done("1", 6);
+
         giftBox.setVisible(true);
         book.setVisible(true);
     }
 
+    let correctTime = findTimer.getProgress().toString().substr(0, 4) * 15;
+
     //keperluan debugging
-    timerText.setText(`Event.progress: ${findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${findTimer.paused}`);
+    timerText.setText(`Time: ${correctTime.toString().substr(0, 2)}`);
+    // timerText.setText(`Event.progress: ${findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${findTimer.paused}`);
 
     //kalo jawabannya bener, timernnya direset
     if (correctAnswer) {

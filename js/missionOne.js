@@ -89,7 +89,14 @@ missionOne.create = function() {
         5: [1,0]
     };
 
-    loadSequence(this, 0);
+    //kalau finding objects belum beres, mulai dari 0
+    if (!findingObjects1Done) {
+        loadSequence(this, 0);
+    }
+    //kalau finding objects beres, load sequence beres
+    else {
+        loadSequence(this, 24);
+    }
 }
 
 missionOne.update = function() {
@@ -425,7 +432,9 @@ function loadSequence(scene, sequence) {
 Energi Anda sudah cukup untuk menuju laboratorium pusat.";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence(scene, sequence+1);
+            // loadSequence(scene, sequence+1);
+            //bawa ke finding objects
+            scene.scene.start('FindingObjects1');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
@@ -451,6 +460,8 @@ Energi Anda sudah cukup untuk menuju laboratorium pusat.";
         let text = "Anda dapat memulai penelitian di laboratorium Y!";
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            //biar bisa replay misi 1 lagi
+            findingObjects1Done = false;
             scene.scene.start('MainMenu');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
