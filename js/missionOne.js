@@ -449,7 +449,7 @@ Energi Anda sudah cukup untuk menuju laboratorium pusat.";
             "prof. Allison: Anda dapat memperoleh energi dari Misi kita yang kedua di laboratorium Y",
             `${playerName}: Pasti menyenangkan...`,
         ];
-        createDialog(scene, dialogs, () => {loadSequence(scene, 1)});
+        createDialog(scene, dialogs, () => {loadSequence(scene, sequence+1)});
 
     } 
     
