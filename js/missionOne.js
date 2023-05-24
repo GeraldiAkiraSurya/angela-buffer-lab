@@ -95,7 +95,7 @@ missionOne.create = function() {
     }
     //kalau finding objects beres, load sequence beres
     else {
-        loadSequence(this, 24);
+        loadSequence(this, 23);
     }
 }
 
