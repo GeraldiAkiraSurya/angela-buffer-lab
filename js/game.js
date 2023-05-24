@@ -47,15 +47,16 @@ var config = {
     //lengkap
 
     scene: [mainMenu, findingObjects1, findingObjects2, 
-        question211, question212, question213, question214, question215, question216, question217, question218, question219, question2110, question2111, question2112, 
-        selectChara, missionSelection, missionOne, missionThree, missionFour, missionFive
+        question211, question212, question213, question214, question215, question216, question217, question218, question219, question2110, question2111, question2112,
+        question221, question222, question223, question224, question225, question226, question227, question228, question229, question2210, question2211, question2212, question2213, question2214,
+        selectChara, missionSelection, missionOne, missionThree, missionFive, missionTwodotOne
     ]
 
 
     //development
     // scene: [question211, question212, question213, question214, question215, question216, question217, question218, question219, question2110, question2111, question2112]
-    // scene: [question216]
-    // scene: [mainMenu, findingObjects1, selectChara, missionSelection, missionOne, missionThree]
+    // scene: [question221, question222, question223, question224, question225, question226, question227, question228, question229, question2210, question2211, question2212, question2213, question2214]
+    // scene: [question228]
 };
 
 var game = new Phaser.Game(config);
