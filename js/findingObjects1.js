@@ -8,7 +8,7 @@ findingObjects1.preload = function () {
     this.load.image('testTube', 'lab_eq/TestTube.png');
     this.load.image('testTubeRack', 'lab_eq/TestTubeRack.png');
 
-    this.load.image('background', 'scenes/finding_objects1.png');
+    this.load.image('findingObjects1BG', 'scenes/finding_objects1.png');
 
     this.load.image('dropZoneBG', 'icons/finding_object_dropzone_background.png');
     this.load.image('energyFlask', 'icons/energy_flask.png');
@@ -79,7 +79,7 @@ findingObjects1.create = function () {
     middleY = this.cameras.main.height / 2;
 
     //background
-    this.add.image(middleX, middleY, 'background').setScale(1, 0.94);
+    this.add.image(middleX, middleY, 'findingObjects1BG').setScale(1, 0.94);
 
     //energy debugger, disable pas udah siap dirangkai
     energy = 100;
@@ -228,13 +228,10 @@ findingObjects1.create = function () {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
 
-            //troublenya multiple file jadi ngaco
-            //findingObject2.js bermasalah
-            //foundObjectnya ngaco
             switch (dropZone.name) {
                 case 'beaker':
                     //tandain objeknya ketemu
-                    beakerFound = foundObject(dropZone.name);
+                    beakerFound = true;
                     beaker.setVisible(false);
                     dropZoneBeakerBG.setTint(0x08F26E);
                     //destroy the zone biar yg lain ga dicoba di drag lagi kesini
@@ -242,7 +239,7 @@ findingObjects1.create = function () {
                     // console.log(beakerFound);
                     break;
                 case 'spatula':
-                    spatulaFound = foundObject(dropZone.name);
+                    spatulaFound = true;
                     spatula.setVisible(false);
                     dropZoneSpatulaBG.setTint(0x08F26E);
 
@@ -250,7 +247,7 @@ findingObjects1.create = function () {
                     // console.log(spatulaFound);
                     break;
                 case 'testTube':
-                    testTubeFound = foundObject(dropZone.name);
+                    testTubeFound = true;
                     testTube.setVisible(false);
                     dropZoneTestTubeBG.setTint(0x08F26E);
 
@@ -258,7 +255,7 @@ findingObjects1.create = function () {
                     // console.log(testTubeFound);
                     break;
                 case 'testTubeRack':
-                    testTubeRackFound = foundObject(dropZone.name);
+                    testTubeRackFound = true;
                     testTubeRack.setVisible(false);
                     dropZoneTestTubeRackBG.setTint(0x08F26E);
 
