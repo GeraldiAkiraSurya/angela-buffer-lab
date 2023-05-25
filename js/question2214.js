@@ -151,7 +151,7 @@ penyangga dapat mempertahankan pHnya?
             showAnnouncementCorrectAnswer2214(this, text);
         }
         else {
-            //langsung ngulang
+            //tendang ke question 13
             this.scene.start('Question2213');
         }  
 
@@ -200,8 +200,8 @@ function showAnnouncementCorrectAnswer2214(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to missionSelection
-        scene.scene.start('MissionSelection');
+        //to Misi2, sequence X (pas dialog)
+        scene.scene.start('Misi2');
 
         //2.2 FINISHED
         //Panggil Method Time Finish di sini Dim
@@ -210,7 +210,7 @@ function showAnnouncementCorrectAnswer2214(scene, text) {
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('Question2110');
+        scene.scene.start('MenuMisi2.2');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }

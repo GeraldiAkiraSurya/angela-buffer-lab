@@ -26,6 +26,6 @@ missionTwodotTwo.create = function() {
     
     let tiga = new Button(middleX - 550, middleY + 355, ' 3 ', this, () => {this.scene.start('Question225')},true);
 
-    let empat = new Button(middleX - 430, middleY + 385, ' 4 ', this, () => {this.scene.start('Question227')},false);
+    let empat = new Button(middleX - 430, middleY + 385, ' 4 ', this, () => {this.scene.start('Question227')},true);
 
 }
