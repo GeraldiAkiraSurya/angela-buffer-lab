@@ -62,6 +62,7 @@
     <script src="./js/selectchara.js"></script>
     <script src="./js/missionSelection.js"></script>
     <script src="./js/missionTwodotOne.js"></script>
+    <script src="./js/missionTwodotTwo.js"></script>
 
 
 

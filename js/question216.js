@@ -259,12 +259,12 @@ function showAnnouncementCorrectAnswer216(scene, text) {
         announcement.destroy();
 
         //to tabulasi screen
-        scene.scene.start('Question217');
+        scene.scene.start('MenuMisi2.1');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu')
+        scene.scene.start('MenuMisi2.1')
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
@@ -364,7 +364,7 @@ function startOver216(scene) {
         }
         else {
             //salah kedua kali? langsung tendang ke main menu
-            scene.scene.start('MainMenu');
+            scene.scene.start('MenuMisi2.1');
         }  
 
     }, middleX, middleY + 350);
