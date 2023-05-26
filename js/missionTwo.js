@@ -37,9 +37,6 @@ missionTwo.create = function() {
     if (missionTwoSequence == "endMissionTwoOne") {
         loadSequence2(this, 3);
     }
-    if (missionTwoSequence == "startMissionTwoTwo") {
-        loadSequence2(this, 4);
-    }
     if (missionTwoSequence == "endMissionTwoTwo") {
         loadSequence2(this, 5);
     }
@@ -92,9 +89,9 @@ function loadSequence2(scene, sequence) {
         // Button untuk load sequence selanjutnya
         gameObjects.nextBtn = createNextButton(scene, 'TERIMA', () => {
             // loadSequence2(scene, sequence+1);
-            missionTwoSequence = "endMissionTwoOne";
-            scene.scene.start("Misi2");
-            // scene.scene.start("menumisi2.1");
+            // missionTwoSequence = "endMissionTwoOne";
+            // scene.scene.start("Misi2");
+            scene.scene.start("MenuMisi2.1");
         });
 
     } 
@@ -109,9 +106,10 @@ function loadSequence2(scene, sequence) {
             `${playerName}: Baik Prof... Sampai jumpa...`,
         ];
         createDialog(scene, dialogs, () => {
-            missionTwoSequence = "startMissionTwoTwo";
-            scene.scene.start("Misi2");
-            // loadSequence2(scene, sequence+1);
+            // missionTwoSequence = "startMissionTwoTwo";
+            // scene.scene.start("Misi2");
+            // scene.scene.start("MenuMisi2.2");
+            loadSequence2(scene, sequence+1);
         });
 
     }
@@ -124,8 +122,8 @@ function loadSequence2(scene, sequence) {
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
             // loadSequence2(scene, sequence+1);
-            missionTwoSequence = "endMissionTwoTwo";
-            scene.scene.start("Misi2");
+            // missionTwoSequence = "endMissionTwoTwo";
+            scene.scene.start("MenuMisi2.2");
             // scene.scene.start("menumisi2.1");
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
@@ -144,9 +142,9 @@ function loadSequence2(scene, sequence) {
         ];
         // createDialog(scene, dialogs, () => {loadSequence2(scene, sequence+1)});
         createDialog(scene, dialogs, () => {
-            missionTwoSequence = "afterFindingObjects";
-            scene.scene.start("Misi2");
-            // scene.scene.start['findingObjects2'];
+            // missionTwoSequence = "afterFindingObjects";
+            // scene.scene.start("Misi2");
+            scene.scene.start('FindingObjects2');
         }); // Pindah ke finding objects
 
     }
