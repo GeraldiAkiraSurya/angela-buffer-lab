@@ -20,6 +20,7 @@
     <script src="./js/findingObjects1.js"></script>
     <script src="./js/findingObjects2.js"></script>
     <script src="./js/findingObjects3.js"></script>
+    <script src="./js/findingObjects4.js"></script>
 
     <!-- sub-misi 2.1 -->
     <script src="./js/question211.js"></script>
