@@ -15,11 +15,6 @@ missionSelection.create = function() {
     let jsonMissionProses = missionMenu()
     //--------------------------------------------------------------------------------
 
-
-
-
-
-
     canvasWidth = game.canvas.width;
     canvasHeight = game.canvas.height;
 
@@ -42,8 +37,9 @@ missionSelection.create = function() {
     //temporary ke Question211
     //harusnya ke Objective Misi 2
     let btnMsn2 = new Button((canvasWidth/2) - (1*deltaX), baseY, 'MISI II', this, () => {
-        this.scene.start('menumisi2.1');
+        this.scene.start('Misi2');
         energy = 100;
+        missionTwoSequence = "missionTwo";
     }, true);
     //temporary langsung ke pertanyaannya
     let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('Question211')},true);
