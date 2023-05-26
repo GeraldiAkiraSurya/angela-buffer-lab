@@ -478,11 +478,11 @@ function loadSequence3(scene, sequence) {
 Energi Anda dapat digunakan untuk membantu Prof Allison untuk mendapatkan buah ajaib di hutan";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            //biar bisa replay misi 1 lagi
+            //biar bisa replay misi 3 lagi
             findingObjects3Done = false;
 
-            //bawa ke mission selection
-            scene.scene.start('MissionSelection');
+            //bawa ke next mission 4
+            scene.scene.start('Misi4');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 

@@ -463,7 +463,8 @@ Energi Anda sudah cukup untuk menuju laboratorium pusat.";
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
             //biar bisa replay misi 1 lagi
             findingObjects1Done = false;
-            scene.scene.start('MainMenu');
+            //bawa ke next mission 2
+            scene.scene.start('Misi2');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
