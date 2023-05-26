@@ -131,7 +131,8 @@ findingObjects3.create = function () {
 
         findingObjects3Done = true;
 
-        findingObjects3.scene.start('MissionSelection');
+        //ke misi 4
+        findingObjects3.scene.start('Misi4');
     });
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
