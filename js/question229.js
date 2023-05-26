@@ -152,7 +152,7 @@ Nah..berdasarkan perubahan pH pada campuran / sistem dalam tabel, manakah yang t
         }
         else {
             //salah sekali, tendang ke main menu
-            this.scene.start('MainMenu');
+            this.scene.start('MenuMisi2.2');
         }  
 
     }, middleX, middleY + 350);
@@ -213,7 +213,7 @@ function showAnnouncementCorrectAnswer229(scene, text) {
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.2');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }

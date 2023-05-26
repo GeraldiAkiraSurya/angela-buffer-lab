@@ -45,12 +45,15 @@ missionSelection.create = function() {
         this.scene.start('menumisi2.1');
         energy = 100;
     }, true);
-    //temporary langsung ke pertanyaannya
-    let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('Question211')},true);
-    //seharusnya ke tabel tabulasi
+    
+    //tabulasi 2.1
+    let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('MenuMisi2.1')},true);
+
+    //tabulasi 2.2
     // let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('mission1')},jsonMissionProses["2.1"]);
-    let btnMsn2sub2 = new Button((canvasWidth/2) - (1*deltaX), baseY+200, 'SUB-MISI II.2', this, () => {this.scene.start('Question221')},true);
+    let btnMsn2sub2 = new Button((canvasWidth/2) - (1*deltaX), baseY+200, 'SUB-MISI II.2', this, () => {this.scene.start('MenuMisi2.2')},true);
     // let btnMsn2sub2 = new Button((canvasWidth/2) - (1*deltaX), baseY+200, 'SUB-MISI II.2', this, () => {this.scene.start('mission1')},jsonMissionProses["2.2"]);
+    
     let btnMsn3 = new Button(canvasWidth/2, baseY, 'MISI III', this, () => {this.scene.start('Misi3')},jsonMissionProses["3"]);
     let btnMsn4 = new Button((canvasWidth/2) + (1*deltaX), baseY, 'MISI IV', this, () => {this.scene.start('Misi4')},jsonMissionProses["4"]);
     let btnMsn5 = new Button((canvasWidth/2) + (2*deltaX), baseY, 'MISI V', this, () => {this.scene.start('mission5')},jsonMissionProses["5"]);
