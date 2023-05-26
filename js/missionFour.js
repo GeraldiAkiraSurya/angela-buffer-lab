@@ -104,11 +104,11 @@ missionFour.create = function() {
 
     //kalau finding objects belum beres, mulai dari 1
     if (!findingObjects4Done) {
-        loadSequence(this, 1);
+        loadSequence4(this, 1);
     }
     //kalau finding objects beres, load sequence beres
     else {
-        loadSequence(this, 26);
+        loadSequence4(this, 26);
     }
 }
 

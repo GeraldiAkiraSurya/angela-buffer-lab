@@ -106,11 +106,11 @@ missionThree.create = function() {
 
     //kalau finding objects belum beres, mulai dari 1
     if (!findingObjects3Done) {
-        loadSequence(this, 1);
+        loadSequence3(this, 1);
     }
     //kalau finding objects beres, load sequence beres
     else {
-        loadSequence(this, 26);
+        loadSequence3(this, 26);
     }
 }
 
@@ -466,6 +466,7 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
             // loadSequence3(scene, sequence+1);
             //bawa ke finding objects
+            console.log('start finding objects3');
             scene.scene.start('FindingObjects3');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
