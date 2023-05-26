@@ -52,6 +52,8 @@ question228.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 8);
+
     //variable initialization
     //yg bener itu H+, OH-, NH4+, H2O
     answerArray = ['HPos', 'H2O', 'NH4Pos', 'OHNeg'];
@@ -260,6 +262,8 @@ function showAnnouncementCorrectAnswer228(scene, text) {
         exitBtn.destroy();
         descriptionBox.destroy();
         announcement.destroy();
+
+        done("2.2", 8);
 
         //to question 9
         scene.scene.start('Question229');

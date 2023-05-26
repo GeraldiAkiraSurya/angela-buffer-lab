@@ -86,7 +86,8 @@ findingObjects2.create = function () {
 
     //start timer ke DB
     //ganti habis 2.2 beres
-    start("2.2", 15);
+    //gaperlu start, jadinya sblmnya
+    // start("2.2", 15);
 
     //variable initialization
     correctAnswer = false;
@@ -367,7 +368,7 @@ findingObjects2.update = function () {
 
         //manggil method done buat record time di DB
         //ganti habis 2.2 beres
-        done("2.2", 15);
+        done("2.2", 14);
 
         giftBox.setVisible(true);
         sus.setVisible(true);

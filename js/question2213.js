@@ -50,6 +50,8 @@ question2213.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 13);
+
     //variable initialization
     //yg bener itu pilihan A, B
     answerArray = ['A', 'B'];
@@ -211,7 +213,9 @@ function showAnnouncementCorrectAnswer2213(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to missionSelection
+        done("2.2", 13);
+
+        //to question 14
         scene.scene.start('Question2214');
         
 

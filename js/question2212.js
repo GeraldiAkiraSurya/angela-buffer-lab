@@ -50,6 +50,8 @@ question2212.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 12);
+
     //variable initialization
     //yg bener itu pilihan B
     answerArray = ['B'];
@@ -240,6 +242,8 @@ function showAnnouncementCorrectAnswer2212(scene, text) {
         exitBtn.destroy();
         descriptionBox.destroy();
         announcement.destroy();
+
+        done("2.2", 12);
 
         //to question 13
         scene.scene.start('Question2213');

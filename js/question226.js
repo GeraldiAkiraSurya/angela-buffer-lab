@@ -50,6 +50,8 @@ question226.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 6);
+
     //variable initialization
     //yg bener itu H+, OH-, NH3, NH4+, H2O
     answerArray = ['NH3', 'HPos', 'H2O', 'NH4Pos', 'OHNeg'];
@@ -253,6 +255,8 @@ function showAnnouncementCorrectAnswer226(scene, text) {
         exitBtn.destroy();
         descriptionBox.destroy();
         announcement.destroy();
+
+        done("2.2", 6);
 
         //to tabulasi screen
         scene.scene.start('MenuMisi2.2');
