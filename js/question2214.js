@@ -47,6 +47,8 @@ question2214.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 14);
+
     //variable initialization
     //yg bener itu pilihan A, B
     answerArray = ['A', 'B'];
@@ -200,12 +202,12 @@ function showAnnouncementCorrectAnswer2214(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to Misi2, sequence X (pas dialog)
-        scene.scene.start('Misi2');
+        //to finding objects 2
+        scene.scene.start('FindingObjects2');
 
         //2.2 FINISHED
         //Panggil Method Time Finish di sini Dim
-        
+        //Gajadi disini, jadinya di finding objects
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 

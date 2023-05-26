@@ -86,7 +86,7 @@ findingObjects4.create = function () {
 
     //start timer ke DB
     //ganti habis 4.7 beres
-    start("4", 8);
+    // start("4", 8);
 
     //variable initialization
     correctAnswer = false;
@@ -368,6 +368,7 @@ findingObjects4.update = function () {
 
         //manggil method done buat record time di DB
         //ganti habis 4.7 beres
+        //nyambung sama 4 pertanyan 7
         done("4", 7);
 
         giftBox.setVisible(true);

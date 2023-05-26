@@ -55,6 +55,8 @@ question214.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.1", 4);
+
     //variable initialization
     //yg bener itu H+, OH-, Cl-, Na+, H2O
     answerArray = ['HPos', 'H2O', 'NaPos', 'OHNeg', 'ClNeg'];
@@ -257,6 +259,8 @@ function showAnnouncementCorrectAnswer214(scene, text) {
         exitBtn.destroy();
         descriptionBox.destroy();
         announcement.destroy();
+
+        done("2.1", 4);
 
         //to tabulasi screen
         scene.scene.start('MenuMisi2.1');

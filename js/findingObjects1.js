@@ -85,7 +85,7 @@ findingObjects1.create = function () {
     energy = 100;
 
     //start timer ke DB
-    start("1", 6);
+    // start("1", 6);
 
     //variable initialization
     correctAnswer = false;
@@ -365,7 +365,8 @@ findingObjects1.update = function () {
         findTimer.paused = true;
 
         //manggil method done buat record time di DB
-        done("1", 6);
+        //nyambung sama misi 1 pertanyaan 5
+        done("1", 5);
 
         giftBox.setVisible(true);
         book.setVisible(true);
