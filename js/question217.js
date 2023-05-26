@@ -50,6 +50,8 @@ question217.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.1", 7);
+
     //variable initialization
     //yg bener itu pilihan A
     answerArray = ['A'];
@@ -240,13 +242,15 @@ function showAnnouncementCorrectAnswer217(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
+        done("2.1", 7);
+
         //to question 8
         scene.scene.start('Question218');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.1');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
@@ -335,7 +339,7 @@ function startOver217(scene) {
         }
         else {
             //salah kedua kali? langsung tendang ke main menu
-            scene.scene.start('MainMenu');
+            scene.scene.start('MenuMisi2.1');
         }  
 
     }, middleX, middleY + 350);

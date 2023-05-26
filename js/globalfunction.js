@@ -1,24 +1,3 @@
-function foundObject (objectName) {
-    switch (objectName) {
-        case 'beaker':
-            return true;
-        case 'spatula':
-            return true;
-        case 'testTube':
-            return true;
-        case 'testTubeRack':
-            return true;
-        case 'sprayBottle':
-            return true;
-        case 'dropper':
-            return true;
-        case 'measuringCylinder':
-            return true;
-        case 'stirringRod':
-            return true;
-    }
-}
-
 function hintObject (object) {
     object.setTint(0x08F26E);
 }
@@ -43,6 +22,80 @@ function showObjective(scene, object1, object2, object3, object4, btnHint) {
 [b]BATAS WAKTU:[/b] 15 DETIK PER OBJEK
 
 [b]HADIAH:[/b] BUKU RAMUAN OBAT
+
+[b]JIKA GAGAL:[/b] MINIGAME DIULANG DARI AWAL`;
+
+    var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+250, text, {
+        fontSize: '30px',
+        align: 'left',
+        wrap: {
+            mode: 'word',
+            width: descriptionBox.width-100
+        },
+    });
+
+    var nextBtn = createNextButton(scene, 'LANJUT', () => {
+        title.destroy();
+        missionDesc.destroy();
+        nextBtn.destroy();
+        descriptionBox.destroy();
+
+        startFindingObject(scene, object1, object2, object3, object4, btnHint);
+    }, middleX, middleY + (descriptionBox.height / 2) - 50);    
+}
+
+//buat pop up
+function showObjective2(scene, object1, object2, object3, object4, btnHint) {
+    var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
+    var descBoxTopX = middleX - (descriptionBox.width / 2);
+    var descBoxTopY = middleY - (descriptionBox.height / 2);
+    var title = scene.add.text(middleX, descBoxTopY + 100, "FINDING OBJECTS MINIGAME")
+        .setOrigin(0.5)
+        .setFontSize(40);
+
+    var text = 
+`[b]OBJECTIVE:[/b] TEMUKAN OBJEK DAN PINDAHKAN KE BOX YANG SESUAI
+
+[b]BATAS WAKTU:[/b] 15 DETIK PER OBJEK
+
+[b]HADIAH:[/b] RAMUAN OBAT HIJAU
+
+[b]JIKA GAGAL:[/b] MINIGAME DIULANG DARI AWAL`;
+
+    var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+250, text, {
+        fontSize: '30px',
+        align: 'left',
+        wrap: {
+            mode: 'word',
+            width: descriptionBox.width-100
+        },
+    });
+
+    var nextBtn = createNextButton(scene, 'LANJUT', () => {
+        title.destroy();
+        missionDesc.destroy();
+        nextBtn.destroy();
+        descriptionBox.destroy();
+
+        startFindingObject(scene, object1, object2, object3, object4, btnHint);
+    }, middleX, middleY + (descriptionBox.height / 2) - 50);    
+}
+
+//buat pop up
+function showObjective3(scene, object1, object2, object3, object4, btnHint) {
+    var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
+    var descBoxTopX = middleX - (descriptionBox.width / 2);
+    var descBoxTopY = middleY - (descriptionBox.height / 2);
+    var title = scene.add.text(middleX, descBoxTopY + 100, "FINDING OBJECTS MINIGAME")
+        .setOrigin(0.5)
+        .setFontSize(40);
+
+    var text = 
+`[b]OBJECTIVE:[/b] TEMUKAN OBJEK DAN PINDAHKAN KE BOX YANG SESUAI
+
+[b]BATAS WAKTU:[/b] 15 DETIK PER OBJEK
+
+[b]HADIAH:[/b] BUAH AJAIB
 
 [b]JIKA GAGAL:[/b] MINIGAME DIULANG DARI AWAL`;
 
@@ -155,43 +208,6 @@ function createNextButton(
     return button;
 }
 
-//buat pop up
-// function showPopUp(scene, object1, object2, object3, object4, btnHint) {
-//     var descriptionBox = scene.add.rectangle(scene.cameras.main.width / 2, scene.cameras.main.height / 2, scene.cameras.main.width / 2, scene.cameras.main.height * 3 / 4, 0x000000, 0.7);
-//     var descBoxTopX = middleX - (descriptionBox.width / 2);
-//     var descBoxTopY = middleY - (descriptionBox.height / 2);
-//     var title = scene.add.text(middleX, descBoxTopY + 100, "FINDING OBJECTS MINIGAME")
-//         .setOrigin(0.5)
-//         .setFontSize(40);
-
-//     var text = 
-// `[b]OBJECTIVE:[/b] TEMUKAN OBJEK DAN PINDAHKAN KE BOX YANG SESUAI
-
-// [b]BATAS WAKTU:[/b] 15 DETIK PER OBJEK
-
-// [b]HADIAH:[/b] BUKU RAMUAN OBAT
-
-// [b]JIKA GAGAL:[/b] MINIGAME DIULANG DARI AWAL`;
-
-//     var missionDesc = scene.add.rexBBCodeText(middleX-descBoxTopX+50, descBoxTopY+250, text, {
-//         fontSize: '30px',
-//         align: 'left',
-//         wrap: {
-//             mode: 'word',
-//             width: descriptionBox.width-100
-//         },
-//     });
-
-//     var nextBtn = createNextButton(scene, middleX, middleY + (descriptionBox.height / 2) - 50, 'LANJUT', () => {
-//         title.destroy();
-//         missionDesc.destroy();
-//         nextBtn.destroy();
-//         descriptionBox.destroy();
-
-//         startFindingObject(scene, object1, object2, object3, object4, btnHint);
-//     });    
-// }
-
 function startFindingObject(scene, object1, object2, object3, object4, btnHint) {
     scene.time.addEvent(findTimer);
     object1.setVisible(true);
@@ -217,8 +233,8 @@ function checkAnswerDraggable(answerArray, playerAnswerArray) {
     
     return false;
 }
-//function buat misi 2.1 & 2.2 pertanyaan 1-8 finished
 
+//function buat misi 2.1 & 2.2 pertanyaan 1-8 finished
 function hideObject(objectsArrayToHide) {
     for (let i = 0; i < objectsArrayToHide.length; i++) {
         objectsArrayToHide[i].setVisible(false);
@@ -236,49 +252,3 @@ function destroyObject(objectsArrayToDestroy) {
         objectsArrayToDestroy[i].destroy();
     }    
 }
-
-// function foundObject (objectName, objectFound) {
-//     switch (objectName) {
-//         case 'beaker':
-//             beakerFound = true;
-//             break;
-//         case 'spatula':
-//             spatulaFound = true;
-//             break;
-//         case 'testTube':
-//             testTubeFound = true;
-//             break;
-//         case 'testTubeRack':
-//             testTubeRackFound = true;
-//             break;
-//         case 'sprayBottle':
-//             sprayBottleFound = true;
-//             break;
-//         case 'dropper':
-//             dropperFound = true;
-//             break;
-//         case 'measuringCylinder':
-//             measuringCylinderFound = true;
-//             break;
-//         case 'stirringRod':
-//             stirringRodFound = true;
-//             break;
-//     }
-// }
-
-// function hintObject (objectName) {
-//     switch (objectName) {
-//         case 'beaker':
-//             beaker.setTint(0x08F26E);
-//             break;
-//         case 'spatula':
-//             spatula.setTint(0x08F26E);
-//             break;
-//         case 'testTube':
-//             testTube.setTint(0x08F26E);
-//             break;
-//         case 'testTubeRack':
-//             testTubeRack.setTint(0x08F26E);
-//             break;
-//     }
-// }

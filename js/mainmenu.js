@@ -66,17 +66,17 @@ mainMenu.create = function () {
 
     //buttons
     btnStart = this.add.image(middleX, middleY, 'startButton').setInteractive().setScale(0.5);
-    btnOptions = this.add.image(middleX, middleY + 125, 'optionsButton').setInteractive().setScale(0.5);
-    btnProfile = this.add.image(middleX, middleY + 250, 'optionsButton').setInteractive().setScale(0.5);
+    btnProfile = this.add.image(middleX, middleY + 125, 'optionsButton').setInteractive().setScale(0.5);
+    btnOptions = this.add.image(middleX, middleY + 250, 'optionsButton').setInteractive().setScale(0.5).setVisible(false);    
 
     btnStart.on('pointerup', function () {        
         console.log(energy);
         mainMenu.scene.start('MissionSelection');
     });
 
-    btnOptions.on('pointerup', function () {
-        mainMenu.scene.start('SelectChara');
-    });
+    // btnOptions.on('pointerup', function () {
+    //     mainMenu.scene.start('SelectChara');
+    // });
 
     btnProfile.on('pointerup', function () {
         window.location.href = 'profile';

@@ -47,6 +47,8 @@ question219.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.1", 9);
+
     //variable initialization
     //yg bener itu pilihan A
     answerArray = ['A'];
@@ -152,7 +154,7 @@ Nah..berdasarkan perubahan pH pada campuran / sistem dalam tabel, manakah yang t
         }
         else {
             //salah sekali, tendang ke main menu
-            this.scene.start('MainMenu');
+            this.scene.start('MenuMisi2.1');
         }  
 
     }, middleX, middleY + 350);
@@ -207,13 +209,15 @@ function showAnnouncementCorrectAnswer219(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
+        done("2.1", 9);
+
         //to question 10
         scene.scene.start('Question2110');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.1');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }

@@ -55,6 +55,8 @@ question216.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.1", 6);
+
     //variable initialization
     //yg bener itu H+, OH-, CH3COOH, CH3COO, H2O
     answerArray = ['HPos', 'H2O', 'CH3COOH', 'OHNeg', 'CH3COO'];
@@ -258,13 +260,15 @@ function showAnnouncementCorrectAnswer216(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
+        done("2.1", 6);
+
         //to tabulasi screen
-        scene.scene.start('Question217');
+        scene.scene.start('MenuMisi2.1');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu')
+        scene.scene.start('MenuMisi2.1')
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
@@ -364,7 +368,7 @@ function startOver216(scene) {
         }
         else {
             //salah kedua kali? langsung tendang ke main menu
-            scene.scene.start('MainMenu');
+            scene.scene.start('MenuMisi2.1');
         }  
 
     }, middleX, middleY + 350);
