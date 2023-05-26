@@ -104,7 +104,14 @@ missionThree.create = function() {
 
     };
 
-    loadSequence3(this, 1);
+    //kalau finding objects belum beres, mulai dari 1
+    if (!findingObjects3Done) {
+        loadSequence(this, 1);
+    }
+    //kalau finding objects beres, load sequence beres
+    else {
+        loadSequence(this, 26);
+    }
 }
 
 missionThree.update = function() {
@@ -436,7 +443,7 @@ function loadSequence3(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("3",questionNumber)
+                // done("3",questionNumber)
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence3(scene, sequence+1);
             } else {
@@ -457,7 +464,9 @@ function loadSequence3(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence3(scene, sequence+1);
+            // loadSequence3(scene, sequence+1);
+            //bawa ke finding objects
+            scene.scene.start('FindingObjects3');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
@@ -469,7 +478,11 @@ function loadSequence3(scene, sequence) {
 Energi Anda dapat digunakan untuk membantu Prof Allison untuk mendapatkan buah ajaib di hutan";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            scene.scene.start('MainMenu');
+            //biar bisa replay misi 1 lagi
+            findingObjects3Done = false;
+
+            //bawa ke mission selection
+            scene.scene.start('MissionSelection');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 

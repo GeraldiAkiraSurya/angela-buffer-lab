@@ -399,7 +399,8 @@ function loadSequence(scene, sequence) {
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
-                done("1",5);
+                //done-nya dipindah ke finding objects 1 beres
+                // done("1",5);
                 // Kalo jawaban bener, langsung load sequence selanjutnya
                 loadSequence(scene, sequence+1);
             } else {
