@@ -40,7 +40,8 @@ var config = {
         findingObjects1, findingObjects2, findingObjects3, findingObjects4,
         question211, question212, question213, question214, question215, question216, question217, question218, question219, question2110, question2111, question2112,
         question221, question222, question223, question224, question225, question226, question227, question228, question229, question2210, question2211, question2212, question2213, question2214,
-        missionOne, missionThree, missionFour, missionFive
+
+        missionOne, missionTwo, missionThree, missionFour, missionFive
     ]
 
 

@@ -130,10 +130,12 @@ findingObjects2.create = function () {
     sus.on('pointerup', function () {
         // console.log('clicked sus!');
 
-        findingObjects2Done = true;
+        // findingObjects2Done = true;
+        missionTwoSequence = "afterFindingObjects";
 
         //kembali ke misi2 sequence X
-        findingObjects2.scene.start('MissionSelection');
+        // findingObjects2.scene.start('MissionSelection');
+        findingObjects2.scene.start("Misi2");
     });
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);

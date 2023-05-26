@@ -23,6 +23,7 @@ var findingObjects1Done = false;
 var findingObjects2Done = false;
 var findingObjects3Done = false;
 var findingObjects4Done = false;
+let missionTwoSequence;
 
 let gameObjects = {};
 let missionBoxProps = {};

@@ -203,7 +203,9 @@ function showAnnouncementCorrectAnswer2214(scene, text) {
         announcement.destroy();
 
         //to finding objects 2
-        scene.scene.start('FindingObjects2');
+        // scene.scene.start('FindingObjects2');
+        missionTwoSequence  = "endMissionTwoTwo";
+        scene.scene.start("Misi2");
 
         //2.2 FINISHED
         //Panggil Method Time Finish di sini Dim

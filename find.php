@@ -55,6 +55,7 @@
   
     
     <script src="./js/missionOne.js"></script>
+    <script src="./js/missionTwo.js"></script>
     <script src="./js/missionThree.js"></script>
     <script src="./js/missionFour.js"></script>
     <script src="./js/missionFive.js"></script>
