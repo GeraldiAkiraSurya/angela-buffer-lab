@@ -85,8 +85,8 @@ findingObjects3.create = function () {
     energy = 100;
 
     //start timer ke DB
-    //ganti habis 2.2 beres
-    start("1", 6);
+    //ganti habis 3.7 beres
+    start("3", 8);
 
     //variable initialization
     correctAnswer = false;
@@ -367,8 +367,8 @@ findingObjects3.update = function () {
         findTimer.paused = true;
 
         //manggil method done buat record time di DB
-        //ganti habis 2.2 beres
-        done("1", 6);
+        //ganti habis 3.7 beres
+        done("3", 8);
 
         giftBox.setVisible(true);
         buahAjaib.setVisible(true);

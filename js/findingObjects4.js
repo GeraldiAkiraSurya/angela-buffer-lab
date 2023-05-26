@@ -85,8 +85,8 @@ findingObjects4.create = function () {
     energy = 100;
 
     //start timer ke DB
-    //ganti habis 2.2 beres
-    start("1", 6);
+    //ganti habis 4.7 beres
+    start("4", 8);
 
     //variable initialization
     correctAnswer = false;
@@ -114,11 +114,11 @@ findingObjects4.create = function () {
     this.input.setDraggable(pHMeter);
 
     // ballPipet = this.add.image(500, 565, 'ballPipet').setInteractive().setScale(0.12).setAngle(-7);
-    ballPipet = this.add.image(middleX - 5, middleY + 150, 'ballPipet').setInteractive().setAngle(-7).setScale(0.19).setVisible(false).setFlipX(true);
+    ballPipet = this.add.image(middleX + 520, middleY + 120, 'ballPipet').setInteractive().setAngle(-193).setScale(0.19).setVisible(false).setFlipX(true);
     this.input.setDraggable(ballPipet);
 
     // dripBoard = this.add.image(1110, 100, 'dripBoard').setInteractive().setScale(0.2).setAngle(7);
-    dripBoard = this.add.image(middleX + 875, middleY + 176, 'dripBoard').setInteractive().setScale(0.2).setVisible(false).setAngle(13);
+    dripBoard = this.add.image(middleX - 345, middleY + 356, 'dripBoard').setInteractive().setScale(0.2).setVisible(false).setAngle(137);
     this.input.setDraggable(dripBoard);
 
     //gift box & buahAjaib
@@ -336,8 +336,8 @@ findingObjects4.create = function () {
     });
 
     //alur game
-    // showObjective3(this, watchGlass, pHMeter, ballPipet, dripBoard, btnHint);
-    startFindingObject(this, watchGlass, pHMeter, ballPipet, dripBoard, btnHint);
+    showObjective3(this, watchGlass, pHMeter, ballPipet, dripBoard, btnHint);
+    // startFindingObject(this, watchGlass, pHMeter, ballPipet, dripBoard, btnHint);
 }
 
 findingObjects4.update = function () {
@@ -367,8 +367,8 @@ findingObjects4.update = function () {
         findTimer.paused = true;
 
         //manggil method done buat record time di DB
-        //ganti habis 2.2 beres
-        done("1", 6);
+        //ganti habis 4.7 beres
+        done("4", 7);
 
         giftBox.setVisible(true);
         buahAjaib.setVisible(true);
