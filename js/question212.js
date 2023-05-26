@@ -54,6 +54,8 @@ question212.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.1", 2);
+
     //variable initialization
     //yg bener itu H+, OH-, CH3COOH, CH3COO-, Na+, H2O
     answerArray = ['CH3COONeg', 'CH3COOH', 'HPos', 'H2O', 'NaPos', 'OHNeg'];
@@ -267,6 +269,8 @@ function showAnnouncementCorrectAnswer212(scene, text) {
         exitBtn.destroy();
         descriptionBox.destroy();
         announcement.destroy();
+
+        done("2.1", 2);
 
         //to tabulasi screen
         scene.scene.start('MenuMisi2.1');

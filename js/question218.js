@@ -53,6 +53,8 @@ question218.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.1", 8);
+
     //variable initialization
     //yg bener itu H+, OH-, NaPos, CH3COO, H2O
     answerArray = ['HPos', 'H2O', 'NaPos', 'OHNeg', 'CH3COO'];
@@ -251,6 +253,8 @@ function showAnnouncementCorrectAnswer218(scene, text) {
         exitBtn.destroy();
         descriptionBox.destroy();
         announcement.destroy();
+
+        done("2.1", 8);
 
         //to question 9
         scene.scene.start('Question219');
