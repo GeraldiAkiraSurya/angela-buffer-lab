@@ -23,6 +23,10 @@ missionSelection.create = function() {
     canvasWidth = game.canvas.width;
     canvasHeight = game.canvas.height;
 
+    //comment nanti, keperluan debugging doang. harusnya di initiate dari main menu.
+    middleX = this.cameras.main.width / 2;
+    middleY = this.cameras.main.height / 2;
+
     let image = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'menuBackground');
     let scaleX = this.cameras.main.width / image.width;
     let scaleY = this.cameras.main.height / image.height;
@@ -42,8 +46,8 @@ missionSelection.create = function() {
 
     //harusnya ke Objective Misi 2
     let btnMsn2 = new Button((canvasWidth/2) - (1*deltaX), baseY, 'MISI II', this, () => {
-        this.scene.start('MenuMisi2.1');
-    }, true);
+        this.scene.start('Misi2');
+    }, jsonMissionProses["2.1"]);
     
     //tabulasi 2.1
     let btnMsn2sub1 = new Button((canvasWidth/2) - (1*deltaX), baseY+100, 'SUB-MISI II.1', this, () => {this.scene.start('MenuMisi2.1')},jsonMissionProses["2.1"]);
@@ -54,6 +58,8 @@ missionSelection.create = function() {
     let btnMsn3 = new Button(canvasWidth/2, baseY, 'MISI III', this, () => {this.scene.start('Misi3')},jsonMissionProses["3"]);
     let btnMsn4 = new Button((canvasWidth/2) + (1*deltaX), baseY, 'MISI IV', this, () => {this.scene.start('Misi4')},jsonMissionProses["4"]);
     let btnMsn5 = new Button((canvasWidth/2) + (2*deltaX), baseY, 'MISI V', this, () => {this.scene.start('mission5')},jsonMissionProses["5"]);
+
+    let back = new Button(middleX - 730, middleY - 400, ' BACK ', this, () => {this.scene.start('MainMenu')}, true);
 }
 
 

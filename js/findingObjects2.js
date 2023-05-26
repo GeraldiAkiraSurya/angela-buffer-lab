@@ -132,6 +132,7 @@ findingObjects2.create = function () {
 
         findingObjects2Done = true;
 
+        //kembali ke misi2 sequence X
         findingObjects2.scene.start('MissionSelection');
     });
 
