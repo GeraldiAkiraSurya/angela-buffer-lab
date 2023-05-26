@@ -445,12 +445,15 @@ Energi Anda sudah cukup untuk menuju laboratorium pusat.";
 
         gameObjects.backgroundImage = createBackgroundImage(scene, 'menuBackground');
         let dialogs = [
-            "prof. Allison: Kerja bagus Sora/ Shin... saya pelajari dulu ramuan yang diperlukan...",
+            `prof. Allison: Kerja bagus ${playerName}... saya pelajari dulu ramuan yang diperlukan...`,
             `${playerName}: Saya butuh energi Prof...`,
             "prof. Allison: Anda dapat memperoleh energi dari Misi kita yang kedua di laboratorium Y",
             `${playerName}: Pasti menyenangkan...`,
         ];
-        createDialog(scene, dialogs, () => {loadSequence(scene, sequence+1)});
+        createDialog(scene, dialogs, () => {
+            missionTwoSequence = "missionTwo";
+            loadSequence(scene, sequence+1)
+        });
 
     } 
     
