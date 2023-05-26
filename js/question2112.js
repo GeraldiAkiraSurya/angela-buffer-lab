@@ -247,7 +247,7 @@ function showAnnouncementCorrectAnswer2112(scene, text) {
         done("2.1", 12);
 
         //to Misi2, sequence X (pas dialog)
-        scene.scene.start('Misi2');
+        scene.scene.start('MenuMisi2.2');
 
         //2.1 FINISHED      
 
