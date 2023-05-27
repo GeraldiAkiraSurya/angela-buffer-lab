@@ -1,20 +1,20 @@
-//Finding Objects 2
-findingObjects2 = new Phaser.Scene('FindingObjects2');
+//Finding Objects 3
+findingObjects4 = new Phaser.Scene('FindingObjects4');
 
-findingObjects2.preload = function () {
+findingObjects4.preload = function () {
     this.load.path = './assets/';
-    this.load.image('sprayBottle', 'lab_eq/SprayBottle.png');
-    this.load.image('dropper', 'lab_eq/Dropper.png');
-    this.load.image('measuringCylinder', 'lab_eq/MeasuringCylinder.png');
-    this.load.image('stirringRod', 'lab_eq/StirringRod.png');
+    this.load.image('watchGlass', 'lab_eq/WatchGlass.png');
+    this.load.image('pHMeter', 'lab_eq/pHMeter.png');
+    this.load.image('ballPipet', 'lab_eq/BallPipet.png');
+    this.load.image('dripBoard', 'lab_eq/DripBoard.png');
 
-    this.load.image('findingObjects2BG', 'scenes/finding_objects1.png');
+    this.load.image('findingObjects4BG', 'scenes/bg_hutan2.png');
 
     this.load.image('dropZoneBG', 'icons/finding_object_dropzone_background.png');
     this.load.image('energyFlask', 'icons/energy_flask.png');
     this.load.image('magnifyingGlass', 'icons/MagnifyingGlass.png');
     this.load.image('giftBox', 'icons/gift_box.png');
-    this.load.image('sus', 'icons/sus.png');
+    this.load.image('buahAjaib', 'icons/buahAjaib.png');
 
     this.load.image('backButton', 'buttons/Back Button.png');
 
@@ -22,27 +22,27 @@ findingObjects2.preload = function () {
     this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
 }
 
-var sprayBottle;
-var dropper;
-var measuringCylinder;
-var stirringRod;
+var watchGlass;
+var pHMeter;
+var ballPipet;
+var dripBoard;
 
-var sprayBottleIndicator;
-var dropperIndicator;
-var measuringCylinderIndicator;
-var stirringRodIndicator;
+var watchGlassIndicator;
+var pHMeterIndicator;
+var ballPipetIndicator;
+var dripBoardIndicator;
 
 //drop zone destinasi
-var dropZoneSprayBottleBG;
-var dropZoneDropperBG;
-var dropZoneMeasuringCylinderBG;
-var dropZoneStirringRodBG;
+var dropZoneWatchGlassBG;
+var dropZonePHMeterBG;
+var dropZoneBallPipetBG;
+var dropZoneDripBoardBG;
 
 //boolean: object found or not
-var sprayBottleFound;
-var dropperFound;
-var measuringCylinderFound;
-var stirringRodFound;
+var watchGlassFound;
+var pHMeterFound;
+var burnerFound;
+var dripBoardFound;
 var energyFlask1Found;
 var energyFlask2Found;
 
@@ -59,7 +59,7 @@ var energyText;
 
 //reward when complete
 var giftBox;
-var sus;
+var buahAjaib;
 
 var energyFlask1;
 var energyFlask2;
@@ -71,7 +71,7 @@ var correctAnswer;
 
 var btnHint;
 
-findingObjects2.create = function () {
+findingObjects4.create = function () {
     //x 1879 y 1008
     //halve value: 940, 504
     //comment nanti, keperluan debugging doang. harusnya di initiate dari main menu.
@@ -79,25 +79,24 @@ findingObjects2.create = function () {
     middleY = this.cameras.main.height / 2;
 
     //background
-    this.add.image(middleX, middleY, 'findingObjects2BG').setScale(1, 0.94);
+    this.add.image(middleX, middleY, 'findingObjects4BG').setScale(1.19, 0.94);
 
     //energy debugger, disable pas udah siap dirangkai
     energy = 100;
 
     //start timer ke DB
-    //ganti habis 2.2 beres
-    //gaperlu start, jadinya sblmnya
-    // start("2.2", 15);
+    //ganti habis 4.7 beres
+    // start("4", 8);
 
     //variable initialization
     correctAnswer = false;
     isGameOverRendered = false;
     outOfEnergy = false;
     lookingForEnergyFlask = false;
-    sprayBottleFound = false;
-    dropperFound = false;
-    measuringCylinderFound = false;
-    stirringRodFound = false;
+    watchGlassFound = false;
+    pHMeterFound = false;
+    burnerFound = false;
+    dripBoardFound = false;
     energyFlask1Found = false;
     energyFlask2Found = false;
 
@@ -105,37 +104,34 @@ findingObjects2.create = function () {
     //setScale buat skala imagenya, belum tau hitboxnya keganti ato engga. kayanya ga keganti, atau hitboxnya lebih besar dari imagenya
     //setInteractive buat bisa interactable
     //load image to scene
-    // sprayBottle = this.add.image(650, 840, 'sprayBottle').setInteractive().setScale(0.5);
-    sprayBottle = this.add.image(middleX - 725, middleY - 247, 'sprayBottle').setInteractive().setScale(0.2).setVisible(false);
+    // watchGlass = this.add.image(650, 840, 'watchGlass').setInteractive().setScale(0.5);
+    watchGlass = this.add.image(middleX + 730, middleY + 395, 'watchGlass').setInteractive().setScale(0.35).setVisible(false).setAngle(-180);
     //biar bisa di-drag
-    this.input.setDraggable(sprayBottle);    
+    this.input.setDraggable(watchGlass);    
 
-    // dropper = this.add.image(1655, 165, 'dropper').setInteractive().setScale(0.2).setAngle(17);
-    dropper = this.add.image(middleX + 725, middleY - 339, 'dropper').setInteractive().setScale(0.2).setAngle(17).setVisible(false);
-    this.input.setDraggable(dropper);
+    // pHMeter = this.add.image(1655, 165, 'pHMeter').setInteractive().setScale(0.2).setAngle(17);
+    pHMeter = this.add.image(middleX - 618, middleY + 30, 'pHMeter').setInteractive().setScale(0.17).setAngle().setVisible(false);
+    this.input.setDraggable(pHMeter);
 
-    // measuringCylinder = this.add.image(500, 565, 'measuringCylinder').setInteractive().setScale(0.12).setAngle(-7);
-    measuringCylinder = this.add.image(middleX + 500, middleY + 241, 'measuringCylinder').setInteractive().setAngle(-180).setScale(0.32).setVisible(false);
-    this.input.setDraggable(measuringCylinder);
+    // ballPipet = this.add.image(500, 565, 'ballPipet').setInteractive().setScale(0.12).setAngle(-7);
+    ballPipet = this.add.image(middleX + 520, middleY + 120, 'ballPipet').setInteractive().setAngle(-193).setScale(0.19).setVisible(false).setFlipX(true);
+    this.input.setDraggable(ballPipet);
 
-    // stirringRod = this.add.image(1110, 100, 'stirringRod').setInteractive().setScale(0.2).setAngle(7);
-    stirringRod = this.add.image(middleX + 170, middleY - 396, 'stirringRod').setInteractive().setScale(0.2).setVisible(false).setAngle(40);
-    this.input.setDraggable(stirringRod);
+    // dripBoard = this.add.image(1110, 100, 'dripBoard').setInteractive().setScale(0.2).setAngle(7);
+    dripBoard = this.add.image(middleX - 345, middleY + 356, 'dripBoard').setInteractive().setScale(0.2).setVisible(false).setAngle(137);
+    this.input.setDraggable(dripBoard);
 
-    //gift box & sus
+    //gift box & buahAjaib
     giftBox = this.add.image(middleX, middleY + 50, 'giftBox').setVisible(false);
-    sus = this.add.image(middleX, middleY - 100, 'sus').setInteractive().setScale(0.25).setVisible(false);
+    buahAjaib = this.add.image(middleX, middleY - 100, 'buahAjaib').setInteractive().setScale(1.2).setVisible(false);
 
     //ketrigger kalo udah beres
-    sus.on('pointerup', function () {
-        // console.log('clicked sus!');
+    buahAjaib.on('pointerup', function () {
+        // console.log('clicked buahAjaib!');
 
-        // findingObjects2Done = true;
-        missionTwoSequence = "afterFindingObjects";
+        findingObjects4Done = true;
 
-        //kembali ke misi2 sequence X
-        // findingObjects2.scene.start('MissionSelection');
-        findingObjects2.scene.start("Misi2");
+        findingObjects4.scene.start('mission5');
     });
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
@@ -148,17 +144,17 @@ findingObjects2.create = function () {
 
     btnHint.on('pointerup', function () {
         let objectsArray = [];
-        if (!sprayBottleFound) {
-            objectsArray.push(sprayBottle);
+        if (!watchGlassFound) {
+            objectsArray.push(watchGlass);
         }
-        if (!dropperFound) {
-            objectsArray.push(dropper);
+        if (!pHMeterFound) {
+            objectsArray.push(pHMeter);
         }
-        if (!measuringCylinderFound) {
-            objectsArray.push(measuringCylinder);
+        if (!burnerFound) {
+            objectsArray.push(ballPipet);
         }
-        if (!stirringRodFound) {
-            objectsArray.push(stirringRod);
+        if (!dripBoardFound) {
+            objectsArray.push(dripBoard);
         }
         // console.log(objectsArray);
         // console.log(Math.floor(Math.random() * 4));
@@ -171,23 +167,23 @@ findingObjects2.create = function () {
     //940 504
 
     //drop zone background size default 128x128
-    dropZoneSprayBottleBG = this.add.image(middleX - 640, middleY - 439, 'dropZoneBG');
-    dropZoneDropperBG = this.add.image(middleX - 490, middleY - 439, 'dropZoneBG');
-    dropZoneMeasuringCylinderBG = this.add.image(middleX - 340, middleY - 439, 'dropZoneBG');
-    dropZoneStirringRodBG = this.add.image(middleX - 190, middleY - 439, 'dropZoneBG');
+    dropZoneWatchGlassBG = this.add.image(middleX - 560, middleY - 439, 'dropZoneBG');
+    dropZonePHMeterBG = this.add.image(middleX - 410, middleY - 439, 'dropZoneBG');
+    dropZoneBallPipetBG = this.add.image(middleX - 260, middleY - 439, 'dropZoneBG');
+    dropZoneDripBoardBG = this.add.image(middleX - 110, middleY - 439, 'dropZoneBG');
 
     //drop zone. set name buat id. samain kaya nama texturenya
     //kenapa di set 128? biar sama dengan asset
-    const sprayBottleZone = this.add.zone(middleX - 640, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('sprayBottle');
-    const dropperZone = this.add.zone(middleX - 490, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('dropper');
-    const measuringCylinderZone = this.add.zone(middleX - 340, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('measuringCylinder');
-    const stirringRodZone = this.add.zone(middleX - 190, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('stirringRod');
+    const watchGlassZone = this.add.zone(middleX - 560, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('watchGlass');
+    const pHMeterZone = this.add.zone(middleX - 410, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('pHMeter');
+    const burnerZone = this.add.zone(middleX - 260, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('ballPipet');
+    const dripBoardZone = this.add.zone(middleX - 110, middleY - 439, 128, 128).setRectangleDropZone(128, 128).setName('dripBoard');
 
     //text dalam dropZone
-    this.add.text(middleX - 686, middleY - 464, "   Botol\nSemprot", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(middleX - 520, middleY - 464, "Pipet\nTetes", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(middleX - 370, middleY - 464, "Gelas\n Ukur", {font: "900 20px Helvetica", fill: "#000000"});
-    this.add.text(middleX - 243, middleY - 464, "  Batang\nPengaduk", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 586, middleY - 464, "Kaca\nArloji", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 440, middleY - 464, "  pH\nMeter", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 290, middleY - 464, " Ball\nPipet", {font: "900 20px Helvetica", fill: "#000000"});
+    this.add.text(middleX - 138, middleY - 464, " Plat\nTetes", {font: "900 20px Helvetica", fill: "#000000"});
 
     //timer 15 detik per objek
     //keperluan debugging
@@ -234,38 +230,38 @@ findingObjects2.create = function () {
             gameObject.y = dropZone.y;
 
             switch (dropZone.name) {
-                case 'sprayBottle':
+                case 'watchGlass':
                     //tandain objeknya ketemu
-                    sprayBottleFound = true;
-                    sprayBottle.setVisible(false);
-                    dropZoneSprayBottleBG.setTint(0x08F26E);
+                    watchGlassFound = true;
+                    watchGlass.setVisible(false);
+                    dropZoneWatchGlassBG.setTint(0x08F26E);
                     //destroy the zone biar yg lain ga dicoba di drag lagi kesini
-                    sprayBottleZone.destroy();
-                    // console.log(sprayBottleFound);
+                    watchGlassZone.destroy();
+                    // console.log(watchGlassFound);
                     break;
-                case 'dropper':
-                    dropperFound = true;
-                    dropper.setVisible(false);
-                    dropZoneDropperBG.setTint(0x08F26E);
+                case 'pHMeter':
+                    pHMeterFound = true;
+                    pHMeter.setVisible(false);
+                    dropZonePHMeterBG.setTint(0x08F26E);
 
-                    dropperZone.destroy();
-                    // console.log(dropperFound);
+                    pHMeterZone.destroy();
+                    // console.log(pHMeterFound);
                     break;
-                case 'measuringCylinder':
-                    measuringCylinderFound = true;
-                    measuringCylinder.setVisible(false);
-                    dropZoneMeasuringCylinderBG.setTint(0x08F26E);
+                case 'ballPipet':
+                    burnerFound = true;
+                    ballPipet.setVisible(false);
+                    dropZoneBallPipetBG.setTint(0x08F26E);
 
-                    measuringCylinderZone.destroy();
-                    // console.log(measuringCylinderFound);
+                    burnerZone.destroy();
+                    // console.log(burnerFound);
                     break;
-                case 'stirringRod':
-                    stirringRodFound = true;
-                    stirringRod.setVisible(false);
-                    dropZoneStirringRodBG.setTint(0x08F26E);
+                case 'dripBoard':
+                    dripBoardFound = true;
+                    dripBoard.setVisible(false);
+                    dropZoneDripBoardBG.setTint(0x08F26E);
 
-                    stirringRodZone.destroy();
-                    // console.log(stirringRodFound);
+                    dripBoardZone.destroy();
+                    // console.log(dripBoardFound);
                     break;
             }
 
@@ -304,10 +300,10 @@ findingObjects2.create = function () {
         lookingForEnergyFlask = false;
         // isGameOverRendered = false;
 
-        sprayBottle.input.enabled = true;
-        dropper.input.enabled = true;
-        measuringCylinder.input.enabled = true;
-        stirringRod.input.enabled = true;
+        watchGlass.input.enabled = true;
+        pHMeter.input.enabled = true;
+        ballPipet.input.enabled = true;
+        dripBoard.input.enabled = true;
 
         // console.log('outOfEnergy: ' + outOfEnergy);
         // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
@@ -325,10 +321,10 @@ findingObjects2.create = function () {
         lookingForEnergyFlask = false;
         // isGameOverRendered = false;
 
-        sprayBottle.input.enabled = true;
-        dropper.input.enabled = true;
-        measuringCylinder.input.enabled = true;
-        stirringRod.input.enabled = true;
+        watchGlass.input.enabled = true;
+        pHMeter.input.enabled = true;
+        ballPipet.input.enabled = true;
+        dripBoard.input.enabled = true;
 
         // console.log('outOfEnergy: ' + outOfEnergy);
         // console.log('lookingForEnergyFlask: ' + lookingForEnergyFlask);
@@ -340,20 +336,21 @@ findingObjects2.create = function () {
     });
 
     //alur game
-    showObjective2(this, sprayBottle, dropper, measuringCylinder, stirringRod, btnHint);
+    showObjective3(this, watchGlass, pHMeter, ballPipet, dripBoard, btnHint);
+    // startFindingObject(this, watchGlass, pHMeter, ballPipet, dripBoard, btnHint);
 }
 
-findingObjects2.update = function () {
+findingObjects4.update = function () {
     //out of energy
     //kalo energi abis, disable smua objek interactivenya, dropZone nya
     //yg enabled cmn energyFlask
     if (energy == 0) {
         // console.log("energimu telah habis!");
 
-        sprayBottle.input.enabled = false;
-        dropper.input.enabled = false;
-        measuringCylinder.input.enabled = false;
-        stirringRod.input.enabled = false;
+        watchGlass.input.enabled = false;
+        pHMeter.input.enabled = false;
+        ballPipet.input.enabled = false;
+        dripBoard.input.enabled = false;
 
         if (!lookingForEnergyFlask) {
             outOfEnergy = true;
@@ -365,16 +362,17 @@ findingObjects2.update = function () {
     }
 
     //completion
-    if (sprayBottleFound && dropperFound && measuringCylinderFound && stirringRodFound) {
+    if (watchGlassFound && pHMeterFound && burnerFound && dripBoardFound) {
         // console.log('horeee beres');
         findTimer.paused = true;
 
         //manggil method done buat record time di DB
-        //ganti habis 2.2 beres
-        done("2.2", 14);
+        //ganti habis 4.7 beres
+        //nyambung sama 4 pertanyan 7
+        done("4", 7);
 
         giftBox.setVisible(true);
-        sus.setVisible(true);
+        buahAjaib.setVisible(true);
     }
 
     let correctTime = findTimer.getProgress().toString().substr(0, 4) * 15;

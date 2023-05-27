@@ -51,6 +51,8 @@ question2213.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 13);
+
     //variable initialization
     //yg bener itu pilihan A, B
     answerArray = ['A', 'B'];
@@ -213,14 +215,16 @@ function showAnnouncementCorrectAnswer2213(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to missionSelection
+        done("2.2", 13);
+
+        //to question 14
         scene.scene.start('Question2214');
         
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('Question2110');
+        scene.scene.start('MenuMisi2.2');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }

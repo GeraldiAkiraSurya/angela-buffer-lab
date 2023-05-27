@@ -55,6 +55,8 @@ question2210.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 10);
+
     //variable initialization
     //yg bener itu pilihan opsi1
     objectsArray = [];
@@ -221,13 +223,15 @@ function showAnnouncementCorrectAnswer2210(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to question 10
+        done("2.2", 10);
+
+        //to question 11
         scene.scene.start('Question2211');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.2');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
@@ -308,21 +312,21 @@ function startOver2210(scene) {
 
     opsiJawaban2.on('pointerup', function () {
         //salah kedua kali? langsung tendang ke main menu
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.2');
     });
 
     opsiJawaban3.on('pointerup', function () {
         //salah kedua kali? langsung tendang ke main menu
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.2');
     });
 
     opsiJawaban4.on('pointerup', function () {
         //salah kedua kali? langsung tendang ke main menu
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.2');
     });
 
     opsiJawaban5.on('pointerup', function () {
         //salah kedua kali? langsung tendang ke main menu
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.2');
     });
 }

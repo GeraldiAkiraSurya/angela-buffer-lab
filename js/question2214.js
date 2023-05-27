@@ -48,6 +48,8 @@ question2214.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 14);
+
     //variable initialization
     //yg bener itu pilihan A, B
     answerArray = ['A', 'B'];
@@ -153,7 +155,7 @@ penyangga dapat mempertahankan pHnya?
             showAnnouncementCorrectAnswer2214(this, text);
         }
         else {
-            //langsung ngulang
+            //tendang ke question 13
             this.scene.start('Question2213');
         }  
 
@@ -202,17 +204,19 @@ function showAnnouncementCorrectAnswer2214(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to missionSelection
-        scene.scene.start('MissionSelection');
+        //to finding objects 2
+        // scene.scene.start('FindingObjects2');
+        missionTwoSequence  = "endMissionTwoTwo";
+        scene.scene.start("Misi2");
 
         //2.2 FINISHED
         //Panggil Method Time Finish di sini Dim
-        
+        //Gajadi disini, jadinya di finding objects
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('Question2110');
+        scene.scene.start('MenuMisi2.2');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }

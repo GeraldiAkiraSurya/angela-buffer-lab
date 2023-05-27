@@ -55,6 +55,8 @@ question214.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.1", 4);
+
     //variable initialization
     //yg bener itu H+, OH-, Cl-, Na+, H2O
     answerArray = ['HPos', 'H2O', 'NaPos', 'OHNeg', 'ClNeg'];
@@ -259,13 +261,15 @@ function showAnnouncementCorrectAnswer214(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
+        done("2.1", 4);
+
         //to tabulasi screen
-        scene.scene.start('Question215');
+        scene.scene.start('MenuMisi2.1');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu')
+        scene.scene.start('MenuMisi2.1')
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
@@ -365,7 +369,7 @@ function startOver214(scene) {
         }
         else {
             //salah kedua kali? langsung tendang ke main menu
-            scene.scene.start('MainMenu');
+            scene.scene.start('MenuMisi2.1');
         }  
 
     }, middleX, middleY + 350);

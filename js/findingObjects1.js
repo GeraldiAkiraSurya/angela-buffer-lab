@@ -8,7 +8,7 @@ findingObjects1.preload = function () {
     this.load.image('testTube', 'lab_eq/TestTube.png');
     this.load.image('testTubeRack', 'lab_eq/TestTubeRack.png');
 
-    this.load.image('background', 'scenes/finding_objects1.png');
+    this.load.image('findingObjects1BG', 'scenes/finding_objects1.png');
 
     this.load.image('dropZoneBG', 'icons/finding_object_dropzone_background.png');
     this.load.image('energyFlask', 'icons/energy_flask.png');
@@ -79,10 +79,13 @@ findingObjects1.create = function () {
     middleY = this.cameras.main.height / 2;
 
     //background
-    this.add.image(middleX, middleY, 'background').setScale(0.98, 0.95);
+    this.add.image(middleX, middleY, 'findingObjects1BG').setScale(1, 0.94);
 
     //energy debugger, disable pas udah siap dirangkai
     energy = 100;
+
+    //start timer ke DB
+    // start("1", 6);
 
     //variable initialization
     correctAnswer = false;
@@ -124,9 +127,10 @@ findingObjects1.create = function () {
     //ketrigger kalo udah beres
     book.on('pointerup', function () {
         // console.log('clicked book!');
-        //manggil methodnya disini dim
+        
+        findingObjects1Done = true;
 
-        findingObjects1.scene.start('MissionSelection');
+        findingObjects1.scene.start('Misi1');
     });
 
     energyFlaskIcon = this.add.image(50, 50, 'energyFlask').setScale(0.5);
@@ -184,9 +188,9 @@ findingObjects1.create = function () {
     //keperluan debugging
     timerText = this.add.text(1640, 25);
     timerText.setStyle({
-        fontSize: '900 20px',
+        fontSize: '900 40px',
         fontFamily: 'Helvetica',
-        color: '#000000',
+        color: '#ffffff',
     });
 
     //delay dalam ms, jadi 15000 berarti 15 detik = 1x repeat
@@ -224,13 +228,10 @@ findingObjects1.create = function () {
             gameObject.x = dropZone.x;
             gameObject.y = dropZone.y;
 
-            //troublenya multiple file jadi ngaco
-            //findingObject2.js bermasalah
-            //foundObjectnya ngaco
             switch (dropZone.name) {
                 case 'beaker':
                     //tandain objeknya ketemu
-                    beakerFound = foundObject(dropZone.name);
+                    beakerFound = true;
                     beaker.setVisible(false);
                     dropZoneBeakerBG.setTint(0x08F26E);
                     //destroy the zone biar yg lain ga dicoba di drag lagi kesini
@@ -238,7 +239,7 @@ findingObjects1.create = function () {
                     // console.log(beakerFound);
                     break;
                 case 'spatula':
-                    spatulaFound = foundObject(dropZone.name);
+                    spatulaFound = true;
                     spatula.setVisible(false);
                     dropZoneSpatulaBG.setTint(0x08F26E);
 
@@ -246,7 +247,7 @@ findingObjects1.create = function () {
                     // console.log(spatulaFound);
                     break;
                 case 'testTube':
-                    testTubeFound = foundObject(dropZone.name);
+                    testTubeFound = true;
                     testTube.setVisible(false);
                     dropZoneTestTubeBG.setTint(0x08F26E);
 
@@ -254,7 +255,7 @@ findingObjects1.create = function () {
                     // console.log(testTubeFound);
                     break;
                 case 'testTubeRack':
-                    testTubeRackFound = foundObject(dropZone.name);
+                    testTubeRackFound = true;
                     testTubeRack.setVisible(false);
                     dropZoneTestTubeRackBG.setTint(0x08F26E);
 
@@ -362,12 +363,20 @@ findingObjects1.update = function () {
     if (beakerFound && spatulaFound && testTubeFound && testTubeRackFound) {
         // console.log('horeee beres');
         findTimer.paused = true;
+
+        //manggil method done buat record time di DB
+        //nyambung sama misi 1 pertanyaan 5
+        done("1", 5);
+
         giftBox.setVisible(true);
         book.setVisible(true);
     }
 
+    let correctTime = findTimer.getProgress().toString().substr(0, 4) * 15;
+
     //keperluan debugging
-    timerText.setText(`Event.progress: ${findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${findTimer.paused}`);
+    timerText.setText(`Time: ${correctTime.toString().substr(0, 2)}`);
+    // timerText.setText(`Event.progress: ${findTimer.getProgress().toString().substr(0, 4)}\nPaused?: ${findTimer.paused}`);
 
     //kalo jawabannya bener, timernnya direset
     if (correctAnswer) {

@@ -53,6 +53,8 @@ question228.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.2", 8);
+
     //variable initialization
     //yg bener itu H+, OH-, NH4+, H2O
     answerArray = ['HPos', 'H2O', 'NH4Pos', 'OHNeg'];
@@ -263,13 +265,15 @@ function showAnnouncementCorrectAnswer228(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
+        done("2.2", 8);
+
         //to question 9
         scene.scene.start('Question229');
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('MainMenu');
+        scene.scene.start('MenuMisi2.2');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
@@ -361,7 +365,7 @@ function startOver228(scene) {
         }
         else {
             //salah kedua kali? langsung tendang ke main menu
-            scene.scene.start('MainMenu');
+            scene.scene.start('MenuMisi2.2');
         }  
 
     }, middleX, middleY + 350);

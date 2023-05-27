@@ -51,6 +51,8 @@ question2112.create = function () {
     //background
     this.add.image(middleX, middleY, 'background').setScale(1.2, 0.95);
 
+    start("2.1", 12);
+
     //variable initialization
     //yg bener itu pilihan B
     answerArray = ['B'];
@@ -242,17 +244,20 @@ function showAnnouncementCorrectAnswer2112(scene, text) {
         descriptionBox.destroy();
         announcement.destroy();
 
-        //to missionSelection
-        scene.scene.start('MissionSelection');
-
-        //2.1 FINISHED
         //Panggil Method Time Finish di sini Dim
-        
+        done("2.1", 12);
+
+        //to Misi2, sequence X (pas dialog)
+        // scene.scene.start('MenuMisi2.2');
+        missionTwoSequence = "endMissionTwoOne";
+        scene.scene.start("Misi2");
+
+        //2.1 FINISHED      
 
     }, middleX - 150, middleY + (descriptionBox.height/2) - 100);
 
     var exitBtn = createNextButton(scene, 'KELUAR', () => {
-        scene.scene.start('Question2110');
+        scene.scene.start('MenuMisi2.1');
 
     }, middleX + 150, middleY + (descriptionBox.height/2) - 100);    
 }
