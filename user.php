@@ -11,6 +11,7 @@
         const playerName='{$_SESSION['nama']}'
         const token='{$_SESSION['token']}'
         const email='{$_SESSION['email']}'
+        let gender='{$_SESSION['gender']}'
 
 
         </script>

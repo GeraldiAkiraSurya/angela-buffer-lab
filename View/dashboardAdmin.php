@@ -55,8 +55,8 @@
               <option value=10 <?php if(isset($_GET['tingkat']) && $_GET['tingkat']==10){echo 'selected';} ?>>Dosen</option>
               <option value=11 <?php if(isset($_GET['tingkat']) && $_GET['tingkat']==11){echo 'selected';} ?>>Guru</option>
               <option value=12 <?php if(isset($_GET['tingkat']) && $_GET['tingkat']==12){echo 'selected';} ?>>Mahasiswa S2</option>
-              <option value=12 <?php if(isset($_GET['tingkat']) && $_GET['tingkat']==13){echo 'selected';} ?>>Mahasiswa S1</option>
-              <option value=12 <?php if(isset($_GET['tingkat']) && $_GET['tingkat']==14){echo 'selected';} ?>>Pelajar SMA</option>
+              <option value=13 <?php if(isset($_GET['tingkat']) && $_GET['tingkat']==13){echo 'selected';} ?>>Mahasiswa S1</option>
+              <option value=14 <?php if(isset($_GET['tingkat']) && $_GET['tingkat']==14){echo 'selected';} ?>>Pelajar SMA</option>
             </select>
           </div>
 </form>

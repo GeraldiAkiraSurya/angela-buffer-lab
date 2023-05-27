@@ -86,7 +86,7 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                     $_SESSION['email']=$username;
                     $_SESSION['nama']=$userInfo[0]['nama'];
                     $_SESSION['token']=$generateToken;
-
+                    $_SESSION['gender']=$userInfo[0]['gender'];
 
                     header("location: find");
                     
@@ -349,9 +349,8 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                     array_push($selectedMisi,TRUE);
                 }else{
                     array_push($selectedMisi,FALSE);
-    
-                }
 
+                }
 
             }else{
                 array_push($selectedMisi,TRUE);
@@ -364,7 +363,6 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
             }else{
                 $lastSoal=TRUE;
             }
-
 
         }
 
@@ -386,9 +384,6 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
             }
 
         }
-
-
-
 
         return json_encode($arrRes);
 
@@ -442,7 +437,8 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
         header("location: dashboardAdmin");
     }
 
-    public function missionDetail(){
+
+    public function missionMenu2(){
 
         if(session_status()!=2){
             session_start();
@@ -456,72 +452,82 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
 
 
 
-
-        $query ="SELECT * FROM `pengerjaan` WHERE `userId`=$id AND `misi`=$misi; ";
+        $query ="SELECT * FROM `pengerjaan` WHERE `userId`=$id AND `misi`=$misi ORDER BY `soal` ASC; ";
 
         $res=$this->db->executeSelectQuery($query);
 
-        $arr= ["1"=>array(), "2.1"=> array(), "2.2"=> array(), "3"=> array(), "4"=>array(), "5"=>array()];
+        $arr= ["1"=>TRUE, "2"=>FALSE, "3"=> FALSE, "4"=>FALSE];
 
-        $lastSoal=TRUE; //true kalau dia not null
-
-        foreach($res as $row){
-            $misi=$row['misi'];
-            $soal=$row['soal'];
-            $mulai=$row['waktuPertama'];
-            $selesai=$row['waktuBenar'];
-
-            $selectedMisi=array();
-
-            if($mulai==NULL){
-                if($lastSoal || $selesai !=NULL  ){
-                    array_push($selectedMisi,TRUE);
-                }else{
-                    array_push($selectedMisi,FALSE);
-    
-                }
+        $arr['2']=$res[1]['waktuBenar']!=NULL;
+        $arr['3']=$res[3]['waktuBenar']!=NULL;
+        $arr['4']=$res[5]['waktuBenar']!=NULL;
 
 
-            }else{
-                array_push($selectedMisi,TRUE);
-            }
-
-            array_push($arr[strval($misi)],$selectedMisi);
-    
-            if($selesai==NULL){
-                $lastSoal=FALSE;
-            }else{
-                $lastSoal=TRUE;
-            }
-
-
-        }
-
-        $arrRes= [];
-
-        foreach($arr as $misi=>$misiSoal){
-            $ok=TRUE;
-
-            foreach($misiSoal as $soal=>$status){
-                if($status[0]){
-                    $arrRes[strval($misi)]=TRUE ;
-                    $ok=FALSE;
-                    break;
-                }
-            }
-
-            if($ok){
-                $arrRes[strval($misi)]=FALSE;
-            }
-
-        }
-
-
-
-
-        return json_encode($arrRes);
+        return json_encode($arr);
 
     }
+
+    public function updateUser(){
+
+        if(session_status()!=2){
+            session_start();
+        }
+        if(isset($_SESSION['id'])){
+            $id=(int)$_SESSION['id'];
+            $username=$_SESSION['email'];
+        }else {
+            header("Location:login");
+        }
+        $nama=$_POST['nama'];
+        $password=$_POST['password'];
+        $new_password=$_POST['new_password'];
+        
+        
+      
+        $userInfo=$this->getAccountInfo($username);
+        
+        if($userInfo!= -1){
+            $passwordDB=$userInfo[0]['password'];
+            $verify =Password::decode($password,$passwordDB);
+            if($verify){
+                $query ="UPDATE `user` SET `nama`='$nama'";
+                
+                if($new_password!=""){
+                    $hashNewPass=Password::encode($new_password);
+                    $query.=" ,`password`='$hashNewPass'";
+                }
+
+
+                $query.=" WHERE `id`= $id";
+                $res=$this->db->executeNonSelectQueryGetId($query);
+                header("Location:profile");
+            }
+            else{
+                header("Location:login");
+            }
+        }
+        else{
+            header("Location:login");
+        }
+    }
+
+    public function updateGender(){
+        $id=$_POST['id'];
+        $token=$_POST['token'];
+        $value=$_POST['value'];
+
+        $query ="UPDATE `user` SET `gender`=$value WHERE `id`=$id AND `token`='$token'";
+
+        $res=$this->db->executeNonSelectQuery($query);
+ 
+        if($res==0){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
+    }
+
 
 }
 ?>

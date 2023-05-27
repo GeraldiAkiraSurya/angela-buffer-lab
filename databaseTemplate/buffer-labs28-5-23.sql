@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2023 at 12:12 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Waktu pembuatan: 27 Bulan Mei 2023 pada 22.36
+-- Versi server: 10.4.24-MariaDB
+-- Versi PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `buffer-labs`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pengerjaan`
+-- Struktur dari tabel `pengerjaan`
 --
 
 DROP TABLE IF EXISTS `pengerjaan`;
@@ -36,16 +36,16 @@ CREATE TABLE IF NOT EXISTS `pengerjaan` (
   `misi` varchar(4) NOT NULL,
   `soal` tinyint(4) NOT NULL,
   `waktuPertama` datetime DEFAULT NULL COMMENT 'waktu pertama mulai',
-  `WaktuBenar` datetime DEFAULT NULL COMMENT 'waktu benar pertama kali',
+  `waktuBenar` datetime DEFAULT NULL COMMENT 'waktu benar pertama kali',
   `tries` int(11) NOT NULL DEFAULT 0 COMMENT 'jumlah coba',
   PRIMARY KEY (`id`),
   KEY `user` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=693 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sekolah`
+-- Struktur dari tabel `sekolah`
 --
 
 DROP TABLE IF EXISTS `sekolah`;
@@ -53,18 +53,26 @@ CREATE TABLE IF NOT EXISTS `sekolah` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `sekolah` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `sekolah`
+--
+
+INSERT INTO `sekolah` (`id`, `sekolah`) VALUES
+(1, 'SMA ST. Angela');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
+  `gender` tinyint(4) DEFAULT 0,
   `sekolah` int(11) NOT NULL,
   `tingkat` tinyint(4) NOT NULL,
   `absen` tinyint(4) NOT NULL,
@@ -72,24 +80,25 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(100) NOT NULL,
   `lastLogin` datetime DEFAULT NULL,
   `token` varchar(50) NOT NULL,
-  `power` smallint(6) NOT NULL DEFAULT 100,
+  `numLogin` int(11) NOT NULL DEFAULT 0,
+  `power` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`) USING BTREE,
   KEY `bersekolah` (`sekolah`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `pengerjaan`
+-- Ketidakleluasaan untuk tabel `pengerjaan`
 --
 ALTER TABLE `pengerjaan`
   ADD CONSTRAINT `user` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `user`
+-- Ketidakleluasaan untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `bersekolah` FOREIGN KEY (`sekolah`) REFERENCES `sekolah` (`id`);

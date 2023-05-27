@@ -74,3 +74,31 @@ function missionMenu(){
     request.send(userData);
     return JSON.parse(request.responseText);
     }
+
+
+function missionMenuDua(value){ 
+
+    userData.set("misi",value)
+    let request = new XMLHttpRequest();
+    var url = `${window.location.origin}${baseUrl}/geser`;
+    request.open('POST', url, false);
+    
+    request.send(userData);
+    return JSON.parse(request.responseText);
+    }
+
+
+    //value 0=laki 1=prempuan
+function updateGender(value){ 
+        userData.set("value",value)
+    
+        url=`${window.location.origin}${baseUrl}/bencong`
+        fetch(url,{
+            method: "POST",
+            body: userData,
+            }).then(response => response.text()) .then(response=>{
+                console.log(response)
+            }).catch((error) => {
+                console.log(error)
+            });
+        }

@@ -10,6 +10,8 @@ mainMenu.preload = function () {
 
     this.load.image('sora', 'characters/female.png');
     this.load.image('shin', 'characters/male.png');
+
+    this.load.image('profile', 'icons/profile.png');
 }
 
 var btnStart;
@@ -65,9 +67,12 @@ mainMenu.create = function () {
     }
 
     //buttons
+    btnProfile = this.add.image(this.cameras.main.width-100, 100, 'profile').setInteractive().setScale(0.5);
+
+
     btnStart = this.add.image(middleX, middleY, 'startButton').setInteractive().setScale(0.5);
-    btnProfile = this.add.image(middleX, middleY + 125, 'optionsButton').setInteractive().setScale(0.5);
-    btnOptions = this.add.image(middleX, middleY + 250, 'optionsButton').setInteractive().setScale(0.5).setVisible(false);    
+    btnOptions = this.add.image(middleX, middleY + 125, 'optionsButton').setInteractive().setScale(0.5);
+    
 
     btnStart.on('pointerup', function () {        
         console.log(energy);

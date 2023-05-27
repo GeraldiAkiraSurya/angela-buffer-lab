@@ -49,6 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             require_once 'Database/controllerlogout.php';
             header("location:login");
             break;
+
+        case $base."update":
+            require_once 'Database/databaseController.php';
+            $myDB=new bufferDatabase();
+            $data=$myDB->viewProfile();
+            echo View::createView("View/updatePage.php",$data);
+            break;
+
+   
         
 
 
@@ -99,13 +108,33 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             $myDB=new bufferDatabase();
             echo $myDB->mission();
             break;
-
-
         case $base."masukAdmin":
             require_once 'Database/databaseController.php';
             $myDB=new bufferDatabase();
             $myDB->adminLogin();
             break;
+
+        case $base."gantiNama":
+            require_once 'Database/databaseController.php';
+            $myDB=new bufferDatabase();
+            echo $myDB->updateUser();
+            break;
+
+
+        case $base."geser":
+            require_once 'Database/databaseController.php';
+            $myDB=new bufferDatabase();
+            echo $myDB->missionMenu2();
+            break;
+
+
+        case $base."bencong":
+            require_once 'Database/databaseController.php';
+            $myDB=new bufferDatabase();
+            $myDB->updateGender();
+            break;
+
+
 
 
             
