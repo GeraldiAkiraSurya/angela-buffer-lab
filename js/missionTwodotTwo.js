@@ -2,8 +2,8 @@ missionTwodotTwo = new Phaser.Scene('MenuMisi2.2');
 
 missionTwodotTwo.preload = function () {
     this.load.path = './assets/';
-    this.load.image('twoDotOneBG', 'scenes/dua_dua.png');
-    this.load.image('twoDotOneTable', 'scenes/dua_dua_table.png');
+    this.load.image('twoDotTwoBG', 'scenes/dua_dua.png');
+    this.load.image('twoDotTwoTable', 'scenes/dua_dua_table.png');
 }
 
 missionTwodotTwo.create = function() {
@@ -13,10 +13,10 @@ missionTwodotTwo.create = function() {
     middleY = this.cameras.main.height / 2;
 
     //background
-    this.add.image(middleX, middleY, 'twoDotOneBG').setScale(1.18, 1.02);
+    this.add.image(middleX, middleY, 'twoDotTwoBG').setScale(1.18, 1.02);
 
     //table
-    this.add.image(middleX + 250, middleY + 150, 'twoDotOneTable').setScale();
+    this.add.image(middleX + 250, middleY + 150, 'twoDotTwoTable').setScale();
 
     //button 1
     //true ganti sm jsonMissionProses["2.2.1"]?
