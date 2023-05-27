@@ -39,7 +39,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question225.create = function () {
-
+    start("2.2",5)
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
 
@@ -158,6 +158,7 @@ pada masing - masing larutan?`;
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.2",5)
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer225(this, text);

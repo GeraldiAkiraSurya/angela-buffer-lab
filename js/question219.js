@@ -36,7 +36,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question219.create = function () {
-
+    start("2.1",9)
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
 
@@ -146,6 +146,7 @@ Nah..berdasarkan perubahan pH pada campuran / sistem dalam tabel, manakah yang t
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.1",9)
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer219(this, text);

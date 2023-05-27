@@ -39,6 +39,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question2212.create = function () {
+    start("2.2",12)
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
@@ -159,6 +160,7 @@ larutan penyangga ditambah sedikit basa!
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.2",12)
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer2212(this, text);

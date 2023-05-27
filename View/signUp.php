@@ -50,25 +50,25 @@
             <input type="text" class="form-control" id="floatingInput" name="nama">
             <label for="floatingInput">Nama</label>
           </div>
-          <br>
-          <div class="form-floating">
+          <div class="form-floating" hidden>
             <select class="form-select" aria-label="Default select example" name="sekolah">
-              <option value=1>SMA ST. Angela</option>
+              <option value=1 >SMA ST. Angela</option>
             </select>
-            <label for="floatingInput">Sekolah</label>
+            <label for="floatingInput"  >Sekolah</label>
           </div>
           <br>
           <div class="form-floating">
             <select class="form-select" aria-label="Default select example" name="tingkat">
-              <option value=10>X</option>
-              <option value=11>XI</option>
-              <option value=12>XII</option>
+              <option value=10>Dosen</option>
+              <option value=11>Guru</option>
+              <option value=12>Mahasiswa S2</option>
+              <option value=13>Mahasiswa S1</option>
+              <option value=14 selected>Pelajar SMA</option>
             </select>
             <label for="floatingInput">Tingkat</label>
           </div>
-          <br>
-          <div class="form-floating">
-            <input type="number" class="form-control" id="floatingInput" min="1" name="absen">
+          <div class="form-floating" hidden>
+            <input type="number" class="form-control" id="floatingInput" min="1" name="absen" value=1>
             <label for="floatingInput">No Absen</label>
           </div>
           <br>

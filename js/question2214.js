@@ -36,6 +36,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question2214.create = function () {
+    start("2.2",14)
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
@@ -146,6 +147,7 @@ penyangga dapat mempertahankan pHnya?
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.2",14)
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer2214(this, text);

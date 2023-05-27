@@ -44,7 +44,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question214.create = function () {
-
+    start("2.1",4)
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
 
@@ -183,6 +183,7 @@ Ayo kumpulkan!`;
         else {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.1",4)
 
             let text = "Jawaban Anda salah, Anda punya 1x kesempatan untuk mencoba menjawab kembali.";
             let clueText = "Spesi sesuai dengan reaksi disosiasi yang terjadi, dan pertimbangkan juga bahwa dalam larutan terdapat air";

@@ -41,7 +41,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question224.create = function () {
-
+    start("2.2",4)
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
 
@@ -353,6 +353,7 @@ function startOver224(scene) {
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.2",4)
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer224(scene, text);

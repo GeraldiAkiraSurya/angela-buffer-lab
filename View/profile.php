@@ -42,12 +42,13 @@
     $percentSelesai=round( (($totalSelesai/$total)*100),2);
 
     $loginTime = new DateTime($data[0]['lastLogin']);
-    $loginTimeFormated=date_format($loginTime,'H:i:s d-m-Y')
+    $loginTimeFormated=date_format($loginTime,'H:i:s d-m-Y');
 
+    require_once 'roleConverter.php';
   ?>
 
   <h1 id="judul" class="justify-content-center"><?= $data[0]['nama']; ?> </h1>
-  <p class="status" style="top:240px">Status: SMA ST. Angela </p>
+  <p class="status" style="top:240px">Status: <?= Role::convert($data[0]['tingkat']) ?> </p>
   <p class="status" style="top:270px">Login Terakhir: <?= $loginTimeFormated ?> </p>
   <p class="status" style="top:300px">Jumlah Login: <?= $data[0]['numLogin']; ?></p>
   <p class="status" style="top:330px">Progress Misi: <?= $percentSelesai?>%</p>

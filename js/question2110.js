@@ -1,5 +1,6 @@
 question2110 = new Phaser.Scene('Question2110');
 
+
 question2110.preload = function () {
     this.load.path = './assets/';
     this.load.image('blueBeaker', 'question/blueBeaker.png');
@@ -44,7 +45,7 @@ var E;
 var objectsArray;
 
 question2110.create = function () {
-
+    start("2.1",10)
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
 
@@ -300,6 +301,7 @@ function startOver2110(scene) {
     //btn buat check jawaban kedua kali
     opsiJawaban1.on('pointerup', function () {
         destroyObject(objectsArray);
+        done("2.1",10)
 
         let text = "Bagus sekali, pilihan Anda benar.";
         showAnnouncementCorrectAnswer2110(question2110, text);

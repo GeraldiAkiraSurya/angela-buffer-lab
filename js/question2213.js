@@ -39,6 +39,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question2213.create = function () {
+    start("2.2",13)
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
@@ -157,6 +158,7 @@ komponen yang menyusun larutan penyangga
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.2",13)
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer2213(this, text);

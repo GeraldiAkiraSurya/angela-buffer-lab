@@ -19,7 +19,6 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                 ,array(2.1,3)
                 ,array(2.1,4)
                 ,array(2.1,5)
-                ,array(2.1,5)
                 ,array(2.1,6)
                 ,array(2.1,7)
                 ,array(2.1,8)
@@ -45,7 +44,6 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
                 ,array(3,2)
                 ,array(3,3)
                 ,array(3,4)
-                ,array(3,5)
                 ,array(3,5)
                 ,array(3,6)
                 ,array(3,7)
@@ -317,9 +315,7 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
         $res=$this->db->executeSelectQuery($query);
  
         return $res;
-
     }
-
 
     public function mission(){
 
@@ -332,7 +328,7 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
             header("Location:login");
         }
 
-        $query ="SELECT * FROM `pengerjaan`; ";
+        $query ="SELECT * FROM `pengerjaan` WHERE `userId`=$id; ";
 
         $res=$this->db->executeSelectQuery($query);
 
@@ -398,7 +394,6 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
 
     }
 
-
     public function adminViewClass(){
         $tingkat=10;//default 10
         if(isset($_GET['tingkat'])){
@@ -447,7 +442,86 @@ class bufferDatabase{  //disatuka karena fungsi-fungsi yang beririsan
         header("location: dashboardAdmin");
     }
 
+    public function missionDetail(){
 
+        if(session_status()!=2){
+            session_start();
+        }
+        if(isset($_SESSION['id'])){
+        $id=$_SESSION['id'];
+        }else {
+            header("Location:login");
+        }
+        $misi=$_POST['misi'];
+
+
+
+
+        $query ="SELECT * FROM `pengerjaan` WHERE `userId`=$id AND `misi`=$misi; ";
+
+        $res=$this->db->executeSelectQuery($query);
+
+        $arr= ["1"=>array(), "2.1"=> array(), "2.2"=> array(), "3"=> array(), "4"=>array(), "5"=>array()];
+
+        $lastSoal=TRUE; //true kalau dia not null
+
+        foreach($res as $row){
+            $misi=$row['misi'];
+            $soal=$row['soal'];
+            $mulai=$row['waktuPertama'];
+            $selesai=$row['waktuBenar'];
+
+            $selectedMisi=array();
+
+            if($mulai==NULL){
+                if($lastSoal || $selesai !=NULL  ){
+                    array_push($selectedMisi,TRUE);
+                }else{
+                    array_push($selectedMisi,FALSE);
+    
+                }
+
+
+            }else{
+                array_push($selectedMisi,TRUE);
+            }
+
+            array_push($arr[strval($misi)],$selectedMisi);
+    
+            if($selesai==NULL){
+                $lastSoal=FALSE;
+            }else{
+                $lastSoal=TRUE;
+            }
+
+
+        }
+
+        $arrRes= [];
+
+        foreach($arr as $misi=>$misiSoal){
+            $ok=TRUE;
+
+            foreach($misiSoal as $soal=>$status){
+                if($status[0]){
+                    $arrRes[strval($misi)]=TRUE ;
+                    $ok=FALSE;
+                    break;
+                }
+            }
+
+            if($ok){
+                $arrRes[strval($misi)]=FALSE;
+            }
+
+        }
+
+
+
+
+        return json_encode($arrRes);
+
+    }
 
 }
 ?>

@@ -1,5 +1,6 @@
 question2112 = new Phaser.Scene('Question2112');
 
+
 question2112.preload = function () {
     this.load.path = './assets/';
     this.load.image('emptyBeaker', 'question/emptyBeaker.png');
@@ -39,7 +40,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question2112.create = function () {
-
+    start("2.1",12)
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
 
@@ -334,6 +335,7 @@ function startOver2112(scene) {
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.1",12)
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer2112(scene, text);

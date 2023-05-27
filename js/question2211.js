@@ -39,6 +39,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question2211.create = function () {
+    start("2.2",11)
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
@@ -159,6 +160,7 @@ larutan penyangga ditambah sedikit asam!
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.2",11)
 
             let text = "Bagus sekali, pilihan Anda benar.";
             showAnnouncementCorrectAnswer2211(this, text);

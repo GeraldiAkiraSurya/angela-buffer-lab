@@ -44,7 +44,7 @@ var E;
 var objectsArray;
 
 question2210.create = function () {
-
+    start("2.2",10)
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
 
@@ -110,6 +110,7 @@ Nah.. sekarang cari komponen penyangga yang terdapat dalam campuran, sehingga me
     //opsi bener, sisanya salah
     opsiJawaban1.on('pointerup', function () {
         destroyObject(objectsArray);
+        done("2.2",10)
 
         let text = "Bagus sekali, pilihan Anda benar.";
         showAnnouncementCorrectAnswer2210(question2210, text);

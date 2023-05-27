@@ -41,6 +41,7 @@ var playerAnswerArray;
 var cekJawabanBtn;
 
 question228.create = function () {
+    start("2.2",8)
 
     // console.log(game.canvas.width, game.canvas.height);
     //x 1879 y 1008
@@ -179,6 +180,7 @@ Ayo kumpulkan!`;
         if (checkAnswerDraggable(answerArray, playerAnswerArray)) {
             //destory all objects
             destroyObject(objectsArray);
+            done("2.2",8)
 
             let text = "Kamu keren... Semangat terus!!!\nLanjutkan!!";
             showAnnouncementCorrectAnswer228(this, text);
