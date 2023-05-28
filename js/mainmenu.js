@@ -53,48 +53,47 @@ mainMenu.create = function () {
     //background main menu
     this.add.image(middleX, middleY, 'menuBackground').setScale(0.65, 0.52);
 
-    //add characters
+    //judul Buffer Laboratory
+    this.add.text(middleX - 630, middleY - 370, "Buffer Laboratory", {font: "900 130px Helvetica", fill: "#000000"}).setStroke('#fff', 5);
+
+    //module character start
+
+    //add characters, nanti pas dialog ganti posisinya aja gas
     shin = this.add.image(middleX - 400, middleY - 150, 'shin').setScale(0.56).setVisible(false);
     sora = this.add.image(middleX + 400, middleY - 150, 'sora').setScale(0.56).setFlipX(true).setVisible(false);
 
-    // console.log(character);
+    //global var character dihapus, jadi pake gender
+    // console.log('gender ' + gender);
 
-    if (character == 'male') {
-        shin.setVisible(true);
-    }
-    else if (character == 'female') {
-        sora.setVisible(true);
-    }
+    //0: male
+    // if (gender == 0) {
+    //     shin.setVisible(true);
+    // }
+    // //1: female
+    // else if (gender == 1) {
+    //     sora.setVisible(true);
+    // }
+    //module character end
 
     //buttons
     btnProfile = this.add.image(this.cameras.main.width-100, 100, 'profile').setInteractive().setScale(0.5);
 
-
-    btnStart = this.add.image(middleX, middleY, 'startButton').setInteractive().setScale(0.5);
-    btnOptions = this.add.image(middleX, middleY + 125, 'optionsButton').setInteractive().setScale(0.5);
+    btnStart = this.add.image(middleX, middleY + 150, 'startButton').setInteractive().setScale(0.5);
+    btnOptions = this.add.image(middleX, middleY + 275, 'optionsButton').setInteractive().setScale(0.5);
     
 
     btnStart.on('pointerup', function () {        
-        console.log(energy);
-        mainMenu.scene.start('MissionSelection');
+        // console.log(energy);
+        mainMenu.scene.start('Pengantar');
     });
 
-    // btnOptions.on('pointerup', function () {
-    //     mainMenu.scene.start('SelectChara');
-    // });
+    btnOptions.on('pointerup', function () {
+        mainMenu.scene.start('SelectChara');
+    });
 
     btnProfile.on('pointerup', function () {
         window.location.href = 'profile';
     });
-
-    // this.tweens.add({
-    //     targets: [btnStart],
-    //     duration: 1000,
-    //     x: middleX,
-    //     scaleX: 2,
-    //     scaleY: 2,
-    //     ease: 'Bounce.easeIn'
-    // });
 }
 
 mainMenu.update = function () {

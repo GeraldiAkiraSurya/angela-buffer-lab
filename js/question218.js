@@ -10,7 +10,7 @@ question218.preload = function () {
     this.load.image('CH3COONa', 'question/CH3COONa.png');
     this.load.image('NaPos', 'question/NaPos.png');
     this.load.image('OHNeg', 'question/OHNeg.png');
-    this.load.image('CH3COO', 'question/CH3COO.png');
+    this.load.image('CH3COONeg', 'question/CH3COONeg.png');
     this.load.image('CH3', 'question/CH3.png');
     this.load.image('Na', 'question/Na.png');
 
@@ -26,7 +26,7 @@ var textPertanyaan;
 
 var HPos;
 var OHNeg;
-var CH3COO;
+var CH3COONeg;
 var NaPos;
 var H2O;
 var CH3;
@@ -56,8 +56,8 @@ question218.create = function () {
     start("2.1", 8);
 
     //variable initialization
-    //yg bener itu H+, OH-, NaPos, CH3COO, H2O
-    answerArray = ['HPos', 'H2O', 'NaPos', 'OHNeg', 'CH3COO'];
+    //yg bener itu H+, OH-, NaPos, CH3COONeg, H2O
+    answerArray = ['HPos', 'H2O', 'NaPos', 'OHNeg', 'CH3COONeg'];
     playerAnswerArray = [];
     objectsArray = [];
 
@@ -118,9 +118,9 @@ Ayo kumpulkan!`;
     objectsArray.push(OHNeg);
 
     //jawaban benar
-    CH3COO = this.add.image(middleX + 550, middleY + 20, 'CH3COO').setInteractive().setScale(0.7);
-    this.input.setDraggable(CH3COO);
-    objectsArray.push(CH3COO);
+    CH3COONeg = this.add.image(middleX + 550, middleY + 20, 'CH3COONeg').setInteractive().setScale(0.7);
+    this.input.setDraggable(CH3COONeg);
+    objectsArray.push(CH3COONeg);
 
     CH3 = this.add.image(middleX + 470, middleY + 100, 'CH3').setInteractive().setScale(0.7);
     this.input.setDraggable(CH3);
@@ -336,8 +336,8 @@ function startOver218(scene) {
     scene.input.setDraggable(OHNeg);
 
     //jawaban benar
-    CH3COO = scene.add.image(middleX + 550, middleY + 20, 'CH3COO').setInteractive().setScale(0.7);
-    scene.input.setDraggable(CH3COO);
+    CH3COONeg = scene.add.image(middleX + 550, middleY + 20, 'CH3COONeg').setInteractive().setScale(0.7);
+    scene.input.setDraggable(CH3COONeg);
 
     CH3 = scene.add.image(middleX + 470, middleY + 100, 'CH3').setInteractive().setScale(0.7);
     scene.input.setDraggable(CH3);

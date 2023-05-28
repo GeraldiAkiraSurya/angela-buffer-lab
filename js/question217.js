@@ -53,8 +53,8 @@ question217.create = function () {
     start("2.1", 7);
 
     //variable initialization
-    //yg bener itu pilihan A
-    answerArray = ['A'];
+    //yg bener itu pilihan D
+    answerArray = ['D'];
     playerAnswerArray = [];
     objectsArray = [];
 
