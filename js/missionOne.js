@@ -6,6 +6,13 @@ missionOne.preload = function () {
     this.load.image('missionBackground', 'scenes/lab_desk.jpg');
     // this.load.image('textBoxBackground', 'scenes/textbox_background.png');
 
+    //female
+    this.load.image('sora', 'characters/female.png');
+    //males
+    this.load.image('shin', 'characters/male.png');
+    // professor
+    this.load.image('professor', 'characters/professor.png');
+
     //pluginsnya pindahin ke game?
 
     this.load.scenePlugin({
@@ -559,6 +566,17 @@ function showChoices(choices) {
 }
 
 function createDialog(scene, dialogs, callback) {
+
+    gameObjects.professor = scene.add.image(middleX - 250, middleY - 150, 'professor').setScale(0.56);
+    
+    if (gender == 0) {
+        gameObjects.character = scene.add.image(middleX + 250, middleY - 150, 'shin').setScale(0.56).setFlipX(true);
+    } else if (gender == 1) {
+        gameObjects.character = scene.add.image(middleX + 250, middleY - 150, 'sora').setScale(0.56).setFlipX(true);
+    }
+
+    
+
     //awal mula text
     let content = dialogs[0];
     //penghitung baris keberapa
