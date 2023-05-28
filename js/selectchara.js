@@ -43,7 +43,7 @@ selectChara.create = function () {
         //update gender ke male
         // console.log('male');
         updateGender(0);
-
+        gender = 0;
         selectChara.scene.start('MainMenu');
     });
 
@@ -51,7 +51,7 @@ selectChara.create = function () {
         //update gender ke female
         // console.log('female');
         updateGender(1);
-
+        gender = 1;
         selectChara.scene.start('MainMenu');
     });
 }
