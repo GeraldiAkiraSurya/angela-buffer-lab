@@ -1,5 +1,5 @@
 var status; //0: dead 1: alive
-var character; //male / female
+var character; //0:male //1:female
 
 // var playerName = 'playerName';
 //energy

@@ -53,16 +53,22 @@ mainMenu.create = function () {
     //background main menu
     this.add.image(middleX, middleY, 'menuBackground').setScale(0.65, 0.52);
 
+    //kalau characternya blm milih, default laki laki
+    // character = gender;
+    console.log('gender ' + gender);
+
     //add characters
     shin = this.add.image(middleX - 400, middleY - 150, 'shin').setScale(0.56).setVisible(false);
     sora = this.add.image(middleX + 400, middleY - 150, 'sora').setScale(0.56).setFlipX(true).setVisible(false);
 
     // console.log(character);
 
-    if (character == 'male') {
+    //0: male
+    if (gender == 0) {
         shin.setVisible(true);
     }
-    else if (character == 'female') {
+    //1: female
+    else if (gender == 1) {
         sora.setVisible(true);
     }
 
@@ -75,26 +81,17 @@ mainMenu.create = function () {
     
 
     btnStart.on('pointerup', function () {        
-        console.log(energy);
+        // console.log(energy);
         mainMenu.scene.start('MissionSelection');
     });
 
-    // btnOptions.on('pointerup', function () {
-    //     mainMenu.scene.start('SelectChara');
-    // });
+    btnOptions.on('pointerup', function () {
+        mainMenu.scene.start('SelectChara');
+    });
 
     btnProfile.on('pointerup', function () {
         window.location.href = 'profile';
     });
-
-    // this.tweens.add({
-    //     targets: [btnStart],
-    //     duration: 1000,
-    //     x: middleX,
-    //     scaleX: 2,
-    //     scaleY: 2,
-    //     ease: 'Bounce.easeIn'
-    // });
 }
 
 mainMenu.update = function () {
