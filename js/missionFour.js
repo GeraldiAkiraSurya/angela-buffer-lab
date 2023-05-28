@@ -456,9 +456,7 @@ function loadSequence4(scene, sequence) {
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            // loadSequence4(scene, sequence+1);
-            //bawa ke finding objects
-            scene.scene.start('FindingObjects4');
+            loadSequence4(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
@@ -470,15 +468,29 @@ function loadSequence4(scene, sequence) {
 Energi Anda dapat digunakan untuk membantu Prof Allison untuk mendapatkan buah ajaib kedua di hutan";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            //biar bisa replay misi 4 lagi
-            findingObjects4Done = false;
-
-            //bawa ke next mission 5
-            scene.scene.start('mission5');
+            //bawa ke finding objects
+            scene.scene.start('FindingObjects4');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
     } 
+
+    else if (sequence == 27) {
+
+        gameObjects.backgroundImage = createBackgroundImage(scene, 'menuBackground');
+        let dialogs = [
+            `${playerName}: Buah ajaib sudah didapatkan prof...`,
+            `Prof. Allison: Kerja bagus ${playerName} sekarang selesaikan misi terakhir di laboratorium X untuk mendapatkan pembakar karena ramuan ini harus dipanaskan.`,
+            `${playerName}: Segera saya selesaikan prof...`,
+        ];
+        createDialog(scene, dialogs, () => {
+            //biar bisa replay misi 4 lagi
+            findingObjects4Done = false;
+            //bawa ke next mission 5
+            scene.scene.start('mission5');
+        });
+
+    }
 }
 
 /*
