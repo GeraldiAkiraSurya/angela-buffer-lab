@@ -84,7 +84,7 @@ mainMenu.create = function () {
 
     btnStart.on('pointerup', function () {        
         // console.log(energy);
-        mainMenu.scene.start('MissionSelection');
+        mainMenu.scene.start('Pengantar');
     });
 
     btnOptions.on('pointerup', function () {
