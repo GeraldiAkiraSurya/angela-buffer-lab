@@ -46,6 +46,7 @@ missionOne.create = function() {
     youtubeId = {
         intro: 'qz1XzCmdHAg',
         problem: 'EJZ8B7NOy2k',
+        problem2: 'NyrB4N0knE4',
     };
 
     /**
@@ -245,6 +246,9 @@ function loadSequence(scene, sequence) {
 
         let questionNumber = 2; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -260,6 +264,16 @@ function loadSequence(scene, sequence) {
                     loadSequence(sequence-1);
                 });
             }
+        });
+
+    } 
+
+    else if (sequence == 9.1) { // Sequence CLUE SOAL2
+        
+        let text = 'Mempertahankan pH berarti tidak mengalami perubahan pH atau hanya mengalami sedikit perubahan akibat penambahan sedikit asam maupun basa.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence-0.1);
         });
 
     } 
@@ -287,7 +301,7 @@ function loadSequence(scene, sequence) {
     
     else if (sequence == 12) { // Sequence youtube vid
 
-        gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+        gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem2']);
         // Button untuk load sequence selanjutnya
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
             loadSequence(scene, sequence+1);
@@ -328,7 +342,7 @@ function loadSequence(scene, sequence) {
             }
         });
         
-    } 
+    }
     
     else if (sequence == 15) { // Sequence jawaban bener
 
@@ -357,6 +371,9 @@ function loadSequence(scene, sequence) {
 
         let questionNumber = 4; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -374,6 +391,16 @@ function loadSequence(scene, sequence) {
             }
         });
         
+    } 
+
+    else if (sequence == 17.1) { // Sequence CLUE SOAL4
+        
+        let text = 'Mempertahankan pH berarti tidak mengalami perubahan pH atau hanya mengalami sedikit perubahan akibat penambahan sedikit asam maupun basa.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence(scene, sequence-0.1);
+        });
+
     } 
     
     else if (sequence == 18) { // Sequence jawaban bener
