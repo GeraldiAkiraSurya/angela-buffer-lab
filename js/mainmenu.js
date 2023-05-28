@@ -53,6 +53,9 @@ mainMenu.create = function () {
     //background main menu
     this.add.image(middleX, middleY, 'menuBackground').setScale(0.65, 0.52);
 
+    //judul Buffer Laboratory
+    this.add.text(middleX - 630, middleY - 370, "Buffer Laboratory", {font: "900 130px Helvetica", fill: "#000000"}).setStroke('#fff', 5);
+
     //module character start
 
     //add characters, nanti pas dialog ganti posisinya aja gas
@@ -63,21 +66,20 @@ mainMenu.create = function () {
     // console.log('gender ' + gender);
 
     //0: male
-    if (gender == 0) {
-        shin.setVisible(true);
-    }
-    //1: female
-    else if (gender == 1) {
-        sora.setVisible(true);
-    }
+    // if (gender == 0) {
+    //     shin.setVisible(true);
+    // }
+    // //1: female
+    // else if (gender == 1) {
+    //     sora.setVisible(true);
+    // }
     //module character end
 
     //buttons
     btnProfile = this.add.image(this.cameras.main.width-100, 100, 'profile').setInteractive().setScale(0.5);
 
-
-    btnStart = this.add.image(middleX, middleY, 'startButton').setInteractive().setScale(0.5);
-    btnOptions = this.add.image(middleX, middleY + 125, 'optionsButton').setInteractive().setScale(0.5);
+    btnStart = this.add.image(middleX, middleY + 150, 'startButton').setInteractive().setScale(0.5);
+    btnOptions = this.add.image(middleX, middleY + 275, 'optionsButton').setInteractive().setScale(0.5);
     
 
     btnStart.on('pointerup', function () {        
