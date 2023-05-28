@@ -221,6 +221,9 @@ function loadSequence4(scene, sequence) {
 
         let questionNumber = 2; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence4(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -237,7 +240,20 @@ function loadSequence4(scene, sequence) {
             }
         });
 
-    } else if (sequence == 10) { // Sequence jawaban bener
+    } 
+
+    else if (sequence == 9.1) { // Sequence CLUE SOAL2
+        
+        let text = 'Larutan penyangga berarti larutan yang dapat mempertahankan pH dengan penambahan sedikit asam atau basa.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence4(scene, sequence-0.1);
+        });
+
+    }
+    
+    
+    else if (sequence == 10) { // Sequence jawaban bener
 
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
@@ -302,6 +318,9 @@ function loadSequence4(scene, sequence) {
     else if (sequence == 15) { // Sequence milih jawaban
         let questionNumber = 4; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence4(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -319,6 +338,16 @@ function loadSequence4(scene, sequence) {
             }
         });
         
+    }
+
+    else if (sequence == 15.1) { // Sequence CLUE SOAL4
+        
+        let text = 'Reaktan yang habis bereaksi merupakan reaktan yang memiliki jumlah mol yang lebih kecil setelah dibandingkan dengan koefisien reaksi.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence4(scene, sequence-0.1);
+        });
+
     }
 
     else if (sequence == 16) { // Sequence jawaban bener
@@ -346,6 +375,9 @@ function loadSequence4(scene, sequence) {
     else if (sequence == 18) { // Sequence milih jawaban
         let questionNumber = 5; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence4(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -363,6 +395,16 @@ function loadSequence4(scene, sequence) {
             }
         });
         
+    }
+
+    else if (sequence == 18.1) { // Sequence CLUE SOAL5
+        
+        let text = 'Ingat kembali reaksi asam basa yang terjadi dan pertimbangkan reaktan yang bersisa, produk yang terbentuk serta terdapat air.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence4(scene, sequence-0.1);
+        });
+
     }
 
     else if (sequence == 19) { // Sequence jawaban bener
@@ -432,6 +474,9 @@ function loadSequence4(scene, sequence) {
     else if (sequence == 24) { // Sequence milih jawaban
         let questionNumber = 7; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence4(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -449,6 +494,16 @@ function loadSequence4(scene, sequence) {
             }
         });
         
+    }
+
+    else if (sequence == 24.1) { // Sequence CLUE SOAL2
+        
+        let text = 'Ingat kembali bahwa larutan penyangga harus mengandung asam/basa lemah dengan pasangan asam/basa konjugasinya.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence4(scene, sequence-0.1);
+        });
+
     }
 
     else if (sequence == 25) { // Sequence jawaban bener
