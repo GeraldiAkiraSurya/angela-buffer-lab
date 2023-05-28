@@ -492,9 +492,24 @@ function loadSequence5(scene, sequence) {
         Energi Anda dapat ditukarkan dengan pembakar yang dibutuhkan prof. Allison";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            scene.scene.start('MainMenu');
+            loadSequence(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
+
+    } 
+
+    else if (sequence == 27) {
+
+        gameObjects.backgroundImage = createBackgroundImage(scene, 'menuBackground');
+        let dialogs = [
+            `Prof. Allison: Akhirnya petualangan ini berhasil ${playerName}... ini berkat semangat dan kerja kerasmu`,
+            `${playerName}: Terima kasih prof untuk pujiannya`,
+            "Prof. Allison: Sampai ketemu lagi di petualangan lainnya...",
+            `${playerName}: Sampai ketemu lagi prof...`,
+        ];
+        createDialog(scene, dialogs, () => {
+            scene.scene.start('MainMenu');
+        });
 
     } 
 }
