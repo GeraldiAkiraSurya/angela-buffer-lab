@@ -53,15 +53,14 @@ mainMenu.create = function () {
     //background main menu
     this.add.image(middleX, middleY, 'menuBackground').setScale(0.65, 0.52);
 
-    //kalau characternya blm milih, default laki laki
-    // character = gender;
-    console.log('gender ' + gender);
+    //module character start
 
-    //add characters
+    //add characters, nanti pas dialog ganti posisinya aja gas
     shin = this.add.image(middleX - 400, middleY - 150, 'shin').setScale(0.56).setVisible(false);
     sora = this.add.image(middleX + 400, middleY - 150, 'sora').setScale(0.56).setFlipX(true).setVisible(false);
 
-    // console.log(character);
+    //global var character dihapus, jadi pake gender
+    // console.log('gender ' + gender);
 
     //0: male
     if (gender == 0) {
@@ -71,6 +70,7 @@ mainMenu.create = function () {
     else if (gender == 1) {
         sora.setVisible(true);
     }
+    //module character end
 
     //buttons
     btnProfile = this.add.image(this.cameras.main.width-100, 100, 'profile').setInteractive().setScale(0.5);
