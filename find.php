@@ -67,6 +67,7 @@
     <script src="./js/missionTwodotTwo.js"></script>
 
     <script src="./js/pengantar.js"></script>
+    <script src="./js/penguatan.js"></script>
     <script src="./js/selectchara.js"></script>
     <script src="./js/mainmenu.js"></script>
     <script src="./js/game.js" defer></script>
