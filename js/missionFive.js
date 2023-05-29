@@ -5,13 +5,19 @@ missionFive.preload = function () {
     this.load.image('menuBackground', 'scenes/science_lab.jpg');
     this.load.image('missionBackground', 'scenes/bg_kayu.png')
 
+    //female
+    this.load.image('sora', 'characters/female.png');
+    //males
+    this.load.image('shin', 'characters/male.png');
+    // professor
+    this.load.image('professor', 'characters/professor.png');
 
     //pluginsnya pindahin ke game?
 
     this.load.scenePlugin({
         key: 'rexuiplugin',
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
-        sceneey: 'rexUI'
+        sceneKey: 'rexUI'
     });
     this.load.plugin('rexyoutubeplayerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexyoutubeplayerplugin.min.js', true);
     this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
@@ -489,10 +495,10 @@ function loadSequence5(scene, sequence) {
     else if (sequence == 26) { // Sequence MISI SELESAI
 
         let text = "Selamat... Anda berhasil menyelesaikan misi V!!\n\n\
-        Energi Anda dapat ditukarkan dengan pembakar yang dibutuhkan prof. Allison";
+Energi Anda dapat ditukarkan dengan pembakar yang dibutuhkan prof. Allison";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            loadSequence(scene, sequence+1);
+            loadSequence5(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
@@ -509,6 +515,7 @@ function loadSequence5(scene, sequence) {
         ];
         createDialog(scene, dialogs, () => {
             scene.scene.start('Penguatan');
+            // scene.scene.start('MainMenu');
         });
 
     } 
