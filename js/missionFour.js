@@ -5,13 +5,19 @@ missionFour.preload = function () {
     this.load.image('menuBackground', 'scenes/science_lab.jpg');
     this.load.image('missionBackground', 'scenes/lab_desk.jpg')
 
+    //female
+    this.load.image('sora', 'characters/female.png');
+    //males
+    this.load.image('shin', 'characters/male.png');
+    // professor
+    this.load.image('professor', 'characters/professor.png');
 
     //pluginsnya pindahin ke game?
 
     this.load.scenePlugin({
         key: 'rexuiplugin',
         url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
-        sceneey: 'rexUI'
+        sceneKey: 'rexUI'
     });
     this.load.plugin('rexyoutubeplayerplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexyoutubeplayerplugin.min.js', true);
     this.load.plugin('rexbbcodetextplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexbbcodetextplugin.min.js', true);
