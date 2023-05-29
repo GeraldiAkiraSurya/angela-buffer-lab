@@ -1,0 +1,22 @@
+body {
+  margin: 50px 200px 100px 200px;
+  font-family: "Montserrat", sans-serif;
+  /* background-color: dimgray; */
+  background-image: linear-gradient(to bottom right, #4AC29A, #BDFFF3);
+}
+
+.header-section {
+  margin-bottom: 20px;
+}
+
+h1 {
+  /* margin-bottom: 20px; */
+}
+
+.table {
+  text-align: center;
+}
+
+.table td {
+  font-size: 18px;
+}
