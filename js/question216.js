@@ -10,7 +10,7 @@ question216.preload = function () {
     this.load.image('C', 'question/C.png');
     this.load.image('CH3COOH', 'question/CH3COOH.png');
     this.load.image('OHNeg', 'question/OHNeg.png');
-    this.load.image('CH3COO', 'question/CH3COO.png');
+    this.load.image('CH3COONeg', 'question/CH3COONeg.png');
     this.load.image('COOHNeg', 'question/COOHNeg.png');
     this.load.image('O2', 'question/O2.png');
     this.load.image('CH3COOPos', 'question/CH3COOPos.png');
@@ -27,7 +27,7 @@ var textPertanyaan;
 
 var HPos;
 var OHNeg;
-var CH3COO;
+var CH3COONeg;
 var CH3COOH;
 var H2O;
 var COOHNeg;
@@ -58,8 +58,8 @@ question216.create = function () {
     start("2.1", 6);
 
     //variable initialization
-    //yg bener itu H+, OH-, CH3COOH, CH3COO, H2O
-    answerArray = ['HPos', 'H2O', 'CH3COOH', 'OHNeg', 'CH3COO'];
+    //yg bener itu H+, OH-, CH3COOH, CH3COONeg, H2O
+    answerArray = ['HPos', 'H2O', 'CH3COOH', 'OHNeg', 'CH3COONeg'];
     playerAnswerArray = [];
     objectsArray = [];
 
@@ -120,9 +120,9 @@ Ayo kumpulkan!`;
     objectsArray.push(OHNeg);
 
     //jawaban benar
-    CH3COO = this.add.image(middleX + 550, middleY + 20, 'CH3COO').setInteractive().setScale(0.7);
-    this.input.setDraggable(CH3COO);
-    objectsArray.push(CH3COO);
+    CH3COONeg = this.add.image(middleX + 550, middleY + 20, 'CH3COONeg').setInteractive().setScale(0.7);
+    this.input.setDraggable(CH3COONeg);
+    objectsArray.push(CH3COONeg);
 
     COOHNeg = this.add.image(middleX + 430, middleY + 50, 'COOHNeg').setInteractive().setScale(0.7);
     this.input.setDraggable(COOHNeg);
@@ -342,8 +342,8 @@ function startOver216(scene) {
     scene.input.setDraggable(OHNeg);
 
     //jawaban benar
-    CH3COO = scene.add.image(middleX + 550, middleY + 20, 'CH3COO').setInteractive().setScale(0.7);
-    scene.input.setDraggable(CH3COO);
+    CH3COONeg = scene.add.image(middleX + 550, middleY + 20, 'CH3COONeg').setInteractive().setScale(0.7);
+    scene.input.setDraggable(CH3COONeg);
 
     COOHNeg = scene.add.image(middleX + 430, middleY + 50, 'COOHNeg').setInteractive().setScale(0.7);
     scene.input.setDraggable(COOHNeg);
