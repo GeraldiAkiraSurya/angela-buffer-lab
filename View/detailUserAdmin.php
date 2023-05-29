@@ -35,7 +35,7 @@
 <body>
     
 <table class="table table-bordered">
-  <thead>
+  <thead class="table-dark">
     <tr>
       <th scope="col">Misi</th>
       <th scope="col">Soal</th>
