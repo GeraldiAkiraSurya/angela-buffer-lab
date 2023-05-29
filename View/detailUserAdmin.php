@@ -18,7 +18,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <style>
         body {
           /* background-image:linear-gradient(rgba(0, 0, 0, 0.5),
@@ -30,22 +30,31 @@
 
 
     <link rel="icon" href="..\assets\images\Logo-Serviam.png"> 
-    <link href=".\\style\login.css" rel="stylesheet">
+    <link href=".\\style\detailUser.css" rel="stylesheet">
 </head>
 <body>
-    
-<table class="table table-bordered">
-  <thead class="table-dark">
-    <tr>
-      <th scope="col">Misi</th>
-      <th scope="col">Soal</th>
-      <th scope="col">Waktu Pertama Mengerjakan</th>
-      <th scope="col">Waktu Pertama Benar</th>
-      <th scope="col">Jumlah percobaan</th>
-    </tr>
-  </thead>
-  <tbody>
-        <?php
+<div>
+  <div class="header-section d-flex align-items-center ms-2 me-2">
+    <div>
+      <h1 class="fw-bold">Progres Pengerjaan</h1>
+    </div>
+    <div class="ms-auto">
+      <a class="btn btn-outline-dark btn-lg" href="find" role="button">Kembali</a>
+    </div>
+  </div>
+
+  <table class="table table-bordered shadow p-3 mb-5 bg-body-tertiary">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Misi</th>
+        <th scope="col">Soal</th>
+        <th scope="col">Waktu Pertama Mengerjakan</th>
+        <th scope="col">Waktu Pertama Benar</th>
+        <th scope="col">Jumlah percobaan</th>
+      </tr>
+    </thead>
+    <tbody class="table-light fw-bold">
+      <?php
         $i=0;
         echo  "<tr>
                 <td rowspan=\"5\">1</td>";
@@ -118,12 +127,10 @@
             </tr> 
             ";
             }
-      
-?>
-  </tbody>
-</table>
-
-
+      ?>
+    </tbody>
+  </table>
+</div>
 
 
 </body>
