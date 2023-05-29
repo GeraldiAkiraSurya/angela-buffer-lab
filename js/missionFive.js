@@ -206,6 +206,9 @@ function loadSequence5(scene, sequence) {
 
         let questionNumber = 2; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence5(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -222,7 +225,19 @@ function loadSequence5(scene, sequence) {
             }
         });
 
-    } else if (sequence == 10) { // Sequence jawaban bener
+    } 
+    
+    else if (sequence == 9.1) { // Sequence CLUE SOAL2
+        
+        let text = 'Ingat kembali bahwa setelah pencampuran, konsentrasi larutan berubah akibat perubahan volume.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence5(scene, sequence-0.1);
+        });
+
+    }
+
+    else if (sequence == 10) { // Sequence jawaban bener
 
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
@@ -244,6 +259,9 @@ function loadSequence5(scene, sequence) {
     else if (sequence == 12) { // Sequence milih jawaban
         let questionNumber = 3; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence5(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -261,6 +279,16 @@ function loadSequence5(scene, sequence) {
             }
         });
         
+    }
+
+    else if (sequence == 12.1) { // Sequence CLUE SOAL3
+        
+        let text = 'Reaksi disosiasi asam asetat adalah sebagai berikut CH3COOH(aq) ⇌ CH3COO-(aq) + H+(aq)';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence5(scene, sequence-0.1);
+        });
+
     }
 
     else if (sequence == 13) { // Sequence jawaban bener
@@ -374,6 +402,9 @@ function loadSequence5(scene, sequence) {
     else if (sequence == 21) { // Sequence milih jawaban
         let questionNumber = 6; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence5(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -391,6 +422,16 @@ function loadSequence5(scene, sequence) {
             }
         });
         
+    }
+
+    else if (sequence == 21.1) { // Sequence CLUE SOAL6
+        
+        let text = 'pH = - log[H+]';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence5(scene, sequence-0.1);
+        });
+
     }
 
     else if (sequence == 22) { // Sequence jawaban bener
@@ -451,9 +492,24 @@ function loadSequence5(scene, sequence) {
         Energi Anda dapat ditukarkan dengan pembakar yang dibutuhkan prof. Allison";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            scene.scene.start('MainMenu');
+            loadSequence(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
+
+    } 
+
+    else if (sequence == 27) {
+
+        gameObjects.backgroundImage = createBackgroundImage(scene, 'menuBackground');
+        let dialogs = [
+            `Prof. Allison: Akhirnya petualangan ini berhasil ${playerName}... ini berkat semangat dan kerja kerasmu`,
+            `${playerName}: Terima kasih prof untuk pujiannya`,
+            "Prof. Allison: Sampai ketemu lagi di petualangan lainnya...",
+            `${playerName}: Sampai ketemu lagi prof...`,
+        ];
+        createDialog(scene, dialogs, () => {
+            scene.scene.start('MainMenu');
+        });
 
     } 
 }

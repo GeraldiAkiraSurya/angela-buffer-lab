@@ -261,7 +261,7 @@ function loadSequence(scene, sequence) {
                 createMissionBackgroundObjects(scene, 'missionBackground');
                 gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-                    loadSequence(sequence-1);
+                    loadSequence(scene, sequence-1);
                 });
             }
         });
@@ -335,7 +335,7 @@ function loadSequence(scene, sequence) {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
-                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem2']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
                     loadSequence(scene, sequence-1);
                 });
@@ -384,7 +384,7 @@ function loadSequence(scene, sequence) {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
-                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem2']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
                     loadSequence(scene, sequence-1);
                 });
@@ -441,7 +441,7 @@ function loadSequence(scene, sequence) {
                 // Kalo jawaban salah, suruh tonton video dulu terus nanti bakal ke pertanyaan lagi
                 destroyAllGameObjects();
                 createMissionBackgroundObjects(scene, 'missionBackground');
-                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem']);
+                gameObjects.youtubePlayer = createYoutubeVideo(scene, youtubeId['problem2']);
                 gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
                     loadSequence(scene, sequence-1);
                 });
@@ -536,6 +536,17 @@ function destroyAllGameObjects() {
         gameObjects[key].destroy();
         // delete gameObjects[key];
     });
+
+    console.log("Gonna destroy choices!");
+    console.log(choices);
+
+    if (choices.length > 0) {
+        for (let i = 0; i < choices.length; i++) {
+            choices[i].destroy();
+        }
+    }
+    console.log("Choices Destroyed, this is the choices array");
+    console.log(choices);
 }
 
 function createYoutubeVideo(scenevid, videoId) {
@@ -556,10 +567,30 @@ function createChoices(scene, questionNumber) {
     console.log("Current selections:\n" + selections);
 
     let deltaY = 80; // jarak antar masing-masing tombol jawaban
+
+    let splitLimit = 0;
+
+    if (choicesText[questionNumber].length > 7) {
+        splitLimit = choicesText[questionNumber].length / 2;
+    }
     
     for (let i = 0; i < choicesText[questionNumber].length; i++) {
         // var choice = createChoiceButton(scene, middleX, descBoxTopY+150+(deltaY*i), choicesText[i]);
-        let choice = createChoiceButton(scene, middleX, missionBoxProps.lowestY+150+(deltaY*i), choicesText[questionNumber][i], missionBoxProps);
+        let xPosition, yPosition;
+
+        if (splitLimit == 0) {
+            xPosition = middleX;
+            yPosition = missionBoxProps.lowestY+150+(deltaY*i);
+        } else if (i < splitLimit) {
+            xPosition = middleX - 200;
+            yPosition = missionBoxProps.lowestY+150+(deltaY*i);
+        } else if (i >= splitLimit) {
+            xPosition = middleX + 200;
+            yPosition = missionBoxProps.lowestY+150+(deltaY*(i-splitLimit));
+        }
+        
+        let choice = createChoiceButton(scene, xPosition, yPosition, choicesText[questionNumber][i], missionBoxProps);
+
         // console.log(choice);
         choices.push(choice);
         // choice.setVisible(false);

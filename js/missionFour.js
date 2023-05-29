@@ -221,6 +221,9 @@ function loadSequence4(scene, sequence) {
 
         let questionNumber = 2; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence4(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -237,7 +240,20 @@ function loadSequence4(scene, sequence) {
             }
         });
 
-    } else if (sequence == 10) { // Sequence jawaban bener
+    } 
+
+    else if (sequence == 9.1) { // Sequence CLUE SOAL2
+        
+        let text = 'Larutan penyangga berarti larutan yang dapat mempertahankan pH dengan penambahan sedikit asam atau basa.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence4(scene, sequence-0.1);
+        });
+
+    }
+    
+    
+    else if (sequence == 10) { // Sequence jawaban bener
 
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
@@ -302,6 +318,9 @@ function loadSequence4(scene, sequence) {
     else if (sequence == 15) { // Sequence milih jawaban
         let questionNumber = 4; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence4(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -319,6 +338,16 @@ function loadSequence4(scene, sequence) {
             }
         });
         
+    }
+
+    else if (sequence == 15.1) { // Sequence CLUE SOAL4
+        
+        let text = 'Reaktan yang habis bereaksi merupakan reaktan yang memiliki jumlah mol yang lebih kecil setelah dibandingkan dengan koefisien reaksi.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence4(scene, sequence-0.1);
+        });
+
     }
 
     else if (sequence == 16) { // Sequence jawaban bener
@@ -346,6 +375,9 @@ function loadSequence4(scene, sequence) {
     else if (sequence == 18) { // Sequence milih jawaban
         let questionNumber = 5; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence4(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -363,6 +395,16 @@ function loadSequence4(scene, sequence) {
             }
         });
         
+    }
+
+    else if (sequence == 18.1) { // Sequence CLUE SOAL5
+        
+        let text = 'Ingat kembali reaksi asam basa yang terjadi dan pertimbangkan reaktan yang bersisa, produk yang terbentuk serta terdapat air.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence4(scene, sequence-0.1);
+        });
+
     }
 
     else if (sequence == 19) { // Sequence jawaban bener
@@ -432,6 +474,9 @@ function loadSequence4(scene, sequence) {
     else if (sequence == 24) { // Sequence milih jawaban
         let questionNumber = 7; // ISI DENGAN NOMOR PERTANYAAN!
         createChoices(scene, questionNumber);
+        gameObjects.clueBtn = createNextButton(scene, 'CLUE', () => {
+            loadSequence4(scene, sequence+0.1);
+        }, middleX + 200);
         gameObjects.nextBtn = createNextButton(scene, 'KONFIRMASI', () => {
             console.log("Final answer: \n" + selections);
             if (checkAnswer(questionNumber) == true) {
@@ -451,14 +496,22 @@ function loadSequence4(scene, sequence) {
         
     }
 
+    else if (sequence == 24.1) { // Sequence CLUE SOAL2
+        
+        let text = 'Ingat kembali bahwa larutan penyangga harus mengandung asam/basa lemah dengan pasangan asam/basa konjugasinya.';
+        gameObjects.question = createDescText(scene, text);
+        gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
+            loadSequence4(scene, sequence-0.1);
+        });
+
+    }
+
     else if (sequence == 25) { // Sequence jawaban bener
 
         let text = "Bagus sekali, pilihan Anda benar."
         gameObjects.announcement = createAnnouncementText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            // loadSequence4(scene, sequence+1);
-            //bawa ke finding objects
-            scene.scene.start('FindingObjects4');
+            loadSequence4(scene, sequence+1);
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
     }
@@ -470,15 +523,29 @@ function loadSequence4(scene, sequence) {
 Energi Anda dapat digunakan untuk membantu Prof Allison untuk mendapatkan buah ajaib kedua di hutan";
         gameObjects.missionDesc = createDescText(scene, text);
         gameObjects.nextBtn = createNextButton(scene, 'LANJUT', () => {
-            //biar bisa replay misi 4 lagi
-            findingObjects4Done = false;
-
-            //bawa ke next mission 5
-            scene.scene.start('mission5');
+            //bawa ke finding objects
+            scene.scene.start('FindingObjects4');
         }, middleX - 150, middleY + (missionBoxProps.height/2) - 100);
         gameObjects.exitBtn = createExitButton(scene, middleX+150, middleY + (missionBoxProps.height/2) - 100);
 
     } 
+
+    else if (sequence == 27) {
+
+        gameObjects.backgroundImage = createBackgroundImage(scene, 'menuBackground');
+        let dialogs = [
+            `${playerName}: Buah ajaib sudah didapatkan prof...`,
+            `Prof. Allison: Kerja bagus ${playerName} sekarang selesaikan misi terakhir di laboratorium X untuk mendapatkan pembakar karena ramuan ini harus dipanaskan.`,
+            `${playerName}: Segera saya selesaikan prof...`,
+        ];
+        createDialog(scene, dialogs, () => {
+            //biar bisa replay misi 4 lagi
+            findingObjects4Done = false;
+            //bawa ke next mission 5
+            scene.scene.start('mission5');
+        });
+
+    }
 }
 
 /*
