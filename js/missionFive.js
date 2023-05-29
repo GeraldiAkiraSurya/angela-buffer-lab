@@ -508,7 +508,7 @@ function loadSequence5(scene, sequence) {
             `${playerName}: Sampai ketemu lagi prof...`,
         ];
         createDialog(scene, dialogs, () => {
-            scene.scene.start('MainMenu');
+            scene.scene.start('Penguatan');
         });
 
     } 
